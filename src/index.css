@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-void: #0d0e12;
+    --color-void-subtle: #16171e;
+    --color-charcoal: #222222;
+    --color-charcoal-light: #2c2d35;
+    --color-linen: #FAF3E1;
+    --color-cotton: #F5E7C6;
+    --color-tangerine: #FF6D1F;
+    --color-tangerine-hover: #e65b0f;
+    --color-tangerine-glow: rgba(255, 109, 31, 0.22);
+    --color-ink: #191a1f;
+    --color-ink-muted: #6b6962;
+    --color-border-dark: #2a2b36;
+    --color-border-light: #e4dcbe;
+    --c-focus: #FF6D1F;
+  }
+
+  body {
+    background-color: var(--color-void);
+    color: var(--color-linen);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--c-focus);
+    outline-offset: 2px;
+  }
+}
+
+@utility bg-void {
+  background-color: #0d0e12;
+}
+
+@utility bg-void-subtle {
+  background-color: #16171e;
+}
+
+@utility bg-charcoal {
+  background-color: #222222;
+}
+
+@utility bg-linen {
+  background-color: #FAF3E1;
+}
+
+@utility bg-cotton {
+  background-color: #F5E7C6;
+}
+
+@utility bg-tangerine {
+  background-color: #FF6D1F;
+}
+
+@utility text-linen {
+  color: #FAF3E1;
+}
+
+@utility text-cotton {
+  color: #F5E7C6;
+}
+
+@utility text-tangerine {
+  color: #FF6D1F;
+}
+
+@utility text-ink {
+  color: #191a1f;
+}
+
+@utility text-charcoal {
+  color: #222222;
+}
+
+@utility border-dark {
+  border-color: #2a2b36;
+}
+
+@utility border-light {
+  border-color: #e4dcbe;
+}
+
+@utility font-display {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Hero subtle glow */
+.hero-glow {
+  background: radial-gradient(circle 600px at 50% -20%, rgba(255, 109, 31, 0.16), transparent 70%);
+}
+
+.hero-wave {
+  background-image: radial-gradient(rgba(255, 109, 31, 0.08) 1px, transparent 0);
+  background-size: 24px 24px;
+}
