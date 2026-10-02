@@ -1,46 +1,73 @@
 /**
- * CareerAI Design Tokens
- * Conforming strictly to docs/DESIGN.md and preview/styles.css
+ * CareerAI Production Design Tokens
+ * Conforming strictly to docs/DESIGN.md, docs/UI-UX-RULES.md, and preview/styles.css
  */
 
 :root {
-  /* Core Brand Colors */
-  --c-void: #080B0C;          /* near-black application canvas */
-  --c-black-hole: #222222;    /* dark focus surface */
-  --c-black-soft: #101415;    /* raised dark surface */
-  --c-linen: #FAF3E1;         /* Sustainable Linen reflection/evidence surface */
-  --c-cotton: #F5E7C6;        /* Recycled Cotton secondary surface */
-  --c-tangerine: #FF6D1F;     /* Electric Tangerine signal & focal CTA */
-  --c-tangerine-deep: #C94E14;/* hover / bloom */
-  --c-ink: #101111;           /* high contrast text on light surfaces */
-  --c-muted-light: #C8C2B4;   /* secondary text on dark canvas */
-  --c-muted-dark: #68665E;    /* secondary text on light surfaces */
+  /* Exact Core Colors from Prompt 02 */
+  --color-void: #080B0C;
+  --color-black-hole: #222222;
+  --color-black-soft: #101415;
+  --color-linen: #FAF3E1;
+  --color-cotton: #F5E7C6;
+  --color-tangerine: #FF6D1F;
+  --color-tangerine-deep: #C94E14;
+  --color-ink: #101111;
+  --color-muted-light: #C8C2B4;
+  --color-muted-dark: #68665E;
 
-  /* Accessible Status Colors */
-  --c-success: #A9D69B;       /* accessible warm green */
-  --c-warning: #FFC36B;       /* amber warning */
-  --c-danger: #FF8B7D;        /* error state */
-  --c-focus: #FFB38A;         /* visible focus ring */
+  /* Accessible Semantic Status & Focus Tokens from docs/DESIGN.md */
+  --color-success: #A9D69B;
+  --color-warning: #FFC36B;
+  --color-danger: #FF8B7D;
+  --color-focus: #FFB38A;
 
-  /* Structural & Boundary Tokens */
-  --c-line-dark: rgba(250, 243, 225, 0.14);
-  --c-line-light: rgba(16, 17, 17, 0.14);
+  /* Lines & Borders */
+  --color-line-dark: rgba(250, 243, 225, 0.14);
+  --color-line-light: rgba(16, 17, 17, 0.14);
+
+  /* Radius Tokens */
   --radius-lg: 28px;
   --radius-md: 18px;
   --radius-sm: 8px;
-  --radius-full: 999px;
+  --radius-pill: 999px;
+
+  /* Layout Max Width */
   --max-width: 1180px;
 
-  /* Short alias mappings from preview/styles.css */
-  --void: var(--c-void);
-  --black-hole: var(--c-black-hole);
-  --black-soft: var(--c-black-soft);
-  --linen: var(--c-linen);
-  --cotton: var(--c-cotton);
-  --tangerine: var(--c-tangerine);
-  --ink: var(--c-ink);
-  --muted-light: var(--c-muted-light);
-  --muted-dark: var(--c-muted-dark);
-  --line-dark: var(--c-line-dark);
-  --line-light: var(--c-line-light);
+  /* Typography Font Families */
+  --font-display: "Bebas Neue", "Oswald", Impact, sans-serif;
+  --font-body: "Manrope", "Noto Sans Devanagari", system-ui, -apple-system, sans-serif;
+  --font-editorial: "Cormorant Garamond", Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Backward-compatible and preview alias bindings */
+  --void: var(--color-void);
+  --black-hole: var(--color-black-hole);
+  --black-soft: var(--color-black-soft);
+  --linen: var(--color-linen);
+  --cotton: var(--color-cotton);
+  --tangerine: var(--color-tangerine);
+  --ink: var(--color-ink);
+  --muted-light: var(--color-muted-light);
+  --muted-dark: var(--color-muted-dark);
+  --line-dark: var(--color-line-dark);
+  --line-light: var(--color-line-light);
+
+  --c-void: var(--color-void);
+  --c-black-hole: var(--color-black-hole);
+  --c-black-soft: var(--color-black-soft);
+  --c-linen: var(--color-linen);
+  --c-cotton: var(--color-cotton);
+  --c-tangerine: var(--color-tangerine);
+  --c-tangerine-deep: var(--color-tangerine-deep);
+  --c-ink: var(--color-ink);
+  --c-muted-light: var(--color-muted-light);
+  --c-muted-dark: var(--color-muted-dark);
+  --c-success: var(--color-success);
+  --c-warning: var(--color-warning);
+  --c-danger: var(--color-danger);
+  --c-focus: var(--color-focus);
+  --c-line-dark: var(--color-line-dark);
+  --c-line-light: var(--color-line-light);
 }

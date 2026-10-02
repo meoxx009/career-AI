@@ -1,23 +1,23 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { BrandMark, Toast } from './DesignSystem';
 
 interface AppShellProps {
   children: React.ReactNode;
+  toastMessage?: string | null;
 }
 
-export const AppShell: React.FC<AppShellProps> = ({ children }) => {
+export const AppShell: React.FC<AppShellProps> = ({ children, toastMessage = null }) => {
   return (
     <div className="app-container">
-      {/* Background ambient lighting */}
+      {/* Background ambient lighting blooms */}
       <div className="ambient ambient-top" aria-hidden="true" />
       <div className="ambient ambient-bottom" aria-hidden="true" />
 
-      {/* Accessible Header */}
+      {/* Accessible Global Header */}
       <header className="site-header shell" role="banner">
-        <NavLink to="/" className="brand" aria-label="CareerAI home">
-          <span>career</span>
-          <b>/</b>
-          <span>ai</span>
+        <NavLink to="/" aria-label="CareerAI home">
+          <BrandMark />
         </NavLink>
 
         <nav className="top-nav" aria-label="Primary navigation">
@@ -26,6 +26,12 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
             className={({ isActive }) => (isActive ? 'active' : '')}
           >
             Overview
+          </NavLink>
+          <NavLink
+            to="/design-system"
+            className={({ isActive }) => (isActive ? 'active' : '')}
+          >
+            Design System
           </NavLink>
           <a href="#paths">Your paths</a>
           <a href="#roadmap">Roadmap</a>
@@ -36,7 +42,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
           className="header-button"
           type="button"
           onClick={() => {
-            const el = document.getElementById('shell-content');
+            const el = document.getElementById('top');
             el?.scrollIntoView({ behavior: 'smooth' });
           }}
         >
@@ -44,20 +50,37 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
         </button>
       </header>
 
-      {/* Main Landmark */}
-      <main id="shell-content" className="shell" role="main" style={{ minHeight: 'calc(100vh - 180px)', padding: '40px 0' }}>
+      {/* Main Landmark Shell */}
+      <main id="top" className="shell" role="main" style={{ minHeight: 'calc(100vh - 180px)', padding: '50px 0' }}>
         {children}
       </main>
 
       {/* Accessible Footer */}
-      <footer className="shell" role="contentinfo" style={{ borderTop: '1px solid var(--c-line-dark)', padding: '30px 0', fontSize: '0.75rem', color: 'var(--c-muted-light)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <footer
+        className="shell"
+        role="contentinfo"
+        style={{
+          borderTop: '1px solid var(--color-line-dark)',
+          padding: '36px 0',
+          fontSize: '0.78rem',
+          color: 'var(--color-muted-light)',
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '16px',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
         <div>
-          <strong>CareerAI</strong> — Deterministic Career Preparation Platform
+          <strong style={{ color: 'var(--color-linen)' }}>CareerAI</strong> — Transparent Student Preparation Platform
         </div>
-        <div style={{ fontFamily: 'monospace' }}>
-          Phase 1 Scaffold · Strict TypeScript · WCAG AA
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem' }}>
+          Sustainable Linen · Recycled Cotton · Electric Tangerine · WCAG AA
         </div>
       </footer>
+
+      {/* Global Toast */}
+      <Toast message={toastMessage} />
     </div>
   );
 };
