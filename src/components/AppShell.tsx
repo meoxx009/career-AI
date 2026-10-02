@@ -4,7 +4,7 @@ import { useCareer } from '../context/CareerContext';
 import { Compass, BookOpen, Map, FileText, MessageSquare, RotateCcw } from 'lucide-react';
 
 export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { profile, resetToDemo, aiMode, setAiMode } = useCareer();
+  const { profile, resetToDemo, aiMode, setAiMode, language, setLanguage } = useCareer();
 
   return (
     <div className="min-h-screen bg-void text-linen flex flex-col font-sans selection:bg-tangerine selection:text-void">
@@ -20,11 +20,18 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
 
         <div className="flex items-center gap-3">
           <button
+            onClick={() => setLanguage(language === 'en' ? 'hi' : 'en')}
+            className="px-2 py-0.5 rounded bg-neutral-800 hover:bg-neutral-700 text-xs text-cotton border border-neutral-700 transition cursor-pointer"
+            title="Toggle language: English / Hindi"
+          >
+            {language === 'en' ? 'हिन्दी (HI)' : 'English (EN)'}
+          </button>
+          <button
             onClick={() => setAiMode(aiMode === 'ai' ? 'deterministic-fallback' : 'ai')}
             className="text-xs hover:text-linen underline underline-offset-2 transition-colors cursor-pointer"
             title="Toggle between deterministic local rules and simulated AI"
           >
-            Mode: {aiMode === 'deterministic-fallback' ? 'Deterministic Fallback (100% Private)' : 'AI Assisted'}
+            Mode: {aiMode === 'deterministic-fallback' ? 'Deterministic Fallback' : 'AI Assisted'}
           </button>
           <button
             onClick={resetToDemo}
