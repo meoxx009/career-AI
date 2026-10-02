@@ -1,187 +1,369 @@
-import React from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PrimaryButton, TextButton, BentoCard } from '../components/UIComponents';
-import { ArrowRight, Compass, ShieldCheck, Target, Award } from 'lucide-react';
+import { useCareer } from '../context/CareerContext';
 
-export const Landing: React.FC = () => {
+export const Landing = () => {
   const navigate = useNavigate();
+  const { setSelectedRoleId, showToast } = useCareer();
+
+  const [task1Complete, setTask1Complete] = useState(false);
+
+  const handleStartDemo = () => {
+    document.querySelector('#paths')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    showToast('Synthetic Rahul demo opened — no real student data used.');
+  };
+
+  const handleToggleTask = () => {
+    setTask1Complete(!task1Complete);
+    if (!task1Complete) {
+      showToast('Saved in the fictional demo roadmap.');
+    } else {
+      showToast('Task marked pending.');
+    }
+  };
 
   return (
-    <div className="relative overflow-hidden hero-glow">
+    <div>
       {/* Hero Section */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-16 pb-20 lg:pt-24 lg:pb-28">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Hero Left Column */}
-          <div className="lg:col-span-7 flex flex-col items-start gap-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-cotton">
-              <span className="w-2 h-2 rounded-full bg-tangerine"></span>
-              <span>Transparent Preparation · Indian CS/IT Students</span>
-            </div>
-
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-linen leading-[1.1]">
-              Your next chapter starts with a{' '}
-              <span className="text-tangerine underline decoration-neutral-800 decoration-wavy underline-offset-8">
-                clear next step
-              </span>
-              .
-            </h1>
-
-            <p className="text-lg text-neutral-300 max-w-xl leading-relaxed">
-              Find a direction, practise the skills that matter, and tell your story with confidence.
-              No fake ATS scores, no placement probability myths, and no AI hallucinations.
-            </p>
-
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <PrimaryButton
-                onClick={() => navigate('/assessment')}
-                icon={<ArrowRight className="w-4 h-4" />}
-              >
-                Find my direction
-              </PrimaryButton>
-
-              <TextButton onClick={() => navigate('/dashboard')}>
-                Explore fictional demo (Rahul)
-              </TextButton>
-            </div>
-
-            <div className="flex items-center gap-6 pt-4 text-xs text-neutral-400 font-mono">
-              <div className="flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-cotton" />
-                <span>Private by default</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Target className="w-4 h-4 text-cotton" />
-                <span>Deterministic scoring</span>
-              </div>
-            </div>
+      <section className="hero shell">
+        <div className="hero-copy">
+          <p className="eyebrow">CAREER READINESS / 01</p>
+          <h1>
+            FIND YOUR<br />
+            <em>NEXT MOVE.</em>
+          </h1>
+          <p className="hero-lede">
+            A calm, evidence-led way to choose a direction, practise what matters and tell your story with confidence.
+          </p>
+          <div className="hero-actions">
+            <button
+              className="button button-primary"
+              id="startButton"
+              type="button"
+              onClick={() => {
+                navigate('/assessment');
+                showToast('Starting diagnostic assessment.');
+              }}
+            >
+              Find my direction <span aria-hidden="true">→</span>
+            </button>
+            <a className="button button-quiet" href="#paths">
+              See the sample path
+            </a>
           </div>
+        </div>
 
-          {/* Hero Right Column: Warm Linen Snapshot Card */}
-          <div className="lg:col-span-5">
-            <div className="rounded-2xl bg-linen border border-[#e4dcbe] text-ink p-6 shadow-2xl relative">
-              <div className="flex items-center justify-between border-b border-[#deceaa] pb-3 mb-4">
-                <div>
-                  <span className="text-xs uppercase font-mono tracking-wider text-ink-muted">
-                    Readiness Snapshot
-                  </span>
-                  <h3 className="font-bold text-lg text-ink">Rahul Sharma · 3rd Year</h3>
-                </div>
-                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-cotton text-ink border border-[#deceaa]">
-                  Fictional Sample
-                </span>
-              </div>
-
-              <div className="space-y-4 text-sm">
-                <div className="flex items-center justify-between">
-                  <span className="text-ink-muted">Target Path</span>
-                  <span className="font-semibold text-ink">Backend Developer</span>
-                </div>
-
-                <div>
-                  <div className="flex justify-between text-xs mb-1.5">
-                    <span className="font-medium text-ink-muted">Assessed Skill Alignment</span>
-                    <span className="font-bold text-ink">74% · 63% Coverage</span>
-                  </div>
-                  <div className="w-full bg-[#deceaa] h-2.5 rounded-full overflow-hidden">
-                    <div className="bg-tangerine h-full rounded-full" style={{ width: '74%' }}></div>
-                  </div>
-                </div>
-
-                <div className="p-3 rounded-lg bg-cotton border border-[#deceaa] text-xs">
-                  <div className="font-semibold text-ink mb-1 flex items-center gap-1">
-                    <span className="w-2 h-2 rounded-full bg-tangerine inline-block"></span>
-                    Next Best Action
-                  </div>
-                  <p className="text-ink-muted">
-                    Practise SQL aggregation & join indexing (3 hrs budget this week).
-                  </p>
-                </div>
-
-                <div className="pt-2 border-t border-[#deceaa] flex items-center justify-between text-xs text-ink-muted font-mono">
-                  <span>Source: Diagnostic · Oct 2026</span>
-                  <button
-                    onClick={() => navigate('/dashboard')}
-                    className="text-ink font-semibold underline hover:text-tangerine"
-                  >
-                    Open Rahul's Desk →
-                  </button>
-                </div>
-              </div>
-            </div>
+        <div className="hero-art" aria-hidden="true">
+          <div className="wave-field"></div>
+          <div className="hero-stamp">
+            ONE<br />
+            <span>STEP</span><br />
+            AT A<br />
+            <span>TIME</span>
           </div>
+          <div className="hero-label">CAREERAI / SYNTHETIC DEMO</div>
         </div>
       </section>
 
-      {/* Bento Grid: 3 Pillars */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 border-t border-neutral-800">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="text-2xl sm:text-3xl font-bold text-linen">The Transparent Preparation Loop</h2>
-          <p className="text-sm text-neutral-400 mt-2">
-            Every step explains where you are, what evidence exists, and what to practise next.
+      {/* Snapshot Section */}
+      <section className="snapshot shell" aria-labelledby="snapshot-heading">
+        <div className="section-intro">
+          <p className="eyebrow">RAHUL'S SNAPSHOT / FICTIONAL DATA</p>
+          <h2 id="snapshot-heading">
+            Clarity feels better<br />
+            <i>when it is visible.</i>
+          </h2>
+        </div>
+
+        <div className="snapshot-card linen-card">
+          <div className="card-topline">
+            <span>ASSESSED ALIGNMENT</span>
+            <span className="badge dark-badge">COVERAGE 78%</span>
+          </div>
+          <div className="big-score">
+            82<span>%</span>
+          </div>
+          <p>Backend Developer</p>
+          <div className="mini-meter">
+            <span style={{ width: '82%' }}></span>
+          </div>
+          <div className="card-footer">
+            <span>Evidence-led estimate</span>
+            <span>Version seed-1</span>
+          </div>
+        </div>
+
+        <div className="snapshot-card dark-card">
+          <div className="card-topline">
+            <span>NEXT BEST ACTION</span>
+            <span className="w-2 h-2 rounded-full bg-tangerine inline-block"></span>
+          </div>
+          <h3>
+            Build your first<br />
+            <span>REST endpoint.</span>
+          </h3>
+          <p className="muted">
+            A 45-minute step to turn your API gap into project evidence.
+          </p>
+          <button
+            className="text-link"
+            type="button"
+            onClick={() => {
+              navigate('/roadmap');
+              showToast("Task added to Rahul's fictional roadmap");
+            }}
+          >
+            Add to roadmap <span aria-hidden="true">↗</span>
+          </button>
+        </div>
+      </section>
+
+      {/* Three Directions Section */}
+      <section className="paths shell" id="paths" aria-labelledby="paths-heading">
+        <div className="section-heading-row">
+          <div>
+            <p className="eyebrow">THREE DIRECTIONS / 02</p>
+            <h2 id="paths-heading">
+              Not a verdict.<br />
+              <i>A starting point.</i>
+            </h2>
+          </div>
+          <p className="section-note">
+            We show what we know, what we do not know yet, and what to practise next.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <BentoCard surface="void" className="flex flex-col justify-between">
-            <div>
-              <div className="w-10 h-10 rounded-lg bg-neutral-900 border border-neutral-800 flex items-center justify-center text-tangerine mb-4">
-                <Compass className="w-5 h-5" />
-              </div>
-              <h3 className="font-bold text-lg text-linen mb-2">1. Choose a Direction</h3>
-              <p className="text-sm text-neutral-400 leading-relaxed">
-                Compare entry-level roles (Backend, Frontend, Data Analyst) based on verified requirements. Unknown skills are labelled as unassessed—never zero.
-              </p>
+        <div className="path-grid">
+          {/* Card 1: Backend Developer (Featured Tangerine) */}
+          <article className="path-card featured-card">
+            <div className="path-number">01</div>
+            <div className="path-icon">↗</div>
+            <p className="path-type">PRIMARY DIRECTION</p>
+            <h3>
+              Backend<br />Developer
+            </h3>
+            <div className="path-score">
+              <strong>82</strong>
+              <span>
+                assessed<br />alignment
+              </span>
             </div>
-            <div className="pt-6 border-t border-neutral-800/60 mt-6 text-xs text-cotton font-mono">
-              Role requirements v1.2
-            </div>
-          </BentoCard>
+            <div className="path-line"></div>
+            <p>Strong logic and Python evidence. Practise APIs, testing and deployment next.</p>
+            <button
+              className="card-link"
+              type="button"
+              onClick={() => {
+                setSelectedRoleId('role-backend');
+                navigate('/roadmap');
+                showToast('Backend plan opened');
+              }}
+            >
+              Explore plan <span aria-hidden="true">↗</span>
+            </button>
+          </article>
 
-          <BentoCard surface="linen" className="flex flex-col justify-between">
-            <div>
-              <div className="w-10 h-10 rounded-lg bg-cotton border border-[#deceaa] flex items-center justify-center text-tangerine mb-4">
-                <Target className="w-5 h-5" />
-              </div>
-              <h3 className="font-bold text-lg text-ink mb-2">2. Build a Plan</h3>
-              <p className="text-sm text-ink-muted leading-relaxed">
-                Prerequisite-aware roadmap fitted to your exact weekly hours. Foundational fundamentals are prioritized before complex frameworks.
-              </p>
+          {/* Card 2: Data Analyst (Cotton) */}
+          <article className="path-card cotton-card">
+            <div className="path-number">02</div>
+            <div className="path-icon ink">◇</div>
+            <p className="path-type">SECOND DIRECTION</p>
+            <h3>
+              Data<br />Analyst
+            </h3>
+            <div className="path-score">
+              <strong>74</strong>
+              <span>
+                assessed<br />alignment
+              </span>
             </div>
-            <div className="pt-6 border-t border-[#deceaa] mt-6 text-xs text-ink-muted font-mono">
-              Priced in 6–8 hrs / week
-            </div>
-          </BentoCard>
+            <div className="path-line dark-line"></div>
+            <p>Good analytical interest. Build stronger SQL and data-story evidence.</p>
+            <button
+              className="card-link ink-link"
+              type="button"
+              onClick={() => {
+                setSelectedRoleId('role-analyst');
+                navigate('/roadmap');
+                showToast('Data Analyst plan opened');
+              }}
+            >
+              Explore plan <span aria-hidden="true">↗</span>
+            </button>
+          </article>
 
-          <BentoCard surface="cotton" className="flex flex-col justify-between">
-            <div>
-              <div className="w-10 h-10 rounded-lg bg-linen border border-[#deceaa] flex items-center justify-center text-tangerine mb-4">
-                <Award className="w-5 h-5" />
-              </div>
-              <h3 className="font-bold text-lg text-ink mb-2">3. Practise with Proof</h3>
-              <p className="text-sm text-ink-muted leading-relaxed">
-                Resume review and interview practice anchored strictly to facts you actually completed. Zero fabricated metrics or hallucinated experience.
-              </p>
+          {/* Card 3: Frontend Developer (Black Hole) */}
+          <article className="path-card black-card">
+            <div className="path-number">03</div>
+            <div className="path-icon">○</div>
+            <p className="path-type">EXPLORE WITH MORE EVIDENCE</p>
+            <h3>
+              Frontend<br />Developer
+            </h3>
+            <div className="path-score">
+              <strong>68</strong>
+              <span>
+                alignment<br />coverage 46%
+              </span>
             </div>
-            <div className="pt-6 border-t border-[#deceaa] mt-6 text-xs text-ink-muted font-mono">
-              Truthful Evidence Engine
-            </div>
-          </BentoCard>
+            <div className="path-line"></div>
+            <p>Interesting direction. Take the UI diagnostic before comparing confidently.</p>
+            <button
+              className="card-link"
+              type="button"
+              onClick={() => {
+                setSelectedRoleId('role-frontend');
+                navigate('/assessment');
+                showToast('Frontend diagnostic opened');
+              }}
+            >
+              Take diagnostic <span aria-hidden="true">↗</span>
+            </button>
+          </article>
         </div>
       </section>
 
-      {/* Trust Banner */}
-      <section className="bg-void-subtle border-t border-b border-neutral-800 py-12 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      {/* Roadmap Section */}
+      <section className="roadmap shell" id="roadmap" aria-labelledby="roadmap-heading">
+        <div className="roadmap-head">
           <div>
-            <h4 className="text-lg font-bold text-linen">Our Engineering Guarantee</h4>
-            <p className="text-xs text-neutral-400 mt-1 max-w-xl">
-              CareerAI is deterministic by design. We run offline fallback rules if AI is unavailable, and never use psychometric tests, protected traits, or false decimal precision.
+            <p className="eyebrow">THE PLAN / 03</p>
+            <h2 id="roadmap-heading">
+              Small steps.<br />
+              <i>Real proof.</i>
+            </h2>
+          </div>
+          <div className="plan-meta">
+            <span>BACKEND / 4 WEEKS</span>
+            <strong>6 HRS / WEEK</strong>
+          </div>
+        </div>
+
+        <div className="roadmap-list">
+          {/* Week 1 */}
+          <article className="week-row active-week">
+            <div className="week-marker">01</div>
+            <div className="week-copy">
+              <p className="eyebrow orange-eyebrow">CURRENT</p>
+              <h3>Programming + HTTP foundations</h3>
+              <p>Understand requests, responses and the flow behind a useful endpoint.</p>
+            </div>
+            <div className="task-status">
+              <span className={`status-ring ${task1Complete ? '' : 'empty'}`}></span>
+              <span>{task1Complete ? '3 / 3 tasks' : '2 / 3 tasks'}</span>
+            </div>
+            <button
+              className="task-action"
+              type="button"
+              onClick={handleToggleTask}
+            >
+              {task1Complete ? 'Task complete' : 'Mark task done'}
+            </button>
+          </article>
+
+          {/* Week 2 */}
+          <article className="week-row">
+            <div className="week-marker">02</div>
+            <div className="week-copy">
+              <p className="eyebrow">NEXT</p>
+              <h3>SQL + API basics</h3>
+              <p>Design a small schema and document six clear API requests.</p>
+            </div>
+            <div className="task-status">
+              <span className="status-ring empty"></span>
+              <span>0 / 3 tasks</span>
+            </div>
+            <button
+              className="task-action"
+              type="button"
+              onClick={() => {
+                navigate('/roadmap');
+                showToast('Week 2 opened');
+              }}
+            >
+              View week
+            </button>
+          </article>
+
+          {/* Week 3 */}
+          <article className="week-row">
+            <div className="week-marker">03</div>
+            <div className="week-copy">
+              <p className="eyebrow">UP NEXT</p>
+              <h3>Testing + project evidence</h3>
+              <p>Make a small project safer and explain exactly what you built.</p>
+            </div>
+            <div className="task-status">
+              <span className="status-ring empty"></span>
+              <span>0 / 3 tasks</span>
+            </div>
+            <button
+              className="task-action"
+              type="button"
+              onClick={() => {
+                showToast('Week 3 is locked until prerequisites are complete');
+              }}
+            >
+              View week
+            </button>
+          </article>
+        </div>
+      </section>
+
+      {/* Practice Room Section */}
+      <section className="practice shell" id="practice" aria-labelledby="practice-heading">
+        <div className="practice-card">
+          <div className="practice-copy">
+            <p className="eyebrow">PRACTICE ROOM / 04</p>
+            <h2 id="practice-heading">
+              Tell the story<br />
+              <em>behind the work.</em>
+            </h2>
+            <p>
+              Practise one question in text. Get a rubric, a useful gap and one next action—not a mysterious hiring score.
+            </p>
+            <button
+              className="button button-primary"
+              type="button"
+              onClick={() => {
+                navigate('/practice');
+                showToast('Practice question opened');
+              }}
+            >
+              Start a practice question <span aria-hidden="true">→</span>
+            </button>
+          </div>
+
+          <div className="question-card">
+            <p className="eyebrow">ROLE-SPECIFIC QUESTION</p>
+            <h3>How would you design a small task-management REST API?</h3>
+            <div className="rubric-row">
+              <span>CLARIFY</span>
+              <span>DESIGN</span>
+              <span>VALIDATE</span>
+            </div>
+            <p className="question-note">
+              Text-only mode · your answer stays private until you choose to save it.
             </p>
           </div>
-          <PrimaryButton onClick={() => navigate('/assessment')}>
-            Start Diagnostic
-          </PrimaryButton>
         </div>
+      </section>
+
+      {/* Footer CTA */}
+      <section className="footer-cta shell">
+        <p className="eyebrow">CAREERAI / A CLEARER START</p>
+        <h2>
+          Your next move<br />
+          <i>can be small.</i>
+        </h2>
+        <button
+          className="button button-primary"
+          id="footerStart"
+          type="button"
+          onClick={handleStartDemo}
+        >
+          Explore the demo <span aria-hidden="true">↗</span>
+        </button>
       </section>
     </div>
   );

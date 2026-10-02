@@ -4,7 +4,7 @@ import { useCareer } from '../context/CareerContext';
 import { Compass, BookOpen, Map, FileText, MessageSquare, RotateCcw } from 'lucide-react';
 
 export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { profile, resetToDemo, aiMode, setAiMode, language, setLanguage } = useCareer();
+  const { profile, resetToDemo, aiMode, setAiMode, language, setLanguage, toastMessage } = useCareer();
 
   return (
     <div className="min-h-screen bg-void text-linen flex flex-col font-sans selection:bg-tangerine selection:text-void">
@@ -189,6 +189,15 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
           </div>
         </div>
       </footer>
+
+      {/* Ambient background glows */}
+      <div className="ambient ambient-top" aria-hidden="true"></div>
+      <div className="ambient ambient-bottom" aria-hidden="true"></div>
+
+      {/* Toast Notification Container */}
+      <div id="toast" className={`toast ${toastMessage ? 'show' : ''}`} role="status" aria-live="polite">
+        {toastMessage}
+      </div>
     </div>
   );
 };

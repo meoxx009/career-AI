@@ -23,6 +23,8 @@ interface CareerContextType {
   setAiMode: (mode: 'ai' | 'deterministic-fallback') => void;
   language: 'en' | 'hi';
   setLanguage: (lang: 'en' | 'hi') => void;
+  toastMessage: string | null;
+  showToast: (message: string) => void;
   consentGiven: boolean;
   setConsentGiven: (consent: boolean) => void;
   resetToDemo: () => void;
@@ -112,6 +114,15 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguage] = useState<'en' | 'hi'>(
     savedState?.language || 'en'
   );
+
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const showToast = (message: string) => {
+    setToastMessage(message);
+    setTimeout(() => {
+      setToastMessage(prev => (prev === message ? null : prev));
+    }, 2600);
+  };
 
   // Persist to localStorage whenever state changes
   useEffect(() => {
@@ -240,6 +251,8 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
         setAiMode,
         language,
         setLanguage,
+        toastMessage,
+        showToast,
         consentGiven,
         setConsentGiven,
         resetToDemo,
