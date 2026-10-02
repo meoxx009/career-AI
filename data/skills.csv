@@ -1,0 +1,13 @@
+id,slug,name,category,description
+1,programming-logic,Programming logic,foundation,Translate a problem into correct steps and handle edge cases.
+2,data-structures,Data structures,technical,Choose and use common collections and understand trade-offs.
+3,python-or-javascript,Programming language,technical,Write readable code in one target language.
+4,sql,SQL,technical,Query relational data and reason about joins and constraints.
+5,rest-apis,REST APIs,backend,Design and consume HTTP endpoints with validation and errors.
+6,frontend-fundamentals,Frontend fundamentals,frontend,Build accessible responsive interfaces with HTML CSS and JavaScript.
+7,testing,Testing,quality,Write focused unit or integration checks and debug failures.
+8,git,Git,workflow,Track work in small reviewable commits and collaborate safely.
+9,communication,Technical communication,professional,Explain decisions assumptions and trade-offs clearly.
+10,data-analysis,Data analysis,analytics,Clean explore and communicate patterns in tabular data.
+11,cloud-basics,Cloud basics,platform,Understand deployment configuration and basic observability.
+12,project-evidence,Project evidence,proof,Describe a real contribution constraints and outcome without invented metrics.

@@ -1,0 +1,4 @@
+id,slug,name,level,description,source_label,source_url,source_checked_at,version
+1,backend-developer,Backend Developer,entry,"Build and maintain server-side features, APIs and data flows.","CareerAI seed role profile","","2026-10-02","seed-1"
+2,frontend-developer,Frontend Developer,entry,"Build usable accessible interfaces and connect them to reliable data.","CareerAI seed role profile","","2026-10-02","seed-1"
+3,data-analyst,Data Analyst,entry,"Turn structured data into clear findings, dashboards and decisions.","CareerAI seed role profile","","2026-10-02","seed-1"

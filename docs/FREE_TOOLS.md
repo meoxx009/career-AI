@@ -62,6 +62,8 @@ Verified Free-plan limits relevant to CareerAI:
 
 Use Pages for the compiled React/Vite frontend, and call Supabase from the client with the public client configuration. Keep privileged database operations and Gemini calls in Supabase Edge Functions, not in static browser code.
 
+Cloudflare free-plan commercial-use and payment-card requirements were not verified from the official pages reviewed; do not infer either one. The free Pages figures also do not establish an uptime SLA.
+
 ## Gemini: optional, privacy-sensitive, and not unlimited
 
 The current official Gemini pricing page shows a Free tier with free input/output tokens for eligible models, Google AI Studio access, limited model access, and a note that content is used to improve Google products. It does **not** provide one universal quota for all models: rate limits are per project, vary by model and account state, and are viewable in AI Studio. Google's rate-limit documentation explicitly says specified limits are not guaranteed and actual capacity may vary.
@@ -77,7 +79,37 @@ The official Gemini Additional Terms are the decisive privacy warning for Career
 
 **CareerAI rule:** never send a real resume, name, email, phone number, address, employer identifier, or other PII to the Gemini free tier. Use synthetic resumes and synthetic job descriptions in demos. Make the provider call opt-in and clearly label it. The app must have a local deterministic result that works when the key is absent, the network is unavailable, the free quota is exhausted, or the service refuses a request. Do not promise free unlimited usage, stable quotas, model availability, or a production SLA.
 
+Do not expose a Gemini API key in React/Vite. Vite's official environment-variable guide warns that client-exposed `VITE_*` values are visible in the built bundle. If Gemini is demonstrated at all, the intended architecture is:
+
+`browser -> Supabase Edge Function -> Gemini API`
+
+with synthetic input, bounded request size, no logging of resume content, and a graceful deterministic fallback. The Edge Function boundary protects the key; it does not make sending personal resume data to an unpaid model service acceptable.
+
+## Local deterministic fallback and optional Ollama
+
+The fallback should be more than an error message. Keep a small typed adapter such as `analyzeCareerDocument(input, provider)` with a deterministic provider that uses fixed rules and synthetic fixtures. It should return stable scores, skill matches, and explanations, so judging works with no API key, no network, and no AI account.
+
+Ollama is an optional offline enhancement, not a required dependency. Its official FAQ says local Ollama runs on the user's machine and that Ollama does not see local prompts or data. The practical caveats are:
+
+- the model itself must be downloaded and consumes substantial disk space;
+- RAM/VRAM requirements depend on the chosen model and quantization;
+- GPU acceleration is hardware/driver dependent;
+- CPU-only inference may be too slow for a live demo; and
+- a local model can produce weaker or different results than Gemini, so keep the deterministic path as the reliability baseline.
+
+The exact Ollama hardware minimum for a selected model was not verified here. Do not claim that any particular laptop will run a particular model without measuring it.
+
+## Google Antigravity clarification
+
+Google's official product page calls Antigravity an **agentic development platform**. Google's launch post describes an AI-powered editor plus a Manager Surface where agents can plan, execute, and verify tasks across the editor, terminal, and browser, and says it was available at no cost for individuals in public preview. The current official pricing page lists an Individual plan at $0/month with model access, unlimited tab completions, unlimited command requests, and basic weekly rate limits.
+
+Therefore, treat Antigravity as an optional coding environment/agent for editing and testing the existing React/TypeScript codebase. It is not evidence of a drag-and-drop no-code database builder, mobile-app builder, hosted Postgres service, Auth provider, or deployment target. The official sources reviewed do not describe it as those things. It cannot replace Supabase, Cloudflare Pages, or the app's local fallback. Its free access is rate-limited and should not be treated as unlimited.
+
+VS Code is the simpler no-cost alternative: Microsoft's official FAQ says the core editor can be used without signing in, and that VS Code is free for private or commercial use. AI features and third-party extensions have their own services and terms; no AI subscription is required for the deterministic workflow.
+
 ## Exact zero-spend onboarding sequence
+
+This is an order of work, not account-creation, installation, deployment, or secret-handling instructions:
 
 1. **Freeze the privacy boundary first.** Add synthetic-only fixtures and a visible demo notice. Decide that real resumes/PII never enter an unpaid Gemini request.
 2. **Build the UI and typed provider interface locally.** Finish the React + TypeScript + Vite flow against deterministic output before choosing any hosted AI.
@@ -87,3 +119,48 @@ The official Gemini Additional Terms are the decisive privacy warning for Career
 6. **Evaluate Gemini only as an opt-in enhancement.** Use synthetic data, inspect the active model/project quota in AI Studio, and stop when the free limit or privacy requirement is reached. Do not enable billing or make a free-tier availability claim.
 7. **Optionally benchmark Ollama on the actual demo machine.** If latency and memory are acceptable, offer it as an offline provider; otherwise omit it. Keep deterministic output as the judging-safe path.
 8. **Before submission, rehearse failure modes.** Disable the API key/network, use an inactive Supabase project, exceed a small local input limit, and verify that the UI remains useful and does not reveal secrets or real personal data.
+
+## Font alternatives
+
+For a bundled, free-licensed visual system, use **Bebas Neue** for display text, **Manrope** for body text, and **Noto Sans Devanagari** as a Devanagari fallback. The Google Fonts repositories reviewed identify these font files as SIL Open Font License 1.1. If font files are redistributed with the app, retain the applicable license/copyright notices. A system-font fallback is also fine and avoids extra assets.
+
+## Sources (official pages actually reviewed)
+
+All sources below were accessed on 2026-10-02 UTC.
+
+- Supabase pricing: https://supabase.com/pricing — Free plan quotas, pausing, and included Auth/Storage/Realtime/Edge Function features.
+- Supabase billing overview: https://supabase.com/docs/guides/platform/billing-on-supabase — two free projects and organization quota accounting.
+- Supabase Auth SMTP: https://supabase.com/docs/guides/auth/auth-smtp — pre-authorized-address restriction, current 2 messages/hour default SMTP limit, and no SLA.
+- Supabase RLS: https://supabase.com/docs/guides/database/postgres/row-level-security — grants, policies, testing, and secret-key/RLS warnings.
+- Supabase GitHub OAuth guide: https://supabase.com/docs/guides/auth/social-login/auth-github — example of the OAuth/provider path; provider credentials and setup were not performed.
+- Cloudflare Pages limits: https://developers.cloudflare.com/pages/platform/limits/ — Free builds, files, asset size, projects, and related limits.
+- Cloudflare Pages pricing: https://developers.cloudflare.com/pages/functions/pricing/ — free/static request treatment and Pages Functions relationship to Workers Free requests.
+- Cloudflare Pages Vite guide: https://developers.cloudflare.com/pages/framework-guides/deploy-a-vite3-project/ — Vite build command/output convention (`dist`).
+- Cloudflare direct upload: https://developers.cloudflare.com/pages/get-started/direct-upload/ — prebuilt asset upload and its file/size limits; this is hosting, not a no-code builder.
+- Gemini API pricing: https://ai.google.dev/gemini-api/docs/pricing — current free/paid distinction, free-token labeling, model-by-model pricing/access, and product-improvement data note.
+- Gemini API rate limits: https://ai.google.dev/gemini-api/docs/rate-limits — per-project dimensions, variable model limits, and no-guarantee warning.
+- Gemini API billing: https://ai.google.dev/gemini-api/docs/billing — free vs paid tiers, billing/prepayment caveats, and monitoring guidance.
+- Gemini API Additional Terms: https://ai.google.dev/gemini-api/terms — unpaid-service data use, human review, sensitive-data warning, age/region/business-use restrictions.
+- Vite environment variables: https://vite.dev/guide/env-and-mode — `VITE_*` exposure and secret-protection warning.
+- Google Antigravity launch post: https://developers.googleblog.com/build-with-google-antigravity-our-new-agentic-development-platform/ — editor, Manager Surface, terminal/browser agents, and individual public-preview positioning.
+- Google Antigravity pricing: https://antigravity.google/pricing — current Individual $0 plan and listed rate-limit/features caveat.
+- Google Antigravity home: https://antigravity.google/ — product description as an agentic development platform.
+- VS Code FAQ: https://code.visualstudio.com/docs/supporting/faq — no-sign-in core use and free-use statement.
+- Ollama FAQ: https://docs.ollama.com/faq — local data behavior, CPU/GPU loading, and local/cloud distinction.
+- React license: https://raw.githubusercontent.com/facebook/react/main/LICENSE — MIT license.
+- TypeScript license: https://raw.githubusercontent.com/microsoft/TypeScript/main/LICENSE.txt — Apache License 2.0.
+- Vite license: https://raw.githubusercontent.com/vitejs/vite/main/LICENSE — MIT license.
+- Ollama license: https://raw.githubusercontent.com/ollama/ollama/main/LICENSE — MIT license.
+- Bebas Neue license: https://raw.githubusercontent.com/google/fonts/main/ofl/bebasneue/OFL.txt — SIL Open Font License 1.1.
+- Manrope license: https://raw.githubusercontent.com/google/fonts/main/ofl/manrope/OFL.txt — SIL Open Font License 1.1.
+- Noto Sans Devanagari license: https://raw.githubusercontent.com/google/fonts/main/ofl/notosansdevanagari/OFL.txt — SIL Open Font License 1.1.
+
+## Not verified
+
+- Whether Supabase, Cloudflare Pages, Antigravity, or Gemini will request a payment card for a particular country/account flow.
+- Any provider's current commercial-use interpretation beyond the terms/pages linked above.
+- A universal Gemini RPM/TPM/RPD number; Google says active limits vary and must be checked in AI Studio.
+- Any production uptime, support, or delivery SLA for the Free tiers.
+- Exact Ollama hardware requirements for a particular model, quantization, operating system, or laptop.
+- A custom SMTP provider's current free allowance, deliverability, card requirement, or commercial terms.
+- Legal/privacy compliance for storing real resumes. This document is not legal advice; synthetic data is the safe hackathon default.

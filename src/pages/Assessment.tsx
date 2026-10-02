@@ -58,7 +58,7 @@ export const Assessment: React.FC = () => {
     Object.entries(skillScores).forEach(([skillId, data]) => {
       if (data.total > 0) {
         const ratio = data.correct / 3; // 3 questions per skill
-        let level = 0;
+        let level: number;
         if (ratio >= 0.9) level = 4;
         else if (ratio >= 0.6) level = 3;
         else if (ratio >= 0.3) level = 2;

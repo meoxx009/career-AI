@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CareerAI visual direction preview" />
+  <title>CareerAI — Visual Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-top" aria-hidden="true"></div>
+  <div class="ambient ambient-bottom" aria-hidden="true"></div>
+  <header class="site-header shell">
+    <a class="brand" href="#top" aria-label="CareerAI home"><span>career</span><b>/</b><span>ai</span></a>
+    <nav class="top-nav" aria-label="Primary navigation">
+      <a href="#paths">Your paths</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#practice">Practice</a>
+    </nav>
+    <button class="header-button" id="demoButton" type="button">Explore demo <span aria-hidden="true">↗</span></button>
+  </header>
+
+  <main id="top">
+    <section class="hero shell">
+      <div class="hero-copy">
+        <p class="eyebrow">CAREER READINESS / 01</p>
+        <h1>FIND YOUR<br /><em>NEXT MOVE.</em></h1>
+        <p class="hero-lede">A calm, evidence-led way to choose a direction, practise what matters and tell your story with confidence.</p>
+        <div class="hero-actions">
+          <button class="button button-primary" id="startButton" type="button">Find my direction <span aria-hidden="true">→</span></button>
+          <a class="button button-quiet" href="#paths">See the sample path</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="wave-field"></div>
+        <div class="hero-stamp">ONE<br /><span>STEP</span><br />AT A<br /><span>TIME</span></div>
+        <div class="hero-label">CAREERAI / SYNTHETIC DEMO</div>
+      </div>
+    </section>
+
+    <section class="snapshot shell" aria-labelledby="snapshot-heading">
+      <div class="section-intro">
+        <p class="eyebrow">RAHUL'S SNAPSHOT / FICTIONAL DATA</p>
+        <h2 id="snapshot-heading">Clarity feels better<br /><i>when it is visible.</i></h2>
+      </div>
+      <div class="snapshot-card linen-card">
+        <div class="card-topline"><span>ASSESSED ALIGNMENT</span><span class="badge dark-badge">COVERAGE 78%</span></div>
+        <div class="big-score">82<span>%</span></div>
+        <p>Backend Developer</p>
+        <div class="mini-meter"><span style="width:82%"></span></div>
+        <div class="card-footer"><span>Evidence-led estimate</span><span>Version seed-1</span></div>
+      </div>
+      <div class="snapshot-card dark-card">
+        <div class="card-topline"><span>NEXT BEST ACTION</span><span class="orange-dot"></span></div>
+        <h3>Build your first<br /><span>REST endpoint.</span></h3>
+        <p class="muted">A 45-minute step to turn your API gap into project evidence.</p>
+        <button class="text-link" data-toast="Task added to Rahul's fictional roadmap">Add to roadmap <span aria-hidden="true">↗</span></button>
+      </div>
+    </section>
+
+    <section class="paths shell" id="paths" aria-labelledby="paths-heading">
+      <div class="section-heading-row">
+        <div>
+          <p class="eyebrow">THREE DIRECTIONS / 02</p>
+          <h2 id="paths-heading">Not a verdict.<br /><i>A starting point.</i></h2>
+        </div>
+        <p class="section-note">We show what we know, what we do not know yet, and what to practise next.</p>
+      </div>
+      <div class="path-grid">
+        <article class="path-card featured-card">
+          <div class="path-number">01</div>
+          <div class="path-icon">↗</div>
+          <p class="path-type">PRIMARY DIRECTION</p>
+          <h3>Backend<br />Developer</h3>
+          <div class="path-score"><strong>82</strong><span>assessed<br />alignment</span></div>
+          <div class="path-line"></div>
+          <p>Strong logic and Python evidence. Practise APIs, testing and deployment next.</p>
+          <button class="card-link" data-toast="Backend plan opened">Explore plan <span aria-hidden="true">↗</span></button>
+        </article>
+        <article class="path-card cotton-card">
+          <div class="path-number">02</div>
+          <div class="path-icon ink">◇</div>
+          <p class="path-type">SECOND DIRECTION</p>
+          <h3>Data<br />Analyst</h3>
+          <div class="path-score"><strong>74</strong><span>assessed<br />alignment</span></div>
+          <div class="path-line dark-line"></div>
+          <p>Good analytical interest. Build stronger SQL and data-story evidence.</p>
+          <button class="card-link ink-link" data-toast="Data Analyst plan opened">Explore plan <span aria-hidden="true">↗</span></button>
+        </article>
+        <article class="path-card black-card">
+          <div class="path-number">03</div>
+          <div class="path-icon">○</div>
+          <p class="path-type">EXPLORE WITH MORE EVIDENCE</p>
+          <h3>Frontend<br />Developer</h3>
+          <div class="path-score"><strong>68</strong><span>alignment<br />coverage 46%</span></div>
+          <div class="path-line"></div>
+          <p>Interesting direction. Take the UI diagnostic before comparing confidently.</p>
+          <button class="card-link" data-toast="Frontend diagnostic opened">Take diagnostic <span aria-hidden="true">↗</span></button>
+        </article>
+      </div>
+    </section>
+
+    <section class="roadmap shell" id="roadmap" aria-labelledby="roadmap-heading">
+      <div class="roadmap-head">
+        <div>
+          <p class="eyebrow">THE PLAN / 03</p>
+          <h2 id="roadmap-heading">Small steps.<br /><i>Real proof.</i></h2>
+        </div>
+        <div class="plan-meta"><span>BACKEND / 4 WEEKS</span><strong>6 HRS / WEEK</strong></div>
+      </div>
+      <div class="roadmap-list">
+        <article class="week-row active-week">
+          <div class="week-marker">01</div>
+          <div class="week-copy"><p class="eyebrow orange-eyebrow">CURRENT</p><h3>Programming + HTTP foundations</h3><p>Understand requests, responses and the flow behind a useful endpoint.</p></div>
+          <div class="task-status"><span class="status-ring"></span><span>2 / 3 tasks</span></div>
+          <button class="task-action" data-toast="Task marked complete">Mark task done</button>
+        </article>
+        <article class="week-row">
+          <div class="week-marker">02</div>
+          <div class="week-copy"><p class="eyebrow">NEXT</p><h3>SQL + API basics</h3><p>Design a small schema and document six clear API requests.</p></div>
+          <div class="task-status"><span class="status-ring empty"></span><span>0 / 3 tasks</span></div>
+          <button class="task-action" data-toast="Week 2 opened">View week</button>
+        </article>
+        <article class="week-row">
+          <div class="week-marker">03</div>
+          <div class="week-copy"><p class="eyebrow">UP NEXT</p><h3>Testing + project evidence</h3><p>Make a small project safer and explain exactly what you built.</p></div>
+          <div class="task-status"><span class="status-ring empty"></span><span>0 / 3 tasks</span></div>
+          <button class="task-action" data-toast="Week 3 is locked until prerequisites are complete">View week</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="practice shell" id="practice" aria-labelledby="practice-heading">
+      <div class="practice-card">
+        <div class="practice-copy">
+          <p class="eyebrow">PRACTICE ROOM / 04</p>
+          <h2 id="practice-heading">Tell the story<br /><em>behind the work.</em></h2>
+          <p>Practise one question in text. Get a rubric, a useful gap and one next action—not a mysterious hiring score.</p>
+          <button class="button button-primary" data-toast="Practice question opened">Start a practice question <span aria-hidden="true">→</span></button>
+        </div>
+        <div class="question-card">
+          <p class="eyebrow">ROLE-SPECIFIC QUESTION</p>
+          <h3>How would you design a small task-management REST API?</h3>
+          <div class="rubric-row"><span>CLARIFY</span><span>DESIGN</span><span>VALIDATE</span></div>
+          <p class="question-note">Text-only mode · your answer stays private until you choose to save it.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer-cta shell">
+      <p class="eyebrow">CAREERAI / A CLEARER START</p>
+      <h2>Your next move<br /><i>can be small.</i></h2>
+      <button class="button button-primary" id="footerStart" type="button">Explore the demo <span aria-hidden="true">↗</span></button>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

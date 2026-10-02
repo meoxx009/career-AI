@@ -1,0 +1,46 @@
+/**
+ * CareerAI Design Tokens
+ * Conforming strictly to docs/DESIGN.md and preview/styles.css
+ */
+
+:root {
+  /* Core Brand Colors */
+  --c-void: #080B0C;          /* near-black application canvas */
+  --c-black-hole: #222222;    /* dark focus surface */
+  --c-black-soft: #101415;    /* raised dark surface */
+  --c-linen: #FAF3E1;         /* Sustainable Linen reflection/evidence surface */
+  --c-cotton: #F5E7C6;        /* Recycled Cotton secondary surface */
+  --c-tangerine: #FF6D1F;     /* Electric Tangerine signal & focal CTA */
+  --c-tangerine-deep: #C94E14;/* hover / bloom */
+  --c-ink: #101111;           /* high contrast text on light surfaces */
+  --c-muted-light: #C8C2B4;   /* secondary text on dark canvas */
+  --c-muted-dark: #68665E;    /* secondary text on light surfaces */
+
+  /* Accessible Status Colors */
+  --c-success: #A9D69B;       /* accessible warm green */
+  --c-warning: #FFC36B;       /* amber warning */
+  --c-danger: #FF8B7D;        /* error state */
+  --c-focus: #FFB38A;         /* visible focus ring */
+
+  /* Structural & Boundary Tokens */
+  --c-line-dark: rgba(250, 243, 225, 0.14);
+  --c-line-light: rgba(16, 17, 17, 0.14);
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 8px;
+  --radius-full: 999px;
+  --max-width: 1180px;
+
+  /* Short alias mappings from preview/styles.css */
+  --void: var(--c-void);
+  --black-hole: var(--c-black-hole);
+  --black-soft: var(--c-black-soft);
+  --linen: var(--c-linen);
+  --cotton: var(--c-cotton);
+  --tangerine: var(--c-tangerine);
+  --ink: var(--c-ink);
+  --muted-light: var(--c-muted-light);
+  --muted-dark: var(--c-muted-dark);
+  --line-dark: var(--c-line-dark);
+  --line-light: var(--c-line-light);
+}

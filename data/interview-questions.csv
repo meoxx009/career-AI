@@ -1,0 +1,7 @@
+id,role_id,type,prompt,rubric_points,version
+ib01,1,behavioural,"Tell me about a project problem you solved. What was your contribution and what did you learn?","context|contribution|decision|result_or_limitation|reflection",v1
+ib02,1,technical,"Explain how you would design a small task-management REST API. What would you clarify first?","clarifying_questions|resources|endpoints|validation|errors|trade_off",v1
+if01,2,behavioural,"Tell me about a UI decision you changed after receiving feedback.","context|feedback|change|result_or_limitation|reflection",v1
+if02,2,technical,"How would you make a form accessible and useful on a small screen?","labels|focus|errors|keyboard|responsive_layout|testing",v1
+id01,3,behavioural,"Tell me about a time your analysis changed after checking the data.","context|check|change|finding|limitation|reflection",v1
+id02,3,technical,"How would you investigate a dataset with missing values before making a chart?","meaning|pattern|missingness|decision|validation|limitation",v1
