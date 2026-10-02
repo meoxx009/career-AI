@@ -21,6 +21,8 @@ interface CareerContextType {
   setResumeSuggestions: (suggestions: ResumeSuggestion[]) => void;
   aiMode: 'ai' | 'deterministic-fallback';
   setAiMode: (mode: 'ai' | 'deterministic-fallback') => void;
+  language: 'en' | 'hi';
+  setLanguage: (lang: 'en' | 'hi') => void;
   consentGiven: boolean;
   setConsentGiven: (consent: boolean) => void;
   resetToDemo: () => void;
@@ -107,6 +109,10 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
     savedState?.consentGiven || true
   );
 
+  const [language, setLanguage] = useState<'en' | 'hi'>(
+    savedState?.language || 'en'
+  );
+
   // Persist to localStorage whenever state changes
   useEffect(() => {
     try {
@@ -121,6 +127,7 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
           resumeDoc,
           resumeSuggestions,
           aiMode,
+          language,
           consentGiven,
         })
       );
@@ -136,6 +143,7 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
     resumeDoc,
     resumeSuggestions,
     aiMode,
+    language,
     consentGiven,
   ]);
 
@@ -206,6 +214,7 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
     setResumeDoc(defaultResume);
     setResumeSuggestions([]);
     setAiMode('deterministic-fallback');
+    setLanguage('en');
     setConsentGiven(true);
   };
 
@@ -229,6 +238,8 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
         setResumeSuggestions,
         aiMode,
         setAiMode,
+        language,
+        setLanguage,
         consentGiven,
         setConsentGiven,
         resetToDemo,
