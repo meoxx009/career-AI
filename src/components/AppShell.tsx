@@ -3,6 +3,7 @@ import { NavLink, Link, useLocation } from 'react-router-dom';
 import { BrandMark, Toast } from './DesignSystem';
 import { ErrorBoundary } from './ErrorBoundary';
 import { useCareer } from '../context/CareerContext';
+import { NavbarProfile } from './NavbarProfile';
 import { Menu, X, Sparkles, RefreshCw } from 'lucide-react';
 
 interface AppShellProps {
@@ -16,7 +17,9 @@ export const AppShell: React.FC<AppShellProps> = ({ children, toastMessage = nul
     demoBadgeText,
     resetToDemo,
     user,
+    profile,
     isAuthenticated,
+    authLoading,
     openAuthModal,
     signOut,
   } = useCareer();
@@ -95,15 +98,21 @@ export const AppShell: React.FC<AppShellProps> = ({ children, toastMessage = nul
           {isLanding ? (
             /* Landing: clean primary action + explore demo */
             <>
-              <button
-                type="button"
-                onClick={() => openAuthModal('signin')}
-                className="button-text"
-                style={{ fontSize: '0.74rem', color: 'var(--color-cotton)' }}
-                aria-label="Sign in to CareerAI"
-              >
-                Sign In
-              </button>
+              {authLoading ? (
+                <div style={{ width: '60px', height: '24px' }} aria-hidden="true" />
+              ) : isAuthenticated ? (
+                <NavbarProfile />
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => openAuthModal('signin')}
+                  className="button-text"
+                  style={{ fontSize: '0.74rem', color: 'var(--color-cotton)' }}
+                  aria-label="Sign in to CareerAI"
+                >
+                  Sign In
+                </button>
+              )}
               <Link
                 to="/onboarding"
                 className="header-button"
@@ -113,23 +122,12 @@ export const AppShell: React.FC<AppShellProps> = ({ children, toastMessage = nul
               </Link>
             </>
           ) : (
-            /* Internal routes: show user email, sign-in/out, demo reset, profile link */
+            /* Internal routes: show user profile trigger, demo reset, profile link */
             <>
-              {isAuthenticated ? (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ fontSize: '0.74rem', color: 'var(--color-cotton)' }}>
-                    {user?.email}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={signOut}
-                    className="button-text"
-                    style={{ fontSize: '0.74rem' }}
-                    aria-label="Sign out"
-                  >
-                    Sign Out
-                  </button>
-                </div>
+              {authLoading ? (
+                <div style={{ width: '60px', height: '24px' }} aria-hidden="true" />
+              ) : isAuthenticated ? (
+                <NavbarProfile />
               ) : (
                 <button
                   type="button"
@@ -245,17 +243,99 @@ export const AppShell: React.FC<AppShellProps> = ({ children, toastMessage = nul
 
             <div style={{ marginTop: 'auto', paddingTop: '16px', borderTop: '1px solid var(--color-line-dark)', display: 'grid', gap: '10px' }}>
               {isAuthenticated ? (
-                <button
-                  type="button"
-                  onClick={() => {
-                    signOut();
-                    setMobileMenuOpen(false);
-                  }}
-                  className="button button-secondary"
-                  style={{ width: '100%', fontSize: '0.82rem' }}
-                >
-                  Sign Out ({user?.email})
-                </button>
+                <>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '12px',
+                      padding: '10px 12px',
+                      background: 'rgba(255, 255, 255, 0.04)',
+                      border: '1px solid var(--color-line-dark)',
+                      borderRadius: 'var(--radius-sm)',
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: '32px',
+                        height: '32px',
+                        borderRadius: '50%',
+                        background: 'var(--color-black-soft)',
+                        border: '1.5px solid var(--color-tangerine)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        overflow: 'hidden',
+                        flexShrink: 0,
+                      }}
+                    >
+                      {profile.profileImageUrl ? (
+                        <img
+                          src={profile.profileImageUrl}
+                          alt=""
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        />
+                      ) : (
+                        <span
+                          style={{
+                            fontSize: '0.78rem',
+                            fontFamily: 'var(--font-display, "Bebas Neue", sans-serif)',
+                            color: 'var(--color-tangerine)',
+                            fontWeight: 700,
+                          }}
+                        >
+                          {(profile.displayName || 'U').slice(0, 2).toUpperCase()}
+                        </span>
+                      )}
+                    </div>
+                    <div style={{ minWidth: 0, flex: 1 }}>
+                      <div
+                        style={{
+                          fontSize: '0.84rem',
+                          fontWeight: 700,
+                          color: 'var(--color-linen)',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
+                        {profile.displayName || 'Learner'}
+                      </div>
+                      <div
+                        style={{
+                          fontSize: '0.72rem',
+                          color: 'var(--color-muted-light)',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
+                        {user?.email || profile.contactEmail || 'Signed In'}
+                      </div>
+                    </div>
+                  </div>
+
+                  <Link
+                    to="/profile/edit"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="button button-secondary"
+                    style={{ width: '100%', fontSize: '0.82rem', textDecoration: 'none' }}
+                  >
+                    Edit Profile Details
+                  </Link>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      signOut();
+                      setMobileMenuOpen(false);
+                    }}
+                    className="button button-quiet"
+                    style={{ width: '100%', fontSize: '0.82rem' }}
+                  >
+                    Sign Out
+                  </button>
+                </>
               ) : (
                 <button
                   type="button"
