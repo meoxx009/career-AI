@@ -14,27 +14,37 @@ describe('CareerAI Phase 1 & 2 Design System Tests', () => {
   it('renders the accessible AppShell at root /', () => {
     render(<App />);
 
-    // Checks header brand
+    // Checks header brand (may appear in header and footer)
     expect(screen.getByRole('banner')).toBeDefined();
-    expect(screen.getByText('career')).toBeDefined();
+    expect(screen.getAllByText('career').length).toBeGreaterThan(0);
 
-    // Checks main landmark and initial content
+    // Checks main landmark and initial landing headline
     expect(screen.getByRole('main')).toBeDefined();
-    expect(screen.getByText(/Production Design System/i)).toBeDefined();
+    expect(screen.getByText(/FIND YOUR/i)).toBeDefined();
 
     // Checks footer landmark
     expect(screen.getByRole('contentinfo')).toBeDefined();
+
+    // Storage notice banner must NOT be visible on the public landing page
+    expect(screen.queryByText(/Demo progress stored on this browser/i)).toBeNull();
+
+    // Professional footer disclaimer must be present
+    expect(screen.getByText(/does not guarantee admission/i)).toBeDefined();
+
+    // No hardcoded Rahul snapshot text on /
+    expect(screen.queryByText(/RAHUL'S SNAPSHOT/i)).toBeNull();
+    expect(screen.queryByText(/Viewing synthetic Rahul fixture/i)).toBeNull();
   });
 
   it('renders design system primitives with expected roles and attributes', () => {
     const { container } = render(
       <div>
         <PrimaryButton>Find my direction</PrimaryButton>
-        <StatusBadge variant="tangerine">Coverage 78%</StatusBadge>
+        <StatusBadge variant="tangerine" label="Coverage 78%" />
         <LinenCard>Linen Surface</LinenCard>
         <DarkCard>Dark Surface</DarkCard>
         <CottonCard>Cotton Surface</CottonCard>
-        <ScoreMeter percentage={82} />
+        <ScoreMeter score={82} />
       </div>
     );
 
@@ -44,7 +54,7 @@ describe('CareerAI Phase 1 & 2 Design System Tests', () => {
     expect(btn.className).toContain('button-primary');
 
     // Status badge
-    expect(screen.getByText(/coverage 78%/i)).toBeDefined();
+    expect(screen.getByText(/Coverage 78%/i)).toBeDefined();
 
     // Meter progressbar
     const meter = screen.getByRole('progressbar');

@@ -10,6 +10,7 @@
   --color-black-soft: #101415;
   --color-linen: #FAF3E1;
   --color-cotton: #F5E7C6;
+  --color-natural: #9F886F;
   --color-tangerine: #FF6D1F;
   --color-tangerine-deep: #C94E14;
   --color-ink: #101111;
@@ -41,12 +42,17 @@
   --font-editorial: "Cormorant Garamond", Georgia, serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
+  /* Font Scaling Tokens for Accessible Sizing */
+  --font-scale: 1;
+  --app-font-size: 16px;
+
   /* Backward-compatible and preview alias bindings */
   --void: var(--color-void);
   --black-hole: var(--color-black-hole);
   --black-soft: var(--color-black-soft);
   --linen: var(--color-linen);
   --cotton: var(--color-cotton);
+  --natural: var(--color-natural);
   --tangerine: var(--color-tangerine);
   --ink: var(--color-ink);
   --muted-light: var(--color-muted-light);
@@ -59,6 +65,7 @@
   --c-black-soft: var(--color-black-soft);
   --c-linen: var(--color-linen);
   --c-cotton: var(--color-cotton);
+  --c-natural: var(--color-natural);
   --c-tangerine: var(--color-tangerine);
   --c-tangerine-deep: var(--color-tangerine-deep);
   --c-ink: var(--color-ink);

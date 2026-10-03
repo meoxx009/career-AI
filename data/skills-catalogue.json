@@ -1,0 +1,1100 @@
+[
+  {
+    "id": "skill-programming",
+    "slug": "programming",
+    "name": "Programming Logic",
+    "category": "foundations",
+    "aliases": [
+      "programming logic",
+      "programming basics",
+      "logic building",
+      "coding fundamentals"
+    ],
+    "description": "Translate problem specifications into structured step-by-step logic, conditions, loops, and handle edge cases safely.",
+    "evidenceTypes": [
+      "code_sample",
+      "test_suite",
+      "pull_request"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-data-structures",
+    "slug": "data-structures",
+    "name": "Data Structures",
+    "category": "foundations",
+    "aliases": [
+      "dsa",
+      "data structures",
+      "arrays",
+      "hash tables",
+      "trees",
+      "graphs"
+    ],
+    "description": "Select and implement foundational data structures (arrays, linked lists, hash tables, stacks, queues, heaps, trees) with space-time awareness.",
+    "evidenceTypes": [
+      "code_sample",
+      "algorithm_benchmark",
+      "test_suite"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-algorithms",
+    "slug": "algorithms",
+    "name": "Algorithms",
+    "category": "foundations",
+    "aliases": [
+      "algorithms",
+      "sorting",
+      "searching",
+      "dynamic programming",
+      "graph algorithms"
+    ],
+    "description": "Design and analyze algorithmic solutions, recursion, sorting, search traversals, and dynamic programming with Big-O complexity rigor.",
+    "evidenceTypes": [
+      "code_sample",
+      "algorithm_benchmark",
+      "test_suite"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-python",
+    "slug": "python",
+    "name": "Python",
+    "category": "programming_languages",
+    "aliases": [
+      "python",
+      "python3",
+      "python programming",
+      "py"
+    ],
+    "description": "Write idiomatic, type-hinted, and modular Python code for backend services, scripting, automation, and data processing.",
+    "evidenceTypes": [
+      "code_sample",
+      "test_suite",
+      "repo_deliverable"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-javascript",
+    "slug": "javascript",
+    "name": "JavaScript",
+    "category": "programming_languages",
+    "aliases": [
+      "javascript",
+      "js",
+      "ecmascript",
+      "es6+"
+    ],
+    "description": "Develop modern asynchronous JavaScript utilizing event loops, promises, closures, ES modules, and browser DOM manipulation.",
+    "evidenceTypes": [
+      "code_sample",
+      "test_suite",
+      "live_application"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-typescript",
+    "slug": "typescript",
+    "name": "TypeScript",
+    "category": "programming_languages",
+    "aliases": [
+      "typescript",
+      "ts",
+      "typed javascript"
+    ],
+    "description": "Build scalable web and backend applications utilizing strict static typing, interfaces, generics, utility types, and union narrowings.",
+    "evidenceTypes": [
+      "code_sample",
+      "test_suite",
+      "type_definitions"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-java",
+    "slug": "java",
+    "name": "Java",
+    "category": "programming_languages",
+    "aliases": [
+      "java",
+      "jvm",
+      "core java",
+      "java 17+"
+    ],
+    "description": "Architect robust enterprise backend services using object-oriented principles, JVM memory management, concurrency, and frameworks.",
+    "evidenceTypes": [
+      "code_sample",
+      "test_suite",
+      "service_deliverable"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-cpp",
+    "slug": "cpp",
+    "name": "C/C++",
+    "category": "programming_languages",
+    "aliases": [
+      "c/c++",
+      "c++",
+      "cpp",
+      "c programming",
+      "systems c"
+    ],
+    "description": "Implement low-level, high-performance systems code managing manual memory allocation, pointers, references, RAII, and hardware boundaries.",
+    "evidenceTypes": [
+      "code_sample",
+      "memory_benchmark",
+      "test_suite"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-sql",
+    "slug": "sql",
+    "name": "SQL",
+    "category": "data_engineering",
+    "aliases": [
+      "sql",
+      "structured query language",
+      "postgresql",
+      "mysql",
+      "relational queries"
+    ],
+    "description": "Formulate complex relational queries, joins, subqueries, aggregations, window functions, and schema definition constraints.",
+    "evidenceTypes": [
+      "sql_script",
+      "query_benchmark",
+      "data_model"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-rest-apis",
+    "slug": "rest-apis",
+    "name": "REST APIs",
+    "category": "software_engineering",
+    "aliases": [
+      "rest apis",
+      "restful services",
+      "http apis",
+      "api design",
+      "openapi"
+    ],
+    "description": "Design, document (OpenAPI), and implement stateless HTTP APIs with standard response codes, input validation, and idempotency.",
+    "evidenceTypes": [
+      "api_specification",
+      "service_code",
+      "integration_test"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-databases",
+    "slug": "databases",
+    "name": "Databases",
+    "category": "software_engineering",
+    "aliases": [
+      "databases",
+      "database design",
+      "indexing",
+      "acid transactions",
+      "nosql"
+    ],
+    "description": "Model normalized and dimensional schemas, configure B-tree/GIN indexes, maintain ACID transactions, and analyze execution plans.",
+    "evidenceTypes": [
+      "schema_definition",
+      "query_plan_analysis",
+      "migration_script"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-frontend",
+    "slug": "frontend",
+    "name": "Frontend",
+    "category": "software_engineering",
+    "aliases": [
+      "frontend",
+      "html/css",
+      "web development",
+      "responsive design"
+    ],
+    "description": "Construct responsive, performant semantic web layouts across mobile and desktop viewports using CSS Grid, Flexbox, and web APIs.",
+    "evidenceTypes": [
+      "ui_component",
+      "responsive_demo",
+      "lighthouse_audit"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-react",
+    "slug": "react",
+    "name": "React",
+    "category": "software_engineering",
+    "aliases": [
+      "react",
+      "react.js",
+      "react hooks",
+      "component architecture"
+    ],
+    "description": "Create interactive single-page and server-rendered web applications with composable components, hooks, state machines, and memoization.",
+    "evidenceTypes": [
+      "component_code",
+      "test_suite",
+      "interactive_app"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-accessibility",
+    "slug": "accessibility",
+    "name": "Accessibility",
+    "category": "software_engineering",
+    "aliases": [
+      "accessibility",
+      "a11y",
+      "wcag",
+      "aria",
+      "screen reader support"
+    ],
+    "description": "Audit and implement accessible web experiences meeting WCAG 2.1 AA standards, keyboard navigation, focus management, and ARIA roles.",
+    "evidenceTypes": [
+      "a11y_audit_report",
+      "keyboard_test",
+      "code_sample"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-testing",
+    "slug": "testing",
+    "name": "Testing",
+    "category": "software_engineering",
+    "aliases": [
+      "testing",
+      "unit testing",
+      "integration testing",
+      "jest",
+      "vitest",
+      "test automation"
+    ],
+    "description": "Write automated unit, integration, and contract tests with edge-case assertion coverage, mocking, and continuous test runners.",
+    "evidenceTypes": [
+      "test_suite",
+      "ci_test_run",
+      "coverage_report"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-git",
+    "slug": "git",
+    "name": "Git",
+    "category": "workflow",
+    "aliases": [
+      "git",
+      "version control",
+      "github",
+      "git workflow",
+      "pull requests"
+    ],
+    "description": "Manage source code with atomic commits, branch workflows, interactive rebase, pull request reviews, and merge conflict resolution.",
+    "evidenceTypes": [
+      "git_repository",
+      "commit_history",
+      "pull_request"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-linux",
+    "slug": "linux",
+    "name": "Linux",
+    "category": "systems_engineering",
+    "aliases": [
+      "linux",
+      "bash",
+      "shell scripting",
+      "posix",
+      "terminal"
+    ],
+    "description": "Navigate UNIX/Linux filesystems, inspect system processes, configure file permissions, write Bash scripts, and parse log streams.",
+    "evidenceTypes": [
+      "shell_script",
+      "terminal_session",
+      "config_file"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-docker",
+    "slug": "docker",
+    "name": "Docker",
+    "category": "cloud_devops",
+    "aliases": [
+      "docker",
+      "containerization",
+      "docker-compose",
+      "dockerfile"
+    ],
+    "description": "Package application runtimes into reproducible, multi-stage Docker containers with volume mounts, networks, and compose orchestrations.",
+    "evidenceTypes": [
+      "dockerfile",
+      "docker_compose_config",
+      "container_run_log"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-cloud",
+    "slug": "cloud",
+    "name": "Cloud",
+    "category": "cloud_devops",
+    "aliases": [
+      "cloud",
+      "cloud computing",
+      "aws",
+      "gcp",
+      "azure",
+      "cloud services"
+    ],
+    "description": "Deploy and manage compute instances, serverless functions, object storage, identity policies (IAM), and virtual networking in cloud platforms.",
+    "evidenceTypes": [
+      "cloud_architecture_spec",
+      "deployment_log",
+      "terraform_config"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-devops",
+    "slug": "devops",
+    "name": "DevOps",
+    "category": "cloud_devops",
+    "aliases": [
+      "devops",
+      "ci/cd",
+      "continuous integration",
+      "github actions",
+      "infrastructure as code"
+    ],
+    "description": "Automate build, test, and release pipelines using GitHub Actions, monitor deployment telemetry, and maintain zero-downtime workflows.",
+    "evidenceTypes": [
+      "ci_pipeline_file",
+      "deployment_run",
+      "iac_script"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-cybersecurity",
+    "slug": "cybersecurity",
+    "name": "Cybersecurity",
+    "category": "systems_engineering",
+    "aliases": [
+      "cybersecurity",
+      "appsec",
+      "security",
+      "owasp",
+      "vulnerability assessment"
+    ],
+    "description": "Identify and remediate security vulnerabilities (OWASP Top 10, SQLi, XSS, CSRF), configure secure headers, and enforce role-based access.",
+    "evidenceTypes": [
+      "security_audit_report",
+      "threat_model",
+      "remediation_code"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-networking",
+    "slug": "networking",
+    "name": "Networking",
+    "category": "systems_engineering",
+    "aliases": [
+      "networking",
+      "tcp/ip",
+      "dns",
+      "subnets",
+      "http/https",
+      "osi model"
+    ],
+    "description": "Understand network packet flow, TCP/UDP sockets, DNS resolution, subnets, routing, TLS handshake, and network traffic troubleshooting.",
+    "evidenceTypes": [
+      "wireshark_capture",
+      "network_topology_diagram",
+      "socket_code"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-embedded",
+    "slug": "embedded",
+    "name": "Embedded Systems",
+    "category": "hardware_embedded",
+    "aliases": [
+      "embedded",
+      "embedded systems",
+      "firmware",
+      "bare-metal",
+      "rtos"
+    ],
+    "description": "Write resource-constrained firmware in C/C++, manage hardware interrupts, timers, low-power sleep modes, and FreeRTOS task scheduling.",
+    "evidenceTypes": [
+      "firmware_code",
+      "oscilloscope_capture",
+      "schematic_diagram"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-microcontrollers",
+    "slug": "microcontrollers",
+    "name": "Microcontrollers",
+    "category": "hardware_embedded",
+    "aliases": [
+      "microcontrollers",
+      "mcu",
+      "stm32",
+      "esp32",
+      "arduino",
+      "arm cortex"
+    ],
+    "description": "Configure microcontroller GPIO registers, analog-to-digital converters (ADC), pulse-width modulation (PWM), and hardware timers.",
+    "evidenceTypes": [
+      "hardware_demo_video",
+      "driver_code",
+      "pinout_specification"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-electronics-protocols",
+    "slug": "electronics-protocols",
+    "name": "Electronics Protocols",
+    "category": "hardware_embedded",
+    "aliases": [
+      "electronics protocols",
+      "uart",
+      "spi",
+      "i2c",
+      "can bus",
+      "hardware communication"
+    ],
+    "description": "Implement and debug embedded serial communication protocols (UART, SPI, I2C, CAN) with logic analyzer verification.",
+    "evidenceTypes": [
+      "logic_analyzer_trace",
+      "driver_implementation",
+      "protocol_spec"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-data-cleaning",
+    "slug": "data-cleaning",
+    "name": "Data Cleaning",
+    "category": "data_analytics",
+    "aliases": [
+      "data cleaning",
+      "data wrangling",
+      "data preprocessing",
+      "pandas",
+      "missing values"
+    ],
+    "description": "Clean messy datasets, handle missing values, normalize formats, detect outliers, and validate schema integrity using Python (Pandas).",
+    "evidenceTypes": [
+      "jupyter_notebook",
+      "cleaned_dataset_summary",
+      "test_assertions"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-statistics",
+    "slug": "statistics",
+    "name": "Statistics",
+    "category": "data_analytics",
+    "aliases": [
+      "statistics",
+      "probability",
+      "hypothesis testing",
+      "descriptive statistics",
+      "a/b testing"
+    ],
+    "description": "Apply descriptive statistics, probability distributions, hypothesis testing (t-test, p-values), confidence intervals, and correlation analysis.",
+    "evidenceTypes": [
+      "statistical_report",
+      "hypothesis_test_notebook",
+      "math_proof"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-visualization",
+    "slug": "visualization",
+    "name": "Visualization",
+    "category": "data_analytics",
+    "aliases": [
+      "visualization",
+      "data visualization",
+      "charts",
+      "matplotlib",
+      "seaborn"
+    ],
+    "description": "Design clear, truthful visual charts (histograms, scatter plots, trend lines) adhering to data visualization ethics without misleading axes.",
+    "evidenceTypes": [
+      "dashboard_screenshot",
+      "chart_deliverable",
+      "eda_notebook"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-excel",
+    "slug": "excel",
+    "name": "Excel",
+    "category": "data_analytics",
+    "aliases": [
+      "excel",
+      "spreadsheets",
+      "pivot tables",
+      "vlookup",
+      "xlookup"
+    ],
+    "description": "Build auditable spreadsheet financial/operational models with pivot tables, index-match/xlookup, logical formulas, and data validation rules.",
+    "evidenceTypes": [
+      "spreadsheet_model",
+      "pivot_analysis",
+      "formula_documentation"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-bi",
+    "slug": "bi",
+    "name": "Business Intelligence",
+    "category": "data_analytics",
+    "aliases": [
+      "bi",
+      "business intelligence",
+      "power bi",
+      "tableau",
+      "dax",
+      "kpis"
+    ],
+    "description": "Create interactive enterprise KPI dashboards with dimensional data modeling, DAX measures, automated refresh pipelines, and role-level security.",
+    "evidenceTypes": [
+      "powerbi_report",
+      "tableau_workbook",
+      "kpi_scorecard"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-machine-learning",
+    "slug": "machine-learning",
+    "name": "Machine Learning",
+    "category": "ai_ml",
+    "aliases": [
+      "machine learning",
+      "ml",
+      "scikit-learn",
+      "supervised learning",
+      "classification",
+      "regression"
+    ],
+    "description": "Train, tune, and cross-validate supervised and unsupervised ML models (linear regression, decision trees, random forests, k-means).",
+    "evidenceTypes": [
+      "model_pipeline_code",
+      "evaluation_metrics_report",
+      "confusion_matrix"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-deep-learning",
+    "slug": "deep-learning",
+    "name": "Deep Learning",
+    "category": "ai_ml",
+    "aliases": [
+      "deep learning",
+      "neural networks",
+      "pytorch",
+      "tensorflow",
+      "backpropagation"
+    ],
+    "description": "Construct multi-layer perceptrons, convolutional networks, and transformer backbones with PyTorch, tracking loss gradients and convergence.",
+    "evidenceTypes": [
+      "pytorch_model_code",
+      "training_loss_curves",
+      "benchmark_log"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-nlp",
+    "slug": "nlp",
+    "name": "Natural Language Processing",
+    "category": "ai_ml",
+    "aliases": [
+      "nlp",
+      "natural language processing",
+      "text processing",
+      "tokenization",
+      "huggingface"
+    ],
+    "description": "Process text corpora with tokenization, named entity recognition (NER), transformer fine-tuning, and semantic text classification.",
+    "evidenceTypes": [
+      "nlp_pipeline_notebook",
+      "model_weights_spec",
+      "evaluation_results"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-computer-vision",
+    "slug": "computer-vision",
+    "name": "Computer Vision",
+    "category": "ai_ml",
+    "aliases": [
+      "computer vision",
+      "cv",
+      "opencv",
+      "object detection",
+      "yolo",
+      "image classification"
+    ],
+    "description": "Implement image preprocessing, convolutional filters, object detection, and transfer learning using OpenCV and PyTorch vision models.",
+    "evidenceTypes": [
+      "cv_pipeline_code",
+      "inference_demo",
+      "bounding_box_metrics"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-genai",
+    "slug": "genai",
+    "name": "Generative AI",
+    "category": "ai_ml",
+    "aliases": [
+      "genai",
+      "generative ai",
+      "foundation models",
+      "llms",
+      "diffusion models"
+    ],
+    "description": "Integrate multi-modal foundation model APIs, reason over token windows, manage temperature/top-p parameters, and handle streaming outputs.",
+    "evidenceTypes": [
+      "api_integration_code",
+      "prompt_evaluation_suite",
+      "architecture_doc"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-llm-application-development",
+    "slug": "llm-application-development",
+    "name": "LLM Application Development",
+    "category": "ai_ml",
+    "aliases": [
+      "llm application development",
+      "llm apps",
+      "langchain",
+      "llamaindex",
+      "agentic workflows"
+    ],
+    "description": "Build robust production applications with LLMs utilizing function calling, schema enforcement, agentic loops, and retry mechanisms.",
+    "evidenceTypes": [
+      "full_stack_repo",
+      "tool_definition_code",
+      "integration_test"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-prompt-testing",
+    "slug": "prompt-testing",
+    "name": "Prompt Testing",
+    "category": "ai_ml",
+    "aliases": [
+      "prompt testing",
+      "prompt engineering",
+      "few-shot prompting",
+      "prompt regression"
+    ],
+    "description": "Author, version, and systematically regression-test structured prompts using few-shot exemplars, delimiters, and test assertions.",
+    "evidenceTypes": [
+      "prompt_test_suite",
+      "eval_dataset",
+      "prompt_template_file"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-embeddings",
+    "slug": "embeddings",
+    "name": "Embeddings",
+    "category": "ai_ml",
+    "aliases": [
+      "embeddings",
+      "vector embeddings",
+      "cosine similarity",
+      "dense representations"
+    ],
+    "description": "Generate dense text and multimodal vector embeddings, calculate cosine similarities, and optimize token chunking strategies.",
+    "evidenceTypes": [
+      "embedding_pipeline_code",
+      "similarity_matrix",
+      "chunking_benchmark"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-vector-search",
+    "slug": "vector-search",
+    "name": "Vector Search",
+    "category": "ai_ml",
+    "aliases": [
+      "vector search",
+      "vector databases",
+      "pinecone",
+      "chromadb",
+      "pgvector",
+      "ann search"
+    ],
+    "description": "Configure vector databases (pgvector, Chroma, Qdrant), build approximate nearest neighbor (ANN) indexes, and execute hybrid metadata queries.",
+    "evidenceTypes": [
+      "vector_index_schema",
+      "query_benchmark",
+      "retrieval_script"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-rag",
+    "slug": "rag",
+    "name": "RAG",
+    "category": "ai_ml",
+    "aliases": [
+      "rag",
+      "retrieval augmented generation",
+      "hybrid search",
+      "reranking",
+      "context injection"
+    ],
+    "description": "Architect end-to-end Retrieval-Augmented Generation with document parsing, semantic re-ranking, source citation, and context compression.",
+    "evidenceTypes": [
+      "rag_pipeline_code",
+      "retrieval_eval_report",
+      "working_demo"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-evaluation",
+    "slug": "evaluation",
+    "name": "Evaluation",
+    "category": "ai_ml",
+    "aliases": [
+      "evaluation",
+      "ragas",
+      "model evaluation",
+      "llm evals",
+      "hallucination benchmarking"
+    ],
+    "description": "Benchmark AI outputs deterministically using ground truth datasets, RAGAS (faithfulness, answer relevancy), and semantic similarity scoring.",
+    "evidenceTypes": [
+      "eval_benchmark_results",
+      "ragas_scorecard",
+      "evaluation_script"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-ai-safety",
+    "slug": "ai-safety",
+    "name": "AI Safety",
+    "category": "ai_ml",
+    "aliases": [
+      "ai safety",
+      "guardrails",
+      "moderation",
+      "jailbreak prevention",
+      "llm security"
+    ],
+    "description": "Implement prompt injection defenses, input/output validation guardrails (NeMo Guardrails), PII redaction, and toxicity filters.",
+    "evidenceTypes": [
+      "guardrail_configuration",
+      "red_teaming_report",
+      "test_assertions"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-ui-ux",
+    "slug": "ui-ux",
+    "name": "UI/UX",
+    "category": "design_product",
+    "aliases": [
+      "ui/ux",
+      "user interface design",
+      "visual design",
+      "design hierarchy",
+      "typography"
+    ],
+    "description": "Apply user interface design fundamentals: spatial layouts, typographic scale, color contrast, visual hierarchy, and component consistency.",
+    "evidenceTypes": [
+      "ui_mockup",
+      "design_system_spec",
+      "clickable_prototype"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-figma",
+    "slug": "figma",
+    "name": "Figma",
+    "category": "design_product",
+    "aliases": [
+      "figma",
+      "wireframing",
+      "prototyping",
+      "auto layout",
+      "design components"
+    ],
+    "description": "Craft high-fidelity wireframes and interactive prototypes in Figma utilizing auto-layout, component variants, and design token libraries.",
+    "evidenceTypes": [
+      "figma_file_link",
+      "interactive_prototype",
+      "component_library"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-user-research",
+    "slug": "user-research",
+    "name": "User Research",
+    "category": "design_product",
+    "aliases": [
+      "user research",
+      "usability testing",
+      "interviews",
+      "journey mapping",
+      "personas"
+    ],
+    "description": "Conduct qualitative user interviews, construct journey maps, execute moderated usability testing, and synthesize behavioral insights.",
+    "evidenceTypes": [
+      "research_report",
+      "usability_test_plan",
+      "user_journey_map"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-product-management",
+    "slug": "product-management",
+    "name": "Product Management",
+    "category": "design_product",
+    "aliases": [
+      "product management",
+      "prd",
+      "roadmapping",
+      "backlog prioritization",
+      "rice framework"
+    ],
+    "description": "Author clear Product Requirement Documents (PRDs), formulate user stories with acceptance criteria, and prioritize backlogs with RICE/MoSCoW.",
+    "evidenceTypes": [
+      "prd_document",
+      "product_roadmap",
+      "prioritization_matrix"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-business-analysis",
+    "slug": "business-analysis",
+    "name": "Business Analysis",
+    "category": "design_product",
+    "aliases": [
+      "business analysis",
+      "requirements engineering",
+      "bpmn",
+      "gap analysis",
+      "stakeholder management"
+    ],
+    "description": "Map business process flows (BPMN), analyze functional and non-functional requirements, and align software capabilities with operational goals.",
+    "evidenceTypes": [
+      "business_requirements_doc",
+      "bpmn_flowchart",
+      "gap_analysis_matrix"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-technical-writing",
+    "slug": "technical-writing",
+    "name": "Technical Writing",
+    "category": "professional",
+    "aliases": [
+      "technical writing",
+      "documentation",
+      "api docs",
+      "markdown",
+      "docs-as-code"
+    ],
+    "description": "Write clear, structured technical documentation, API guides, architecture overviews, and tutorials following Style Guide conventions.",
+    "evidenceTypes": [
+      "documentation_page",
+      "api_guide",
+      "tutorial_article"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-communication",
+    "slug": "communication",
+    "name": "Communication",
+    "category": "professional",
+    "aliases": [
+      "communication",
+      "technical communication",
+      "presentation",
+      "stakeholder management"
+    ],
+    "description": "Articulate engineering assumptions, architectural trade-offs, and project status succinctly to technical and non-technical stakeholders.",
+    "evidenceTypes": [
+      "presentation_deck",
+      "written_proposal",
+      "code_review_commentary"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "skill-portfolio-project-evidence",
+    "slug": "portfolio-project-evidence",
+    "name": "Portfolio Project Evidence",
+    "category": "proof",
+    "aliases": [
+      "portfolio",
+      "project proof",
+      "deliverables",
+      "github proof",
+      "live demo"
+    ],
+    "description": "Package verifiable project deliverables with reproducible setup commands, test suites, architecture notes, and documented limitations.",
+    "evidenceTypes": [
+      "git_repository_readme",
+      "live_deployment",
+      "test_report"
+    ],
+    "source": "industry_standard_curriculum",
+    "version": "1.0.0",
+    "active": true
+  }
+]

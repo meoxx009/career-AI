@@ -1,0 +1,2572 @@
+[
+  {
+    "id": "edu-school-pcm",
+    "level": "school",
+    "degreeTitle": "High School (Class 11-12)",
+    "specializationTitle": "PCM (Physics, Chemistry, Mathematics)",
+    "label": "School — Science (PCM)",
+    "aliases": [
+      "PCM",
+      "Non-Medical",
+      "Science with Maths",
+      "CBSE PCM",
+      "ISC PCM",
+      "State Board PCM"
+    ],
+    "compatibleLearnerStages": [
+      "class_10",
+      "class_11_12"
+    ],
+    "relatedAcademicContextIds": [
+      "school_pcm"
+    ],
+    "relatedCareerPathIds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      9,
+      10,
+      13,
+      16,
+      17,
+      18
+    ],
+    "source": "national_education_framework",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-school-pcm-cs",
+    "level": "school",
+    "degreeTitle": "High School (Class 11-12)",
+    "specializationTitle": "PCM with Computer Science Elective",
+    "label": "School — Science (PCM with CS Elective)",
+    "aliases": [
+      "PCM with CS",
+      "PCM + IP",
+      "PCM with Computer Science",
+      "Informatics Practices"
+    ],
+    "compatibleLearnerStages": [
+      "class_10",
+      "class_11_12"
+    ],
+    "relatedAcademicContextIds": [
+      "school_pcm"
+    ],
+    "relatedCareerPathIds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      10,
+      13,
+      16,
+      17,
+      18
+    ],
+    "source": "national_education_framework",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-school-pcb",
+    "level": "school",
+    "degreeTitle": "High School (Class 11-12)",
+    "specializationTitle": "PCB (Physics, Chemistry, Biology)",
+    "label": "School — Science (PCB)",
+    "aliases": [
+      "PCB",
+      "Medical",
+      "Science without Maths",
+      "Biology Stream"
+    ],
+    "compatibleLearnerStages": [
+      "class_10",
+      "class_11_12"
+    ],
+    "relatedAcademicContextIds": [
+      "school_pcb"
+    ],
+    "relatedCareerPathIds": [
+      3,
+      17,
+      27,
+      28,
+      29,
+      32
+    ],
+    "source": "national_education_framework",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-school-pcmb",
+    "level": "school",
+    "degreeTitle": "High School (Class 11-12)",
+    "specializationTitle": "PCMB (Physics, Chemistry, Mathematics, Biology)",
+    "label": "School — Science (PCMB)",
+    "aliases": [
+      "PCMB",
+      "Science with Maths & Bio",
+      "General Science"
+    ],
+    "compatibleLearnerStages": [
+      "class_10",
+      "class_11_12"
+    ],
+    "relatedAcademicContextIds": [
+      "school_pcmb"
+    ],
+    "relatedCareerPathIds": [
+      1,
+      2,
+      3,
+      4,
+      13,
+      16,
+      17,
+      18
+    ],
+    "source": "national_education_framework",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-school-commerce",
+    "level": "school",
+    "degreeTitle": "High School (Class 11-12)",
+    "specializationTitle": "Commerce (Accountancy, Business Studies, Economics)",
+    "label": "School — Commerce",
+    "aliases": [
+      "Commerce",
+      "Commerce with Maths",
+      "Commerce with IP",
+      "Business Studies"
+    ],
+    "compatibleLearnerStages": [
+      "class_10",
+      "class_11_12"
+    ],
+    "relatedAcademicContextIds": [
+      "school_commerce"
+    ],
+    "relatedCareerPathIds": [
+      3,
+      26,
+      30,
+      32
+    ],
+    "source": "national_education_framework",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-school-arts",
+    "level": "school",
+    "degreeTitle": "High School (Class 11-12)",
+    "specializationTitle": "Arts & Humanities",
+    "label": "School — Arts & Humanities",
+    "aliases": [
+      "Arts",
+      "Humanities",
+      "Social Sciences",
+      "Liberal Arts"
+    ],
+    "compatibleLearnerStages": [
+      "class_10",
+      "class_11_12"
+    ],
+    "relatedAcademicContextIds": [
+      "school_arts"
+    ],
+    "relatedCareerPathIds": [
+      27,
+      28,
+      29,
+      32,
+      33
+    ],
+    "source": "national_education_framework",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-school-vocational",
+    "level": "school",
+    "degreeTitle": "High School (Class 11-12)",
+    "specializationTitle": "Vocational & Applied Skills",
+    "label": "School — Vocational",
+    "aliases": [
+      "Vocational Stream",
+      "NSQF",
+      "Skill Education",
+      "Applied Skills"
+    ],
+    "compatibleLearnerStages": [
+      "class_10",
+      "class_11_12"
+    ],
+    "relatedAcademicContextIds": [
+      "school_vocational"
+    ],
+    "relatedCareerPathIds": [
+      2,
+      3,
+      7,
+      27,
+      33
+    ],
+    "source": "national_education_framework",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-dip-computer-engineering",
+    "level": "diploma",
+    "degreeTitle": "Diploma in Engineering",
+    "specializationTitle": "Computer Engineering",
+    "label": "Diploma — Computer Engineering",
+    "aliases": [
+      "Diploma CE",
+      "Polytechnic Computer",
+      "Diploma in CSE",
+      "Polytechnic Computer Engineering"
+    ],
+    "compatibleLearnerStages": [
+      "diploma",
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "cse"
+    ],
+    "relatedCareerPathIds": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      9,
+      10
+    ],
+    "source": "aicte_polytechnic_catalogue",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-dip-it",
+    "level": "diploma",
+    "degreeTitle": "Diploma in Engineering",
+    "specializationTitle": "Information Technology",
+    "label": "Diploma — Information Technology",
+    "aliases": [
+      "Diploma IT",
+      "Polytechnic IT",
+      "Diploma Information Tech"
+    ],
+    "compatibleLearnerStages": [
+      "diploma",
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "it"
+    ],
+    "relatedCareerPathIds": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      9,
+      10,
+      12
+    ],
+    "source": "aicte_polytechnic_catalogue",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-dip-electronics",
+    "level": "diploma",
+    "degreeTitle": "Diploma in Engineering",
+    "specializationTitle": "Electronics & Communication",
+    "label": "Diploma — Electronics",
+    "aliases": [
+      "Diploma ECE",
+      "Polytechnic Electronics",
+      "Diploma in Electronics"
+    ],
+    "compatibleLearnerStages": [
+      "diploma",
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "ece"
+    ],
+    "relatedCareerPathIds": [
+      13,
+      14,
+      15,
+      1,
+      4
+    ],
+    "source": "aicte_polytechnic_catalogue",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-dip-electrical",
+    "level": "diploma",
+    "degreeTitle": "Diploma in Engineering",
+    "specializationTitle": "Electrical Engineering",
+    "label": "Diploma — Electrical",
+    "aliases": [
+      "Diploma Electrical",
+      "Polytechnic EE",
+      "Diploma EEE"
+    ],
+    "compatibleLearnerStages": [
+      "diploma",
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "electrical"
+    ],
+    "relatedCareerPathIds": [
+      13,
+      14,
+      15,
+      3
+    ],
+    "source": "aicte_polytechnic_catalogue",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-dip-mechanical",
+    "level": "diploma",
+    "degreeTitle": "Diploma in Engineering",
+    "specializationTitle": "Mechanical Engineering",
+    "label": "Diploma — Mechanical",
+    "aliases": [
+      "Diploma Mechanical",
+      "Polytechnic ME",
+      "Diploma in Mech"
+    ],
+    "compatibleLearnerStages": [
+      "diploma",
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "mechanical"
+    ],
+    "relatedCareerPathIds": [
+      3,
+      14,
+      30,
+      31
+    ],
+    "source": "aicte_polytechnic_catalogue",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-dip-civil",
+    "level": "diploma",
+    "degreeTitle": "Diploma in Engineering",
+    "specializationTitle": "Civil Engineering",
+    "label": "Diploma — Civil",
+    "aliases": [
+      "Diploma Civil",
+      "Polytechnic Civil"
+    ],
+    "compatibleLearnerStages": [
+      "diploma",
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "civil"
+    ],
+    "relatedCareerPathIds": [
+      3,
+      7,
+      30,
+      32
+    ],
+    "source": "aicte_polytechnic_catalogue",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-dip-business-apps",
+    "level": "diploma",
+    "degreeTitle": "Diploma in Vocational",
+    "specializationTitle": "Data / Office / Business Applications",
+    "label": "Diploma — Data/Office/Business Applications",
+    "aliases": [
+      "Diploma in Office Automation",
+      "Diploma in Computer Applications",
+      "DCA",
+      "PGDCA"
+    ],
+    "compatibleLearnerStages": [
+      "diploma",
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bca",
+      "school_vocational"
+    ],
+    "relatedCareerPathIds": [
+      3,
+      7,
+      26,
+      32
+    ],
+    "source": "nsqf_vocational_standards",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-dip-other-vocational",
+    "level": "diploma",
+    "degreeTitle": "Diploma in Vocational",
+    "specializationTitle": "Other Vocational / Polytechnic",
+    "label": "Diploma — Other Vocational",
+    "aliases": [
+      "Vocational Diploma",
+      "ITI Certificate",
+      "Polytechnic Other"
+    ],
+    "compatibleLearnerStages": [
+      "diploma",
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "school_vocational"
+    ],
+    "relatedCareerPathIds": [
+      3,
+      7,
+      27,
+      32
+    ],
+    "source": "nsqf_vocational_standards",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-cs",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Computer Science & Engineering",
+    "label": "BTech / BE — Computer Science",
+    "aliases": [
+      "BTech CSE",
+      "BE Computer Science",
+      "B.Tech CS",
+      "B.E. CSE"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "cse"
+    ],
+    "relatedCareerPathIds": [
+      1,
+      2,
+      4,
+      5,
+      8,
+      9,
+      10,
+      16,
+      17,
+      18,
+      19
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-it",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Information Technology",
+    "label": "BTech / BE — Information Technology",
+    "aliases": [
+      "BTech IT",
+      "BE IT",
+      "B.Tech Information Technology"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "it"
+    ],
+    "relatedCareerPathIds": [
+      1,
+      2,
+      4,
+      5,
+      9,
+      10,
+      11,
+      12,
+      16
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-ai",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Artificial Intelligence",
+    "label": "BTech / BE — Artificial Intelligence",
+    "aliases": [
+      "BTech AI",
+      "B.Tech AI",
+      "BE Artificial Intelligence"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "cse"
+    ],
+    "relatedCareerPathIds": [
+      19,
+      20,
+      21,
+      22,
+      17,
+      18,
+      23,
+      25
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-ml",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Machine Learning",
+    "label": "BTech / BE — Machine Learning",
+    "aliases": [
+      "BTech ML",
+      "B.Tech Machine Learning",
+      "BE ML"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "cse"
+    ],
+    "relatedCareerPathIds": [
+      18,
+      19,
+      20,
+      24,
+      17,
+      16
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-ds",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Data Science",
+    "label": "BTech / BE — Data Science",
+    "aliases": [
+      "BTech Data Science",
+      "B.Tech DS",
+      "BE Data Science"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bsc_ds",
+      "cse"
+    ],
+    "relatedCareerPathIds": [
+      16,
+      17,
+      18,
+      3,
+      26
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-cybersecurity",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Cybersecurity & Information Security",
+    "label": "BTech / BE — Cybersecurity",
+    "aliases": [
+      "BTech Cybersecurity",
+      "B.Tech InfoSec",
+      "BE Cyber Security"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "it",
+      "cse"
+    ],
+    "relatedCareerPathIds": [
+      12,
+      9,
+      10,
+      15,
+      1
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-se",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Software Engineering",
+    "label": "BTech / BE — Software Engineering",
+    "aliases": [
+      "BTech Software Engineering",
+      "B.Tech SE",
+      "BE Software Engineering"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "cse"
+    ],
+    "relatedCareerPathIds": [
+      4,
+      1,
+      2,
+      5,
+      7,
+      8
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-bca-general",
+    "level": "undergraduate",
+    "degreeTitle": "BCA",
+    "specializationTitle": "General Computer Applications",
+    "label": "BCA — Computer Applications",
+    "aliases": [
+      "BCA",
+      "Bachelor of Computer Applications",
+      "B.C.A."
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bca"
+    ],
+    "relatedCareerPathIds": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      3
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-bca-da",
+    "level": "undergraduate",
+    "degreeTitle": "BCA",
+    "specializationTitle": "Data Analytics",
+    "label": "BCA — Data Analytics",
+    "aliases": [
+      "BCA Data Analytics",
+      "BCA DA",
+      "BCA in Data Science"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bca",
+      "bsc_ds"
+    ],
+    "relatedCareerPathIds": [
+      3,
+      26,
+      16,
+      17
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-bca-cloud",
+    "level": "undergraduate",
+    "degreeTitle": "BCA",
+    "specializationTitle": "Cloud Computing",
+    "label": "BCA — Cloud Computing",
+    "aliases": [
+      "BCA Cloud",
+      "BCA Cloud & Security",
+      "BCA Cloud Computing"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bca",
+      "it"
+    ],
+    "relatedCareerPathIds": [
+      10,
+      9,
+      1,
+      11,
+      12
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-bca-aiml",
+    "level": "undergraduate",
+    "degreeTitle": "BCA",
+    "specializationTitle": "Artificial Intelligence & Machine Learning",
+    "label": "BCA — AI/ML",
+    "aliases": [
+      "BCA AI/ML",
+      "BCA AI",
+      "BCA Machine Learning"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bca"
+    ],
+    "relatedCareerPathIds": [
+      18,
+      19,
+      20,
+      21,
+      3
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-bsc-cs",
+    "level": "undergraduate",
+    "degreeTitle": "BSc",
+    "specializationTitle": "Computer Science",
+    "label": "BSc — Computer Science",
+    "aliases": [
+      "BSc CS",
+      "B.Sc. Computer Science",
+      "BSc Comp Sci"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bsc_cs"
+    ],
+    "relatedCareerPathIds": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      3,
+      16
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-bsc-it",
+    "level": "undergraduate",
+    "degreeTitle": "BSc",
+    "specializationTitle": "Information Technology",
+    "label": "BSc — Information Technology",
+    "aliases": [
+      "BSc IT",
+      "B.Sc. Information Technology",
+      "BSc Info Tech"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "it",
+      "bsc_cs"
+    ],
+    "relatedCareerPathIds": [
+      1,
+      2,
+      4,
+      10,
+      12,
+      7
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-bsc-ds",
+    "level": "undergraduate",
+    "degreeTitle": "BSc",
+    "specializationTitle": "Data Science",
+    "label": "BSc — Data Science",
+    "aliases": [
+      "BSc Data Science",
+      "B.Sc. DS",
+      "BSc DS"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bsc_ds"
+    ],
+    "relatedCareerPathIds": [
+      3,
+      16,
+      17,
+      18,
+      26
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-bsc-stats",
+    "level": "undergraduate",
+    "degreeTitle": "BSc",
+    "specializationTitle": "Statistics",
+    "label": "BSc — Statistics",
+    "aliases": [
+      "BSc Statistics",
+      "B.Sc. Stats",
+      "BSc Stats"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bsc_stats"
+    ],
+    "relatedCareerPathIds": [
+      3,
+      17,
+      18,
+      26,
+      32
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-bsc-ai",
+    "level": "undergraduate",
+    "degreeTitle": "BSc",
+    "specializationTitle": "Artificial Intelligence",
+    "label": "BSc — Artificial Intelligence",
+    "aliases": [
+      "BSc AI",
+      "B.Sc. AI",
+      "BSc Artificial Intelligence"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bsc_cs"
+    ],
+    "relatedCareerPathIds": [
+      18,
+      19,
+      20,
+      21,
+      22,
+      17
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-mca",
+    "level": "postgraduate",
+    "degreeTitle": "MCA",
+    "specializationTitle": "Master of Computer Applications",
+    "label": "MCA — Computer Applications",
+    "aliases": [
+      "MCA",
+      "M.C.A.",
+      "Master of Computer Applications"
+    ],
+    "compatibleLearnerStages": [
+      "postgraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "mca"
+    ],
+    "relatedCareerPathIds": [
+      1,
+      2,
+      4,
+      5,
+      8,
+      9,
+      10,
+      16
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-msc-cs",
+    "level": "postgraduate",
+    "degreeTitle": "MSc",
+    "specializationTitle": "Computer Science",
+    "label": "MSc — Computer Science",
+    "aliases": [
+      "MSc CS",
+      "M.Sc. Computer Science",
+      "MSc Comp Sci"
+    ],
+    "compatibleLearnerStages": [
+      "postgraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bsc_cs",
+      "cse"
+    ],
+    "relatedCareerPathIds": [
+      1,
+      4,
+      16,
+      17,
+      18,
+      19
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-msc-ds",
+    "level": "postgraduate",
+    "degreeTitle": "MSc",
+    "specializationTitle": "Data Science",
+    "label": "MSc — Data Science",
+    "aliases": [
+      "MSc Data Science",
+      "M.Sc. DS",
+      "MSc DS"
+    ],
+    "compatibleLearnerStages": [
+      "postgraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bsc_ds"
+    ],
+    "relatedCareerPathIds": [
+      16,
+      17,
+      18,
+      24,
+      26
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-msc-ai",
+    "level": "postgraduate",
+    "degreeTitle": "MSc",
+    "specializationTitle": "Artificial Intelligence",
+    "label": "MSc — Artificial Intelligence",
+    "aliases": [
+      "MSc AI",
+      "M.Sc. Artificial Intelligence",
+      "MSc AI/ML"
+    ],
+    "compatibleLearnerStages": [
+      "postgraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bsc_ds",
+      "cse"
+    ],
+    "relatedCareerPathIds": [
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      25
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-msc-stats",
+    "level": "postgraduate",
+    "degreeTitle": "MSc",
+    "specializationTitle": "Statistics",
+    "label": "MSc — Statistics",
+    "aliases": [
+      "MSc Statistics",
+      "M.Sc. Stats",
+      "MSc Applied Statistics"
+    ],
+    "compatibleLearnerStages": [
+      "postgraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bsc_stats"
+    ],
+    "relatedCareerPathIds": [
+      3,
+      17,
+      18,
+      26,
+      32
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-mtech-cs",
+    "level": "postgraduate",
+    "degreeTitle": "MTech / ME",
+    "specializationTitle": "Computer Science & Engineering",
+    "label": "MTech — Computer Science",
+    "aliases": [
+      "MTech CSE",
+      "M.Tech CS",
+      "ME Computer Science"
+    ],
+    "compatibleLearnerStages": [
+      "postgraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "cse"
+    ],
+    "relatedCareerPathIds": [
+      4,
+      1,
+      9,
+      10,
+      15,
+      16
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-mtech-aiml",
+    "level": "postgraduate",
+    "degreeTitle": "MTech / ME",
+    "specializationTitle": "AI & Machine Learning",
+    "label": "MTech — AI/ML",
+    "aliases": [
+      "MTech AI",
+      "MTech ML",
+      "M.Tech AI/ML"
+    ],
+    "compatibleLearnerStages": [
+      "postgraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "cse"
+    ],
+    "relatedCareerPathIds": [
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-mtech-ds",
+    "level": "postgraduate",
+    "degreeTitle": "MTech / ME",
+    "specializationTitle": "Data Science",
+    "label": "MTech — Data Science",
+    "aliases": [
+      "MTech Data Science",
+      "M.Tech DS"
+    ],
+    "compatibleLearnerStages": [
+      "postgraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "cse",
+      "bsc_ds"
+    ],
+    "relatedCareerPathIds": [
+      16,
+      17,
+      18,
+      24
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-mtech-cybersecurity",
+    "level": "postgraduate",
+    "degreeTitle": "MTech / ME",
+    "specializationTitle": "Cybersecurity",
+    "label": "MTech — Cybersecurity",
+    "aliases": [
+      "MTech Cybersecurity",
+      "M.Tech InfoSec"
+    ],
+    "compatibleLearnerStages": [
+      "postgraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "cse",
+      "it"
+    ],
+    "relatedCareerPathIds": [
+      12,
+      10,
+      9,
+      15
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-ece",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Electronics & Communication Engineering",
+    "label": "BTech / BE — ECE",
+    "aliases": [
+      "ECE",
+      "BTech ECE",
+      "BE Electronics and Communication",
+      "B.Tech ECE"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "ece"
+    ],
+    "relatedCareerPathIds": [
+      13,
+      14,
+      15,
+      1,
+      4
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-electronics",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Electronics Engineering",
+    "label": "BTech / BE — Electronics Engineering",
+    "aliases": [
+      "Electronics Engineering",
+      "BE Electronics",
+      "BTech Electronics"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "ece"
+    ],
+    "relatedCareerPathIds": [
+      13,
+      14,
+      15
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-embedded",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Embedded Systems",
+    "label": "BTech / BE — Embedded Systems",
+    "aliases": [
+      "Embedded Systems",
+      "BTech Embedded",
+      "BE Embedded"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "ece"
+    ],
+    "relatedCareerPathIds": [
+      13,
+      14,
+      15
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-vlsi",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "VLSI Design & Microelectronics",
+    "label": "BTech / BE — VLSI",
+    "aliases": [
+      "VLSI",
+      "BTech VLSI",
+      "Microelectronics"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "ece"
+    ],
+    "relatedCareerPathIds": [
+      13,
+      15
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-instrumentation",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Instrumentation Engineering",
+    "label": "BTech / BE — Instrumentation",
+    "aliases": [
+      "Instrumentation",
+      "BTech ICE",
+      "Instrumentation & Control"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "ece",
+      "electrical"
+    ],
+    "relatedCareerPathIds": [
+      13,
+      14,
+      15,
+      3
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-electrical",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Electrical & Electronics Engineering",
+    "label": "BTech / BE — Electrical Engineering",
+    "aliases": [
+      "Electrical Engineering",
+      "EEE",
+      "BTech EEE",
+      "BE Electrical"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "electrical"
+    ],
+    "relatedCareerPathIds": [
+      13,
+      14,
+      15,
+      3
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-robotics",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Robotics & Automation",
+    "label": "BTech / BE — Robotics",
+    "aliases": [
+      "Robotics",
+      "BTech Robotics",
+      "Automation Engineering"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "ece",
+      "mechanical"
+    ],
+    "relatedCareerPathIds": [
+      13,
+      14,
+      15,
+      18,
+      25
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-mechatronics",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Mechatronics Engineering",
+    "label": "BTech / BE — Mechatronics",
+    "aliases": [
+      "Mechatronics",
+      "BTech Mechatronics"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "mechanical",
+      "ece"
+    ],
+    "relatedCareerPathIds": [
+      13,
+      14,
+      15,
+      30
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-iot",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Internet of Things (IoT)",
+    "label": "BTech / BE — IoT",
+    "aliases": [
+      "IoT",
+      "Internet of Things",
+      "BTech IoT"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "ece",
+      "cse"
+    ],
+    "relatedCareerPathIds": [
+      14,
+      13,
+      1,
+      10
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-biomedical",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Biomedical Engineering",
+    "label": "BTech / BE — Biomedical Engineering",
+    "aliases": [
+      "Biomedical Engineering",
+      "BTech BME",
+      "Bioengineering"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "ece"
+    ],
+    "relatedCareerPathIds": [
+      13,
+      17,
+      3,
+      25
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-mechanical",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Mechanical Engineering",
+    "label": "BTech / BE — Mechanical Engineering",
+    "aliases": [
+      "Mechanical Engineering",
+      "Mech",
+      "BTech ME",
+      "BE Mechanical"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "mechanical"
+    ],
+    "relatedCareerPathIds": [
+      30,
+      31,
+      3,
+      14
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-civil",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Civil Engineering",
+    "label": "BTech / BE — Civil Engineering",
+    "aliases": [
+      "Civil Engineering",
+      "Civil",
+      "BTech CE",
+      "BE Civil"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "civil"
+    ],
+    "relatedCareerPathIds": [
+      3,
+      7,
+      30,
+      32
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-chemical",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Chemical Engineering",
+    "label": "BTech / BE — Chemical Engineering",
+    "aliases": [
+      "Chemical Engineering",
+      "Chem Eng",
+      "BTech Chem"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "mechanical"
+    ],
+    "relatedCareerPathIds": [
+      3,
+      30,
+      32
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-production",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Production Engineering",
+    "label": "BTech / BE — Production Engineering",
+    "aliases": [
+      "Production Engineering",
+      "BTech Production"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "mechanical"
+    ],
+    "relatedCareerPathIds": [
+      30,
+      31,
+      3
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-industrial",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Industrial Engineering",
+    "label": "BTech / BE — Industrial Engineering",
+    "aliases": [
+      "Industrial Engineering",
+      "Operations Research",
+      "BTech Industrial"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "mechanical"
+    ],
+    "relatedCareerPathIds": [
+      30,
+      31,
+      3,
+      32
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-automobile",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Automobile Engineering",
+    "label": "BTech / BE — Automobile Engineering",
+    "aliases": [
+      "Automobile Engineering",
+      "Automotive",
+      "BTech Auto"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "mechanical"
+    ],
+    "relatedCareerPathIds": [
+      14,
+      30,
+      3
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-btech-environmental",
+    "level": "undergraduate",
+    "degreeTitle": "BTech / BE",
+    "specializationTitle": "Environmental Engineering",
+    "label": "BTech / BE — Environmental Engineering",
+    "aliases": [
+      "Environmental Engineering",
+      "BTech Environmental"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "civil"
+    ],
+    "relatedCareerPathIds": [
+      3,
+      30,
+      32
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-barch",
+    "level": "undergraduate",
+    "degreeTitle": "BArch",
+    "specializationTitle": "Architecture & Spatial Design",
+    "label": "BArch — Architecture",
+    "aliases": [
+      "Architecture",
+      "BArch",
+      "Bachelor of Architecture"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "civil",
+      "arts_humanities"
+    ],
+    "relatedCareerPathIds": [
+      27,
+      28,
+      29,
+      30
+    ],
+    "source": "ugc_coa_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-bcom-general",
+    "level": "undergraduate",
+    "degreeTitle": "BCom",
+    "specializationTitle": "General Commerce",
+    "label": "BCom — General",
+    "aliases": [
+      "BCom",
+      "B.Com",
+      "Bachelor of Commerce"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bcom"
+    ],
+    "relatedCareerPathIds": [
+      3,
+      26,
+      30,
+      32
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-bcom-af",
+    "level": "undergraduate",
+    "degreeTitle": "BCom",
+    "specializationTitle": "Accounting and Finance",
+    "label": "BCom — Accounting and Finance",
+    "aliases": [
+      "BCom A&F",
+      "BCom Accounting",
+      "BCom Finance"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bcom"
+    ],
+    "relatedCareerPathIds": [
+      3,
+      26,
+      32
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-bcom-bi",
+    "level": "undergraduate",
+    "degreeTitle": "BCom",
+    "specializationTitle": "Banking and Insurance",
+    "label": "BCom — Banking and Insurance",
+    "aliases": [
+      "BCom Banking",
+      "BCom Insurance"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bcom"
+    ],
+    "relatedCareerPathIds": [
+      3,
+      26,
+      32
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-bcom-fintech",
+    "level": "undergraduate",
+    "degreeTitle": "BCom",
+    "specializationTitle": "FinTech & Financial Analytics",
+    "label": "BCom — FinTech",
+    "aliases": [
+      "BCom FinTech",
+      "FinTech",
+      "Financial Technology"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bcom"
+    ],
+    "relatedCareerPathIds": [
+      3,
+      26,
+      32,
+      1
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-bba-general",
+    "level": "undergraduate",
+    "degreeTitle": "BBA",
+    "specializationTitle": "General Business Administration",
+    "label": "BBA — General",
+    "aliases": [
+      "BBA",
+      "B.B.A.",
+      "Bachelor of Business Administration"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bba"
+    ],
+    "relatedCareerPathIds": [
+      30,
+      32,
+      3,
+      26
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-bba-analytics",
+    "level": "undergraduate",
+    "degreeTitle": "BBA",
+    "specializationTitle": "Business Analytics",
+    "label": "BBA — Business Analytics",
+    "aliases": [
+      "BBA Analytics",
+      "BBA Business Analytics"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bba"
+    ],
+    "relatedCareerPathIds": [
+      3,
+      26,
+      32,
+      30
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-bba-finance",
+    "level": "undergraduate",
+    "degreeTitle": "BBA",
+    "specializationTitle": "Finance",
+    "label": "BBA — Finance",
+    "aliases": [
+      "BBA Finance",
+      "BBA in Financial Management"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bba"
+    ],
+    "relatedCareerPathIds": [
+      3,
+      30,
+      32
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-bba-marketing",
+    "level": "undergraduate",
+    "degreeTitle": "BBA",
+    "specializationTitle": "Marketing",
+    "label": "BBA — Marketing",
+    "aliases": [
+      "BBA Marketing",
+      "Digital Marketing"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bba"
+    ],
+    "relatedCareerPathIds": [
+      30,
+      32,
+      27
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-mba-general",
+    "level": "postgraduate",
+    "degreeTitle": "MBA",
+    "specializationTitle": "General Management",
+    "label": "MBA — General",
+    "aliases": [
+      "MBA",
+      "M.B.A.",
+      "Master of Business Administration"
+    ],
+    "compatibleLearnerStages": [
+      "postgraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "mba"
+    ],
+    "relatedCareerPathIds": [
+      30,
+      31,
+      32,
+      3
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-mba-analytics",
+    "level": "postgraduate",
+    "degreeTitle": "MBA",
+    "specializationTitle": "Business Analytics",
+    "label": "MBA — Business Analytics",
+    "aliases": [
+      "MBA Analytics",
+      "MBA Business Analytics",
+      "MBA Data Analytics"
+    ],
+    "compatibleLearnerStages": [
+      "postgraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "mba"
+    ],
+    "relatedCareerPathIds": [
+      30,
+      31,
+      32,
+      3,
+      26
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-mba-finance",
+    "level": "postgraduate",
+    "degreeTitle": "MBA",
+    "specializationTitle": "Finance",
+    "label": "MBA — Finance",
+    "aliases": [
+      "MBA Finance",
+      "MBA Financial Markets"
+    ],
+    "compatibleLearnerStages": [
+      "postgraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "mba"
+    ],
+    "relatedCareerPathIds": [
+      30,
+      32,
+      3
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-mba-marketing",
+    "level": "postgraduate",
+    "degreeTitle": "MBA",
+    "specializationTitle": "Marketing",
+    "label": "MBA — Marketing",
+    "aliases": [
+      "MBA Marketing",
+      "MBA Brand Management"
+    ],
+    "compatibleLearnerStages": [
+      "postgraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "mba"
+    ],
+    "relatedCareerPathIds": [
+      30,
+      32,
+      29
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-mba-pm",
+    "level": "postgraduate",
+    "degreeTitle": "MBA",
+    "specializationTitle": "Product Management",
+    "label": "MBA — Product Management",
+    "aliases": [
+      "MBA Product Management",
+      "MBA Tech Management",
+      "MBA PM"
+    ],
+    "compatibleLearnerStages": [
+      "postgraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "mba"
+    ],
+    "relatedCareerPathIds": [
+      30,
+      31,
+      32
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-mba-operations",
+    "level": "postgraduate",
+    "degreeTitle": "MBA",
+    "specializationTitle": "Operations & Supply Chain",
+    "label": "MBA — Operations",
+    "aliases": [
+      "MBA Operations",
+      "MBA Supply Chain"
+    ],
+    "compatibleLearnerStages": [
+      "postgraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "mba"
+    ],
+    "relatedCareerPathIds": [
+      30,
+      31,
+      32
+    ],
+    "source": "ugc_aicte_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-ba-economics",
+    "level": "undergraduate",
+    "degreeTitle": "BA",
+    "specializationTitle": "Economics",
+    "label": "BA — Economics",
+    "aliases": [
+      "BA Economics",
+      "B.A. Economics"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "arts_humanities"
+    ],
+    "relatedCareerPathIds": [
+      3,
+      26,
+      32,
+      30
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-ba-psychology",
+    "level": "undergraduate",
+    "degreeTitle": "BA",
+    "specializationTitle": "Psychology",
+    "label": "BA — Psychology",
+    "aliases": [
+      "BA Psychology",
+      "B.A. Psychology",
+      "Cognitive Psychology"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "arts_humanities"
+    ],
+    "relatedCareerPathIds": [
+      27,
+      28,
+      29,
+      30
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-ba-english",
+    "level": "undergraduate",
+    "degreeTitle": "BA",
+    "specializationTitle": "English Literature & Professional Writing",
+    "label": "BA — English",
+    "aliases": [
+      "BA English",
+      "English Literature",
+      "B.A. English"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "arts_humanities"
+    ],
+    "relatedCareerPathIds": [
+      33,
+      27,
+      29,
+      30
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-ba-sociology",
+    "level": "undergraduate",
+    "degreeTitle": "BA",
+    "specializationTitle": "Sociology",
+    "label": "BA — Sociology",
+    "aliases": [
+      "BA Sociology",
+      "B.A. Sociology"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "arts_humanities"
+    ],
+    "relatedCareerPathIds": [
+      29,
+      30,
+      27,
+      33
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-ba-polscience",
+    "level": "undergraduate",
+    "degreeTitle": "BA",
+    "specializationTitle": "Political Science",
+    "label": "BA — Political Science",
+    "aliases": [
+      "BA Political Science",
+      "Pol Science"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "arts_humanities"
+    ],
+    "relatedCareerPathIds": [
+      32,
+      30,
+      33
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-ba-masscomm",
+    "level": "undergraduate",
+    "degreeTitle": "BA",
+    "specializationTitle": "Mass Communication & Journalism",
+    "label": "BA — Mass Communication",
+    "aliases": [
+      "BA Journalism",
+      "Mass Comm",
+      "BJMC",
+      "Media Studies"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "arts_humanities"
+    ],
+    "relatedCareerPathIds": [
+      33,
+      27,
+      29,
+      30
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-bdes-uiux",
+    "level": "undergraduate",
+    "degreeTitle": "BDes",
+    "specializationTitle": "UI/UX & Interaction Design",
+    "label": "BDes — UI/UX",
+    "aliases": [
+      "BDes UI/UX",
+      "User Experience Design",
+      "BDes Interaction"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "arts_humanities"
+    ],
+    "relatedCareerPathIds": [
+      27,
+      28,
+      29,
+      2
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-bdes-interaction",
+    "level": "undergraduate",
+    "degreeTitle": "BDes",
+    "specializationTitle": "Interaction Design",
+    "label": "BDes — Interaction Design",
+    "aliases": [
+      "BDes IxD",
+      "Interaction Design"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "arts_humanities"
+    ],
+    "relatedCareerPathIds": [
+      27,
+      28,
+      29,
+      2
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-bdes-comm",
+    "level": "undergraduate",
+    "degreeTitle": "BDes",
+    "specializationTitle": "Communication Design",
+    "label": "BDes — Communication Design",
+    "aliases": [
+      "Communication Design",
+      "Graphic Design",
+      "BDes Visual"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "arts_humanities"
+    ],
+    "relatedCareerPathIds": [
+      27,
+      28,
+      33
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-ma-comm",
+    "level": "postgraduate",
+    "degreeTitle": "MA",
+    "specializationTitle": "Communication & Media",
+    "label": "MA — Communication",
+    "aliases": [
+      "MA Communication",
+      "Master in Media",
+      "MA Journalism"
+    ],
+    "compatibleLearnerStages": [
+      "postgraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "arts_humanities"
+    ],
+    "relatedCareerPathIds": [
+      33,
+      29,
+      30
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-ma-psychology",
+    "level": "postgraduate",
+    "degreeTitle": "MA",
+    "specializationTitle": "Psychology",
+    "label": "MA — Psychology",
+    "aliases": [
+      "MA Psychology",
+      "M.A. Psychology",
+      "MSc Psychology"
+    ],
+    "compatibleLearnerStages": [
+      "postgraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "arts_humanities"
+    ],
+    "relatedCareerPathIds": [
+      29,
+      27,
+      30
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-des-other",
+    "level": "undergraduate",
+    "degreeTitle": "Design",
+    "specializationTitle": "Other Creative / Design Disciplines",
+    "label": "Design — Other Disciplines",
+    "aliases": [
+      "Design Other",
+      "Fine Arts",
+      "BFA",
+      "Multimedia"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "recent_graduate"
+    ],
+    "relatedAcademicContextIds": [
+      "arts_humanities"
+    ],
+    "relatedCareerPathIds": [
+      27,
+      28,
+      29
+    ],
+    "source": "ugc_directory",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-generic-self-taught",
+    "level": "professional",
+    "degreeTitle": "Self-Taught",
+    "specializationTitle": "Independent / Portfolio-Driven Learning",
+    "label": "Self-Taught — Independent Learning",
+    "aliases": [
+      "Self-Taught",
+      "Autodidact",
+      "Bootcamp",
+      "No Formal Degree",
+      "Self Study"
+    ],
+    "compatibleLearnerStages": [
+      "self_taught",
+      "recent_graduate",
+      "undergraduate",
+      "diploma"
+    ],
+    "relatedAcademicContextIds": [
+      "cse"
+    ],
+    "relatedCareerPathIds": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      27
+    ],
+    "source": "industry_standards",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-generic-career-switcher",
+    "level": "professional",
+    "degreeTitle": "Career Switcher",
+    "specializationTitle": "Transitioning from Non-Tech Field",
+    "label": "Career Switcher — Any Prior Background",
+    "aliases": [
+      "Career Switcher",
+      "Career Transition",
+      "Non-Tech to Tech",
+      "Domain Switcher"
+    ],
+    "compatibleLearnerStages": [
+      "self_taught",
+      "recent_graduate",
+      "postgraduate"
+    ],
+    "relatedAcademicContextIds": [
+      "bca",
+      "arts_humanities"
+    ],
+    "relatedCareerPathIds": [
+      1,
+      2,
+      3,
+      7,
+      30,
+      32,
+      33
+    ],
+    "source": "industry_standards",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-generic-other-degree",
+    "level": "undergraduate",
+    "degreeTitle": "Other Degree",
+    "specializationTitle": "Degree / Program Not Listed",
+    "label": "Other Degree / Not Listed",
+    "aliases": [
+      "Other Degree",
+      "Other",
+      "Degree Not Listed",
+      "Unlisted Program"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "postgraduate",
+      "diploma",
+      "recent_graduate",
+      "self_taught"
+    ],
+    "relatedAcademicContextIds": [
+      "cse",
+      "arts_humanities"
+    ],
+    "relatedCareerPathIds": [
+      1,
+      2,
+      3
+    ],
+    "source": "user_intake_fallback",
+    "version": "1.0.0",
+    "active": true
+  },
+  {
+    "id": "edu-generic-other-specialization",
+    "level": "undergraduate",
+    "degreeTitle": "Other Specialization",
+    "specializationTitle": "Specialization Not Listed",
+    "label": "Other Specialization",
+    "aliases": [
+      "Other Specialization",
+      "Custom Branch",
+      "Unlisted Specialization"
+    ],
+    "compatibleLearnerStages": [
+      "undergraduate",
+      "postgraduate",
+      "diploma",
+      "recent_graduate",
+      "self_taught"
+    ],
+    "relatedAcademicContextIds": [
+      "cse"
+    ],
+    "relatedCareerPathIds": [
+      1,
+      2,
+      3
+    ],
+    "source": "user_intake_fallback",
+    "version": "1.0.0",
+    "active": true
+  }
+]

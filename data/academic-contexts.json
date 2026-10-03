@@ -1,0 +1,191 @@
+[
+  {
+    "id": "cse",
+    "name": "Computer Science & Engineering (CSE)",
+    "category": "engineering",
+    "typicalPrerequisites": ["Discrete Mathematics", "Programming Logic", "Data Structures", "Algorithms"],
+    "naturalCareerBridges": ["software-engineer", "backend-developer", "frontend-developer", "full-stack-developer", "devops-engineer", "systems-engineer"],
+    "transferableStrengths": ["Formal computational complexity", "Memory models", "Operating systems architecture"],
+    "advisoryNote": "Strong technical baseline. Focus on production-grade testing, continuous integration, and verifiable project proof rather than textbook theory."
+  },
+  {
+    "id": "it",
+    "name": "Information Technology (IT)",
+    "category": "engineering",
+    "typicalPrerequisites": ["Database Systems", "Networking", "Web Technologies", "Information Security"],
+    "naturalCareerBridges": ["cloud-engineer", "devops-engineer", "full-stack-developer", "cybersecurity-engineer", "backend-developer"],
+    "transferableStrengths": ["System integration", "Network protocols", "Relational database administration"],
+    "advisoryNote": "Excellent practical orientation. Strengthen core algorithmic problem solving and distributed systems concepts."
+  },
+  {
+    "id": "ece",
+    "name": "Electronics & Communication Engineering (ECE)",
+    "category": "engineering",
+    "typicalPrerequisites": ["Digital Signal Processing", "Microcontrollers", "Signals and Systems", "Circuit Theory"],
+    "naturalCareerBridges": ["embedded-systems-engineer", "iot-engineer", "systems-engineer", "backend-developer"],
+    "transferableStrengths": ["Hardware-software boundary", "Low-level bit manipulation", "Real-time operating systems constraints"],
+    "advisoryNote": "Direct bridge to Embedded and IoT engineering. To transition to cloud or software, focus on REST APIs, Linux server environments, and database design."
+  },
+  {
+    "id": "electrical",
+    "name": "Electrical & Electronics Engineering (EEE)",
+    "category": "engineering",
+    "typicalPrerequisites": ["Control Systems", "Power Electronics", "Electromagnetic Fields", "Microprocessors"],
+    "naturalCareerBridges": ["embedded-systems-engineer", "iot-engineer", "systems-engineer", "data-analyst"],
+    "transferableStrengths": ["Rigorous differential equations", "Physical sensor telemetry", "State-space modeling"],
+    "advisoryNote": "Mathematical rigor translates well to data modeling and physical computing. Focus on modern Python and Git workflows."
+  },
+  {
+    "id": "mechanical",
+    "name": "Mechanical Engineering",
+    "category": "engineering",
+    "typicalPrerequisites": ["Thermodynamics", "Mechanics of Solids", "CAD/CAM", "Finite Element Analysis"],
+    "naturalCareerBridges": ["product-manager", "data-analyst", "iot-engineer", "technical-product-manager"],
+    "transferableStrengths": ["System tolerances", "Root cause failure analysis", "Physical product lifecycle"],
+    "advisoryNote": "Systematic problem-solving carries over to technical product management and industrial data analytics. Emphasize software fundamentals."
+  },
+  {
+    "id": "civil",
+    "name": "Civil Engineering",
+    "category": "engineering",
+    "typicalPrerequisites": ["Structural Analysis", "Geotechnical Engineering", "Surveying", "Project Planning"],
+    "naturalCareerBridges": ["data-analyst", "business-analyst", "product-manager", "qa-engineer"],
+    "transferableStrengths": ["Spatial data reasoning", "Estimation and cost optimization", "Regulatory compliance"],
+    "advisoryNote": "Project lifecycle management maps smoothly to business analysis, QA, and geospatial data analytics."
+  },
+  {
+    "id": "bca",
+    "name": "Bachelor of Computer Applications (BCA)",
+    "category": "computer_applications",
+    "typicalPrerequisites": ["Programming in C/C++/Java", "Database Management", "Web Technologies", "Software Engineering"],
+    "naturalCareerBridges": ["frontend-developer", "backend-developer", "full-stack-developer", "data-analyst", "qa-engineer"],
+    "transferableStrengths": ["Hands-on web and database implementation", "Rapid prototyping", "Software project lifecycle"],
+    "advisoryNote": "Applied software focus. Equal footing with engineering graduates when backed by verifiable GitHub deliverables and clean architectural documentation."
+  },
+  {
+    "id": "mca",
+    "name": "Master of Computer Applications (MCA)",
+    "category": "computer_applications",
+    "typicalPrerequisites": ["Advanced Data Structures", "Software Architecture", "Distributed Systems", "Cloud Computing"],
+    "naturalCareerBridges": ["software-engineer", "backend-developer", "data-engineer", "devops-engineer", "sdet-engineer"],
+    "transferableStrengths": ["Postgraduate technical depth", "Enterprise application design", "Comprehensive database modeling"],
+    "advisoryNote": "High eligibility for senior engineering benchmarks. Focus on distributed services, test automation, and system performance benchmarks."
+  },
+  {
+    "id": "bba",
+    "name": "Bachelor of Business Administration (BBA)",
+    "category": "management_commerce",
+    "typicalPrerequisites": ["Principles of Management", "Marketing", "Business Statistics", "Financial Accounting"],
+    "naturalCareerBridges": ["product-manager", "business-analyst", "bi-analyst", "data-analyst"],
+    "transferableStrengths": ["Market sizing", "Customer research", "Stakeholder presentations"],
+    "advisoryNote": "Combines naturally with data and product pathways. Learning SQL and spreadsheet data pipelines unlocks immediate analytics roles."
+  },
+  {
+    "id": "mba",
+    "name": "Master of Business Administration (MBA)",
+    "category": "management_commerce",
+    "typicalPrerequisites": ["Strategic Management", "Corporate Finance", "Operations & Supply Chain", "Managerial Economics"],
+    "naturalCareerBridges": ["product-manager", "technical-product-manager", "business-analyst", "bi-analyst"],
+    "transferableStrengths": ["P&L accountability", "Cross-functional roadmap alignment", "Executive synthesis"],
+    "advisoryNote": "Strategic decision-making. Pair with technical literacy in APIs, cloud costs, and data pipelines for top-tier product leadership."
+  },
+  {
+    "id": "bcom",
+    "name": "Bachelor of Commerce (BCom)",
+    "category": "management_commerce",
+    "typicalPrerequisites": ["Financial Accounting", "Corporate Law", "Auditing", "Cost Accounting"],
+    "naturalCareerBridges": ["data-analyst", "business-analyst", "bi-analyst", "backend-developer"],
+    "transferableStrengths": ["Auditable precision", "Financial reconciliation", "Balance sheet mechanics"],
+    "advisoryNote": "Financial integrity is critical in FinTech, fraud analytics, and business intelligence. SQL and Python data querying open rapid pathways."
+  },
+  {
+    "id": "bsc_cs",
+    "name": "BSc Computer Science",
+    "category": "sciences",
+    "typicalPrerequisites": ["Algorithms", "Object-Oriented Programming", "Operating Systems", "Discrete Mathematics"],
+    "naturalCareerBridges": ["software-engineer", "backend-developer", "frontend-developer", "data-analyst"],
+    "transferableStrengths": ["Theoretical mathematical foundations", "Pure problem formulation", "Algorithmic clarity"],
+    "advisoryNote": "Solid theoretical foundation. Bridge the gap to industry standards through automated testing, Git collaboration, and deployment automation."
+  },
+  {
+    "id": "bsc_ds",
+    "name": "BSc Data Science",
+    "category": "sciences",
+    "typicalPrerequisites": ["Linear Algebra", "Applied Probability", "Statistical Modeling", "Python Data Stack"],
+    "naturalCareerBridges": ["data-analyst", "data-scientist", "machine-learning-engineer", "bi-analyst"],
+    "transferableStrengths": ["Mathematical hypothesis testing", "Data visualization ethics", "Exploratory statistics"],
+    "advisoryNote": "Direct alignment with Data & AI pathways. Ensure equal attention to software engineering standards, modular code, and SQL databases."
+  },
+  {
+    "id": "bsc_stats",
+    "name": "BSc Statistics / Mathematics",
+    "category": "sciences",
+    "typicalPrerequisites": ["Probability Theory", "Multivariate Calculus", "Regression Analysis", "Stochastic Processes"],
+    "naturalCareerBridges": ["data-scientist", "machine-learning-engineer", "data-analyst", "bi-analyst"],
+    "transferableStrengths": ["Deep statistical inference", "Optimization theory", "Analytical rigor"],
+    "advisoryNote": "Rare mathematical depth required for cutting-edge ML and quantitative modeling. Learn modern Python, vectorized pipelines, and reproducible notebooks."
+  },
+  {
+    "id": "arts_humanities",
+    "name": "BA / Humanities & Social Sciences",
+    "category": "humanities",
+    "typicalPrerequisites": ["Qualitative Research", "Critical Theory", "Communication & Rhetoric", "Ethics"],
+    "naturalCareerBridges": ["ui-ux-designer", "ux-researcher", "technical-writer", "product-designer"],
+    "transferableStrengths": ["User empathy", "Qualitative interview synthesis", "Clear plain-language documentation"],
+    "advisoryNote": "Human-centered perspective is in high demand for UX research, accessible interface design, AI governance, and technical documentation."
+  },
+  {
+    "id": "school_pcm",
+    "name": "School: Mathematics / PCM",
+    "category": "school_stream",
+    "typicalPrerequisites": ["Class 10/12 Physics", "Class 10/12 Chemistry", "Class 10/12 Mathematics"],
+    "naturalCareerBridges": ["software-engineer", "backend-developer", "data-analyst"],
+    "transferableStrengths": ["Algebraic problem solving", "Analytical curiosity", "Coordinate reasoning"],
+    "advisoryNote": "Foundational exploration stage. Build computational confidence through basic programming and algorithmic logic before college entrance."
+  },
+  {
+    "id": "school_pcb",
+    "name": "School: Biology / PCB",
+    "category": "school_stream",
+    "typicalPrerequisites": ["Class 10/12 Biology", "Class 10/12 Chemistry", "Class 10/12 Physics"],
+    "naturalCareerBridges": ["data-analyst", "data-scientist", "qa-engineer"],
+    "transferableStrengths": ["Empirical observation", "Taxonomic categorization", "Biological systems thinking"],
+    "advisoryNote": "Opens health informatics, computational biology, and life sciences analytics without engineering entrance requirements."
+  },
+  {
+    "id": "school_pcmb",
+    "name": "School: PCMB (Maths + Biology)",
+    "category": "school_stream",
+    "typicalPrerequisites": ["Class 10/12 Physics", "Class 10/12 Chemistry", "Class 10/12 Maths", "Class 10/12 Biology"],
+    "naturalCareerBridges": ["data-analyst", "software-engineer", "data-scientist"],
+    "transferableStrengths": ["Interdisciplinary synthesis", "Quantitative and life-sciences balance"],
+    "advisoryNote": "Versatile foundation for biomedical technology, bio-data science, or conventional computing tracks."
+  },
+  {
+    "id": "school_commerce",
+    "name": "School: Commerce",
+    "category": "school_stream",
+    "typicalPrerequisites": ["Class 10/12 Accountancy", "Class 10/12 Economics", "Class 10/12 Business Studies"],
+    "naturalCareerBridges": ["data-analyst", "business-analyst", "bi-analyst"],
+    "transferableStrengths": ["Commercial literacy", "Balance sheet orientation", "Economic trade-offs"],
+    "advisoryNote": "Connects directly to business analytics and FinTech. Learn relational database querying (SQL) early."
+  },
+  {
+    "id": "school_arts",
+    "name": "School: Arts / Humanities",
+    "category": "school_stream",
+    "typicalPrerequisites": ["Class 10/12 History", "Class 10/12 Psychology/Sociology", "Class 10/12 Literature"],
+    "naturalCareerBridges": ["ui-ux-designer", "technical-writer", "frontend-developer"],
+    "transferableStrengths": ["Human behavior insight", "Visual narrative", "Clear written argument"],
+    "advisoryNote": "Foundation for digital product design, web accessibility, and technical communications. Begin with semantic HTML/CSS."
+  },
+  {
+    "id": "school_vocational",
+    "name": "School: Vocational / Applied",
+    "category": "school_stream",
+    "typicalPrerequisites": ["Applied Computing", "IT Basics", "Technical Trades"],
+    "naturalCareerBridges": ["frontend-developer", "qa-engineer", "full-stack-developer"],
+    "transferableStrengths": ["Hands-on implementation", "Tool usage focus", "Pragmatic debugging"],
+    "advisoryNote": "Project-first learning. Focus on deployable, portfolio-ready web deliverables."
+  }
+]

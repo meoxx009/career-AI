@@ -1,0 +1,5833 @@
+[
+  {
+    "pathId": 1,
+    "skillId": "programming",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Programming Logic is required before building Backend Developer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 1,
+    "skillId": "linux",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Linux is required before building Backend Developer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 1,
+    "skillId": "git",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Git is required before building Backend Developer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 1,
+    "skillId": "rest-apis",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Backend Developer deliverables directly depends on verified proficiency in REST APIs.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 1,
+    "skillId": "sql",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Backend Developer deliverables directly depends on verified proficiency in SQL.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 1,
+    "skillId": "python",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Backend Developer deliverables directly depends on verified proficiency in Python.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 1,
+    "skillId": "testing",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Backend Developer deliverables directly depends on verified proficiency in Testing.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 1,
+    "skillId": "databases",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Backend Developer deliverables directly depends on verified proficiency in Databases.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 1,
+    "skillId": "docker",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Backend Developer requires applied knowledge of Docker in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 1,
+    "skillId": "cloud",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Backend Developer requires applied knowledge of Cloud in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 1,
+    "skillId": "devops",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Backend Developer requires applied knowledge of DevOps in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 1,
+    "skillId": "cybersecurity",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Backend Developer requires applied knowledge of Cybersecurity in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 2,
+    "skillId": "programming",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Programming Logic is required before building Frontend Developer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 2,
+    "skillId": "git",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Git is required before building Frontend Developer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 2,
+    "skillId": "frontend",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Frontend Developer deliverables directly depends on verified proficiency in Frontend.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 2,
+    "skillId": "javascript",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Frontend Developer deliverables directly depends on verified proficiency in JavaScript.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 2,
+    "skillId": "react",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Frontend Developer deliverables directly depends on verified proficiency in React.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 2,
+    "skillId": "accessibility",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Frontend Developer deliverables directly depends on verified proficiency in Accessibility.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 2,
+    "skillId": "testing",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Frontend Developer deliverables directly depends on verified proficiency in Testing.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 2,
+    "skillId": "typescript",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Frontend Developer requires applied knowledge of TypeScript in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 2,
+    "skillId": "rest-apis",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Frontend Developer requires applied knowledge of REST APIs in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 2,
+    "skillId": "figma",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Frontend Developer requires applied knowledge of Figma in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 2,
+    "skillId": "ui-ux",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Frontend Developer requires applied knowledge of UI/UX in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 3,
+    "skillId": "excel",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Excel is required before building Data Analyst capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 3,
+    "skillId": "statistics",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Statistics is required before building Data Analyst capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 3,
+    "skillId": "sql",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Data Analyst deliverables directly depends on verified proficiency in SQL.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 3,
+    "skillId": "data-cleaning",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Data Analyst deliverables directly depends on verified proficiency in Data Cleaning.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 3,
+    "skillId": "visualization",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Data Analyst deliverables directly depends on verified proficiency in Visualization.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 3,
+    "skillId": "bi",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Data Analyst deliverables directly depends on verified proficiency in Business Intelligence.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 3,
+    "skillId": "python",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Data Analyst deliverables directly depends on verified proficiency in Python.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 3,
+    "skillId": "machine-learning",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Data Analyst requires applied knowledge of Machine Learning in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 3,
+    "skillId": "communication",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Data Analyst requires applied knowledge of Communication in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 3,
+    "skillId": "business-analysis",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Data Analyst requires applied knowledge of Business Analysis in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 4,
+    "skillId": "programming",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Programming Logic is required before building Software Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 4,
+    "skillId": "data-structures",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Data Structures is required before building Software Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 4,
+    "skillId": "algorithms",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Algorithms is required before building Software Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 4,
+    "skillId": "data-structures",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Software Engineer deliverables directly depends on verified proficiency in Data Structures.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 4,
+    "skillId": "algorithms",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Software Engineer deliverables directly depends on verified proficiency in Algorithms.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 4,
+    "skillId": "java",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Software Engineer deliverables directly depends on verified proficiency in Java.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 4,
+    "skillId": "testing",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Software Engineer deliverables directly depends on verified proficiency in Testing.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 4,
+    "skillId": "git",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Software Engineer deliverables directly depends on verified proficiency in Git.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 4,
+    "skillId": "rest-apis",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Software Engineer deliverables directly depends on verified proficiency in REST APIs.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 4,
+    "skillId": "databases",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Software Engineer requires applied knowledge of Databases in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 4,
+    "skillId": "docker",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Software Engineer requires applied knowledge of Docker in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 4,
+    "skillId": "devops",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Software Engineer requires applied knowledge of DevOps in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 4,
+    "skillId": "cloud",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Software Engineer requires applied knowledge of Cloud in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 5,
+    "skillId": "programming",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Programming Logic is required before building Full Stack Developer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 5,
+    "skillId": "git",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Git is required before building Full Stack Developer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 5,
+    "skillId": "frontend",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Full Stack Developer deliverables directly depends on verified proficiency in Frontend.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 5,
+    "skillId": "react",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Full Stack Developer deliverables directly depends on verified proficiency in React.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 5,
+    "skillId": "rest-apis",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Full Stack Developer deliverables directly depends on verified proficiency in REST APIs.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 5,
+    "skillId": "databases",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Full Stack Developer deliverables directly depends on verified proficiency in Databases.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 5,
+    "skillId": "javascript",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Full Stack Developer deliverables directly depends on verified proficiency in JavaScript.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 5,
+    "skillId": "typescript",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Full Stack Developer deliverables directly depends on verified proficiency in TypeScript.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 5,
+    "skillId": "docker",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Full Stack Developer requires applied knowledge of Docker in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 5,
+    "skillId": "cloud",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Full Stack Developer requires applied knowledge of Cloud in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 5,
+    "skillId": "testing",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Full Stack Developer requires applied knowledge of Testing in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 5,
+    "skillId": "devops",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Full Stack Developer requires applied knowledge of DevOps in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 6,
+    "skillId": "programming",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Programming Logic is required before building Mobile Developer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 6,
+    "skillId": "git",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Git is required before building Mobile Developer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 6,
+    "skillId": "javascript",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Mobile Developer deliverables directly depends on verified proficiency in JavaScript.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 6,
+    "skillId": "react",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Mobile Developer deliverables directly depends on verified proficiency in React.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 6,
+    "skillId": "rest-apis",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Mobile Developer deliverables directly depends on verified proficiency in REST APIs.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 6,
+    "skillId": "testing",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Mobile Developer deliverables directly depends on verified proficiency in Testing.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 6,
+    "skillId": "ui-ux",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Mobile Developer deliverables directly depends on verified proficiency in UI/UX.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 6,
+    "skillId": "typescript",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Mobile Developer requires applied knowledge of TypeScript in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 6,
+    "skillId": "accessibility",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Mobile Developer requires applied knowledge of Accessibility in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 6,
+    "skillId": "figma",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Mobile Developer requires applied knowledge of Figma in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 7,
+    "skillId": "programming",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Programming Logic is required before building QA Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 7,
+    "skillId": "git",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Git is required before building QA Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 7,
+    "skillId": "testing",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of QA Engineer deliverables directly depends on verified proficiency in Testing.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 7,
+    "skillId": "python",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of QA Engineer deliverables directly depends on verified proficiency in Python.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 7,
+    "skillId": "rest-apis",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of QA Engineer deliverables directly depends on verified proficiency in REST APIs.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 7,
+    "skillId": "accessibility",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of QA Engineer deliverables directly depends on verified proficiency in Accessibility.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 7,
+    "skillId": "git",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of QA Engineer deliverables directly depends on verified proficiency in Git.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 7,
+    "skillId": "docker",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in QA Engineer requires applied knowledge of Docker in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 7,
+    "skillId": "devops",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in QA Engineer requires applied knowledge of DevOps in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 7,
+    "skillId": "cybersecurity",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in QA Engineer requires applied knowledge of Cybersecurity in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 8,
+    "skillId": "programming",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Programming Logic is required before building SDET / Test Automation Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 8,
+    "skillId": "data-structures",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Data Structures is required before building SDET / Test Automation Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 8,
+    "skillId": "git",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Git is required before building SDET / Test Automation Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 8,
+    "skillId": "testing",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of SDET / Test Automation Engineer deliverables directly depends on verified proficiency in Testing.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 8,
+    "skillId": "java",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of SDET / Test Automation Engineer deliverables directly depends on verified proficiency in Java.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 8,
+    "skillId": "python",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of SDET / Test Automation Engineer deliverables directly depends on verified proficiency in Python.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 8,
+    "skillId": "rest-apis",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of SDET / Test Automation Engineer deliverables directly depends on verified proficiency in REST APIs.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 8,
+    "skillId": "devops",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of SDET / Test Automation Engineer deliverables directly depends on verified proficiency in DevOps.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 8,
+    "skillId": "docker",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in SDET / Test Automation Engineer requires applied knowledge of Docker in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 8,
+    "skillId": "cloud",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in SDET / Test Automation Engineer requires applied knowledge of Cloud in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 8,
+    "skillId": "cybersecurity",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in SDET / Test Automation Engineer requires applied knowledge of Cybersecurity in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 9,
+    "skillId": "linux",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Linux is required before building DevOps Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 9,
+    "skillId": "git",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Git is required before building DevOps Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 9,
+    "skillId": "networking",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Networking is required before building DevOps Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 9,
+    "skillId": "docker",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of DevOps Engineer deliverables directly depends on verified proficiency in Docker.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 9,
+    "skillId": "devops",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of DevOps Engineer deliverables directly depends on verified proficiency in DevOps.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 9,
+    "skillId": "cloud",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of DevOps Engineer deliverables directly depends on verified proficiency in Cloud.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 9,
+    "skillId": "linux",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of DevOps Engineer deliverables directly depends on verified proficiency in Linux.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 9,
+    "skillId": "python",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of DevOps Engineer deliverables directly depends on verified proficiency in Python.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 9,
+    "skillId": "cybersecurity",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in DevOps Engineer requires applied knowledge of Cybersecurity in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 9,
+    "skillId": "databases",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in DevOps Engineer requires applied knowledge of Databases in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 9,
+    "skillId": "rest-apis",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in DevOps Engineer requires applied knowledge of REST APIs in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 10,
+    "skillId": "linux",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Linux is required before building Cloud Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 10,
+    "skillId": "networking",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Networking is required before building Cloud Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 10,
+    "skillId": "cloud",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Cloud Engineer deliverables directly depends on verified proficiency in Cloud.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 10,
+    "skillId": "docker",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Cloud Engineer deliverables directly depends on verified proficiency in Docker.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 10,
+    "skillId": "devops",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Cloud Engineer deliverables directly depends on verified proficiency in DevOps.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 10,
+    "skillId": "linux",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Cloud Engineer deliverables directly depends on verified proficiency in Linux.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 10,
+    "skillId": "cybersecurity",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Cloud Engineer deliverables directly depends on verified proficiency in Cybersecurity.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 10,
+    "skillId": "python",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Cloud Engineer requires applied knowledge of Python in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 10,
+    "skillId": "databases",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Cloud Engineer requires applied knowledge of Databases in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 10,
+    "skillId": "rest-apis",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Cloud Engineer requires applied knowledge of REST APIs in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 11,
+    "skillId": "linux",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Linux is required before building Site Reliability Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 11,
+    "skillId": "networking",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Networking is required before building Site Reliability Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 11,
+    "skillId": "programming",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Programming Logic is required before building Site Reliability Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 11,
+    "skillId": "devops",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Site Reliability Engineer deliverables directly depends on verified proficiency in DevOps.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 11,
+    "skillId": "cloud",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Site Reliability Engineer deliverables directly depends on verified proficiency in Cloud.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 11,
+    "skillId": "linux",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Site Reliability Engineer deliverables directly depends on verified proficiency in Linux.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 11,
+    "skillId": "testing",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Site Reliability Engineer deliverables directly depends on verified proficiency in Testing.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 11,
+    "skillId": "python",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Site Reliability Engineer deliverables directly depends on verified proficiency in Python.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 11,
+    "skillId": "docker",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Site Reliability Engineer requires applied knowledge of Docker in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 11,
+    "skillId": "cybersecurity",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Site Reliability Engineer requires applied knowledge of Cybersecurity in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 11,
+    "skillId": "databases",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Site Reliability Engineer requires applied knowledge of Databases in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 12,
+    "skillId": "networking",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Networking is required before building Cybersecurity Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 12,
+    "skillId": "linux",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Linux is required before building Cybersecurity Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 12,
+    "skillId": "cybersecurity",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Cybersecurity Engineer deliverables directly depends on verified proficiency in Cybersecurity.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 12,
+    "skillId": "networking",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Cybersecurity Engineer deliverables directly depends on verified proficiency in Networking.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 12,
+    "skillId": "linux",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Cybersecurity Engineer deliverables directly depends on verified proficiency in Linux.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 12,
+    "skillId": "python",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Cybersecurity Engineer deliverables directly depends on verified proficiency in Python.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 12,
+    "skillId": "testing",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Cybersecurity Engineer deliverables directly depends on verified proficiency in Testing.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 12,
+    "skillId": "cloud",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Cybersecurity Engineer requires applied knowledge of Cloud in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 12,
+    "skillId": "docker",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Cybersecurity Engineer requires applied knowledge of Docker in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 12,
+    "skillId": "devops",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Cybersecurity Engineer requires applied knowledge of DevOps in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 13,
+    "skillId": "cpp",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in C/C++ is required before building Embedded Systems Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 13,
+    "skillId": "programming",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Programming Logic is required before building Embedded Systems Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 13,
+    "skillId": "embedded",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Embedded Systems Engineer deliverables directly depends on verified proficiency in Embedded Systems.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 13,
+    "skillId": "microcontrollers",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Embedded Systems Engineer deliverables directly depends on verified proficiency in Microcontrollers.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 13,
+    "skillId": "electronics-protocols",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Embedded Systems Engineer deliverables directly depends on verified proficiency in Electronics Protocols.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 13,
+    "skillId": "cpp",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Embedded Systems Engineer deliverables directly depends on verified proficiency in C/C++.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 13,
+    "skillId": "linux",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Embedded Systems Engineer deliverables directly depends on verified proficiency in Linux.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 13,
+    "skillId": "testing",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Embedded Systems Engineer requires applied knowledge of Testing in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 13,
+    "skillId": "git",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Embedded Systems Engineer requires applied knowledge of Git in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 13,
+    "skillId": "networking",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Embedded Systems Engineer requires applied knowledge of Networking in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 14,
+    "skillId": "programming",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Programming Logic is required before building IoT Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 14,
+    "skillId": "networking",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Networking is required before building IoT Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 14,
+    "skillId": "embedded",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of IoT Engineer deliverables directly depends on verified proficiency in Embedded Systems.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 14,
+    "skillId": "microcontrollers",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of IoT Engineer deliverables directly depends on verified proficiency in Microcontrollers.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 14,
+    "skillId": "electronics-protocols",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of IoT Engineer deliverables directly depends on verified proficiency in Electronics Protocols.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 14,
+    "skillId": "networking",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of IoT Engineer deliverables directly depends on verified proficiency in Networking.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 14,
+    "skillId": "cloud",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of IoT Engineer deliverables directly depends on verified proficiency in Cloud.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 14,
+    "skillId": "python",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in IoT Engineer requires applied knowledge of Python in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 14,
+    "skillId": "rest-apis",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in IoT Engineer requires applied knowledge of REST APIs in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 14,
+    "skillId": "cybersecurity",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in IoT Engineer requires applied knowledge of Cybersecurity in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 15,
+    "skillId": "cpp",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in C/C++ is required before building Systems Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 15,
+    "skillId": "linux",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Linux is required before building Systems Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 15,
+    "skillId": "cpp",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Systems Engineer deliverables directly depends on verified proficiency in C/C++.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 15,
+    "skillId": "linux",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Systems Engineer deliverables directly depends on verified proficiency in Linux.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 15,
+    "skillId": "networking",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Systems Engineer deliverables directly depends on verified proficiency in Networking.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 15,
+    "skillId": "databases",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Systems Engineer deliverables directly depends on verified proficiency in Databases.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 15,
+    "skillId": "algorithms",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Systems Engineer deliverables directly depends on verified proficiency in Algorithms.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 15,
+    "skillId": "cybersecurity",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Systems Engineer requires applied knowledge of Cybersecurity in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 15,
+    "skillId": "docker",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Systems Engineer requires applied knowledge of Docker in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 15,
+    "skillId": "testing",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Systems Engineer requires applied knowledge of Testing in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 16,
+    "skillId": "sql",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in SQL is required before building Data Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 16,
+    "skillId": "python",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Python is required before building Data Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 16,
+    "skillId": "sql",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Data Engineer deliverables directly depends on verified proficiency in SQL.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 16,
+    "skillId": "databases",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Data Engineer deliverables directly depends on verified proficiency in Databases.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 16,
+    "skillId": "python",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Data Engineer deliverables directly depends on verified proficiency in Python.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 16,
+    "skillId": "data-cleaning",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Data Engineer deliverables directly depends on verified proficiency in Data Cleaning.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 16,
+    "skillId": "docker",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Data Engineer deliverables directly depends on verified proficiency in Docker.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 16,
+    "skillId": "cloud",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Data Engineer requires applied knowledge of Cloud in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 16,
+    "skillId": "devops",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Data Engineer requires applied knowledge of DevOps in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 16,
+    "skillId": "linux",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Data Engineer requires applied knowledge of Linux in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 17,
+    "skillId": "python",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Python is required before building Data Scientist capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 17,
+    "skillId": "statistics",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Statistics is required before building Data Scientist capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 17,
+    "skillId": "python",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Data Scientist deliverables directly depends on verified proficiency in Python.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 17,
+    "skillId": "statistics",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Data Scientist deliverables directly depends on verified proficiency in Statistics.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 17,
+    "skillId": "machine-learning",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Data Scientist deliverables directly depends on verified proficiency in Machine Learning.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 17,
+    "skillId": "data-cleaning",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Data Scientist deliverables directly depends on verified proficiency in Data Cleaning.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 17,
+    "skillId": "visualization",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Data Scientist deliverables directly depends on verified proficiency in Visualization.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 17,
+    "skillId": "deep-learning",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Data Scientist requires applied knowledge of Deep Learning in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 17,
+    "skillId": "sql",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Data Scientist requires applied knowledge of SQL in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 17,
+    "skillId": "nlp",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Data Scientist requires applied knowledge of Natural Language Processing in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 18,
+    "skillId": "python",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Python is required before building Machine Learning Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 18,
+    "skillId": "algorithms",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Algorithms is required before building Machine Learning Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 18,
+    "skillId": "statistics",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Statistics is required before building Machine Learning Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 18,
+    "skillId": "machine-learning",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Machine Learning Engineer deliverables directly depends on verified proficiency in Machine Learning.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 18,
+    "skillId": "deep-learning",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Machine Learning Engineer deliverables directly depends on verified proficiency in Deep Learning.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 18,
+    "skillId": "python",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Machine Learning Engineer deliverables directly depends on verified proficiency in Python.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 18,
+    "skillId": "docker",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Machine Learning Engineer deliverables directly depends on verified proficiency in Docker.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 18,
+    "skillId": "evaluation",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Machine Learning Engineer deliverables directly depends on verified proficiency in Evaluation.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 18,
+    "skillId": "cloud",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Machine Learning Engineer requires applied knowledge of Cloud in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 18,
+    "skillId": "devops",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Machine Learning Engineer requires applied knowledge of DevOps in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 18,
+    "skillId": "rest-apis",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Machine Learning Engineer requires applied knowledge of REST APIs in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 19,
+    "skillId": "python",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Python is required before building AI Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 19,
+    "skillId": "rest-apis",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in REST APIs is required before building AI Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 19,
+    "skillId": "genai",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of AI Engineer deliverables directly depends on verified proficiency in Generative AI.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 19,
+    "skillId": "llm-application-development",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of AI Engineer deliverables directly depends on verified proficiency in LLM Application Development.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 19,
+    "skillId": "python",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of AI Engineer deliverables directly depends on verified proficiency in Python.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 19,
+    "skillId": "rag",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of AI Engineer deliverables directly depends on verified proficiency in RAG.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 19,
+    "skillId": "evaluation",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of AI Engineer deliverables directly depends on verified proficiency in Evaluation.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 19,
+    "skillId": "prompt-testing",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in AI Engineer requires applied knowledge of Prompt Testing in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 19,
+    "skillId": "embeddings",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in AI Engineer requires applied knowledge of Embeddings in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 19,
+    "skillId": "vector-search",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in AI Engineer requires applied knowledge of Vector Search in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 19,
+    "skillId": "ai-safety",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in AI Engineer requires applied knowledge of AI Safety in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 20,
+    "skillId": "python",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Python is required before building Generative AI Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 20,
+    "skillId": "deep-learning",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Deep Learning is required before building Generative AI Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 20,
+    "skillId": "genai",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Generative AI Engineer deliverables directly depends on verified proficiency in Generative AI.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 20,
+    "skillId": "deep-learning",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Generative AI Engineer deliverables directly depends on verified proficiency in Deep Learning.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 20,
+    "skillId": "python",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Generative AI Engineer deliverables directly depends on verified proficiency in Python.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 20,
+    "skillId": "nlp",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Generative AI Engineer deliverables directly depends on verified proficiency in Natural Language Processing.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 20,
+    "skillId": "evaluation",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Generative AI Engineer deliverables directly depends on verified proficiency in Evaluation.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 20,
+    "skillId": "prompt-testing",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Generative AI Engineer requires applied knowledge of Prompt Testing in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 20,
+    "skillId": "ai-safety",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Generative AI Engineer requires applied knowledge of AI Safety in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 20,
+    "skillId": "embeddings",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Generative AI Engineer requires applied knowledge of Embeddings in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 21,
+    "skillId": "python",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Python is required before building LLM Application Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 21,
+    "skillId": "rest-apis",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in REST APIs is required before building LLM Application Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 21,
+    "skillId": "javascript",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in JavaScript is required before building LLM Application Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 21,
+    "skillId": "llm-application-development",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of LLM Application Engineer deliverables directly depends on verified proficiency in LLM Application Development.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 21,
+    "skillId": "prompt-testing",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of LLM Application Engineer deliverables directly depends on verified proficiency in Prompt Testing.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 21,
+    "skillId": "genai",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of LLM Application Engineer deliverables directly depends on verified proficiency in Generative AI.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 21,
+    "skillId": "rest-apis",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of LLM Application Engineer deliverables directly depends on verified proficiency in REST APIs.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 21,
+    "skillId": "ai-safety",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of LLM Application Engineer deliverables directly depends on verified proficiency in AI Safety.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 21,
+    "skillId": "rag",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in LLM Application Engineer requires applied knowledge of RAG in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 21,
+    "skillId": "vector-search",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in LLM Application Engineer requires applied knowledge of Vector Search in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 21,
+    "skillId": "embeddings",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in LLM Application Engineer requires applied knowledge of Embeddings in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 21,
+    "skillId": "evaluation",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in LLM Application Engineer requires applied knowledge of Evaluation in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 22,
+    "skillId": "python",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Python is required before building RAG Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 22,
+    "skillId": "databases",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Databases is required before building RAG Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 22,
+    "skillId": "rag",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of RAG Engineer deliverables directly depends on verified proficiency in RAG.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 22,
+    "skillId": "embeddings",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of RAG Engineer deliverables directly depends on verified proficiency in Embeddings.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 22,
+    "skillId": "vector-search",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of RAG Engineer deliverables directly depends on verified proficiency in Vector Search.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 22,
+    "skillId": "evaluation",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of RAG Engineer deliverables directly depends on verified proficiency in Evaluation.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 22,
+    "skillId": "python",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of RAG Engineer deliverables directly depends on verified proficiency in Python.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 22,
+    "skillId": "llm-application-development",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in RAG Engineer requires applied knowledge of LLM Application Development in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 22,
+    "skillId": "prompt-testing",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in RAG Engineer requires applied knowledge of Prompt Testing in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 22,
+    "skillId": "ai-safety",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in RAG Engineer requires applied knowledge of AI Safety in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 22,
+    "skillId": "sql",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in RAG Engineer requires applied knowledge of SQL in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 23,
+    "skillId": "python",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Python is required before building NLP Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 23,
+    "skillId": "statistics",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Statistics is required before building NLP Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 23,
+    "skillId": "nlp",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of NLP Engineer deliverables directly depends on verified proficiency in Natural Language Processing.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 23,
+    "skillId": "deep-learning",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of NLP Engineer deliverables directly depends on verified proficiency in Deep Learning.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 23,
+    "skillId": "python",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of NLP Engineer deliverables directly depends on verified proficiency in Python.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 23,
+    "skillId": "evaluation",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of NLP Engineer deliverables directly depends on verified proficiency in Evaluation.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 23,
+    "skillId": "machine-learning",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of NLP Engineer deliverables directly depends on verified proficiency in Machine Learning.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 23,
+    "skillId": "genai",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in NLP Engineer requires applied knowledge of Generative AI in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 23,
+    "skillId": "embeddings",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in NLP Engineer requires applied knowledge of Embeddings in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 23,
+    "skillId": "cloud",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in NLP Engineer requires applied knowledge of Cloud in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 24,
+    "skillId": "python",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Python is required before building MLOps Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 24,
+    "skillId": "linux",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Linux is required before building MLOps Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 24,
+    "skillId": "docker",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Docker is required before building MLOps Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 24,
+    "skillId": "devops",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of MLOps Engineer deliverables directly depends on verified proficiency in DevOps.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 24,
+    "skillId": "docker",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of MLOps Engineer deliverables directly depends on verified proficiency in Docker.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 24,
+    "skillId": "cloud",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of MLOps Engineer deliverables directly depends on verified proficiency in Cloud.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 24,
+    "skillId": "machine-learning",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of MLOps Engineer deliverables directly depends on verified proficiency in Machine Learning.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 24,
+    "skillId": "evaluation",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of MLOps Engineer deliverables directly depends on verified proficiency in Evaluation.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 24,
+    "skillId": "databases",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in MLOps Engineer requires applied knowledge of Databases in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 24,
+    "skillId": "testing",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in MLOps Engineer requires applied knowledge of Testing in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 24,
+    "skillId": "cybersecurity",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in MLOps Engineer requires applied knowledge of Cybersecurity in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 25,
+    "skillId": "python",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Python is required before building Computer Vision Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 25,
+    "skillId": "algorithms",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Algorithms is required before building Computer Vision Engineer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 25,
+    "skillId": "computer-vision",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Computer Vision Engineer deliverables directly depends on verified proficiency in Computer Vision.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 25,
+    "skillId": "deep-learning",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Computer Vision Engineer deliverables directly depends on verified proficiency in Deep Learning.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 25,
+    "skillId": "python",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Computer Vision Engineer deliverables directly depends on verified proficiency in Python.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 25,
+    "skillId": "evaluation",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Computer Vision Engineer deliverables directly depends on verified proficiency in Evaluation.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 25,
+    "skillId": "cpp",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Computer Vision Engineer deliverables directly depends on verified proficiency in C/C++.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 25,
+    "skillId": "embedded",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Computer Vision Engineer requires applied knowledge of Embedded Systems in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 25,
+    "skillId": "docker",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Computer Vision Engineer requires applied knowledge of Docker in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 25,
+    "skillId": "cloud",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Computer Vision Engineer requires applied knowledge of Cloud in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 26,
+    "skillId": "excel",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Excel is required before building Business Intelligence Analyst capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 26,
+    "skillId": "statistics",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Statistics is required before building Business Intelligence Analyst capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 26,
+    "skillId": "bi",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Business Intelligence Analyst deliverables directly depends on verified proficiency in Business Intelligence.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 26,
+    "skillId": "sql",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Business Intelligence Analyst deliverables directly depends on verified proficiency in SQL.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 26,
+    "skillId": "visualization",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Business Intelligence Analyst deliverables directly depends on verified proficiency in Visualization.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 26,
+    "skillId": "excel",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Business Intelligence Analyst deliverables directly depends on verified proficiency in Excel.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 26,
+    "skillId": "business-analysis",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Business Intelligence Analyst deliverables directly depends on verified proficiency in Business Analysis.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 26,
+    "skillId": "data-cleaning",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Business Intelligence Analyst requires applied knowledge of Data Cleaning in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 26,
+    "skillId": "communication",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Business Intelligence Analyst requires applied knowledge of Communication in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 26,
+    "skillId": "python",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Business Intelligence Analyst requires applied knowledge of Python in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 27,
+    "skillId": "communication",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Communication is required before building UI/UX Designer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 27,
+    "skillId": "ui-ux",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of UI/UX Designer deliverables directly depends on verified proficiency in UI/UX.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 27,
+    "skillId": "figma",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of UI/UX Designer deliverables directly depends on verified proficiency in Figma.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 27,
+    "skillId": "user-research",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of UI/UX Designer deliverables directly depends on verified proficiency in User Research.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 27,
+    "skillId": "accessibility",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of UI/UX Designer deliverables directly depends on verified proficiency in Accessibility.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 27,
+    "skillId": "communication",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of UI/UX Designer deliverables directly depends on verified proficiency in Communication.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 27,
+    "skillId": "frontend",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in UI/UX Designer requires applied knowledge of Frontend in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 27,
+    "skillId": "product-management",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in UI/UX Designer requires applied knowledge of Product Management in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 27,
+    "skillId": "technical-writing",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in UI/UX Designer requires applied knowledge of Technical Writing in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 28,
+    "skillId": "communication",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Communication is required before building Product Designer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 28,
+    "skillId": "ui-ux",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in UI/UX is required before building Product Designer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 28,
+    "skillId": "ui-ux",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Product Designer deliverables directly depends on verified proficiency in UI/UX.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 28,
+    "skillId": "figma",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Product Designer deliverables directly depends on verified proficiency in Figma.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 28,
+    "skillId": "user-research",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Product Designer deliverables directly depends on verified proficiency in User Research.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 28,
+    "skillId": "product-management",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Product Designer deliverables directly depends on verified proficiency in Product Management.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 28,
+    "skillId": "accessibility",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Product Designer deliverables directly depends on verified proficiency in Accessibility.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 28,
+    "skillId": "business-analysis",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Product Designer requires applied knowledge of Business Analysis in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 28,
+    "skillId": "frontend",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Product Designer requires applied knowledge of Frontend in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 28,
+    "skillId": "portfolio-project-evidence",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Product Designer requires applied knowledge of Portfolio Project Evidence in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 29,
+    "skillId": "communication",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Communication is required before building UX Researcher capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 29,
+    "skillId": "user-research",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of UX Researcher deliverables directly depends on verified proficiency in User Research.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 29,
+    "skillId": "statistics",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of UX Researcher deliverables directly depends on verified proficiency in Statistics.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 29,
+    "skillId": "communication",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of UX Researcher deliverables directly depends on verified proficiency in Communication.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 29,
+    "skillId": "ui-ux",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of UX Researcher deliverables directly depends on verified proficiency in UI/UX.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 29,
+    "skillId": "technical-writing",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of UX Researcher deliverables directly depends on verified proficiency in Technical Writing.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 29,
+    "skillId": "product-management",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in UX Researcher requires applied knowledge of Product Management in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 29,
+    "skillId": "figma",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in UX Researcher requires applied knowledge of Figma in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 29,
+    "skillId": "business-analysis",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in UX Researcher requires applied knowledge of Business Analysis in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 30,
+    "skillId": "communication",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Communication is required before building Product Manager capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 30,
+    "skillId": "product-management",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Product Manager deliverables directly depends on verified proficiency in Product Management.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 30,
+    "skillId": "business-analysis",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Product Manager deliverables directly depends on verified proficiency in Business Analysis.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 30,
+    "skillId": "communication",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Product Manager deliverables directly depends on verified proficiency in Communication.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 30,
+    "skillId": "statistics",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Product Manager deliverables directly depends on verified proficiency in Statistics.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 30,
+    "skillId": "user-research",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Product Manager deliverables directly depends on verified proficiency in User Research.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 30,
+    "skillId": "ui-ux",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Product Manager requires applied knowledge of UI/UX in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 30,
+    "skillId": "technical-writing",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Product Manager requires applied knowledge of Technical Writing in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 30,
+    "skillId": "portfolio-project-evidence",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Product Manager requires applied knowledge of Portfolio Project Evidence in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 31,
+    "skillId": "programming",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Programming Logic is required before building Technical Product Manager capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 31,
+    "skillId": "communication",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Communication is required before building Technical Product Manager capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 31,
+    "skillId": "product-management",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Technical Product Manager deliverables directly depends on verified proficiency in Product Management.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 31,
+    "skillId": "rest-apis",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Technical Product Manager deliverables directly depends on verified proficiency in REST APIs.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 31,
+    "skillId": "business-analysis",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Technical Product Manager deliverables directly depends on verified proficiency in Business Analysis.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 31,
+    "skillId": "communication",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Technical Product Manager deliverables directly depends on verified proficiency in Communication.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 31,
+    "skillId": "databases",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Technical Product Manager deliverables directly depends on verified proficiency in Databases.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 31,
+    "skillId": "cloud",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Technical Product Manager requires applied knowledge of Cloud in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 31,
+    "skillId": "devops",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Technical Product Manager requires applied knowledge of DevOps in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 31,
+    "skillId": "cybersecurity",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Technical Product Manager requires applied knowledge of Cybersecurity in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 32,
+    "skillId": "communication",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Communication is required before building Business Analyst capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 32,
+    "skillId": "excel",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Excel is required before building Business Analyst capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 32,
+    "skillId": "business-analysis",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Business Analyst deliverables directly depends on verified proficiency in Business Analysis.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 32,
+    "skillId": "sql",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Business Analyst deliverables directly depends on verified proficiency in SQL.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 32,
+    "skillId": "excel",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Business Analyst deliverables directly depends on verified proficiency in Excel.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 32,
+    "skillId": "communication",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Business Analyst deliverables directly depends on verified proficiency in Communication.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 32,
+    "skillId": "bi",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Business Analyst deliverables directly depends on verified proficiency in Business Intelligence.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 32,
+    "skillId": "visualization",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Business Analyst requires applied knowledge of Visualization in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 32,
+    "skillId": "product-management",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Business Analyst requires applied knowledge of Product Management in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 32,
+    "skillId": "data-cleaning",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Business Analyst requires applied knowledge of Data Cleaning in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 33,
+    "skillId": "communication",
+    "targetLevel": 2,
+    "importance": 2,
+    "prerequisiteOrder": 1,
+    "rationale": "Foundational competence in Communication is required before building Technical Writer capabilities.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 33,
+    "skillId": "technical-writing",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Technical Writer deliverables directly depends on verified proficiency in Technical Writing.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 33,
+    "skillId": "communication",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Technical Writer deliverables directly depends on verified proficiency in Communication.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 33,
+    "skillId": "git",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Technical Writer deliverables directly depends on verified proficiency in Git.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 33,
+    "skillId": "rest-apis",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Technical Writer deliverables directly depends on verified proficiency in REST APIs.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 33,
+    "skillId": "accessibility",
+    "targetLevel": 3,
+    "importance": 3,
+    "prerequisiteOrder": 2,
+    "rationale": "Core execution of Technical Writer deliverables directly depends on verified proficiency in Accessibility.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 33,
+    "skillId": "portfolio-project-evidence",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Technical Writer requires applied knowledge of Portfolio Project Evidence in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 33,
+    "skillId": "frontend",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Technical Writer requires applied knowledge of Frontend in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  },
+  {
+    "pathId": 33,
+    "skillId": "linux",
+    "targetLevel": 3,
+    "importance": 2,
+    "prerequisiteOrder": 3,
+    "rationale": "Advanced engineering in Technical Writer requires applied knowledge of Linux in production environments.",
+    "evidenceSources": [
+      "diagnostic",
+      "assessment",
+      "project fact",
+      "reviewed project",
+      "resume",
+      "practice"
+    ],
+    "version": "catalogue-v2.0"
+  }
+]

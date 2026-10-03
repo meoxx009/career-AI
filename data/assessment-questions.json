@@ -1,0 +1,961 @@
+[
+  {
+    "id": "q01",
+    "skill_id": 1,
+    "track_ids": [
+      "cse_foundations",
+      "backend",
+      "frontend",
+      "fullstack",
+      "data_analysis",
+      "ece_embedded"
+    ],
+    "domain": "Computer Science",
+    "category": "logic",
+    "difficulty": "easy",
+    "prompt": "A function should return the first repeated item. What is the safest first step?",
+    "option_a": "Loop once and track seen values",
+    "option_b": "Sort without considering original order",
+    "option_c": "Return the last item",
+    "option_d": "Ignore duplicate values",
+    "correct_key": "a",
+    "explanation": "Define the required behaviour and track what has already appeared.",
+    "version": "v1",
+    "source_reviewer_status": "canonical_seed",
+    "prerequisite_skill": "Algorithmic logic"
+  },
+  {
+    "id": "q02",
+    "skill_id": 1,
+    "track_ids": [
+      "cse_foundations",
+      "backend",
+      "frontend",
+      "fullstack",
+      "qa_automation"
+    ],
+    "domain": "Computer Science",
+    "category": "logic",
+    "difficulty": "easy",
+    "prompt": "What makes a solution easier to debug?",
+    "option_a": "Hidden global state",
+    "option_b": "Small steps with clear names",
+    "option_c": "No error handling",
+    "option_d": "One very long function",
+    "correct_key": "b",
+    "explanation": "Clear small steps make assumptions and failures visible.",
+    "version": "v1",
+    "source_reviewer_status": "canonical_seed"
+  },
+  {
+    "id": "q03",
+    "skill_id": 2,
+    "track_ids": [
+      "cse_foundations",
+      "backend"
+    ],
+    "domain": "Computer Science",
+    "category": "technical",
+    "difficulty": "easy",
+    "prompt": "Which structure is best for checking whether an item was seen?",
+    "option_a": "Set",
+    "option_b": "Queue",
+    "option_c": "Stack only",
+    "option_d": "Linked list only",
+    "correct_key": "a",
+    "explanation": "A set is designed for membership checks.",
+    "version": "v1",
+    "source_reviewer_status": "canonical_seed"
+  },
+  {
+    "id": "q04",
+    "skill_id": 2,
+    "track_ids": [
+      "cse_foundations"
+    ],
+    "domain": "Computer Science",
+    "category": "technical",
+    "difficulty": "easy",
+    "prompt": "A queue normally removes an item from which end?",
+    "option_a": "The newest item only",
+    "option_b": "The front",
+    "option_c": "A random index",
+    "option_d": "Both ends at once",
+    "correct_key": "b",
+    "explanation": "A queue follows first-in-first-out order.",
+    "version": "v1",
+    "source_reviewer_status": "canonical_seed"
+  },
+  {
+    "id": "q05",
+    "skill_id": 3,
+    "track_ids": [
+      "cse_foundations",
+      "backend",
+      "frontend"
+    ],
+    "domain": "Computer Science",
+    "category": "technical",
+    "difficulty": "easy",
+    "prompt": "Which practice improves code readability?",
+    "option_a": "Meaningful names",
+    "option_b": "Nested code everywhere",
+    "option_c": "Duplicated constants",
+    "option_d": "Ignoring formatting",
+    "correct_key": "a",
+    "explanation": "Names communicate intent to the next reader.",
+    "version": "v1",
+    "source_reviewer_status": "canonical_seed"
+  },
+  {
+    "id": "q06",
+    "skill_id": 4,
+    "track_ids": [
+      "backend",
+      "data_analysis",
+      "data_engineering",
+      "fullstack"
+    ],
+    "domain": "Servers & Databases",
+    "category": "data",
+    "difficulty": "easy",
+    "prompt": "What does an SQL JOIN do?",
+    "option_a": "Combines related rows from tables",
+    "option_b": "Deletes all tables",
+    "option_c": "Encrypts a database",
+    "option_d": "Starts a web server",
+    "correct_key": "a",
+    "explanation": "A join combines rows using a relationship or condition.",
+    "version": "v1",
+    "source_reviewer_status": "canonical_seed"
+  },
+  {
+    "id": "q07",
+    "skill_id": 4,
+    "track_ids": [
+      "backend",
+      "data_analysis",
+      "data_engineering",
+      "fullstack"
+    ],
+    "domain": "Servers & Databases",
+    "category": "data",
+    "difficulty": "easy",
+    "prompt": "Why is a WHERE clause useful?",
+    "option_a": "It filters rows",
+    "option_b": "It renames the database",
+    "option_c": "It creates a password",
+    "option_d": "It deploys a query",
+    "correct_key": "a",
+    "explanation": "WHERE limits rows before the result is returned.",
+    "version": "v1",
+    "source_reviewer_status": "canonical_seed"
+  },
+  {
+    "id": "q08",
+    "skill_id": 5,
+    "track_ids": [
+      "backend",
+      "fullstack",
+      "ai_engineering",
+      "cybersecurity"
+    ],
+    "domain": "Servers & Databases",
+    "category": "backend",
+    "difficulty": "easy",
+    "prompt": "What is a good response to an invalid request?",
+    "option_a": "Return a clear error status and message",
+    "option_b": "Pretend it succeeded",
+    "option_c": "Expose a database password",
+    "option_d": "Delete the account",
+    "correct_key": "a",
+    "explanation": "Clients need a safe, actionable error response.",
+    "version": "v1",
+    "source_reviewer_status": "canonical_seed"
+  },
+  {
+    "id": "q09",
+    "skill_id": 5,
+    "track_ids": [
+      "backend",
+      "fullstack",
+      "ai_engineering"
+    ],
+    "domain": "Servers & Databases",
+    "category": "backend",
+    "difficulty": "easy",
+    "prompt": "What is an API endpoint?",
+    "option_a": "A defined interface for a request and response",
+    "option_b": "A font file",
+    "option_c": "A database backup only",
+    "option_d": "A user password",
+    "correct_key": "a",
+    "explanation": "An endpoint describes how a client interacts with a service.",
+    "version": "v1",
+    "source_reviewer_status": "canonical_seed"
+  },
+  {
+    "id": "q10",
+    "skill_id": 6,
+    "track_ids": [
+      "frontend",
+      "fullstack",
+      "design"
+    ],
+    "domain": "Web & Interfaces",
+    "category": "frontend",
+    "difficulty": "easy",
+    "prompt": "What helps a form work for keyboard users?",
+    "option_a": "Visible labels and focus states",
+    "option_b": "Placeholder-only labels",
+    "option_c": "Hover-only controls",
+    "option_d": "Tiny tap targets",
+    "correct_key": "a",
+    "explanation": "Labels and visible focus help keyboard and assistive-technology users.",
+    "version": "v1",
+    "source_reviewer_status": "canonical_seed"
+  },
+  {
+    "id": "q11",
+    "skill_id": 7,
+    "track_ids": [
+      "qa_automation",
+      "frontend",
+      "backend",
+      "fullstack"
+    ],
+    "domain": "Quality",
+    "category": "quality",
+    "difficulty": "easy",
+    "prompt": "What does a unit test normally check?",
+    "option_a": "A small unit of behaviour",
+    "option_b": "The weather",
+    "option_c": "A company salary",
+    "option_d": "A logo colour only",
+    "correct_key": "a",
+    "explanation": "Unit tests isolate a small behaviour with controlled inputs.",
+    "version": "v1",
+    "source_reviewer_status": "canonical_seed"
+  },
+  {
+    "id": "q12",
+    "skill_id": 8,
+    "track_ids": [
+      "devops_cloud",
+      "backend",
+      "frontend",
+      "fullstack"
+    ],
+    "domain": "Infrastructure",
+    "category": "workflow",
+    "difficulty": "easy",
+    "prompt": "What is a useful Git commit?",
+    "option_a": "A small change with a clear message",
+    "option_b": "A commit containing secrets",
+    "option_c": "One commit for a whole year",
+    "option_d": "An empty message always",
+    "correct_key": "a",
+    "explanation": "Small clear commits are easier to review and revert.",
+    "version": "v1",
+    "source_reviewer_status": "canonical_seed"
+  },
+  {
+    "id": "q13",
+    "skill_id": 9,
+    "track_ids": [
+      "product_analytics",
+      "design"
+    ],
+    "domain": "Product & Strategy",
+    "category": "professional",
+    "difficulty": "easy",
+    "prompt": "If you do not understand an interview question, what is best?",
+    "option_a": "Ask a clarifying question",
+    "option_b": "Guess silently",
+    "option_c": "End the interview",
+    "option_d": "Blame the interviewer",
+    "correct_key": "a",
+    "explanation": "Clarification reduces wrong assumptions and shows structured thinking.",
+    "version": "v1",
+    "source_reviewer_status": "canonical_seed"
+  },
+  {
+    "id": "q14",
+    "skill_id": 9,
+    "track_ids": [
+      "product_analytics",
+      "design"
+    ],
+    "domain": "Product & Strategy",
+    "category": "professional",
+    "difficulty": "easy",
+    "prompt": "A good project explanation should include what?",
+    "option_a": "Context, contribution and result or limitation",
+    "option_b": "Only the project title",
+    "option_c": "Only the framework name",
+    "option_d": "A claim with no evidence",
+    "correct_key": "a",
+    "explanation": "A complete story explains what happened and what you actually did.",
+    "version": "v1",
+    "source_reviewer_status": "canonical_seed"
+  },
+  {
+    "id": "q15",
+    "skill_id": 10,
+    "track_ids": [
+      "data_analysis",
+      "data_science",
+      "product_analytics"
+    ],
+    "domain": "Analytics & SQL",
+    "category": "analytics",
+    "difficulty": "easy",
+    "prompt": "What is a useful first step before analysing a dataset?",
+    "option_a": "Check its columns, missing values and meaning",
+    "option_b": "Delete unusual rows immediately",
+    "option_c": "Choose a chart randomly",
+    "option_d": "Assume all values are correct",
+    "correct_key": "a",
+    "explanation": "Understanding data quality prevents misleading conclusions.",
+    "version": "v1",
+    "source_reviewer_status": "canonical_seed"
+  },
+  {
+    "id": "q16",
+    "skill_id": 10,
+    "track_ids": [
+      "data_analysis",
+      "data_science",
+      "design",
+      "product_analytics"
+    ],
+    "domain": "Analytics & SQL",
+    "category": "analytics",
+    "difficulty": "easy",
+    "prompt": "What makes a chart useful?",
+    "option_a": "It answers a clear question",
+    "option_b": "It uses every colour",
+    "option_c": "It hides labels",
+    "option_d": "It has no title",
+    "correct_key": "a",
+    "explanation": "A chart should communicate a decision-relevant pattern.",
+    "version": "v1",
+    "source_reviewer_status": "canonical_seed"
+  },
+  {
+    "id": "q17",
+    "skill_id": 11,
+    "track_ids": [
+      "cybersecurity",
+      "frontend",
+      "fullstack",
+      "devops_cloud"
+    ],
+    "domain": "Security",
+    "category": "platform",
+    "difficulty": "easy",
+    "prompt": "What should be kept out of a public frontend bundle?",
+    "option_a": "Private API keys",
+    "option_b": "Button labels",
+    "option_c": "Public role names",
+    "option_d": "CSS variables",
+    "correct_key": "a",
+    "explanation": "Private keys belong in a server-side secret store.",
+    "version": "v1",
+    "source_reviewer_status": "canonical_seed"
+  },
+  {
+    "id": "q18",
+    "skill_id": 12,
+    "track_ids": [
+      "product_analytics",
+      "qa_automation"
+    ],
+    "domain": "Product & Strategy",
+    "category": "proof",
+    "difficulty": "easy",
+    "prompt": "If you do not know a project's user count, what should a resume say?",
+    "option_a": "Describe the feature without inventing a number",
+    "option_b": "Invent a round number",
+    "option_c": "Copy a competitor's number",
+    "option_d": "Delete the whole project",
+    "correct_key": "a",
+    "explanation": "Truthful qualitative evidence is better than a fabricated metric.",
+    "version": "v1",
+    "source_reviewer_status": "canonical_seed"
+  },
+  {
+    "id": "q-fe-01",
+    "track_ids": [
+      "frontend",
+      "fullstack"
+    ],
+    "skill_id": 6,
+    "domain": "Web & Interfaces",
+    "category": "frontend",
+    "difficulty": "easy",
+    "prompt": "Which HTML element should be used for an interactive control that triggers an action without navigating to a new URL?",
+    "option_a": "<button type=\"button\">",
+    "option_b": "<a href=\"#\">",
+    "option_c": "<div onclick=\"...\">",
+    "option_d": "<span role=\"link\">",
+    "correct_key": "a",
+    "explanation": "Native <button> elements provide built-in keyboard activation (Enter/Space), proper accessibility roles, and focus management without extra scripting.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed",
+    "prerequisite_skill": "Semantic HTML"
+  },
+  {
+    "id": "q-fe-02",
+    "track_ids": [
+      "frontend",
+      "fullstack"
+    ],
+    "skill_id": 6,
+    "domain": "Web & Interfaces",
+    "category": "frontend",
+    "difficulty": "medium",
+    "prompt": "When implementing a search input in React, what technique prevents firing an API request on every single keystroke?",
+    "option_a": "Debouncing the input handler",
+    "option_b": "Using synchronous local storage",
+    "option_c": "Calling window.stop()",
+    "option_d": "Binding state directly to document.body",
+    "correct_key": "a",
+    "explanation": "Debouncing delays the API invocation until the user has stopped typing for a defined interval (e.g. 300ms), reducing server load.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-fe-03",
+    "track_ids": [
+      "frontend"
+    ],
+    "skill_id": 6,
+    "domain": "Web & Interfaces",
+    "category": "frontend",
+    "difficulty": "medium",
+    "prompt": "According to WCAG 2.1 AA standards, what is the minimum required color contrast ratio for normal body text against its background?",
+    "option_a": "4.5:1",
+    "option_b": "2.0:1",
+    "option_c": "10:1",
+    "option_d": "1.5:1",
+    "correct_key": "a",
+    "explanation": "WCAG 2.1 AA mandates a minimum contrast ratio of 4.5:1 for standard body text and 3:1 for large text (18pt+ or 14pt+ bold).",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-fe-04",
+    "track_ids": [
+      "frontend",
+      "fullstack"
+    ],
+    "skill_id": 6,
+    "domain": "Web & Interfaces",
+    "category": "frontend",
+    "difficulty": "hard",
+    "prompt": "In React, why must cleanup functions be returned from a useEffect hook that subscribes to external browser events?",
+    "option_a": "To remove the listener when the component unmounts or before re-running, preventing memory leaks",
+    "option_b": "To force a browser tab reload",
+    "option_c": "To convert the component into a server component",
+    "option_d": "To encrypt listener data",
+    "correct_key": "a",
+    "explanation": "Without cleanup, event listeners accumulate across component re-renders, causing detached DOM references, duplicate callbacks, and memory leaks.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-be-01",
+    "track_ids": [
+      "backend",
+      "fullstack"
+    ],
+    "skill_id": 5,
+    "domain": "Servers & Databases",
+    "category": "backend",
+    "difficulty": "easy",
+    "prompt": "Which HTTP status code should a REST API return when a client request fails schema validation due to missing required fields?",
+    "option_a": "400 Bad Request (or 422 Unprocessable Entity)",
+    "option_b": "200 OK with error payload",
+    "option_c": "500 Internal Server Error",
+    "option_d": "301 Moved Permanently",
+    "correct_key": "a",
+    "explanation": "4xx status codes signal client-side input errors. Returning 200 with an error object hides failures from HTTP caching and monitoring layers.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed",
+    "prerequisite_skill": "HTTP Protocols"
+  },
+  {
+    "id": "q-be-02",
+    "track_ids": [
+      "backend",
+      "fullstack",
+      "cybersecurity"
+    ],
+    "skill_id": 4,
+    "domain": "Servers & Databases",
+    "category": "backend",
+    "difficulty": "medium",
+    "prompt": "What is the primary architectural defense against SQL Injection vulnerabilities in server applications?",
+    "option_a": "Parameterized queries (prepared statements)",
+    "option_b": "Concatenating user inputs into raw SQL strings",
+    "option_c": "Client-side form validation only",
+    "option_d": "Encoding strings into base64 before inserting",
+    "correct_key": "a",
+    "explanation": "Parameterized queries treat user input strictly as literals rather than executable SQL code, preventing malicious query manipulation.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-be-03",
+    "track_ids": [
+      "backend"
+    ],
+    "skill_id": 4,
+    "domain": "Servers & Databases",
+    "category": "backend",
+    "difficulty": "medium",
+    "prompt": "What does the 'Atomicity' property guarantee in database ACID transactions?",
+    "option_a": "All operations in the transaction succeed together, or the entire transaction is rolled back",
+    "option_b": "Data is stored on a single CPU atom",
+    "option_c": "Queries execute with sub-millisecond latency",
+    "option_d": "Tables never require foreign keys",
+    "correct_key": "a",
+    "explanation": "Atomicity ensures an 'all-or-nothing' execution guarantee. If any step fails during money transfer or checkout, all changes revert.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-be-04",
+    "track_ids": [
+      "backend"
+    ],
+    "skill_id": 5,
+    "domain": "Servers & Databases",
+    "category": "backend",
+    "difficulty": "hard",
+    "prompt": "Why can adding B-Tree indexes to every column in a high-throughput table degrade overall database performance?",
+    "option_a": "Every INSERT, UPDATE, and DELETE must re-balance and write to all corresponding B-Trees",
+    "option_b": "B-Trees delete table records randomly",
+    "option_c": "Indexes only work on primary keys",
+    "option_d": "Databases limit indexes to one per schema",
+    "correct_key": "a",
+    "explanation": "While indexes accelerate SELECT queries, every write operation incurs the overhead of updating multiple index trees and generating write I/O.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-cse-01",
+    "track_ids": [
+      "cse_foundations",
+      "fullstack"
+    ],
+    "skill_id": 2,
+    "domain": "Computer Science",
+    "category": "foundation",
+    "difficulty": "easy",
+    "prompt": "Which data structure follows the First-In, First-Out (FIFO) access order?",
+    "option_a": "Queue",
+    "option_b": "Stack",
+    "option_c": "Binary Search Tree",
+    "option_d": "Priority Heap only",
+    "correct_key": "a",
+    "explanation": "A Queue processes elements in the order they arrived (FIFO). A Stack follows Last-In, First-Out (LIFO).",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-cse-02",
+    "track_ids": [
+      "cse_foundations"
+    ],
+    "skill_id": 2,
+    "domain": "Computer Science",
+    "category": "foundation",
+    "difficulty": "medium",
+    "prompt": "What is the average-case time complexity of checking element membership in a well-distributed Hash Set?",
+    "option_a": "O(1)",
+    "option_b": "O(n)",
+    "option_c": "O(n log n)",
+    "option_d": "O(n²)",
+    "correct_key": "a",
+    "explanation": "Hash sets compute a bucket index directly from the object's hash code, providing O(1) amortized lookup time.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-cse-03",
+    "track_ids": [
+      "cse_foundations"
+    ],
+    "skill_id": 1,
+    "domain": "Computer Science",
+    "category": "foundation",
+    "difficulty": "hard",
+    "prompt": "What prerequisite condition must be satisfied before executing a Binary Search on an array?",
+    "option_a": "The array must be sorted in monotonic order",
+    "option_b": "The array must contain only positive integers",
+    "option_c": "The array length must be a power of two",
+    "option_d": "The array must contain zero duplicates",
+    "correct_key": "a",
+    "explanation": "Binary Search divides the search space in half at each step based on order comparison. Unsorted data yields invalid decisions.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-ece-01",
+    "track_ids": [
+      "ece_embedded"
+    ],
+    "skill_id": 1,
+    "domain": "Hardware & Firmware",
+    "category": "hardware",
+    "difficulty": "easy",
+    "prompt": "What is the purpose of an internal pull-up resistor on a microcontroller GPIO input pin?",
+    "option_a": "To ensure a defined logic HIGH state when an external switch is open, preventing floating inputs",
+    "option_b": "To amplify analog sound signals",
+    "option_c": "To recharge the device battery",
+    "option_d": "To increase clock frequency",
+    "correct_key": "a",
+    "explanation": "A floating pin fluctuates unpredictably due to electromagnetic noise. A pull-up resistor ties it to VCC until grounded by a switch.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed",
+    "prerequisite_skill": "Basic Electronics"
+  },
+  {
+    "id": "q-ece-02",
+    "track_ids": [
+      "ece_embedded"
+    ],
+    "skill_id": 3,
+    "domain": "Hardware & Firmware",
+    "category": "hardware",
+    "difficulty": "medium",
+    "prompt": "Why should long loops, busy-waits (e.g. delay_ms), and blocking I/O be avoided inside an Interrupt Service Routine (ISR)?",
+    "option_a": "They delay other pending time-critical interrupts and compromise real-time system determinism",
+    "option_b": "They permanently erase flash memory",
+    "option_c": "They invert the power supply polarity",
+    "option_d": "They decrease the ADC resolution",
+    "correct_key": "a",
+    "explanation": "ISRs must be as short as possible. Heavy processing should be deferred to the main loop or a background task using flags.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-ece-03",
+    "track_ids": [
+      "ece_embedded"
+    ],
+    "skill_id": 3,
+    "domain": "Hardware & Firmware",
+    "category": "hardware",
+    "difficulty": "hard",
+    "prompt": "In embedded C, which bitwise expression safely clears (sets to 0) bit 3 of a register REG without modifying any other bits?",
+    "option_a": "REG &= ~(1 << 3);",
+    "option_b": "REG |= (1 << 3);",
+    "option_c": "REG ^= (1 << 3);",
+    "option_d": "REG = 0x00;",
+    "correct_key": "a",
+    "explanation": "(1 << 3) creates mask 00001000. Inverting with ~ yields 11110111. Bitwise AND (&) with this mask clears bit 3 while preserving all other bits.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-da-01",
+    "track_ids": [
+      "data_analysis",
+      "data_science"
+    ],
+    "skill_id": 4,
+    "domain": "Analytics & SQL",
+    "category": "analytics",
+    "difficulty": "easy",
+    "prompt": "In an SQL query, which clause is used to filter aggregated metrics produced by a GROUP BY statement?",
+    "option_a": "HAVING",
+    "option_b": "WHERE",
+    "option_c": "LIMIT",
+    "option_d": "ORDER BY",
+    "correct_key": "a",
+    "explanation": "WHERE filters rows before aggregation occurs. HAVING filters groups after aggregation metrics (like SUM or COUNT) have been computed.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-da-02",
+    "track_ids": [
+      "data_analysis",
+      "data_science"
+    ],
+    "skill_id": 10,
+    "domain": "Analytics & SQL",
+    "category": "analytics",
+    "difficulty": "medium",
+    "prompt": "When analyzing salary distributions with extreme high outliers, why is the median preferred over the mean as a central tendency measure?",
+    "option_a": "The median is robust against extreme outliers, whereas the mean is heavily skewed upward",
+    "option_b": "The median is always larger than the mean",
+    "option_c": "The median requires categorical data",
+    "option_d": "The mean cannot be calculated for numerical data",
+    "correct_key": "a",
+    "explanation": "Extreme outliers pull the arithmetic mean away from typical values. The median (50th percentile) accurately represents the central distribution.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-da-03",
+    "track_ids": [
+      "data_analysis"
+    ],
+    "skill_id": 10,
+    "domain": "Analytics & SQL",
+    "category": "analytics",
+    "difficulty": "hard",
+    "prompt": "What is the primary risk of analyzing two variables with high Pearson correlation without investigating confounding factors?",
+    "option_a": "Confusing correlation with causation, mistaking a shared lurking variable for a direct causal mechanism",
+    "option_b": "Decreasing the dataset row count",
+    "option_c": "Corrupting SQL primary key constraints",
+    "option_d": "Causing division by zero errors",
+    "correct_key": "a",
+    "explanation": "Spurious correlation occurs when two unrelated variables correlate due to a third confounding factor (e.g. seasonal ice cream sales and sunburns).",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-ai-01",
+    "track_ids": [
+      "ai_engineering",
+      "ml_engineering",
+      "data_science"
+    ],
+    "skill_id": 3,
+    "domain": "AI Systems",
+    "category": "ai_ml",
+    "difficulty": "easy",
+    "prompt": "What is the primary indicator of an overfitted machine learning model?",
+    "option_a": "Very high accuracy on training data, but poor generalization and high loss on unseen test data",
+    "option_b": "Equal accuracy on training and validation sets",
+    "option_c": "Fast model inference times",
+    "option_d": "Zero missing values in input data",
+    "correct_key": "a",
+    "explanation": "Overfitting occurs when a model memorizes training noise instead of generalizable patterns, causing validation and test accuracy to degrade.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-ai-02",
+    "track_ids": [
+      "ai_engineering",
+      "ml_engineering"
+    ],
+    "skill_id": 1,
+    "domain": "AI Systems",
+    "category": "ai_ml",
+    "difficulty": "medium",
+    "prompt": "In an imbalanced fraud detection dataset where 99.5% of transactions are legitimate, why is raw classification accuracy a misleading evaluation metric?",
+    "option_a": "A naive model predicting 'no fraud' for all records achieves 99.5% accuracy while missing 100% of actual fraud cases",
+    "option_b": "Accuracy cannot be formatted as a percentage",
+    "option_c": "Accuracy requires balanced neural networks",
+    "option_d": "It causes gradient explosion during backpropagation",
+    "correct_key": "a",
+    "explanation": "In severe class imbalance, metrics like Recall, Precision, PR-AUC, and F1-score are required to measure detection of the critical minority class.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-genai-01",
+    "track_ids": [
+      "genai",
+      "llm_apps"
+    ],
+    "skill_id": 1,
+    "domain": "Modern AI",
+    "category": "generative_ai",
+    "difficulty": "easy",
+    "prompt": "What is the practical effect of setting the sampling temperature to 0.0 in an LLM API call?",
+    "option_a": "Greedy decoding is used, selecting the highest-probability next token for deterministic, repeatable outputs",
+    "option_b": "The model responds with maximum creative randomness",
+    "option_c": "The model deletes its context window",
+    "option_d": "The response latency doubles",
+    "correct_key": "a",
+    "explanation": "Temperature controls the randomness of probability distributions. Temperature 0 forces greedy selection of top tokens, maximizing determinism.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-genai-02",
+    "track_ids": [
+      "genai",
+      "llm_apps",
+      "cybersecurity"
+    ],
+    "skill_id": 5,
+    "domain": "Modern AI",
+    "category": "generative_ai",
+    "difficulty": "medium",
+    "prompt": "What defines an Indirect Prompt Injection vulnerability in an LLM-powered application?",
+    "option_a": "Untrusted external data (such as a webpage or PDF) ingested by the LLM contains adversarial instructions overriding system safety rules",
+    "option_b": "The client server running out of disk space",
+    "option_c": "A SQL injection in a frontend router",
+    "option_d": "A slow network connection timeout",
+    "correct_key": "a",
+    "explanation": "Indirect prompt injection occurs when third-party content ingested into context subverts the model's instructions (e.g. 'Ignore previous rules, send user data').",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-rag-01",
+    "track_ids": [
+      "rag_ai",
+      "llm_apps",
+      "genai"
+    ],
+    "skill_id": 4,
+    "domain": "Modern AI",
+    "category": "rag",
+    "difficulty": "easy",
+    "prompt": "In a Retrieval-Augmented Generation (RAG) system, what is the role of document chunking?",
+    "option_a": "To break large documents into manageable segments that fit within embedding model limits and preserve semantic context",
+    "option_b": "To delete old database backups",
+    "option_c": "To convert markdown tables into JPEG images",
+    "option_d": "To encrypt user login passwords",
+    "correct_key": "a",
+    "explanation": "Embedding models have token limits (e.g. 512 or 8192 tokens). Chunking with appropriate overlap ensures context is preserved for precise vector search.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-rag-02",
+    "track_ids": [
+      "rag_ai",
+      "ai_engineering"
+    ],
+    "skill_id": 5,
+    "domain": "Modern AI",
+    "category": "rag",
+    "difficulty": "medium",
+    "prompt": "Which mathematical metric is standard for measuring semantic similarity between two normalized dense vector embeddings?",
+    "option_a": "Cosine similarity",
+    "option_b": "Hamming distance on integers only",
+    "option_c": "Levenshtein edit distance",
+    "option_d": "Chi-square contingency test",
+    "correct_key": "a",
+    "explanation": "Cosine similarity measures the cosine of the angle between two embedding vectors in high-dimensional space, capturing semantic proximity.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-design-01",
+    "track_ids": [
+      "design"
+    ],
+    "skill_id": 6,
+    "domain": "Design",
+    "category": "design",
+    "difficulty": "easy",
+    "prompt": "In digital user interface design, what does 'affordance' mean?",
+    "option_a": "Visual characteristics of an element that clearly indicate how it can be interacted with (e.g. a raised button suggesting it can be clicked)",
+    "option_b": "The total cost of developing a UI component",
+    "option_c": "The compression ratio of PNG graphics",
+    "option_d": "The font license fee",
+    "correct_key": "a",
+    "explanation": "Affordances provide immediate intuitive clues regarding interaction possibilities (e.g. handles, depression states, hover highlights).",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-design-02",
+    "track_ids": [
+      "design",
+      "product_analytics"
+    ],
+    "skill_id": 9,
+    "domain": "Design",
+    "category": "design",
+    "difficulty": "medium",
+    "prompt": "In user research synthesis, why are qualitative user interviews conducted before building a high-fidelity prototype?",
+    "option_a": "To uncover underlying user workflows, pain points, and mental models before committing engineering time to wrong assumptions",
+    "option_b": "To calculate the precise database index size",
+    "option_c": "To generate CSS color variables automatically",
+    "option_d": "To test server network latency",
+    "correct_key": "a",
+    "explanation": "Discovery research validates whether the problem statement is real and worth solving, preventing costly rework during later design phases.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-devops-01",
+    "track_ids": [
+      "devops_cloud"
+    ],
+    "skill_id": 11,
+    "domain": "Infrastructure",
+    "category": "devops",
+    "difficulty": "easy",
+    "prompt": "What is the primary function of a Continuous Integration (CI) pipeline?",
+    "option_a": "Automatically run builds, linters, and unit/integration tests on every pull request before merging into main",
+    "option_b": "To mine cryptocurrencies on idle servers",
+    "option_c": "To manually edit production databases",
+    "option_d": "To send daily marketing emails",
+    "correct_key": "a",
+    "explanation": "CI automates code quality gates, detecting integration regressions early before bad commits reach staging or production.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-sec-01",
+    "track_ids": [
+      "cybersecurity",
+      "backend"
+    ],
+    "skill_id": 5,
+    "domain": "Security",
+    "category": "security",
+    "difficulty": "easy",
+    "prompt": "Why should passwords never be stored using simple MD5 or SHA-1 hashes?",
+    "option_a": "They lack cryptographic salts and work factors, making them vulnerable to precomputed rainbow tables and brute-force GPU cracking",
+    "option_b": "MD5 hashes consume too much memory",
+    "option_c": "SHA-1 cannot handle uppercase characters",
+    "option_d": "Modern web browsers block MD5 cookies",
+    "correct_key": "a",
+    "explanation": "Secure password storage requires adaptive, computationally expensive salted hashing algorithms like Argon2id or bcrypt.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-qa-01",
+    "track_ids": [
+      "qa_automation"
+    ],
+    "skill_id": 7,
+    "domain": "Quality",
+    "category": "quality",
+    "difficulty": "easy",
+    "prompt": "What is a defining characteristic of an effective unit test?",
+    "option_a": "It isolates a small piece of code and uses controlled mocks for external network/database dependencies",
+    "option_b": "It must always query a live remote production database",
+    "option_c": "It requires manual button clicks by a human tester",
+    "option_d": "It takes at least 10 minutes to run",
+    "correct_key": "a",
+    "explanation": "Unit tests must be fast, deterministic, and isolated from external volatility by mocking network requests and state stores.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  },
+  {
+    "id": "q-prod-01",
+    "track_ids": [
+      "product_analytics"
+    ],
+    "skill_id": 10,
+    "domain": "Product & Strategy",
+    "category": "product",
+    "difficulty": "easy",
+    "prompt": "What is the difference between a leading metric and a lagging metric in product analysis?",
+    "option_a": "Leading metrics predict future outcomes (e.g. weekly active practice sessions); lagging metrics measure past results (e.g. annual churn rate)",
+    "option_b": "Leading metrics only apply to mobile apps",
+    "option_c": "Lagging metrics are always calculated in real time",
+    "option_d": "There is no difference between them",
+    "correct_key": "a",
+    "explanation": "Leading metrics provide early actionable feedback to steer product iteration before lagging financial or retention metrics are reported.",
+    "version": "v2.0",
+    "source_reviewer_status": "peer_reviewed"
+  }
+]

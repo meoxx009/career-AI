@@ -1,25 +1,13 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCareer } from '../context/CareerContext';
 
 export const Landing = () => {
   const navigate = useNavigate();
-  const { setSelectedRoleId, showToast } = useCareer();
-
-  const [task1Complete, setTask1Complete] = useState(false);
+  const { setSelectedRoleId, loadRahulDemo } = useCareer();
 
   const handleStartDemo = () => {
-    document.querySelector('#paths')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    showToast('Synthetic Rahul demo opened — no real student data used.');
-  };
-
-  const handleToggleTask = () => {
-    setTask1Complete(!task1Complete);
-    if (!task1Complete) {
-      showToast('Saved in the fictional demo roadmap.');
-    } else {
-      showToast('Task marked pending.');
-    }
+    loadRahulDemo();
+    navigate('/dashboard');
   };
 
   return (
@@ -27,28 +15,25 @@ export const Landing = () => {
       {/* Hero Section */}
       <section className="hero shell">
         <div className="hero-copy">
-          <p className="eyebrow">CAREER READINESS / 01</p>
+          <p className="eyebrow">YOUR STARTING POINT / BUILT FOR YOUR GOALS</p>
           <h1>
             FIND YOUR<br />
             <em>NEXT MOVE.</em>
           </h1>
           <p className="hero-lede">
-            A calm, evidence-led way to choose a direction, practise what matters and tell your story with confidence.
+            A clearer way to choose what to practise next. Start with your goals, interests and current skills.
           </p>
           <div className="hero-actions">
             <button
               className="button button-primary"
               id="startButton"
               type="button"
-              onClick={() => {
-                navigate('/assessment');
-                showToast('Starting diagnostic assessment.');
-              }}
+              onClick={() => navigate('/onboarding')}
             >
               Find my direction <span aria-hidden="true">→</span>
             </button>
             <a className="button button-quiet" href="#paths">
-              See the sample path
+              See starter paths
             </a>
           </div>
         </div>
@@ -61,64 +46,79 @@ export const Landing = () => {
             AT A<br />
             <span>TIME</span>
           </div>
-          <div className="hero-label">CAREERAI / SYNTHETIC DEMO</div>
+          <div className="hero-label">CAREERAI / EVIDENCE-LED PREPARATION</div>
         </div>
       </section>
 
-      {/* Snapshot Section */}
-      <section className="snapshot shell" aria-labelledby="snapshot-heading">
+      {/* User-Neutral Starting Point Section */}
+      <section className="starting-section shell" aria-labelledby="starting-heading">
         <div className="section-intro">
-          <p className="eyebrow">RAHUL'S SNAPSHOT / FICTIONAL DATA</p>
-          <h2 id="snapshot-heading">
-            Clarity feels better<br />
-            <i>when it is visible.</i>
+          <p className="eyebrow">YOUR STARTING POINT / 01</p>
+          <h2 id="starting-heading">
+            A clearer way<br />
+            <i>to choose next.</i>
           </h2>
         </div>
 
-        <div className="snapshot-card linen-card">
-          <div className="card-topline">
-            <span>ASSESSED ALIGNMENT</span>
-            <span className="badge dark-badge">COVERAGE 78%</span>
+        <div className="starting-cards-grid">
+          {/* Card 1: Discover direction */}
+          <div className="starting-card dark-card">
+            <p className="eyebrow" style={{ color: 'var(--color-tangerine)' }}>STEP 01</p>
+            <h3 className="starting-card-title">
+              Discover your <span>direction</span>
+            </h3>
+            <p className="starting-card-desc" style={{ color: 'var(--color-muted-light)' }}>
+              Take a short diagnostic to understand where your skills stand today. We show what is known, what is still unassessed, and what three roles fit your profile.
+            </p>
+            <button
+              className="card-link"
+              type="button"
+              style={{ color: 'var(--color-tangerine)' }}
+              onClick={() => navigate('/assessment')}
+            >
+              Start the diagnostic <span aria-hidden="true">→</span>
+            </button>
           </div>
-          <div className="big-score">
-            82<span>%</span>
-          </div>
-          <p>Backend Developer</p>
-          <div className="mini-meter">
-            <span style={{ width: '82%' }}></span>
-          </div>
-          <div className="card-footer">
-            <span>Evidence-led estimate</span>
-            <span>Version seed-1</span>
-          </div>
-        </div>
 
-        <div className="snapshot-card dark-card">
-          <div className="card-topline">
-            <span>NEXT BEST ACTION</span>
-            <span className="w-2 h-2 rounded-full bg-tangerine inline-block"></span>
+          {/* Card 2: Build a plan */}
+          <div className="starting-card linen-card">
+            <p className="eyebrow">STEP 02</p>
+            <h3 className="starting-card-title">
+              Build a realistic<br />weekly plan
+            </h3>
+            <p className="starting-card-desc">
+              Once you pick a direction, CareerAI builds a four-week learning roadmap with realistic tasks and evidence checkpoints — no guesswork.
+            </p>
+            <button
+              className="card-link ink-link"
+              type="button"
+              onClick={() => navigate('/roadmap')}
+            >
+              Explore roadmap <span aria-hidden="true">→</span>
+            </button>
           </div>
-          <h3>
-            Build your first<br />
-            <span>REST endpoint.</span>
-          </h3>
-          <p className="muted">
-            A 45-minute step to turn your API gap into project evidence.
-          </p>
-          <button
-            className="text-link"
-            type="button"
-            onClick={() => {
-              navigate('/roadmap');
-              showToast("Task added to Rahul's fictional roadmap");
-            }}
-          >
-            Add to roadmap <span aria-hidden="true">↗</span>
-          </button>
+
+          {/* Card 3: Turn practice into evidence */}
+          <div className="starting-card cotton-card">
+            <p className="eyebrow">STEP 03</p>
+            <h3 className="starting-card-title">
+              Turn practice<br />into evidence
+            </h3>
+            <p className="starting-card-desc">
+              Practise interview questions with a deterministic rubric. Review your resume against a job description honestly. Build a story you can actually tell.
+            </p>
+            <button
+              className="card-link ink-link"
+              type="button"
+              onClick={() => navigate('/practice')}
+            >
+              Open practice room <span aria-hidden="true">→</span>
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* Three Directions Section */}
+      {/* Three Starter Paths Section */}
       <section className="paths shell" id="paths" aria-labelledby="paths-heading">
         <div className="section-heading-row">
           <div>
@@ -138,28 +138,25 @@ export const Landing = () => {
           <article className="path-card featured-card">
             <div className="path-number">01</div>
             <div className="path-icon">↗</div>
-            <p className="path-type">PRIMARY DIRECTION</p>
+            <p className="path-type">BACKEND DEVELOPER</p>
             <h3>
               Backend<br />Developer
             </h3>
-            <div className="path-score">
-              <strong>82</strong>
-              <span>
-                assessed<br />alignment
-              </span>
+            <div className="path-starter-state">
+              <span className="starter-pill">Starter path</span>
+              <span className="starter-subtext">Explore this direction</span>
             </div>
             <div className="path-line"></div>
-            <p>Strong logic and Python evidence. Practise APIs, testing and deployment next.</p>
+            <p>Logic, APIs and systems. A strong direction if you enjoy building the parts users never see.</p>
             <button
               className="card-link"
               type="button"
               onClick={() => {
-                setSelectedRoleId('role-backend');
-                navigate('/roadmap');
-                showToast('Backend plan opened');
+                setSelectedRoleId(1);
+                navigate('/paths/backend-developer');
               }}
             >
-              Explore plan <span aria-hidden="true">↗</span>
+              Explore path <span aria-hidden="true">↗</span>
             </button>
           </article>
 
@@ -167,168 +164,72 @@ export const Landing = () => {
           <article className="path-card cotton-card">
             <div className="path-number">02</div>
             <div className="path-icon ink">◇</div>
-            <p className="path-type">SECOND DIRECTION</p>
+            <p className="path-type">DATA ANALYST</p>
             <h3>
               Data<br />Analyst
             </h3>
-            <div className="path-score">
-              <strong>74</strong>
-              <span>
-                assessed<br />alignment
-              </span>
+            <div className="path-starter-state">
+              <span className="starter-pill">Starter path</span>
+              <span className="starter-subtext">Not assessed yet</span>
             </div>
             <div className="path-line dark-line"></div>
-            <p>Good analytical interest. Build stronger SQL and data-story evidence.</p>
+            <p>Patterns, SQL and storytelling with numbers. Take the diagnostic to see how you compare.</p>
             <button
               className="card-link ink-link"
               type="button"
               onClick={() => {
-                setSelectedRoleId('role-analyst');
-                navigate('/roadmap');
-                showToast('Data Analyst plan opened');
+                setSelectedRoleId(3);
+                navigate('/paths/data-analyst');
               }}
             >
-              Explore plan <span aria-hidden="true">↗</span>
+              Explore path <span aria-hidden="true">↗</span>
             </button>
           </article>
 
-          {/* Card 3: Frontend Developer (Black Hole) */}
-          <article className="path-card black-card">
+          {/* Card 3: Frontend Developer (Natural #9F886F) */}
+          <article className="path-card natural-card">
             <div className="path-number">03</div>
-            <div className="path-icon">○</div>
-            <p className="path-type">EXPLORE WITH MORE EVIDENCE</p>
+            <div className="path-icon ink">○</div>
+            <p className="path-type">FRONTEND DEVELOPER</p>
             <h3>
               Frontend<br />Developer
             </h3>
-            <div className="path-score">
-              <strong>68</strong>
-              <span>
-                alignment<br />coverage 46%
-              </span>
+            <div className="path-starter-state">
+              <span className="starter-pill">Starter path</span>
+              <span className="starter-subtext">Not assessed yet</span>
             </div>
-            <div className="path-line"></div>
-            <p>Interesting direction. Take the UI diagnostic before comparing confidently.</p>
+            <div className="path-line dark-line"></div>
+            <p>UI, interactions and the user-facing layer. Take the diagnostic to see what to practise first.</p>
             <button
-              className="card-link"
+              className="card-link ink-link"
               type="button"
               onClick={() => {
-                setSelectedRoleId('role-frontend');
-                navigate('/assessment');
-                showToast('Frontend diagnostic opened');
+                setSelectedRoleId(2);
+                navigate('/paths/frontend-developer');
               }}
             >
-              Take diagnostic <span aria-hidden="true">↗</span>
+              Explore path <span aria-hidden="true">↗</span>
             </button>
           </article>
         </div>
       </section>
 
-      {/* Roadmap Section */}
-      <section className="roadmap shell" id="roadmap" aria-labelledby="roadmap-heading">
-        <div className="roadmap-head">
-          <div>
-            <p className="eyebrow">THE PLAN / 03</p>
-            <h2 id="roadmap-heading">
-              Small steps.<br />
-              <i>Real proof.</i>
-            </h2>
-          </div>
-          <div className="plan-meta">
-            <span>BACKEND / 4 WEEKS</span>
-            <strong>6 HRS / WEEK</strong>
-          </div>
-        </div>
-
-        <div className="roadmap-list">
-          {/* Week 1 */}
-          <article className="week-row active-week">
-            <div className="week-marker">01</div>
-            <div className="week-copy">
-              <p className="eyebrow orange-eyebrow">CURRENT</p>
-              <h3>Programming + HTTP foundations</h3>
-              <p>Understand requests, responses and the flow behind a useful endpoint.</p>
-            </div>
-            <div className="task-status">
-              <span className={`status-ring ${task1Complete ? '' : 'empty'}`}></span>
-              <span>{task1Complete ? '3 / 3 tasks' : '2 / 3 tasks'}</span>
-            </div>
-            <button
-              className="task-action"
-              type="button"
-              onClick={handleToggleTask}
-            >
-              {task1Complete ? 'Task complete' : 'Mark task done'}
-            </button>
-          </article>
-
-          {/* Week 2 */}
-          <article className="week-row">
-            <div className="week-marker">02</div>
-            <div className="week-copy">
-              <p className="eyebrow">NEXT</p>
-              <h3>SQL + API basics</h3>
-              <p>Design a small schema and document six clear API requests.</p>
-            </div>
-            <div className="task-status">
-              <span className="status-ring empty"></span>
-              <span>0 / 3 tasks</span>
-            </div>
-            <button
-              className="task-action"
-              type="button"
-              onClick={() => {
-                navigate('/roadmap');
-                showToast('Week 2 opened');
-              }}
-            >
-              View week
-            </button>
-          </article>
-
-          {/* Week 3 */}
-          <article className="week-row">
-            <div className="week-marker">03</div>
-            <div className="week-copy">
-              <p className="eyebrow">UP NEXT</p>
-              <h3>Testing + project evidence</h3>
-              <p>Make a small project safer and explain exactly what you built.</p>
-            </div>
-            <div className="task-status">
-              <span className="status-ring empty"></span>
-              <span>0 / 3 tasks</span>
-            </div>
-            <button
-              className="task-action"
-              type="button"
-              onClick={() => {
-                showToast('Week 3 is locked until prerequisites are complete');
-              }}
-            >
-              View week
-            </button>
-          </article>
-        </div>
-      </section>
-
-      {/* Practice Room Section */}
+      {/* Practice Room Preview Section */}
       <section className="practice shell" id="practice" aria-labelledby="practice-heading">
         <div className="practice-card">
           <div className="practice-copy">
-            <p className="eyebrow">PRACTICE ROOM / 04</p>
+            <p className="eyebrow">PRACTICE ROOM / 03</p>
             <h2 id="practice-heading">
               Tell the story<br />
               <em>behind the work.</em>
             </h2>
             <p>
-              Practise one question in text. Get a rubric, a useful gap and one next action—not a mysterious hiring score.
+              Practise one question in text. Get a rubric, a useful gap and one next action — not a mysterious hiring score.
             </p>
             <button
               className="button button-primary"
               type="button"
-              onClick={() => {
-                navigate('/practice');
-                showToast('Practice question opened');
-              }}
+              onClick={() => navigate('/practice')}
             >
               Start a practice question <span aria-hidden="true">→</span>
             </button>
@@ -356,14 +257,27 @@ export const Landing = () => {
           Your next move<br />
           <i>can be small.</i>
         </h2>
-        <button
-          className="button button-primary"
-          id="footerStart"
-          type="button"
-          onClick={handleStartDemo}
-        >
-          Explore the demo <span aria-hidden="true">↗</span>
-        </button>
+        <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
+          <button
+            className="button button-primary"
+            id="footerStart"
+            type="button"
+            onClick={() => navigate('/onboarding')}
+          >
+            Find my direction <span aria-hidden="true">→</span>
+          </button>
+          <button
+            className="button button-quiet"
+            type="button"
+            onClick={handleStartDemo}
+            title="Load the pre-populated synthetic Rahul demo to explore a complete example"
+          >
+            Explore the demo <span aria-hidden="true">↗</span>
+          </button>
+        </div>
+        <p style={{ fontSize: '0.74rem', color: 'var(--color-muted-light)', marginTop: '12px', maxWidth: '480px' }}>
+          The demo shows synthetic data for a fictional learner. It is not a real student profile.
+        </p>
       </section>
     </div>
   );

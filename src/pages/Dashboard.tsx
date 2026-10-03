@@ -1,269 +1,423 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCareer } from '../context/CareerContext';
-import { SEED_ROLES, SEED_SKILLS } from '../data/seed';
-import { evaluateRoleFit } from '../lib/scoring';
-import { PrimaryButton, StatusBadge, SourceLabel } from '../components/UIComponents';
-import { ArrowRight, CheckCircle2, ChevronRight, Compass, Sparkles, BookOpen } from 'lucide-react';
+import {
+  SEED_ROLE_SKILL_REQUIREMENTS,
+  SKILLS_BY_ID,
+} from '../data/seedData';
+import {
+  calculateRoleCoverage,
+  calculateAssessedAlignment,
+  calculateKnownGaps,
+  prioritiseGaps,
+  calculatePlanCompletion,
+} from '../lib/scoring';
+import {
+  DisplayHeading,
+  Eyebrow,
+  PrimaryButton,
+  SecondaryButton,
+  DarkCard,
+  LinenCard,
+  CottonCard,
+  StatusBadge,
+  ProgressPill,
+  ScoreMeter,
+} from '../components/DesignSystem';
+import {
+  Compass,
+  ArrowRight,
+  FileText,
+  MessageSquare,
+  CheckCircle2,
+  Info,
+} from 'lucide-react';
 
 export const Dashboard: React.FC = () => {
   const navigate = useNavigate();
-  const { profile, skillObservations, selectedRoleId, roadmapTasks, toggleTaskCompletion } = useCareer();
+  const {
+    profile,
+    selectedRole,
+    skillObservations,
+    roadmapTasks,
+    toggleTaskCompletion,
+    showToast,
+    isDemoMode,
+  } = useCareer();
 
-  const currentRole = SEED_ROLES.find(r => r.id === selectedRoleId) || SEED_ROLES[0];
+  // Create observations lookup map
+  const obsMap = new Map<number | string, number | null>();
+  Object.entries(skillObservations).forEach(([sId, val]) => {
+    obsMap.set(Number(sId), val);
+  });
 
-  // Convert skillObservations map for pure scoring engine
-  const obsMap = new Map<string, number | null>();
-  Object.entries(skillObservations).forEach(([id, val]) => obsMap.set(id, val));
+  // Calculate coverage and alignment deterministically
+  const requirements = SEED_ROLE_SKILL_REQUIREMENTS.filter(r => r.role_id === selectedRole.id);
+  const coverageResult = calculateRoleCoverage(requirements, obsMap);
+  const alignmentResult = calculateAssessedAlignment(requirements, obsMap);
+  const knownGaps = calculateKnownGaps(requirements, obsMap);
+  const prioritizedGaps = prioritiseGaps(knownGaps);
 
-  const scoringResult = evaluateRoleFit(currentRole.id, currentRole.requirements, obsMap);
+  // Calculate plan completion separately from skill proficiency
+  const planCompletion = calculatePlanCompletion(roadmapTasks);
 
-  // Top pending task
-  const nextTask = roadmapTasks.find(t => t.status === 'pending') || roadmapTasks[0];
-  const completedTaskCount = roadmapTasks.filter(t => t.status === 'completed').length;
-  const progressPercent = Math.round((completedTaskCount / roadmapTasks.length) * 100);
+  // Current active roadmap task
+  const currentTask = roadmapTasks.find(t => t.status !== 'completed') || roadmapTasks[0];
+  const topGap = prioritizedGaps[0];
+  const topGapSkill = topGap ? SKILLS_BY_ID.get(Number(topGap.skillId)) : null;
 
-  // Top gap
-  const topGap = scoringResult.gaps.find(g => g.gap > 0) || scoringResult.gaps[0];
-  const topGapSkill = SEED_SKILLS.find(s => s.id === topGap?.skillId);
+  const handleToggleTask = (taskId: string) => {
+    toggleTaskCompletion(taskId);
+    showToast('Roadmap task status updated.');
+  };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-8">
-      {/* Header Greeting & Context */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-neutral-800 pb-6">
+    <div style={{ maxWidth: '1060px', margin: '0 auto' }}>
+      {/* Page Header */}
+      <header style={{ marginBottom: '36px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <span className="text-xs font-mono text-cotton uppercase tracking-wider">
-              {profile.branch} · {profile.studyYear}
-            </span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-linen">
-            Welcome back, {profile.displayName || 'Rahul'}
-          </h1>
-          <p className="text-sm text-neutral-400 mt-1">
-            Track your verified progress toward {currentRole.name}.
+          <Eyebrow
+            text={
+              isDemoMode
+                ? "RAHUL'S SNAPSHOT / FICTIONAL DATA"
+                : `${profile.displayName || 'LEARNER'}'S SNAPSHOT / ${profile.branch || 'ACADEMIC CONTEXT'}`
+            }
+          />
+          <DisplayHeading level={1}>
+            CLARITY FEELS BETTER<br />
+            <i>WHEN IT IS VISIBLE.</i>
+          </DisplayHeading>
+          <p className="muted-light" style={{ maxWidth: '620px', marginTop: '12px', fontSize: '0.98rem', lineHeight: 1.5 }}>
+            Benchmarking verified competencies against <strong style={{ color: 'var(--color-linen)' }}>{selectedRole.name}</strong>.
+            All estimates are deterministic. No placement odds, salary predictions, or artificial rankings.
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => navigate('/paths')}
-            className="px-3.5 py-2 rounded-lg bg-neutral-900 border border-neutral-800 text-xs text-neutral-300 hover:text-linen hover:border-neutral-700 transition cursor-pointer flex items-center gap-1.5"
-          >
-            <Compass className="w-3.5 h-3.5 text-tangerine" />
-            <span>Switch target role</span>
-          </button>
-          <PrimaryButton
-            onClick={() => navigate('/roadmap')}
-            icon={<ArrowRight className="w-4 h-4" />}
-          >
-            Continue learning plan
+        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+          <SecondaryButton onClick={() => navigate('/paths')} style={{ padding: '10px 16px', fontSize: '0.8rem' }}>
+            <Compass size={14} aria-hidden="true" />
+            Switch Path
+          </SecondaryButton>
+          <PrimaryButton onClick={() => navigate('/roadmap')} icon={<ArrowRight size={14} />}>
+            Open Roadmap ↗
           </PrimaryButton>
         </div>
-      </div>
+      </header>
 
-      {/* "Next Best Action" Tangerine Focal Card */}
-      <div className="rounded-2xl bg-orange-950/30 border border-orange-700/50 p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-lg">
-        <div className="space-y-2">
-          <div className="flex items-center gap-2 text-xs font-mono font-semibold text-tangerine">
-            <span className="w-2 h-2 rounded-full bg-tangerine"></span>
-            NEXT BEST ACTION
-          </div>
-          <h2 className="text-xl font-bold text-linen">
-            {nextTask ? nextTask.title : 'All initial tasks completed!'}
-          </h2>
-          <p className="text-sm text-neutral-300 max-w-2xl">
-            {nextTask ? nextTask.description : 'Explore interview practice or review your resume.'}
-          </p>
-          <div className="flex items-center gap-4 text-xs text-neutral-400 font-mono pt-1">
-            <span>Est. effort: {nextTask?.estimatedHours || 0} hours</span>
-            <span>·</span>
-            <span>Deliverable: {nextTask?.deliverable || 'N/A'}</span>
-          </div>
-        </div>
+      {/* Two-Card Snapshot Row (Matching reference preview/index.html) */}
+      <section
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+          gap: '24px',
+          marginBottom: '36px',
+        }}
+        aria-labelledby="snapshot-heading"
+      >
+        <h2 id="snapshot-heading" style={{ position: 'absolute', opacity: 0, pointerEvents: 'none' }}>
+          Role Snapshot Overview
+        </h2>
 
-        <div className="flex items-center gap-3 shrink-0">
-          {nextTask && (
-            <button
-              onClick={() => toggleTaskCompletion(nextTask.id)}
-              className="px-4 py-2.5 rounded-lg bg-neutral-900 border border-neutral-700 text-xs font-medium text-cotton hover:text-linen hover:border-neutral-600 transition cursor-pointer flex items-center gap-2"
-            >
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>Mark completed</span>
-            </button>
-          )}
-          <PrimaryButton onClick={() => navigate('/roadmap')}>
-            Open task
-          </PrimaryButton>
-        </div>
-      </div>
-
-      {/* 3 Primary Panels: Assessed Alignment, Top Gap, Current Milestone */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Panel 1: Assessed Alignment (Dark canvas) */}
-        <div className="rounded-2xl bg-void-subtle border border-neutral-800 p-6 flex flex-col justify-between">
+        {/* 1. Warm Linen Assessed-Alignment Card */}
+        <LinenCard style={{ padding: '32px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div>
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-mono uppercase text-neutral-400">Assessed Alignment</span>
-              <StatusBadge variant={scoringResult.isSufficientCoverage ? 'tangerine' : 'neutral'}>
-                {scoringResult.coveragePercent}% Coverage
-              </StatusBadge>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+              <span style={{ fontSize: '0.74rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--color-muted-dark)' }}>
+                ASSESSED ALIGNMENT
+              </span>
+              <span className="badge dark-badge" style={{ fontSize: '0.74rem', padding: '4px 10px' }}>
+                COVERAGE {coverageResult.coveragePercent}%
+              </span>
             </div>
 
-            <div className="my-3">
-              {scoringResult.isSufficientCoverage && scoringResult.alignment !== null ? (
-                <div className="flex items-baseline gap-2">
-                  <span className="text-5xl font-extrabold text-linen tracking-tight">
-                    {scoringResult.alignment}%
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', margin: '4px 0 10px' }}>
+              {alignmentResult.alignmentPercent !== null ? (
+                <>
+                  <span style={{ fontSize: '3.6rem', fontFamily: 'var(--font-mono)', fontWeight: 800, color: 'var(--color-ink)', lineHeight: 1 }}>
+                    {alignmentResult.alignmentPercent}
                   </span>
-                  <span className="text-xs text-neutral-400 font-mono">fit estimate</span>
-                </div>
+                  <span style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--color-ink)' }}>%</span>
+                </>
               ) : (
-                <div>
-                  <div className="text-xl font-semibold text-cotton">More evidence needed</div>
-                  <p className="text-xs text-neutral-400 mt-1">
-                    Coverage is below 60%. Complete the diagnostic to unlock a calibrated role estimate.
-                  </p>
-                </div>
+                <span style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--color-ink)' }}>
+                  More evidence needed
+                </span>
               )}
             </div>
 
-            <p className="text-xs text-neutral-400 mt-2">
-              Based on {scoringResult.gaps.filter(g => g.isAssessed).length} of{' '}
-              {currentRole.requirements.length} required skills for {currentRole.name}.
+            <p style={{ margin: '0 0 16px', fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-ink)' }}>
+              {selectedRole.name}
             </p>
+
+            <div style={{ marginBottom: '16px' }}>
+              <ScoreMeter score={alignmentResult.alignmentPercent || 0} />
+            </div>
           </div>
 
-          <div className="pt-4 border-t border-neutral-800/80 mt-4 flex items-center justify-between text-xs">
-            <SourceLabel source="Diagnostic" attempt={1} />
+          <div
+            style={{
+              paddingTop: '16px',
+              borderTop: '1px solid rgba(0, 0, 0, 0.1)',
+              display: 'flex',
+              justifyContent: 'space-between',
+              fontSize: '0.74rem',
+              color: 'var(--color-muted-dark)',
+            }}
+          >
+            <span>Evidence-led estimate</span>
+            <span>Version {selectedRole.version}</span>
+          </div>
+        </LinenCard>
+
+        {/* 2. Dark Next-Best-Action Tangerine Card */}
+        <DarkCard
+          style={{
+            padding: '32px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            border: '1px solid var(--color-tangerine)',
+            background: 'linear-gradient(135deg, rgba(255, 109, 31, 0.14) 0%, var(--color-black-hole) 100%)',
+          }}
+        >
+          <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+              <span style={{ fontSize: '0.74rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--color-tangerine)' }}>
+                NEXT BEST ACTION
+              </span>
+              <span
+                style={{
+                  width: '9px',
+                  height: '9px',
+                  borderRadius: '50%',
+                  background: 'var(--color-tangerine)',
+                  boxShadow: '0 0 8px var(--color-tangerine)',
+                }}
+              />
+            </div>
+
+            {topGap ? (
+              <>
+                <h3 style={{ margin: '0 0 10px', fontSize: '1.5rem', lineHeight: 1.3, color: 'var(--color-linen)' }}>
+                  Bridge gap: <span style={{ color: 'var(--color-tangerine)' }}>{topGapSkill?.name || 'API endpoint'}</span>
+                </h3>
+                <p className="muted-light" style={{ fontSize: '0.86rem', lineHeight: 1.45, margin: '0 0 20px' }}>
+                  {topGap.rationale || 'A focused learning deliverable to turn this competency requirement into verified project proof.'}
+                </p>
+              </>
+            ) : currentTask ? (
+              <>
+                <h3 style={{ margin: '0 0 10px', fontSize: '1.5rem', lineHeight: 1.3, color: 'var(--color-linen)' }}>
+                  Week {currentTask.weekNumber}: <span style={{ color: 'var(--color-tangerine)' }}>{currentTask.title}</span>
+                </h3>
+                <p className="muted-light" style={{ fontSize: '0.86rem', lineHeight: 1.45, margin: '0 0 20px' }}>
+                  {currentTask.description} Deliverable: {currentTask.deliverable}.
+                </p>
+              </>
+            ) : (
+              <>
+                <h3 style={{ margin: '0 0 10px', fontSize: '1.5rem', lineHeight: 1.3, color: 'var(--color-linen)' }}>
+                  Take the diagnostic assessment
+                </h3>
+                <p className="muted-light" style={{ fontSize: '0.86rem', lineHeight: 1.45, margin: '0 0 20px' }}>
+                  Answer 18 calm, untimed questions to identify your starting evidence map.
+                </p>
+              </>
+            )}
+          </div>
+
+          <div>
             <button
-              onClick={() => navigate('/assessment')}
-              className="text-tangerine hover:underline font-medium cursor-pointer"
+              className="text-link"
+              type="button"
+              onClick={() => {
+                navigate(topGap ? '/roadmap' : '/assessment');
+                showToast('Opening next step.');
+              }}
+              style={{ fontSize: '0.9rem' }}
             >
-              Take diagnostic →
+              <span>{topGap ? 'Add to roadmap' : 'Start diagnostic'}</span>
+              <span aria-hidden="true"> ↗</span>
             </button>
           </div>
+        </DarkCard>
+      </section>
+
+      {/* Priority Competency Gap & Active Roadmap Task Section */}
+      <section style={{ marginBottom: '36px' }} aria-labelledby="metrics-heading">
+        <div style={{ marginBottom: '18px' }}>
+          <h2 id="metrics-heading" style={{ fontSize: '1.35rem', color: 'var(--color-linen)', margin: '0 0 6px' }}>
+            ROLE ALIGNMENT METRICS & PRIORITY GAPS
+          </h2>
+          <p className="muted-light" style={{ fontSize: '0.84rem', margin: 0 }}>
+            Prioritized by prerequisite dependency order before gap size.
+          </p>
         </div>
 
-        {/* Panel 2: Warm Linen Plan Card (Reflection & Roadmap) */}
-        <div className="rounded-2xl bg-linen border border-[#e4dcbe] text-ink p-6 flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-mono uppercase text-ink-muted">Active Milestone</span>
-              <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded bg-cotton text-ink border border-[#deceaa]">
-                Week 1 of 3
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '20px' }}>
+          {/* Priority Gap Card */}
+          <DarkCard style={{ padding: '26px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+              <span style={{ fontSize: '0.74rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--color-cotton)' }}>
+                TOP PRIORITY GAP
+              </span>
+              {topGap && (
+                <ProgressPill label={`Prerequisite 0${topGap.prerequisiteOrder}`} />
+              )}
+            </div>
+
+            {topGap ? (
+              <div>
+                <h3 style={{ margin: '0 0 8px', fontSize: '1.15rem', color: 'var(--color-linen)' }}>
+                  {topGapSkill?.name || `Skill ${topGap.skillId}`}
+                </h3>
+                <p className="muted-light" style={{ fontSize: '0.82rem', lineHeight: 1.45, margin: '0 0 16px' }}>
+                  {topGap.rationale}
+                </p>
+
+                <div
+                  style={{
+                    padding: '12px 16px',
+                    borderRadius: 'var(--radius-sm)',
+                    background: 'var(--color-black-soft)',
+                    border: '1px solid var(--color-line-dark)',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    fontSize: '0.78rem',
+                  }}
+                >
+                  <span style={{ color: 'var(--color-muted-light)' }}>
+                    Current: <strong style={{ color: 'var(--color-linen)' }}>{topGap.observedLevel !== null ? `Level ${topGap.observedLevel}` : 'Unassessed'}</strong>
+                  </span>
+                  <span style={{ color: 'var(--color-tangerine)' }}>
+                    Required: <strong>Level {topGap.targetLevel} / 4</strong>
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <p className="muted-light" style={{ fontSize: '0.84rem' }}>
+                No active gaps identified. Complete the diagnostic to discover gaps.
+              </p>
+            )}
+          </DarkCard>
+
+          {/* Current Roadmap Task Card */}
+          <DarkCard style={{ padding: '26px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+              <span style={{ fontSize: '0.74rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--color-cotton)' }}>
+                CURRENT ROADMAP TASK
+              </span>
+              {currentTask && (
+                <StatusBadge
+                  variant={currentTask.status === 'completed' ? 'cotton' : 'tangerine'}
+                  label={currentTask.status === 'completed' ? 'Completed' : 'To Do'}
+                />
+              )}
+            </div>
+
+            {currentTask ? (
+              <div>
+                <h3 style={{ margin: '0 0 8px', fontSize: '1.15rem', color: 'var(--color-linen)' }}>
+                  Week {currentTask.weekNumber}: {currentTask.title}
+                </h3>
+                <p className="muted-light" style={{ fontSize: '0.82rem', lineHeight: 1.45, margin: '0 0 16px' }}>
+                  Deliverable: {currentTask.deliverable} ({currentTask.estimatedHours} hrs).
+                </p>
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <button
+                    type="button"
+                    onClick={() => handleToggleTask(currentTask.id)}
+                    className="button-text"
+                    style={{ fontSize: '0.8rem', color: currentTask.status === 'completed' ? 'var(--color-success)' : 'var(--color-tangerine)' }}
+                  >
+                    <CheckCircle2 size={14} aria-hidden="true" />
+                    <span>{currentTask.status === 'completed' ? 'Mark as Pending' : 'Mark Task Done'}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => navigate('/roadmap')}
+                    className="button-text"
+                    style={{ fontSize: '0.78rem' }}
+                  >
+                    View Week ↗
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <p className="muted-light" style={{ fontSize: '0.84rem' }}>
+                No roadmap tasks configured yet.
+              </p>
+            )}
+          </DarkCard>
+        </div>
+      </section>
+
+      {/* Plan Completion Section (Separated from Skill Proficiency) */}
+      <section style={{ marginBottom: '36px' }} aria-labelledby="plan-completion-heading">
+        <CottonCard style={{ padding: '26px 30px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px', marginBottom: '14px' }}>
+            <div>
+              <span style={{ fontSize: '0.74rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--color-muted-dark)' }}>
+                EFFORT TRACKING / {planCompletion.label.toUpperCase()}
+              </span>
+              <h3 id="plan-completion-heading" style={{ margin: '4px 0 0', fontSize: '1.4rem', color: 'var(--color-ink)' }}>
+                {planCompletion.planCompletionPercent}% of weekly tasks completed
+              </h3>
+            </div>
+
+            <div style={{ textAlign: 'right' }}>
+              <span style={{ fontSize: '1.3rem', fontFamily: 'var(--font-mono)', fontWeight: 800, color: 'var(--color-ink)' }}>
+                {planCompletion.completedHours} / {planCompletion.totalHours} hrs
+              </span>
+              <span style={{ display: 'block', fontSize: '0.74rem', color: 'var(--color-muted-dark)' }}>
+                ({planCompletion.completedTasks} of {planCompletion.totalTasks} milestones)
               </span>
             </div>
-
-            <h3 className="font-bold text-lg text-ink">
-              Plan Completion: {progressPercent}%
-            </h3>
-            <div className="w-full bg-[#deceaa] h-2 rounded-full overflow-hidden my-3">
-              <div
-                className="bg-tangerine h-full transition-all duration-300"
-                style={{ width: `${progressPercent}%` }}
-              ></div>
-            </div>
-
-            <p className="text-xs text-ink-muted leading-relaxed">
-              Budgeted at {profile.hoursPerWeek} hrs/week. {completedTaskCount} of {roadmapTasks.length} tasks completed with verifiable deliverables.
-            </p>
           </div>
 
-          <div className="pt-4 border-t border-[#deceaa] mt-4 flex items-center justify-between text-xs font-mono text-ink-muted">
-            <span>Last checked: Today</span>
-            <button
-              onClick={() => navigate('/roadmap')}
-              className="font-bold text-ink underline hover:text-tangerine cursor-pointer"
-            >
-              Full schedule →
-            </button>
-          </div>
-        </div>
-
-        {/* Panel 3: Cotton Evidence Card (Top Skill Gap) */}
-        <div className="rounded-2xl bg-cotton border border-[#deceaa] text-ink p-6 flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-mono uppercase text-ink-muted">Top Prerequisite Gap</span>
-              <span className="text-xs font-mono px-2 py-0.5 rounded bg-linen text-ink border border-[#deceaa]">
-                Order #{topGap?.prerequisiteOrder || 1}
-              </span>
-            </div>
-
-            <h3 className="font-bold text-lg text-ink">
-              {topGapSkill?.name || 'Skill Gap'}
-            </h3>
-            <p className="text-xs text-ink-muted mt-1 leading-relaxed">
-              Target Level: {topGap?.targetLevel} · Observed:{' '}
-              {topGap?.observedLevel !== null && topGap?.observedLevel !== undefined
-                ? topGap.observedLevel
-                : 'Not assessed'}
-            </p>
-
-            <div className="mt-3 p-3 rounded-lg bg-linen/90 border border-[#deceaa] text-xs">
-              <span className="font-semibold text-ink block mb-0.5">Why it matters:</span>
-              <p className="text-ink-muted">
-                {currentRole.requirements.find(r => r.skillId === topGap?.skillId)?.rationale ||
-                  'Critical foundational skill for daily role duties.'}
-              </p>
-            </div>
+          <div style={{ marginBottom: '14px' }}>
+            <ScoreMeter score={planCompletion.planCompletionPercent} />
           </div>
 
-          <div className="pt-4 border-t border-[#deceaa] mt-4 flex items-center justify-between text-xs font-mono text-ink-muted">
-            <span>Priority: High</span>
-            <button
-              onClick={() => navigate(`/paths/${currentRole.id}/gaps`)}
-              className="font-bold text-ink underline hover:text-tangerine cursor-pointer"
-            >
-              Examine all gaps →
-            </button>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontSize: '0.76rem', color: 'var(--color-muted-dark)' }}>
+            <Info size={13} style={{ flexShrink: 0, marginTop: '2px', color: 'var(--color-tangerine-deep)' }} />
+            <span>
+              <strong>Crucial Distinction:</strong> {planCompletion.caveat}
+            </span>
           </div>
-        </div>
-      </div>
+        </CottonCard>
+      </section>
 
-      {/* Additional Quick Action Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-        <div
-          onClick={() => navigate('/resume')}
-          className="p-5 rounded-xl bg-void-subtle border border-neutral-800 hover:border-neutral-700 transition flex items-center justify-between cursor-pointer group"
-        >
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-neutral-900 flex items-center justify-center text-cotton">
-              <BookOpen className="w-5 h-5" />
-            </div>
-            <div>
-              <h4 className="text-sm font-semibold text-linen group-hover:text-tangerine transition-colors">
-                Resume Lab
-              </h4>
-              <p className="text-xs text-neutral-400">
-                Ground your bullet points in verified facts. No fabricated claims.
-              </p>
-            </div>
+      {/* Practice Room & Resume Lab Quick Access */}
+      <section style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '20px' }}>
+        <DarkCard style={{ padding: '26px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+            <FileText size={18} style={{ color: 'var(--color-cotton)' }} />
+            <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-linen)' }}>Resume Integrity Lab</h3>
           </div>
-          <ChevronRight className="w-4 h-4 text-neutral-500 group-hover:text-linen transition" />
-        </div>
+          <p className="muted-light" style={{ fontSize: '0.82rem', lineHeight: 1.45, margin: '0 0 16px' }}>
+            Audit your resume draft against verified project facts. Detects unsupported metrics and protects against hallucinations.
+          </p>
+          <PrimaryButton onClick={() => navigate('/resume')} icon={<ArrowRight size={14} />}>
+            Open Resume Lab ↗
+          </PrimaryButton>
+        </DarkCard>
 
-        <div
-          onClick={() => navigate('/practice')}
-          className="p-5 rounded-xl bg-void-subtle border border-neutral-800 hover:border-neutral-700 transition flex items-center justify-between cursor-pointer group"
-        >
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-neutral-900 flex items-center justify-center text-cotton">
-              <Sparkles className="w-5 h-5 text-tangerine" />
-            </div>
-            <div>
-              <h4 className="text-sm font-semibold text-linen group-hover:text-tangerine transition-colors">
-                Mock Interview Room
-              </h4>
-              <p className="text-xs text-neutral-400">
-                Practice text answers evaluated against structured technical rubrics.
-              </p>
-            </div>
+        <DarkCard style={{ padding: '26px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+            <MessageSquare size={18} style={{ color: 'var(--color-tangerine)' }} />
+            <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-linen)' }}>Interview Practice Room</h3>
           </div>
-          <ChevronRight className="w-4 h-4 text-neutral-500 group-hover:text-linen transition" />
-        </div>
-      </div>
+          <p className="muted-light" style={{ fontSize: '0.82rem', lineHeight: 1.45, margin: '0 0 16px' }}>
+            Practise technical and behavioural questions in text mode with objective rubrics. Zero video or voice surveillance.
+          </p>
+          <PrimaryButton onClick={() => navigate('/practice')} icon={<ArrowRight size={14} />}>
+            Start Practice Question ↗
+          </PrimaryButton>
+        </DarkCard>
+      </section>
     </div>
   );
 };

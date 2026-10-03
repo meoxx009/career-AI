@@ -60,13 +60,14 @@ export const DisplayHeading: React.FC<{
 
 /* 6. Eyebrow */
 export const Eyebrow: React.FC<{
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  text?: string;
   tangerine?: boolean;
   className?: string;
-}> = ({ children, tangerine = false, className = '' }) => {
+}> = ({ children, text, tangerine = false, className = '' }) => {
   return (
     <p className={`eyebrow ${tangerine ? 'eyebrow-tangerine' : ''} ${className}`}>
-      {children}
+      {children ?? text}
     </p>
   );
 };
@@ -74,7 +75,7 @@ export const Eyebrow: React.FC<{
 /* 7. BentoCard */
 export const BentoCard: React.FC<{
   children: React.ReactNode;
-  surface?: 'dark' | 'linen' | 'cotton' | 'featured';
+  surface?: 'dark' | 'linen' | 'cotton' | 'featured' | 'natural';
   className?: string;
 }> = ({ children, surface = 'dark', className = '' }) => {
   const surfaceClass = {
@@ -82,61 +83,98 @@ export const BentoCard: React.FC<{
     linen: 'linen-card',
     cotton: 'cotton-card',
     featured: 'featured-card',
+    natural: 'natural-card',
   }[surface];
 
   return <div className={`bento-card ${surfaceClass} ${className}`}>{children}</div>;
 };
 
 /* 8. DarkCard */
-export const DarkCard: React.FC<{ children: React.ReactNode; className?: string }> = ({
-  children,
-  className = '',
-}) => <div className={`dark-card ${className}`}>{children}</div>;
+export const DarkCard: React.FC<{
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+  onClick?: () => void;
+}> = ({ children, className = '', style, onClick }) => (
+  <div className={`dark-card ${className}`} style={style} onClick={onClick}>
+    {children}
+  </div>
+);
 
 /* 9. LinenCard */
-export const LinenCard: React.FC<{ children: React.ReactNode; className?: string }> = ({
-  children,
-  className = '',
-}) => <div className={`linen-card ${className}`}>{children}</div>;
+export const LinenCard: React.FC<{
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+  onClick?: () => void;
+}> = ({ children, className = '', style, onClick }) => (
+  <div className={`linen-card ${className}`} style={style} onClick={onClick}>
+    {children}
+  </div>
+);
 
 /* 10. CottonCard */
-export const CottonCard: React.FC<{ children: React.ReactNode; className?: string }> = ({
-  children,
-  className = '',
-}) => <div className={`cotton-card ${className}`}>{children}</div>;
+export const CottonCard: React.FC<{
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+  onClick?: () => void;
+}> = ({ children, className = '', style, onClick }) => (
+  <div className={`cotton-card ${className}`} style={style} onClick={onClick}>
+    {children}
+  </div>
+);
+
+/* 10b. NaturalCard */
+export const NaturalCard: React.FC<{
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+  onClick?: () => void;
+}> = ({ children, className = '', style, onClick }) => (
+  <div className={`natural-card ${className}`} style={style} onClick={onClick}>
+    {children}
+  </div>
+);
 
 /* 11. StatusBadge */
 export type BadgeVariant = 'dark' | 'linen' | 'cotton' | 'tangerine' | 'success' | 'warning' | 'danger';
 
 export const StatusBadge: React.FC<{
   variant?: BadgeVariant;
-  children: React.ReactNode;
+  label?: string;
+  children?: React.ReactNode;
   icon?: React.ReactNode;
   className?: string;
-}> = ({ variant = 'dark', children, icon, className = '' }) => {
+}> = ({ variant = 'dark', label, children, icon, className = '' }) => {
   const variantClass = `badge-${variant}`;
   return (
     <span className={`status-badge ${variantClass} ${className}`}>
       {icon && <span aria-hidden="true">{icon}</span>}
-      <span>{children}</span>
+      <span>{children ?? label}</span>
     </span>
   );
 };
 
 /* 12. ProgressPill */
 export const ProgressPill: React.FC<{
-  current: number;
-  total: number;
+  current?: number;
+  total?: number;
   label?: string;
   className?: string;
 }> = ({ current, total, label, className = '' }) => {
-  const formattedCurrent = String(current).padStart(2, '0');
-  const formattedTotal = String(total).padStart(2, '0');
+  const hasCounts = current !== undefined && total !== undefined;
+  const formattedCurrent = hasCounts ? String(current).padStart(2, '0') : '';
+  const formattedTotal = hasCounts ? String(total).padStart(2, '0') : '';
 
   return (
-    <div className={`progress-pill ${className}`} aria-label={`Progress: ${current} of ${total}`}>
-      <span>{formattedCurrent} / {formattedTotal}</span>
-      {label && <span style={{ opacity: 0.7 }}>· {label}</span>}
+    <div
+      className={`progress-pill ${className}`}
+      aria-label={hasCounts ? `Progress: ${current} of ${total}` : label}
+    >
+      {hasCounts && <span>{formattedCurrent} / {formattedTotal}</span>}
+      {hasCounts && label && <span style={{ opacity: 0.7 }}>· {label}</span>}
+      {!hasCounts && label && <span>{label}</span>}
     </div>
   );
 };
@@ -161,11 +199,13 @@ export const SourceLabel: React.FC<{
 
 /* 14. ScoreMeter / ScoreRing */
 export const ScoreMeter: React.FC<{
-  percentage: number;
+  percentage?: number;
+  score?: number;
   darkTrack?: boolean;
   className?: string;
-}> = ({ percentage, darkTrack = false, className = '' }) => {
-  const clamped = Math.min(Math.max(percentage, 0), 100);
+}> = ({ percentage, score, darkTrack = false, className = '' }) => {
+  const rawValue = percentage ?? score ?? 0;
+  const clamped = Math.min(Math.max(rawValue, 0), 100);
   return (
     <div
       className={`mini-meter ${darkTrack ? 'mini-meter-dark' : ''} ${className}`}
@@ -180,24 +220,56 @@ export const ScoreMeter: React.FC<{
 };
 
 export const ScoreRing: React.FC<{
+  score?: number;
+  size?: number;
+  strokeWidth?: number;
   active?: boolean;
   className?: string;
-}> = ({ active = true, className = '' }) => {
+}> = ({ score, size = 36, strokeWidth = 4, active = true, className = '' }) => {
+  if (score !== undefined) {
+    const radius = (size - strokeWidth) / 2;
+    const circumference = 2 * Math.PI * radius;
+    const offset = circumference - (Math.min(Math.max(score, 0), 100) / 100) * circumference;
+    return (
+      <svg width={size} height={size} className={className} style={{ transform: 'rotate(-90deg)', flexShrink: 0 }}>
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          stroke="var(--color-line-dark)"
+          strokeWidth={strokeWidth}
+          fill="none"
+        />
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          stroke="var(--color-tangerine)"
+          strokeWidth={strokeWidth}
+          strokeDasharray={circumference}
+          strokeDashoffset={offset}
+          strokeLinecap="round"
+          fill="none"
+        />
+      </svg>
+    );
+  }
   return <span className={`status-ring ${active ? '' : 'empty'} ${className}`} aria-hidden="true" />;
 };
 
 /* 15. EmptyState */
 export const EmptyState: React.FC<{
   title: string;
-  description: string;
+  description?: string;
+  message?: string;
   action?: React.ReactNode;
   className?: string;
-}> = ({ title, description, action, className = '' }) => {
+}> = ({ title, description, message, action, className = '' }) => {
   return (
     <div className={`empty-state ${className}`} role="status">
       <Info size={36} color="var(--color-muted-light)" aria-hidden="true" />
       <h4>{title}</h4>
-      <p>{description}</p>
+      <p>{description ?? message}</p>
       {action && <div style={{ marginTop: '8px' }}>{action}</div>}
     </div>
   );
@@ -205,14 +277,16 @@ export const EmptyState: React.FC<{
 
 /* 16. LoadingState */
 export const LoadingState: React.FC<{
+  title?: string;
+  message?: string;
   label?: string;
   className?: string;
-}> = ({ label = 'Evaluating deterministic evidence...', className = '' }) => {
+}> = ({ title, message, label = 'Evaluating deterministic evidence...', className = '' }) => {
   return (
     <div className={`loading-state ${className}`} role="status" aria-live="polite">
       <Loader2 size={36} color="var(--color-tangerine)" style={{ animation: 'spin 1.2s linear infinite' }} />
-      <h4>{label}</h4>
-      <p>Zero external API calls. Computing locally.</p>
+      <h4>{title ?? label}</h4>
+      <p>{message ?? 'Zero external API calls. Computing locally.'}</p>
     </div>
   );
 };
@@ -222,13 +296,15 @@ export const ErrorState: React.FC<{
   title?: string;
   message: string;
   onRetry?: () => void;
+  action?: React.ReactNode;
   className?: string;
-}> = ({ title = 'Check Failed', message, onRetry, className = '' }) => {
+}> = ({ title = 'Check Failed', message, onRetry, action, className = '' }) => {
   return (
     <div className={`error-state ${className}`} role="alert">
       <AlertTriangle size={36} color="var(--color-danger)" aria-hidden="true" />
       <h4>{title}</h4>
       <p>{message}</p>
+      {action && <div style={{ marginTop: '8px' }}>{action}</div>}
       {onRetry && (
         <PrimaryButton onClick={onRetry} style={{ marginTop: '8px' }}>
           Retry Action

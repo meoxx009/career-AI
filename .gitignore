@@ -24,4 +24,6 @@ dist-ssr
 *.ntvs*
 *.njsproj
 *.sln
-*.sw?
+# Temporary scratch directories
+scratch/
+.freebuff/

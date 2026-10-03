@@ -1,0 +1,340 @@
+[
+  {
+    "id": "ib01",
+    "role_id": 1,
+    "role_slug": "backend-developer",
+    "type": "behavioural",
+    "prompt": "Tell me about a project problem you solved. What was your contribution and what did you learn?",
+    "rubric_points": ["context", "contribution", "decision", "result_or_limitation", "reflection"],
+    "version": "v1",
+    "purpose": "Evaluates problem decomposition, personal ownership in real projects, and self-awareness beyond team or tutorial work.",
+    "interviewerListeningFor": [
+      "Specific technical obstacles faced rather than generic descriptions",
+      "Clear personal code and debugging contributions",
+      "Objective rationale for the technical approach chosen",
+      "Realistic results or constraints, followed by honest engineering takeaways"
+    ],
+    "keyPitfalls": [
+      "Speaking solely in 'we' without specifying your personal code",
+      "Claiming 100% perfection without mentioning trade-offs or constraints",
+      "Omitting what you learned or would do differently"
+    ]
+  },
+  {
+    "id": "ib02",
+    "role_id": 1,
+    "role_slug": "backend-developer",
+    "type": "technical",
+    "prompt": "Explain how you would design a small task-management REST API. What would you clarify first?",
+    "rubric_points": ["clarifying_questions", "resources", "endpoints", "validation", "errors", "trade_off"],
+    "version": "v1",
+    "purpose": "Assesses REST architectural principles, requirement clarification instincts, and API contract design prior to coding.",
+    "interviewerListeningFor": [
+      "Asking clarifying questions regarding scale, auth, or requirements first",
+      "Resource-oriented naming with proper plural nouns and standard HTTP verbs",
+      "Input validation rules and structured error responses (4xx/5xx)",
+      "Practical trade-offs such as pagination, data consistency, or soft deletes"
+    ],
+    "keyPitfalls": [
+      "Jumping into writing endpoints without clarifying requirements",
+      "Using verbs in URLs (e.g. /getTasks, /deleteTask) instead of standard HTTP methods",
+      "Ignoring error states, payload validation, or pagination"
+    ]
+  },
+  {
+    "id": "if01",
+    "role_id": 2,
+    "role_slug": "frontend-developer",
+    "type": "behavioural",
+    "prompt": "Tell me about a UI decision you changed after receiving feedback.",
+    "rubric_points": ["context", "feedback", "change", "result_or_limitation", "reflection"],
+    "version": "v1",
+    "purpose": "Evaluates user empathy, openness to constructive critique, and willingness to iterate based on real feedback.",
+    "interviewerListeningFor": [
+      "Concrete description of the initial UI state or component",
+      "Feedback source (user testing, peer review, accessibility audit) and specific issue",
+      "Direct frontend code and design modifications implemented",
+      "Measurable outcome or improved usability, with a lesson on user assumptions"
+    ],
+    "keyPitfalls": [
+      "Being defensive about initial designs",
+      "Vague descriptions of what actually changed in the code",
+      "Not verifying whether the change actually solved the user problem"
+    ]
+  },
+  {
+    "id": "if02",
+    "role_id": 2,
+    "role_slug": "frontend-developer",
+    "type": "technical",
+    "prompt": "How would you make a form accessible and useful on a small screen?",
+    "rubric_points": ["labels", "focus", "errors", "keyboard", "responsive_layout", "testing"],
+    "version": "v1",
+    "purpose": "Evaluates frontend accessibility fundamentals (WCAG), responsive mobile design, keyboard navigation, and touch-target sizing.",
+    "interviewerListeningFor": [
+      "Semantic HTML with explicit <label for='id'> associations",
+      "Visible focus states (:focus-visible) and logical keyboard tab order",
+      "Screen-reader accessible error announcements (aria-describedby, aria-invalid)",
+      "Single-column responsive layouts with minimum 44x44px touch targets",
+      "Testing with screen readers, keyboard-only navigation, or viewport throttling"
+    ],
+    "keyPitfalls": [
+      "Using placeholders instead of persistent <label> elements",
+      "Relying solely on color to convey error states",
+      "Ignoring keyboard focus or removing outline without a visible replacement"
+    ]
+  },
+  {
+    "id": "id01",
+    "role_id": 3,
+    "role_slug": "data-analyst",
+    "type": "behavioural",
+    "prompt": "Tell me about a time your analysis changed after checking the data.",
+    "rubric_points": ["context", "check", "change", "finding", "limitation", "reflection"],
+    "version": "v1",
+    "purpose": "Evaluates analytical skepticism, methodological rigor, and intellectual honesty when data disproves initial assumptions.",
+    "interviewerListeningFor": [
+      "Initial hypothesis or business question clearly stated",
+      "Systematic data verification or sanity check that revealed anomalies",
+      "Explicit correction made to the SQL query, filter, or calculation logic",
+      "Verified revised findings and acknowledgement of data limitations"
+    ],
+    "keyPitfalls": [
+      "Forcing data to fit a preconceived narrative",
+      "Failing to verify distributions, null rates, or duplicate rows",
+      "Omitting sample-size or data recency limitations"
+    ]
+  },
+  {
+    "id": "id02",
+    "role_id": 3,
+    "role_slug": "data-analyst",
+    "type": "technical",
+    "prompt": "How would you investigate a dataset with missing values before making a chart?",
+    "rubric_points": ["meaning", "pattern", "missingness", "decision", "validation", "limitation"],
+    "version": "v1",
+    "purpose": "Evaluates exploratory data analysis (EDA) rigor, missingness mechanism understanding (MCAR/MAR), and disciplined imputation.",
+    "interviewerListeningFor": [
+      "Investigating what null actually signifies in the business domain",
+      "Quantifying missing rates per column and identifying pattern correlations",
+      "Justifying treatment (drop vs median/mode imputation vs categorical indicator)",
+      "Checking post-treatment distribution distortion or skewness",
+      "Disclosing missingness or imputation in chart captions or footnotes"
+    ],
+    "keyPitfalls": [
+      "Blindly dropping all null rows without checking impact",
+      "Naive mean-imputation on skewed distributions without justification",
+      "Presenting visualizations without disclosing missing data rates"
+    ]
+  },
+  {
+    "id": "iai01",
+    "role_id": 19,
+    "role_slug": "ai-engineer",
+    "type": "behavioural",
+    "prompt": "Tell me about an AI system or model integration where outputs degraded, failed on edge cases, or hallucinated. What was your personal contribution and what did you learn?",
+    "rubric_points": ["context", "contribution", "error_analysis", "safety_limitations", "reflection"],
+    "version": "v2.0",
+    "purpose": "Evaluates practical debugging of non-deterministic AI systems, error analysis rigor, safety guardrails, and candidate accountability.",
+    "interviewerListeningFor": [
+      "Concrete technical obstacle (e.g. prompt injection, drift, hallucinated citations)",
+      "Candidate's direct authoring of validation tests, prompt guardrails, or evaluation scripts",
+      "Disciplined error analysis examining failure distributions rather than anecdotal testing",
+      "Safety mitigation implemented without claiming 100% infallible performance"
+    ],
+    "keyPitfalls": [
+      "Blaming the underlying foundation model without taking engineering ownership",
+      "Claiming prompt engineering alone eliminated all hallucinations",
+      "Ignoring latency, token cost, or fallback paths when the AI service fails"
+    ]
+  },
+  {
+    "id": "iai02",
+    "role_id": 19,
+    "role_slug": "ai-engineer",
+    "type": "technical",
+    "prompt": "Explain how you would design an evaluation framework for an AI assistant. How do you measure accuracy, handle edge-case safety, and balance latency/cost trade-offs?",
+    "rubric_points": ["problem_framing", "data_quality", "model_selection", "evaluation", "safety_limitations", "latency_cost"],
+    "version": "v2.0",
+    "purpose": "Assesses structured framework design for AI evaluation: test datasets, quantitative scoring (exact match, semantic similarity, precision/recall), guardrails, and cost telemetry.",
+    "interviewerListeningFor": [
+      "Ground-truth benchmark dataset creation with diverse edge cases and adversarial prompts",
+      "Multi-dimensional evaluation (task accuracy, refusal of dangerous inputs, latency, token spend)",
+      "Automated evaluation suites run continuously in CI pipelines",
+      "Explicit fallback mechanisms when confidence scores fall below acceptable thresholds"
+    ],
+    "keyPitfalls": [
+      "Relying solely on subjective manual eyeballing of AI responses",
+      "Ignoring latency overhead and token budget ceilings in production",
+      "Failing to separate general conversational fluency from factual correctness"
+    ]
+  },
+  {
+    "id": "igenai01",
+    "role_id": 20,
+    "role_slug": "generative-ai-engineer",
+    "type": "behavioural",
+    "prompt": "Describe a project where a prompt or generative pipeline produced inconsistent, malformed, or hallucinatory outputs. How did you diagnose, reproduce, and resolve it?",
+    "rubric_points": ["context", "contribution", "prompt_testing", "error_analysis", "reflection"],
+    "version": "v2.0",
+    "purpose": "Assesses diagnostic problem-solving for generative pipelines, structured output validation, temperature calibration, and version testing.",
+    "interviewerListeningFor": [
+      "Clear explanation of why outputs broke downstream parsers (e.g. malformed JSON, markdown fences)",
+      "Systematic prompt iteration with versioning and controlled temperature sampling",
+      "Implementation of Pydantic/Zod schema validation with automatic retry loops",
+      "Engineering takeaway regarding non-deterministic API integration"
+    ],
+    "keyPitfalls": [
+      "Assuming prompt wording alone guarantees schema compliance without schema enforcement",
+      "Not recording versioned prompt diffs or input/output pairs",
+      "Ignoring timeout and quota failure handling"
+    ]
+  },
+  {
+    "id": "igenai02",
+    "role_id": 20,
+    "role_slug": "generative-ai-engineer",
+    "type": "technical",
+    "prompt": "How would you design a generative AI workflow that guarantees deterministic structured JSON output and defends against prompt injection?",
+    "rubric_points": ["problem_framing", "prompt_testing", "safety_limitations", "evaluation", "reproducibility", "latency_cost"],
+    "version": "v2.0",
+    "purpose": "Evaluates defensive architecture for generative applications: structured response schemas, system/user message segregation, input sanitization, and regression test suites.",
+    "interviewerListeningFor": [
+      "Enforcing strict output schemas (Function Calling, JSON schema mode) with runtime validator",
+      "Differentiating trusted system prompts from untrusted user inputs to resist injection",
+      "Regression test suite evaluating prompt updates against golden test fixtures",
+      "Evaluating latency and cost impacts of multi-pass reasoning or guardrail models"
+    ],
+    "keyPitfalls": [
+      "Simply appending 'Please respond strictly in JSON' without schema enforcement or parser validation",
+      "Concatenating raw user text directly into system instructions",
+      "Omitting offline golden-set regression testing"
+    ]
+  },
+  {
+    "id": "irag01",
+    "role_id": 21,
+    "role_slug": "llm-application-engineer",
+    "type": "behavioural",
+    "prompt": "Tell me about a project where you built or improved a retrieval-augmented generation (RAG) system. What chunking, indexing, or retrieval obstacle did you solve?",
+    "rubric_points": ["context", "contribution", "retrieval_evaluation", "latency_cost", "reflection"],
+    "version": "v2.0",
+    "purpose": "Assesses hands-on RAG implementation challenges: chunk size tuning, overlap trade-offs, vector search tuning, and retrieval quality measurement.",
+    "interviewerListeningFor": [
+      "Specific document structure and chunking obstacles (e.g. tables split across chunks)",
+      "Authoring of custom chunkers, metadata tagging, or hybrid keyword/vector search",
+      "Quantitative retrieval evaluation measuring Recall@K or hit rate",
+      "Lesson learned regarding garbage-in garbage-out in retrieval pipelines"
+    ],
+    "keyPitfalls": [
+      "Using fixed arbitrary 1000-character chunking without considering document structure",
+      "Evaluating RAG solely on final LLM answer rather than isolating retrieval precision",
+      "Ignoring vector index query latency and storage cost"
+    ]
+  },
+  {
+    "id": "irag02",
+    "role_id": 22,
+    "role_slug": "rag-engineer",
+    "type": "technical",
+    "prompt": "How would you architect an enterprise RAG system? How do you optimize document chunking, embedding similarity, ground-truth retrieval evaluation, and latency/cost trade-offs?",
+    "rubric_points": ["problem_framing", "data_quality", "retrieval_evaluation", "evaluation", "safety_limitations", "latency_cost"],
+    "version": "v2.0",
+    "purpose": "Evaluates complete end-to-end RAG architecture: semantic chunking, dense vs sparse retrieval, reranking, vector database indexing, evaluation metrics (RAGAS/TruLens), and caching.",
+    "interviewerListeningFor": [
+      "Document ingestion pipeline: text extraction, metadata extraction, semantic chunk boundaries",
+      "Hybrid retrieval: combining BM25 keyword search with dense vector similarity, plus cross-encoder reranking",
+      "Evaluation metrics: context relevance, faithfulness, answer relevance",
+      "Cost and latency controls: semantic caching, embedding model sizing, token pruning"
+    ],
+    "keyPitfalls": [
+      "Believing vector similarity alone solves semantic search without keyword fallback",
+      "Passing bloated context windows that cause 'lost in the middle' degradation",
+      "Lacking guardrails against hallucinations when retrieved context does not contain the answer"
+    ]
+  },
+  {
+    "id": "iece01",
+    "role_id": 13,
+    "role_slug": "embedded-systems-engineer",
+    "type": "behavioural",
+    "prompt": "Tell me about an embedded hardware or firmware bug you debugged (e.g. timing jitter, race condition, ISR lockup, or switch bounce). What was your approach?",
+    "rubric_points": ["context", "contribution", "debugging_approach", "result_or_limitation", "reflection"],
+    "version": "v2.0",
+    "purpose": "Assesses low-level hardware/firmware debugging skills, oscilloscope/logic analyzer instrumentation, and structured root-cause isolation.",
+    "interviewerListeningFor": [
+      "Specific microcontroller, peripheral, or communication protocol (UART, SPI, I2C, GPIO)",
+      "Methodical reproduction using hardware tools (logic analyzer, oscilloscope, hardware breakpoints)",
+      "Clear software or hardware fix (e.g. non-blocking state machine, hardware RC debounce, volatile keyword)",
+      "Verifiable test outcome under stress or edge timing conditions"
+    ],
+    "keyPitfalls": [
+      "Relying on blocking busy-waits (delay_ms) to resolve timing race conditions",
+      "Vague descriptions of hardware components or pin configurations",
+      "Ignoring volatile qualifier on variables modified inside interrupt handlers"
+    ]
+  },
+  {
+    "id": "iece02",
+    "role_id": 13,
+    "role_slug": "embedded-systems-engineer",
+    "type": "technical",
+    "prompt": "How would you design a non-blocking sensor data logging task on a microcontroller with strict power and memory constraints?",
+    "rubric_points": ["clarifying_questions", "resource_constraints", "non_blocking_architecture", "error_handling", "testing"],
+    "version": "v2.0",
+    "purpose": "Evaluates non-blocking embedded software architecture: ring buffers, DMA transfers, low-power sleep modes, and memory alignment.",
+    "interviewerListeningFor": [
+      "Non-blocking state machine or RTOS task decoupled from hardware sampling timers",
+      "Using DMA or interrupt-driven ring buffers to avoid CPU polling",
+      "Power optimization: duty-cycling peripherals, deep sleep modes, wakeup triggers",
+      "Defensive handling: sensor disconnection timeouts, CRC checksum validation, brownout reset"
+    ],
+    "keyPitfalls": [
+      "Using blocking delay loops inside main execution threads",
+      "Allocating dynamic memory (malloc/free) on microcontrollers with limited SRAM",
+      "Ignoring power consumption during idle periods"
+    ]
+  },
+  {
+    "id": "iux01",
+    "role_id": 27,
+    "role_slug": "ui-ux-designer",
+    "type": "behavioural",
+    "prompt": "Tell me about a design critique or usability test that challenged your initial assumptions. How did you iterate on the user interface?",
+    "rubric_points": ["context", "user_research", "design_iteration", "usability_validation", "reflection"],
+    "version": "v2.0",
+    "purpose": "Assesses user empathy, constructive acceptance of design critique, iterative wireframing, and usability testing rigor.",
+    "interviewerListeningFor": [
+      "Concrete description of the initial UI flow and assumptions",
+      "Direct usability evidence (e.g. high task completion drop-off, confusion during think-aloud test)",
+      "Structural redesign focusing on user mental models, visual hierarchy, and progressive disclosure",
+      "Validation showing improved usability and candidate humility regarding design assumptions"
+    ],
+    "keyPitfalls": [
+      "Defending aesthetics over functional user task completion",
+      "Making arbitrary changes without grounding them in user observation",
+      "Failing to conduct follow-up validation on the revised design"
+    ]
+  },
+  {
+    "id": "iux02",
+    "role_id": 27,
+    "role_slug": "ui-ux-designer",
+    "type": "technical",
+    "prompt": "How would you design an accessible design token system and component hierarchy for a multi-platform application?",
+    "rubric_points": ["problem_framing", "wcag_accessibility", "design_tokens", "responsive_hierarchy", "testing_validation"],
+    "version": "v2.0",
+    "purpose": "Assesses design system architecture: semantic design tokens (color, spacing, typography, elevation), WCAG contrast ratios, component states, and developer handoff.",
+    "interviewerListeningFor": [
+      "Multi-tier token architecture: global primitives -> semantic tokens -> component-scoped tokens",
+      "Strict WCAG 2.1 AA/AAA color contrast ratios across light and dark surfaces",
+      "Designing complete component state matrices: default, hover, active, focus-visible, disabled, loading",
+      "Clear documentation and handoff specifications for engineering teams"
+    ],
+    "keyPitfalls": [
+      "Hardcoding hex values instead of defining semantic token aliases",
+      "Treating accessibility as an afterthought rather than a core requirement",
+      "Neglecting keyboard focus-visible indicator states in component specifications"
+    ]
+  }
+]

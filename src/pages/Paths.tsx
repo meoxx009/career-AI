@@ -1,168 +1,612 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCareer } from '../context/CareerContext';
-import { SEED_ROLES, SEED_SKILLS } from '../data/seed';
-import { evaluateRoleFit } from '../lib/scoring';
-import { StatusBadge } from '../components/UIComponents';
-import { CheckCircle2, AlertCircle, ExternalLink } from 'lucide-react';
+import {
+  SEED_ROLES,
+  SEED_ROLE_SKILL_REQUIREMENTS,
+  SKILLS_BY_ID,
+} from '../data/seedData';
+import {
+  buildRoleExplanation,
+  sortRoleAssessments,
+} from '../lib/scoring';
+import {
+  DisplayHeading,
+  Eyebrow,
+  PrimaryButton,
+  SecondaryButton,
+  DarkCard,
+  CottonCard,
+  ScoreMeter,
+  StatusBadge,
+  ProgressPill,
+} from '../components/DesignSystem';
+import {
+  ArrowRight,
+  Info,
+  CheckCircle2,
+  AlertTriangle,
+  HelpCircle,
+  SlidersHorizontal,
+  Sparkles,
+  BookOpen,
+} from 'lucide-react';
+import { LearnerContextIntake } from '../components/LearnerContextIntake';
+import { generatePathRecommendations } from '../lib/pathRecommendations';
+import type { UserProfile } from '../types';
 
 export const Paths: React.FC = () => {
   const navigate = useNavigate();
-  const { skillObservations, selectedRoleId, setSelectedRoleId } = useCareer();
+  const {
+    profile,
+    updateProfile,
+    saveProfile,
+    skillObservations,
+    selectedRoleId,
+    setSelectedRoleId,
+    showToast,
+  } = useCareer();
 
-  const obsMap = new Map<string, number | null>();
-  Object.entries(skillObservations).forEach(([id, val]) => obsMap.set(id, val));
+  const [isEditorOpen, setIsEditorOpen] = useState(false);
 
-  // Score each role deterministically
-  const scoredRoles = SEED_ROLES.map(role => {
-    const score = evaluateRoleFit(role.id, role.requirements, obsMap);
-    return {
-      role,
-      score,
-    };
+  // Create lookup map of skill observations
+  const obsMap = new Map<number | string, number | null>();
+  Object.entries(skillObservations).forEach(([sId, val]) => {
+    obsMap.set(Number(sId), val);
   });
 
-  // Sort adequately covered roles by alignment descending; tie-break by role.id
-  scoredRoles.sort((a, b) => {
-    if (a.score.isSufficientCoverage && b.score.isSufficientCoverage) {
-      if (a.score.alignment !== null && b.score.alignment !== null) {
-        return b.score.alignment - a.score.alignment;
-      }
-    }
-    return a.role.id.localeCompare(b.role.id);
+  // Build rich deterministic assessment for each seed role
+  const roleAssessments = SEED_ROLES.map(role =>
+    buildRoleExplanation(role, SEED_ROLE_SKILL_REQUIREMENTS, obsMap)
+  );
+
+  // Sort: selected first, then confident by alignment, then coverage
+  const sortedAssessments = sortRoleAssessments(roleAssessments).sort((a, b) => {
+    const aSelected = Number(a.roleId) === selectedRoleId;
+    const bSelected = Number(b.roleId) === selectedRoleId;
+    if (aSelected && !bSelected) return -1;
+    if (!aSelected && bSelected) return 1;
+    return 0;
   });
+
+  const handleSelectRole = (roleId: number, roleName: string) => {
+    setSelectedRoleId(roleId);
+    showToast(`Active path set to ${roleName}.`);
+  };
+
+  const handleProfileChange = (updates: Partial<UserProfile>) => {
+    updateProfile(updates);
+    saveProfile(updates);
+  };
+
+  // Generate deterministic personalized path recommendations
+  const recResult = generatePathRecommendations(profile);
+  const isSchool = recResult.isSchoolLearner;
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-8">
-      {/* Header */}
-      <div className="border-b border-neutral-800 pb-6">
-        <div className="flex items-center gap-2 mb-2">
-          <span className="text-xs font-mono text-cotton uppercase">Curated Industry Rubrics v1.2</span>
-        </div>
-        <h1 className="text-3xl sm:text-4xl font-bold text-linen">Career Direction Comparison</h1>
-        <p className="text-sm text-neutral-400 mt-1 max-w-2xl">
-          Evaluate entry-level roles against your demonstrated evidence. Scores are deterministic estimates—never guarantees or placement odds.
+    <div style={{ maxWidth: '1120px', margin: '0 auto' }}>
+      {/* Page Header */}
+      <header style={{ marginBottom: '32px' }}>
+        <Eyebrow text="ROLE BENCHMARKING / DETERMINISTIC COMPARISON" />
+        <DisplayHeading level={1}>CAREER PATH COMPARISON</DisplayHeading>
+        <p className="muted-light" style={{ maxWidth: '760px', marginTop: '14px', fontSize: '1rem', lineHeight: 1.5 }}>
+          Explore paths tailored for Class 10/12 school streams, college degrees, and self-taught learners.
+          We provide transparent curriculum guidance without degree bias or job guarantees.
         </p>
-      </div>
+        <div style={{ marginTop: '16px', display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+          <button
+            type="button"
+            onClick={() => navigate('/paths/builder')}
+            className="button button-primary"
+            style={{ fontSize: '0.85rem', padding: '10px 18px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+          >
+            <BookOpen size={16} aria-hidden="true" />
+            <span>Launch Unified Path Builder (33 Careers) →</span>
+          </button>
+        </div>
+      </header>
 
-      {/* Role Cards Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {scoredRoles.map(({ role, score }) => {
-          const isSelected = selectedRoleId === role.id;
-          const knownGaps = score.gaps.filter(g => g.gap > 0).slice(0, 2);
+      {/* Learner Context & Personalization Banner */}
+      <DarkCard style={{ marginBottom: '36px', padding: '24px 28px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '6px' }}>
+              <span style={{ fontSize: '0.74rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--color-cotton)' }}>
+                CURRENT CONTEXT
+              </span>
+              <StatusBadge variant="tangerine" label={recResult.stageLabel} />
+              {isSchool && profile.stream && (
+                <StatusBadge variant="dark" label={`Stream: ${profile.stream.toUpperCase()}`} />
+              )}
+              {!isSchool && profile.degree && (
+                <StatusBadge variant="dark" label={profile.degree} />
+              )}
+              <span style={{ fontSize: '0.78rem', color: 'var(--color-muted-light)' }}>
+                ~{profile.hoursPerWeek || 8} hrs/week
+              </span>
+            </div>
+            <p className="muted-light" style={{ margin: 0, fontSize: '0.86rem' }}>
+              Suggestions below are calibrated to this profile. You can adjust your stage, stream, or interests at any time.
+            </p>
+          </div>
 
-          return (
-            <div
-              key={role.id}
-              className={`rounded-2xl border transition-all flex flex-col justify-between p-6 ${
-                isSelected
-                  ? 'bg-neutral-900 border-tangerine shadow-lg shadow-orange-950/20'
-                  : 'bg-void-subtle border-neutral-800 hover:border-neutral-700'
-              }`}
+          <button
+            type="button"
+            onClick={() => setIsEditorOpen(!isEditorOpen)}
+            className="button button-secondary"
+            style={{ fontSize: '0.8rem', padding: '8px 16px', minHeight: '36px' }}
+          >
+            <SlidersHorizontal size={14} aria-hidden="true" style={{ marginRight: '6px' }} />
+            <span>{isEditorOpen ? 'Close Profile Editor' : 'Customize Profile & Interests'}</span>
+          </button>
+        </div>
+
+        {/* Expandable Reusable Intake Component */}
+        {isEditorOpen && (
+          <div
+            style={{
+              marginTop: '24px',
+              paddingTop: '24px',
+              borderTop: '1px solid var(--color-line-dark)',
+            }}
+          >
+            <LearnerContextIntake
+              profile={profile}
+              onChange={handleProfileChange}
+              mode="all"
+            />
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
+              <PrimaryButton onClick={() => setIsEditorOpen(false)} style={{ fontSize: '0.8rem', padding: '8px 18px' }}>
+                Apply &amp; View Updated Directions ↗
+              </PrimaryButton>
+            </div>
+          </div>
+        )}
+      </DarkCard>
+
+      {/* Stream-Aligned Opportunities (for School Learners) */}
+      {recResult.streamOpportunity && (
+        <CottonCard style={{ marginBottom: '36px', padding: '28px 32px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+            <BookOpen size={18} color="var(--color-ink)" aria-hidden="true" />
+            <Eyebrow text={`STREAM-ALIGNED OPPORTUNITY GROUPS / ${recResult.streamOpportunity.streamName.toUpperCase()}`} />
+          </div>
+
+          <h2 style={{ margin: '0 0 10px', fontSize: '1.4rem', color: 'var(--color-ink)' }}>
+            Future Opportunities for {recResult.streamOpportunity.streamName}
+          </h2>
+
+          <p style={{ margin: '0 0 16px', fontSize: '0.88rem', color: 'var(--color-muted-dark)', lineHeight: 1.5, maxWidth: '800px' }}>
+            {recResult.streamOpportunity.description}
+          </p>
+
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '16px' }}>
+            {recResult.streamOpportunity.opportunityDirections.map((dir, idx) => (
+              <span
+                key={idx}
+                style={{
+                  padding: '6px 14px',
+                  background: 'rgba(34, 34, 34, 0.08)',
+                  border: '1px solid rgba(34, 34, 34, 0.15)',
+                  borderRadius: 'var(--radius-pill)',
+                  fontSize: '0.82rem',
+                  fontWeight: 600,
+                  color: 'var(--color-ink)',
+                }}
+              >
+                {dir}
+              </span>
+            ))}
+          </div>
+
+          <div
+            style={{
+              padding: '10px 14px',
+              borderRadius: 'var(--radius-sm)',
+              background: 'rgba(34, 34, 34, 0.04)',
+              fontSize: '0.78rem',
+              color: 'var(--color-muted-dark)',
+              lineHeight: 1.45,
+            }}
+          >
+            <strong>Official Verification Note: </strong>
+            {recResult.streamOpportunity.verificationNote}
+          </div>
+        </CottonCard>
+      )}
+
+      {/* Personalized Path Recommendations Section */}
+      <section style={{ marginBottom: '48px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+          <Sparkles size={18} color="var(--color-tangerine)" aria-hidden="true" />
+          <Eyebrow text="PERSONALIZED PATH SUGGESTIONS" />
+        </div>
+        <h2 style={{ fontSize: '1.6rem', color: 'var(--color-linen)', margin: '0 0 8px' }}>
+          Suggested Directions for You
+        </h2>
+        <p className="muted-light" style={{ maxWidth: '720px', margin: '0 0 24px', fontSize: '0.9rem', lineHeight: 1.5 }}>
+          Generated deterministically from your stage, stream, interests, and stated hours.
+          Eligibility varies by institution and programme.
+        </p>
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))',
+            gap: '20px',
+          }}
+        >
+          {recResult.recommendations.map(rec => (
+            <DarkCard
+              key={rec.id}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                padding: '28px',
+                border: '1px solid var(--color-line-dark)',
+              }}
             >
               <div>
-                {/* Header & Badges */}
-                <div className="flex items-center justify-between gap-2 mb-4">
-                  <span className="text-xs font-mono px-2 py-0.5 rounded bg-neutral-900 border border-neutral-800 text-cotton">
-                    {role.level}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                  <StatusBadge variant="tangerine" label={rec.badge} />
+                  {rec.alignedRoleId && (
+                    <span style={{ fontSize: '0.74rem', fontFamily: 'var(--font-mono)', color: 'var(--color-cotton)' }}>
+                      SEED #{rec.alignedRoleId}
+                    </span>
+                  )}
+                </div>
+
+                <h3 style={{ fontSize: '1.25rem', color: 'var(--color-linen)', margin: '0 0 10px', lineHeight: 1.3 }}>
+                  {rec.title}
+                </h3>
+
+                <p style={{ margin: '0 0 16px', fontSize: '0.84rem', color: 'var(--color-muted-light)', lineHeight: 1.5 }}>
+                  <strong>Why suggested:</strong> {rec.whySuggested}
+                </p>
+
+                <div
+                  style={{
+                    background: 'var(--color-black-soft)',
+                    border: '1px solid var(--color-line-dark)',
+                    borderRadius: 'var(--radius-sm)',
+                    padding: '12px 14px',
+                    fontSize: '0.78rem',
+                    color: 'var(--color-cotton)',
+                    display: 'grid',
+                    gap: '6px',
+                    marginBottom: '16px',
+                  }}
+                >
+                  <div><strong>Inputs evaluated:</strong> {(rec.inputsEvaluated || rec.contributingInputs || []).join(' · ')}</div>
+                  {rec.requirementsEvaluated && rec.requirementsEvaluated.length > 0 && (
+                    <div><strong>Requirements evaluated:</strong> {rec.requirementsEvaluated.join(' · ')}</div>
+                  )}
+                  <div>
+                    <strong>Evidence found:</strong>{' '}
+                    {rec.evidenceFound && rec.evidenceFound.length > 0 && !rec.evidenceFound.every(e => e.includes('No prior coursework') || e.includes('No verified skill'))
+                      ? rec.evidenceFound.join(' · ')
+                      : 'No verified skill evidence supplied yet.'}
+                  </div>
+                  <div>
+                    <strong>Still unknown:</strong>{' '}
+                    {(rec.stillUnknown || rec.unknowns || []).length > 0
+                      ? (rec.stillUnknown || rec.unknowns || []).map(u => u.replace(/Confirmed gap/gi, 'Not assessed yet')).join(' · ')
+                      : 'Not assessed yet'}
+                  </div>
+                  <div>
+                    <strong>Prerequisites:</strong>{' '}
+                    {(rec.prerequisiteSkills || rec.prerequisites || []).length > 0
+                      ? (rec.prerequisiteSkills || rec.prerequisites || []).join(', ')
+                      : 'None'}
+                  </div>
+                </div>
+
+                {/* Estimated Curriculum Preview */}
+                <div style={{ marginBottom: '16px' }}>
+                  <span style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--color-tangerine)', textTransform: 'uppercase' }}>
+                    Estimated Curriculum Path
                   </span>
-                  <StatusBadge variant={score.isSufficientCoverage ? 'tangerine' : 'neutral'}>
-                    {score.coveragePercent}% Coverage
-                  </StatusBadge>
+                  <ul style={{ margin: '6px 0 0', paddingLeft: '18px', fontSize: '0.78rem', color: 'var(--color-muted-light)', lineHeight: 1.45 }}>
+                    {(rec.estimatedCurriculum || []).map((item, idx) => (
+                      <li key={idx}>{item}</li>
+                    ))}
+                  </ul>
                 </div>
 
-                <h2 className="text-xl font-bold text-linen mb-2">{role.name}</h2>
-                <p className="text-xs text-neutral-400 mb-4 leading-relaxed">{role.description}</p>
-
-                {/* Score / Fit Metric */}
-                <div className="p-4 rounded-xl bg-neutral-950/80 border border-neutral-800/80 mb-5">
-                  <div className="text-xs font-mono text-neutral-400 mb-1">Assessed Alignment</div>
-                  {score.isSufficientCoverage && score.alignment !== null ? (
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-3xl font-extrabold text-linen">{score.alignment}%</span>
-                      <span className="text-xs text-cotton font-mono">evidence match</span>
-                    </div>
-                  ) : (
-                    <div className="text-sm font-semibold text-cotton flex items-center gap-1.5">
-                      <AlertCircle className="w-4 h-4 text-tangerine" />
-                      More evidence needed
-                    </div>
-                  )}
-                  <p className="text-[11px] text-neutral-500 mt-1">
-                    {score.statusMessage}
-                  </p>
-                </div>
-
-                {/* Top Gaps */}
-                <div className="space-y-2 mb-4">
-                  <span className="text-xs font-semibold text-neutral-300 block">Identified Gaps:</span>
-                  {knownGaps.length > 0 ? (
-                    knownGaps.map(gap => {
-                      const skill = SEED_SKILLS.find(s => s.id === gap.skillId);
-                      return (
-                        <div
-                          key={gap.skillId}
-                          className="text-xs p-2 rounded-lg bg-neutral-900/60 border border-neutral-800 flex items-center justify-between text-neutral-300"
-                        >
-                          <span>{skill?.name || gap.skillId}</span>
-                          <span className="text-cotton font-mono text-[11px]">
-                            {gap.isAssessed ? `Gap: -${gap.gap}` : 'Not assessed'}
-                          </span>
-                        </div>
-                      );
-                    })
-                  ) : (
-                    <div className="text-xs text-emerald-400 flex items-center gap-1">
-                      <CheckCircle2 className="w-3.5 h-3.5" /> All core prerequisites met!
-                    </div>
-                  )}
+                {/* Next Action */}
+                <div style={{ marginBottom: '14px', fontSize: '0.8rem', color: 'var(--color-linen)' }}>
+                  <strong style={{ color: 'var(--color-tangerine)' }}>Next Action: </strong>
+                  {rec.nextAction}
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="pt-4 border-t border-neutral-800/80 space-y-2">
-                <div className="flex items-center justify-between text-[11px] text-neutral-500 font-mono mb-2">
-                  <span>Checked: {role.sourceCheckedAt}</span>
-                  <a
-                    href={role.sourceUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-1 hover:text-neutral-300"
-                  >
-                    Canonical rubric <ExternalLink className="w-3 h-3" />
-                  </a>
-                </div>
+              <div>
+                <p style={{ fontSize: '0.72rem', color: 'var(--color-muted-dark)', margin: '0 0 14px', lineHeight: 1.4, fontStyle: 'italic' }}>
+                  {rec.disclaimer}
+                </p>
 
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    onClick={() => {
-                      setSelectedRoleId(role.id);
-                      navigate(`/paths/${role.id}/gaps`);
-                    }}
-                    className="w-full py-2.5 px-3 rounded-lg bg-neutral-900 border border-neutral-800 hover:border-neutral-700 text-xs font-medium text-neutral-300 hover:text-linen text-center transition cursor-pointer"
-                  >
-                    View gaps
-                  </button>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {rec.canExplore && (rec.exploreHref || rec.cataloguePathSlug || rec.catalogueSlug) ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const slug = rec.cataloguePathSlug || rec.catalogueSlug;
+                        const pathId = rec.cataloguePathId || rec.alignedRoleId;
+                        if (pathId) {
+                          setSelectedRoleId(pathId);
+                        }
+                        navigate(rec.exploreHref || `/paths/${slug}`);
+                      }}
+                      className="button button-primary"
+                      style={{ width: '100%', padding: '10px 14px', fontSize: '0.82rem' }}
+                    >
+                      <span>Explore this curriculum roadmap</span>
+                      <ArrowRight size={14} aria-hidden="true" />
+                    </button>
+                  ) : (
+                    <div style={{ textAlign: 'center', padding: '6px 0' }}>
+                      <p style={{ margin: '0 0 6px', fontSize: '0.78rem', color: 'var(--color-cotton)' }}>
+                        Curriculum content pending review
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => navigate('/paths/builder')}
+                        className="button button-secondary"
+                        style={{ width: '100%', padding: '8px 12px', fontSize: '0.78rem' }}
+                      >
+                        <span>Explore in Path Builder ↗</span>
+                      </button>
+                    </div>
+                  )}
 
+                  {/* Secondary Action: Diagnostic Assessment — Never replaces Explore */}
                   <button
-                    onClick={() => {
-                      setSelectedRoleId(role.id);
-                      navigate('/roadmap');
-                    }}
-                    className={`w-full py-2.5 px-3 rounded-lg text-xs font-semibold text-center transition cursor-pointer ${
-                      isSelected
-                        ? 'bg-tangerine text-void hover:bg-orange-500'
-                        : 'bg-neutral-800 text-linen hover:bg-neutral-700'
-                    }`}
+                    type="button"
+                    onClick={() => navigate('/assessment')}
+                    className="button button-secondary"
+                    style={{ width: '100%', padding: '8px 14px', fontSize: '0.78rem' }}
                   >
-                    {isSelected ? 'Active Path →' : 'Select role'}
+                    <span>Take diagnostic assessment</span>
+                    <ArrowRight size={14} aria-hidden="true" />
                   </button>
                 </div>
               </div>
+            </DarkCard>
+          ))}
+        </div>
+      </section>
+
+      {/* Preloaded Starter Paths (Always Present Below Recommendations) */}
+      <section style={{ marginBottom: '40px' }}>
+        <header style={{ marginBottom: '20px' }}>
+          <Eyebrow text="FOUNDATIONAL BENCHMARKS / ENTRY ROLES" />
+          <h2 style={{ fontSize: '1.6rem', color: 'var(--color-linen)', margin: '0 0 8px' }}>
+            Starter paths — available to explore before assessment.
+          </h2>
+          {isSchool ? (
+            <div
+              style={{
+                padding: '10px 14px',
+                borderRadius: 'var(--radius-sm)',
+                background: 'rgba(255, 109, 31, 0.08)',
+                border: '1px solid rgba(255, 109, 31, 0.25)',
+                fontSize: '0.82rem',
+                color: 'var(--color-cotton)',
+                marginBottom: '16px',
+              }}
+            >
+              <strong>School Learner Notice: </strong>
+              You can begin foundation preparation now. Role readiness is not being claimed.
             </div>
-          );
-        })}
-      </div>
+          ) : (
+            <p className="muted-light" style={{ maxWidth: '720px', margin: 0, fontSize: '0.9rem', lineHeight: 1.5 }}>
+              Compare entry-level directions against your verified diagnostic observations.
+              Assessed alignment is only calculated when your evidence covers at least 60% of role requirements.
+            </p>
+          )}
+        </header>
+
+        {/* Three Directions Cards Grid */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+            gap: '24px',
+            marginBottom: '40px',
+          }}
+        >
+          {sortedAssessments.map((assessment, index) => {
+            const roleId = Number(assessment.roleId);
+            const role = SEED_ROLES.find(r => r.id === roleId)!;
+            const isSelected = selectedRoleId === roleId;
+            const isConfident = assessment.state === 'confident';
+
+            return (
+              <DarkCard
+                key={role.id}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  padding: '32px',
+                  border: isSelected
+                    ? '1px solid var(--color-tangerine)'
+                    : '1px solid var(--color-line-dark)',
+                  background: isSelected
+                    ? 'linear-gradient(180deg, rgba(255, 109, 31, 0.08) 0%, var(--color-black-hole) 100%)'
+                    : 'var(--color-black-hole)',
+                  position: 'relative',
+                }}
+              >
+                <div>
+                  {/* Card Topline */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+                    <span style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono)', color: 'var(--color-cotton)' }}>
+                      0{index + 1} / {role.level.toUpperCase()}
+                    </span>
+                    {isSelected && (
+                      <StatusBadge variant="tangerine" label="Active Target" />
+                    )}
+                  </div>
+
+                  {/* Role Title */}
+                  <h3 style={{ fontSize: '1.6rem', lineHeight: 1.25, color: 'var(--color-linen)', margin: '0 0 10px' }}>
+                    {role.name}
+                  </h3>
+                  <p className="muted-light" style={{ fontSize: '0.86rem', lineHeight: 1.45, margin: '0 0 20px' }}>
+                    {role.description}
+                  </p>
+
+                  {/* Score & Coverage Block */}
+                  <div
+                    style={{
+                      padding: '16px 20px',
+                      borderRadius: 'var(--radius-md)',
+                      background: 'var(--color-black-soft)',
+                      border: '1px solid var(--color-line-dark)',
+                      marginBottom: '20px',
+                    }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '8px' }}>
+                      <div>
+                        {isConfident ? (
+                          <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
+                            <span style={{ fontSize: '2.2rem', fontFamily: 'var(--font-mono)', fontWeight: 800, color: 'var(--color-linen)' }}>
+                              {assessment.alignment}
+                            </span>
+                            <span style={{ fontSize: '1rem', color: 'var(--color-cotton)' }}>%</span>
+                            <span style={{ fontSize: '0.74rem', color: 'var(--color-muted-light)', marginLeft: '6px' }}>
+                              assessed alignment
+                            </span>
+                          </div>
+                        ) : (
+                          <div>
+                            <span style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--color-cotton)' }}>
+                              More evidence needed
+                            </span>
+                            <p style={{ margin: '4px 0 0', fontSize: '0.74rem', color: 'var(--color-muted-light)' }}>
+                              {assessment.coverage.coveragePercent < 60
+                                ? `Coverage (${assessment.coverage.coveragePercent}%) is below 60% threshold.`
+                                : 'Take diagnostic to evaluate.'}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+
+                      <div style={{ textAlign: 'right' }}>
+                        <span
+                          style={{
+                            fontSize: '0.74rem',
+                            fontFamily: 'var(--font-mono)',
+                            fontWeight: 700,
+                            color: assessment.coverage.isSufficient ? 'var(--color-success)' : 'var(--color-cotton)',
+                          }}
+                        >
+                          COVERAGE {assessment.coverage.coveragePercent}%
+                        </span>
+                      </div>
+                    </div>
+
+                    <ScoreMeter score={assessment.coverage.coveragePercent} />
+                  </div>
+
+                  {/* Evidence & Gaps Summary */}
+                  <div style={{ display: 'grid', gap: '10px', marginBottom: '24px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.78rem' }}>
+                      <CheckCircle2 size={13} style={{ color: 'var(--color-success)', flexShrink: 0 }} />
+                      <span style={{ color: 'var(--color-linen)' }}>
+                        <strong>{assessment.evidenceUsed.length}</strong> competencies evidenced
+                      </span>
+                    </div>
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.78rem' }}>
+                      <AlertTriangle size={13} style={{ color: 'var(--color-tangerine)', flexShrink: 0 }} />
+                      <span style={{ color: 'var(--color-linen)' }}>
+                        <strong>{assessment.prioritizedGaps.length}</strong> known gaps to close
+                      </span>
+                    </div>
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.78rem' }}>
+                      <HelpCircle size={13} style={{ color: 'var(--color-cotton)', flexShrink: 0 }} />
+                      <span style={{ color: 'var(--color-muted-light)' }}>
+                        <strong>{assessment.unknowns.length}</strong> requirements unassessed
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Priority Gap Callout if available */}
+                  {assessment.prioritizedGaps.length > 0 && (
+                    <div
+                      style={{
+                        padding: '10px 14px',
+                        borderRadius: 'var(--radius-sm)',
+                        background: 'rgba(255, 109, 31, 0.06)',
+                        border: '1px solid rgba(255, 109, 31, 0.25)',
+                        marginBottom: '20px',
+                      }}
+                    >
+                      <span style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', color: 'var(--color-tangerine)', fontWeight: 700 }}>
+                        FIRST NEXT STEP:
+                      </span>
+                      <p style={{ margin: '4px 0 0', fontSize: '0.78rem', color: 'var(--color-linen)', lineHeight: 1.4 }}>
+                        {SKILLS_BY_ID.get(Number(assessment.prioritizedGaps[0].skillId))?.name || 'Skill'}:{' '}
+                        {assessment.prioritizedGaps[0].rationale || 'Address foundational prerequisite.'}
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Card Footer Actions & Source Label */}
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '8px' }}>
+                    <span className="source-label">{assessment.source} · {assessment.version}</span>
+                    <ProgressPill label={isConfident ? 'Confidence: High' : 'Needs Evidence'} />
+                  </div>
+
+                  <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                    <button
+                      type="button"
+                      onClick={() => navigate(`/paths/${role.slug}`)}
+                      className="button button-primary"
+                      style={{ flex: 1, padding: '10px 16px', fontSize: '0.84rem' }}
+                    >
+                      <span>Explore plan</span>
+                      <ArrowRight size={14} aria-hidden="true" />
+                    </button>
+
+                    {!isSelected && (
+                      <SecondaryButton
+                        onClick={() => handleSelectRole(role.id, role.name)}
+                        style={{ padding: '10px 14px', fontSize: '0.8rem' }}
+                      >
+                        Set Active
+                      </SecondaryButton>
+                    )}
+                  </div>
+                </div>
+              </DarkCard>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Bottom Trust Contract & Transparency Note */}
+      <CottonCard style={{ padding: '24px 28px' }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
+          <Info size={18} style={{ color: 'var(--color-tangerine-deep)', flexShrink: 0, marginTop: '2px' }} />
+          <div>
+            <h3 style={{ margin: '0 0 6px', fontSize: '0.96rem', color: 'var(--color-ink)' }}>
+              Transparent Scoring Boundary &amp; Privacy Rule
+            </h3>
+            <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--color-ink)', lineHeight: 1.45 }}>
+              All recommendations are guidance suggestions and structured exploration plans, never guaranteed admissions or hiring outcomes.
+              Missing diagnostic answers are recorded as unassessed unknowns, never penalized as 0%.
+              We do not scrape live job postings, predict hiring probabilities, or invent salary figures.
+            </p>
+          </div>
+        </div>
+      </CottonCard>
     </div>
   );
 };

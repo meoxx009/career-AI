@@ -76,7 +76,7 @@ export const Home: React.FC<HomeProps> = ({ onTriggerToast }) => {
         <NavLink to="/design-system" className="button button-primary">
           View Component Showcase <ArrowRight size={16} />
         </NavLink>
-        <a className="button button-quiet" href="/preview/index.html" target="_blank" rel="noreferrer">
+        <a className="button button-quiet" href="/preview/index.html" target="_blank" rel="noopener noreferrer">
           Open Visual Preview <span aria-hidden="true">↗</span>
         </a>
       </div>
