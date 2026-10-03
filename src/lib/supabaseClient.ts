@@ -281,12 +281,16 @@ const envKey =
 
 /**
  * Checks whether valid Supabase publishable credentials are configured.
+ * Accepts both legacy anon JWT keys (eyJ...) and new publishable key format (sb_publishable_...).
  */
 export function isSupabaseConfigured(): boolean {
   if (!envUrl || !envKey) return false;
   try {
     const parsed = new URL(envUrl);
-    return Boolean(parsed.protocol.startsWith('http') && envKey.trim().length > 10);
+    const urlOk = parsed.protocol.startsWith('http') && parsed.hostname.includes('supabase');
+    const keyOk = envKey.trim().length > 10 &&
+      (envKey.startsWith('eyJ') || envKey.startsWith('sb_publishable_') || envKey.startsWith('sb_anon_'));
+    return urlOk && keyOk;
   } catch {
     return false;
   }
