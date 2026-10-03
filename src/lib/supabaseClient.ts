@@ -284,6 +284,10 @@ const envKey =
  * Accepts both legacy anon JWT keys (eyJ...) and new publishable key format (sb_publishable_...).
  */
 export function isSupabaseConfigured(): boolean {
+  // Automated test runner runs in deterministic local guest mode unless live tests are explicitly enabled
+  if (typeof import.meta !== 'undefined' && import.meta.env?.MODE === 'test' && !import.meta.env?.VITE_TEST_LIVE_SUPABASE) {
+    return false;
+  }
   if (!envUrl || !envKey) return false;
   try {
     const parsed = new URL(envUrl);
