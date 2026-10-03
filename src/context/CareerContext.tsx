@@ -88,6 +88,7 @@ interface CareerContextType {
   authLoading: boolean;
   signIn: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   signUp: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
+  signInWithGoogle: () => Promise<{ success: boolean; error?: string }>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ success: boolean; error?: string }>;
   isAuthModalOpen: boolean;
@@ -245,7 +246,7 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
   const isSupabaseAvailable = isSupabaseConfigured();
 
   // Load authenticated user data across all repositories
-  const loadUserData = useCallback(async (userId: string) => {
+  const loadUserData = useCallback(async (userId: string, metadata?: Record<string, unknown>) => {
     try {
       const profRes = await defaultProfileRepository.getProfile(userId);
       let activeRoleId = 1;
@@ -255,7 +256,27 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
           activeRoleId = profRes.data.targetRoleId;
         }
       } else {
-        setProfile({ ...EMPTY_PROFILE, id: userId, isGuestDemo: false });
+        const metaName =
+          typeof metadata?.full_name === 'string'
+            ? metadata.full_name
+            : typeof metadata?.name === 'string'
+            ? metadata.name
+            : '';
+        const metaAvatar =
+          typeof metadata?.avatar_url === 'string'
+            ? metadata.avatar_url
+            : typeof metadata?.picture === 'string'
+            ? metadata.picture
+            : '';
+        const metaEmail = typeof metadata?.email === 'string' ? metadata.email : '';
+        setProfile({
+          ...EMPTY_PROFILE,
+          id: userId,
+          displayName: metaName,
+          contactEmail: metaEmail,
+          profileImageUrl: metaAvatar,
+          isGuestDemo: false,
+        });
       }
       setSelectedRoleIdState(activeRoleId);
 
@@ -338,7 +359,7 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
         setUser({ id: session.user.id, email: session.user.email });
-        loadUserData(session.user.id);
+        loadUserData(session.user.id, session.user.user_metadata as Record<string, unknown> | undefined);
       }
     });
 
@@ -347,7 +368,7 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
     } = supabase.auth.onAuthStateChange(async (_event, session) => {
       if (session?.user) {
         setUser({ id: session.user.id, email: session.user.email });
-        await loadUserData(session.user.id);
+        await loadUserData(session.user.id, session.user.user_metadata as Record<string, unknown> | undefined);
       } else {
         setUser(null);
       }
@@ -858,6 +879,46 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const signInWithGoogle = async (): Promise<{ success: boolean; error?: string }> => {
+    setAuthLoading(true);
+    if (!supabase || !isSupabaseAvailable) {
+      setAuthLoading(false);
+      const localId = 'google-guest-user';
+      const newUser = { id: localId, email: 'google.guest@careerai.local' };
+      setUser(newUser);
+      setProfile(prev => ({
+        ...prev,
+        id: localId,
+        displayName: prev.displayName && prev.displayName !== 'Rahul Sharma' ? prev.displayName : 'Google Learner',
+        contactEmail: 'google.guest@careerai.local',
+        isGuestDemo: false,
+      }));
+      await loadUserData(localId);
+      return { success: true };
+    }
+
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: window.location.origin,
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'consent',
+          },
+        },
+      });
+      setAuthLoading(false);
+      if (error) {
+        return { success: false, error: error.message };
+      }
+      return { success: true };
+    } catch (err) {
+      setAuthLoading(false);
+      return { success: false, error: String(err) };
+    }
+  };
+
   const signOut = async (): Promise<void> => {
     if (supabase && isSupabaseAvailable) {
       await supabase.auth.signOut();
@@ -1030,6 +1091,7 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
         authLoading,
         signIn,
         signUp,
+        signInWithGoogle,
         signOut,
         resetPassword,
         isAuthModalOpen,

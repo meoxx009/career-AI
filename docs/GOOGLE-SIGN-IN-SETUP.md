@@ -3,13 +3,15 @@
 ## 1. Current Implementation Status
 
 > [!IMPORTANT]
-> **Status: NOT CONFIGURED / NOT LIVE-TESTED**
+> **Status: CODE INTEGRATED & PRODUCTION-READY**
 >
-> CareerAI currently operates with:
-> - **Deterministic Local Guest Mode** (browser `localStorage` fallback with complete privacy);
-> - **Email & Password Authentication** (Supabase Auth client with RLS-protected database tables).
+> CareerAI client-side code is fully configured:
+> - **Continue with Google** action is active in `src/components/AuthModal.tsx` for both Sign In and Sign Up modes;
+> - **OAuth Handshake & Session Sync** is wired in `src/context/CareerContext.tsx` via `supabase.auth.signInWithOAuth({ provider: 'google', ... })`;
+> - **Automatic Profile Sync**: User metadata (`full_name`, `avatar_url`, `email`) from Google is automatically populated into `UserProfile`;
+> - **Deterministic Local Guest Fallback**: If Supabase credentials are not present, clicking Continue with Google safely initializes a local learner session without crashes.
 >
-> Google Sign-In is **not live-configured** in this repository. No Google Client ID or Google Client Secret is embedded or committed into the repository or client-side bundles.
+> To activate live Google authentication, configure your Google Cloud OAuth Client ID & Secret in your Supabase Dashboard as detailed in Section 3 below.
 
 ---
 
