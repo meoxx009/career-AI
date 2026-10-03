@@ -5,7 +5,7 @@ import {
   PrimaryButton,
   SecondaryButton,
 } from './DesignSystem';
-import { X, Lock, Mail, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { X, Lock, Mail, AlertCircle, CheckCircle2, ExternalLink } from 'lucide-react';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -23,6 +23,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     signIn,
     signUp,
     signInWithGoogle,
+    signInAsLocalGuest,
     resetPassword,
     loadRahulDemo,
     showToast,
@@ -33,8 +34,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
+  const [showSupabaseNotice, setShowSupabaseNotice] = useState(false);
 
   // Close modal on Escape key press for accessible keyboard navigation
   useEffect(() => {
@@ -108,15 +111,27 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const handleGoogleSignIn = async () => {
     setErrorMsg(null);
     setSuccessMsg(null);
-    setLoading(true);
+    setShowSupabaseNotice(false);
+    setGoogleLoading(true);
     const res = await signInWithGoogle();
-    setLoading(false);
+    setGoogleLoading(false);
+
     if (res.success) {
-      showToast('Successfully signed in with Google.');
-      onClose();
+      // OAuth redirect initiated — browser will navigate away to Google
+      showToast('Redirecting to Google...');
+      // Modal stays open briefly while redirect happens
+    } else if (res.error === '__NO_SUPABASE__') {
+      // Supabase not configured — show inline setup notice
+      setShowSupabaseNotice(true);
     } else {
-      setErrorMsg(res.error || 'Google Sign-In failed.');
+      setErrorMsg(res.error || 'Google Sign-In failed. Please try again.');
     }
+  };
+
+  const handleContinueAsLocalLearner = () => {
+    signInAsLocalGuest('Google Learner');
+    setShowSupabaseNotice(false);
+    onClose();
   };
 
   return (
@@ -228,7 +243,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             <button
               type="button"
               onClick={handleGoogleSignIn}
-              disabled={loading}
+              disabled={loading || googleLoading}
               style={{
                 width: '100%',
                 display: 'flex',
@@ -237,44 +252,123 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 gap: '12px',
                 padding: '11px 16px',
                 borderRadius: 'var(--radius-sm)',
-                background: 'rgba(255, 255, 255, 0.05)',
+                background: googleLoading ? 'rgba(255,255,255,0.03)' : 'rgba(255, 255, 255, 0.05)',
                 border: '1px solid var(--color-line-dark)',
-                color: 'var(--color-linen)',
+                color: googleLoading ? 'var(--color-muted-light)' : 'var(--color-linen)',
                 fontSize: '0.88rem',
                 fontWeight: 600,
-                cursor: loading ? 'not-allowed' : 'pointer',
-                transition: 'background 0.2s, border-color 0.2s',
+                cursor: (loading || googleLoading) ? 'not-allowed' : 'pointer',
+                transition: 'background 0.2s, border-color 0.2s, color 0.2s',
+                minHeight: '44px',
               }}
               onMouseEnter={e => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.09)';
-                e.currentTarget.style.borderColor = 'var(--color-linen)';
+                if (!loading && !googleLoading) {
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.09)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)';
+                }
               }}
               onMouseLeave={e => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                e.currentTarget.style.borderColor = 'var(--color-line-dark)';
+                if (!loading && !googleLoading) {
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                  e.currentTarget.style.borderColor = 'var(--color-line-dark)';
+                }
               }}
               aria-label="Continue with Google"
+              aria-busy={googleLoading}
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="#4285F4"
-                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                />
-                <path
-                  fill="#34A853"
-                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                />
-                <path
-                  fill="#FBBC05"
-                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
-                />
-                <path
-                  fill="#EA4335"
-                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
-                />
-              </svg>
-              <span>Continue with Google</span>
+              {googleLoading ? (
+                <>
+                  <svg
+                    width="18" height="18" viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    style={{ animation: 'spin 1s linear infinite', opacity: 0.5 }}
+                  >
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" fill="none" strokeDasharray="40 60" />
+                  </svg>
+                  <span>Connecting to Google...</span>
+                </>
+              ) : (
+                <>
+                  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+                  </svg>
+                  <span>Continue with Google</span>
+                </>
+              )}
             </button>
+
+            {/* Supabase not configured notice */}
+            {showSupabaseNotice && (
+              <div
+                role="alert"
+                style={{
+                  marginTop: '12px',
+                  padding: '14px 16px',
+                  background: 'rgba(255, 109, 31, 0.08)',
+                  border: '1px solid rgba(255, 109, 31, 0.35)',
+                  borderRadius: 'var(--radius-sm)',
+                  fontSize: '0.8rem',
+                  color: 'var(--color-cotton)',
+                  lineHeight: 1.55,
+                }}
+              >
+                <div style={{ fontWeight: 700, marginBottom: '6px', color: 'var(--color-tangerine)', display: 'flex', gap: '6px', alignItems: 'center' }}>
+                  <AlertCircle size={14} aria-hidden="true" />
+                  <span>Google Sign-In needs Supabase setup</span>
+                </div>
+                <p style={{ margin: '0 0 10px' }}>
+                  To enable live Google authentication, configure your Supabase project and add the Google OAuth Client ID &amp; Secret in{' '}
+                  <strong>Supabase Dashboard → Auth → Providers → Google</strong>.
+                  See{' '}
+                  <a
+                    href="https://github.com/meoxx009/career-AI/blob/main/docs/GOOGLE-SIGN-IN-SETUP.md"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: 'var(--color-tangerine)', textDecoration: 'underline' }}
+                  >
+                    GOOGLE-SIGN-IN-SETUP.md <ExternalLink size={11} style={{ verticalAlign: 'middle' }} />
+                  </a>
+                </p>
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                  <button
+                    type="button"
+                    onClick={handleContinueAsLocalLearner}
+                    style={{
+                      padding: '7px 14px',
+                      borderRadius: 'var(--radius-sm)',
+                      background: 'var(--color-tangerine)',
+                      color: '#000',
+                      border: 0,
+                      fontWeight: 700,
+                      fontSize: '0.76rem',
+                      cursor: 'pointer',
+                      minHeight: '36px',
+                    }}
+                  >
+                    Continue as Local Learner →
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowSupabaseNotice(false)}
+                    style={{
+                      padding: '7px 12px',
+                      borderRadius: 'var(--radius-sm)',
+                      background: 'transparent',
+                      color: 'var(--color-muted-light)',
+                      border: '1px solid var(--color-line-dark)',
+                      fontSize: '0.76rem',
+                      cursor: 'pointer',
+                      minHeight: '36px',
+                    }}
+                  >
+                    Dismiss
+                  </button>
+                </div>
+              </div>
+            )}
 
             <div
               style={{

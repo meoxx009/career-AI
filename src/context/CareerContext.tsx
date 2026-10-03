@@ -89,6 +89,7 @@ interface CareerContextType {
   signIn: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   signUp: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   signInWithGoogle: () => Promise<{ success: boolean; error?: string }>;
+  signInAsLocalGuest: (displayName?: string) => void;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ success: boolean; error?: string }>;
   isAuthModalOpen: boolean;
@@ -881,20 +882,15 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
 
   const signInWithGoogle = async (): Promise<{ success: boolean; error?: string }> => {
     setAuthLoading(true);
+
+    // Guest / local mode: Supabase OAuth not available
     if (!supabase || !isSupabaseAvailable) {
       setAuthLoading(false);
-      const localId = 'google-guest-user';
-      const newUser = { id: localId, email: 'google.guest@careerai.local' };
-      setUser(newUser);
-      setProfile(prev => ({
-        ...prev,
-        id: localId,
-        displayName: prev.displayName && prev.displayName !== 'Rahul Sharma' ? prev.displayName : 'Google Learner',
-        contactEmail: 'google.guest@careerai.local',
-        isGuestDemo: false,
-      }));
-      await loadUserData(localId);
-      return { success: true };
+      // Return a special signal so the UI can show a setup notice instead of silently doing nothing
+      return {
+        success: false,
+        error: '__NO_SUPABASE__',
+      };
     }
 
     try {
@@ -912,11 +908,29 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
       if (error) {
         return { success: false, error: error.message };
       }
+      // OAuth redirect has been initiated — browser will navigate away to Google
       return { success: true };
     } catch (err) {
       setAuthLoading(false);
       return { success: false, error: String(err) };
     }
+  };
+
+  /**
+   * Sign in as a local guest learner (no Supabase required).
+   * Used as the fallback when Google OAuth is not configured.
+   */
+  const signInAsLocalGuest = (displayName: string = 'Google Learner') => {
+    const localId = 'google-guest-user-' + Date.now();
+    setUser({ id: localId, email: 'local.learner@careerai.local' });
+    setProfile(prev => ({
+      ...prev,
+      id: localId,
+      displayName,
+      contactEmail: 'local.learner@careerai.local',
+      isGuestDemo: false,
+    }));
+    showToast(`Signed in as ${displayName} (local session).`);
   };
 
   const signOut = async (): Promise<void> => {
@@ -1092,6 +1106,7 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
         signIn,
         signUp,
         signInWithGoogle,
+        signInAsLocalGuest,
         signOut,
         resetPassword,
         isAuthModalOpen,
