@@ -894,7 +894,7 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
     }
 
     try {
-      const { error } = await supabase.auth.signInWithOAuth({
+      const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
           redirectTo: `${window.location.origin}/`,
@@ -908,7 +908,9 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
       if (error) {
         return { success: false, error: error.message };
       }
-      // OAuth redirect has been initiated — browser will navigate away to Google
+      if (data?.url && typeof window !== 'undefined') {
+        window.location.assign(data.url);
+      }
       return { success: true };
     } catch (err) {
       setAuthLoading(false);

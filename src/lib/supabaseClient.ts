@@ -271,13 +271,20 @@ export interface Database {
   };
 }
 
-// Environment resolution with Vite import.meta.env
-const envUrl = typeof import.meta !== 'undefined' ? import.meta.env?.VITE_SUPABASE_URL : undefined;
+// Default publishable configuration for CareerAI production & preview instances
+const DEFAULT_SUPABASE_URL = 'https://ufoslvvpuceazzpgmdgr.supabase.co';
+const DEFAULT_SUPABASE_KEY = 'sb_publishable_yeIWzC8Z18E1FvuzjZxU8A_atwHZAEM';
+
+// Environment resolution with Vite import.meta.env with project defaults
+const envUrl =
+  (typeof import.meta !== 'undefined' ? import.meta.env?.VITE_SUPABASE_URL : undefined) ||
+  DEFAULT_SUPABASE_URL;
 
 const envKey =
-  typeof import.meta !== 'undefined'
+  (typeof import.meta !== 'undefined'
     ? import.meta.env?.VITE_SUPABASE_PUBLISHABLE_KEY || import.meta.env?.VITE_SUPABASE_ANON_KEY
-    : undefined;
+    : undefined) ||
+  DEFAULT_SUPABASE_KEY;
 
 /**
  * Checks whether valid Supabase publishable credentials are configured.
