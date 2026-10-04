@@ -111,7 +111,8 @@
         "status": "todo",
         "prerequisite": "cur-backend-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://restfulapi.net/"
       },
       {
         "id": "cur-backend-4",
@@ -131,7 +132,8 @@
         "status": "todo",
         "prerequisite": "cur-backend-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://testing-library.com/docs/"
       },
       {
         "id": "cur-backend-5",
@@ -150,7 +152,8 @@
         "status": "todo",
         "prerequisite": "cur-backend-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://12factor.net/"
       }
     ],
     "estimatedEffortHours": 34,
@@ -483,7 +486,8 @@
         "status": "todo",
         "prerequisite": "cur-frontend-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Grid"
       },
       {
         "id": "cur-frontend-3",
@@ -503,7 +507,8 @@
         "status": "todo",
         "prerequisite": "cur-frontend-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://react.dev/learn/state-a-components-memory"
       },
       {
         "id": "cur-frontend-4",
@@ -523,7 +528,8 @@
         "status": "todo",
         "prerequisite": "cur-frontend-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.w3.org/WAI/test-evaluate/"
       },
       {
         "id": "cur-frontend-5",
@@ -542,7 +548,8 @@
         "status": "todo",
         "prerequisite": "cur-frontend-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://developer.mozilla.org/en-US/docs/Web/Accessibility"
       }
     ],
     "estimatedEffortHours": 34,
@@ -840,7 +847,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://pandas.pydata.org/docs/getting_started/intro_tutorials/06_calculate_statistics.html"
       },
       {
         "id": "cur-data-2",
@@ -860,7 +868,8 @@
         "status": "todo",
         "prerequisite": "cur-data-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.postgresql.org/docs/current/tutorial-agg.html"
       },
       {
         "id": "cur-data-3",
@@ -880,7 +889,8 @@
         "status": "todo",
         "prerequisite": "cur-data-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://pandas.pydata.org/docs/getting_started/intro_tutorials/"
       },
       {
         "id": "cur-data-4",
@@ -900,7 +910,8 @@
         "status": "todo",
         "prerequisite": "cur-data-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.data-to-viz.com/"
       },
       {
         "id": "cur-data-5",
@@ -919,7 +930,8 @@
         "status": "todo",
         "prerequisite": "cur-data-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.storytellingwithdata.com/"
       }
     ],
     "estimatedEffortHours": 34,
@@ -1187,7 +1199,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures"
       },
       {
         "id": "cur-se-2",
@@ -1207,7 +1220,8 @@
         "status": "todo",
         "prerequisite": "cur-se-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://refactoring.guru/design-patterns"
       },
       {
         "id": "cur-se-3",
@@ -1227,7 +1241,8 @@
         "status": "todo",
         "prerequisite": "cur-se-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Async_JS"
       },
       {
         "id": "cur-se-4",
@@ -1247,7 +1262,8 @@
         "status": "todo",
         "prerequisite": "cur-se-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://vitest.dev/guide/"
       },
       {
         "id": "cur-se-5",
@@ -1266,7 +1282,8 @@
         "status": "todo",
         "prerequisite": "cur-se-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://google.github.io/eng-practices/review/"
       }
     ],
     "estimatedEffortHours": 42,
@@ -1587,7 +1604,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://12factor.net/"
       },
       {
         "id": "cur-fs-2",
@@ -1607,7 +1625,8 @@
         "status": "todo",
         "prerequisite": "cur-fs-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html"
       },
       {
         "id": "cur-fs-3",
@@ -1627,7 +1646,8 @@
         "status": "todo",
         "prerequisite": "cur-fs-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://react.dev/learn"
       },
       {
         "id": "cur-fs-4",
@@ -1647,7 +1667,8 @@
         "status": "todo",
         "prerequisite": "cur-fs-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://playwright.dev/docs/intro"
       },
       {
         "id": "cur-fs-5",
@@ -1666,7 +1687,8 @@
         "status": "todo",
         "prerequisite": "cur-fs-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://sre.google/sre-book/postmortem-culture/"
       }
     ],
     "estimatedEffortHours": 42,
@@ -1967,7 +1989,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://reactnative.dev/docs/navigation"
       },
       {
         "id": "cur-mob-2",
@@ -1987,7 +2010,8 @@
         "status": "todo",
         "prerequisite": "cur-mob-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://reactnative.dev/docs/asyncstorage"
       },
       {
         "id": "cur-mob-3",
@@ -2007,7 +2031,8 @@
         "status": "todo",
         "prerequisite": "cur-mob-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://reactnative.dev/docs/getting-started"
       },
       {
         "id": "cur-mob-4",
@@ -2027,7 +2052,8 @@
         "status": "todo",
         "prerequisite": "cur-mob-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://reactnative.dev/docs/testing-overview"
       },
       {
         "id": "cur-mob-5",
@@ -2046,7 +2072,8 @@
         "status": "todo",
         "prerequisite": "cur-mob-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://developer.android.com/topic/performance/memory"
       }
     ],
     "estimatedEffortHours": 42,
@@ -2314,7 +2341,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.istqb.org/"
       },
       {
         "id": "cur-qa-2",
@@ -2334,7 +2362,8 @@
         "status": "todo",
         "prerequisite": "cur-qa-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://testing-library.com/docs/guiding-principles/"
       },
       {
         "id": "cur-qa-3",
@@ -2354,7 +2383,8 @@
         "status": "todo",
         "prerequisite": "cur-qa-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://learning.postman.com/docs/writing-scripts/test-scripts/"
       },
       {
         "id": "cur-qa-4",
@@ -2374,7 +2404,8 @@
         "status": "todo",
         "prerequisite": "cur-qa-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://playwright.dev/docs/test-components"
       },
       {
         "id": "cur-qa-5",
@@ -2393,7 +2424,8 @@
         "status": "todo",
         "prerequisite": "cur-qa-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://martinfowler.com/articles/practical-test-pyramid.html"
       }
     ],
     "estimatedEffortHours": 34,
@@ -2658,7 +2690,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://playwright.dev/docs/pom"
       },
       {
         "id": "cur-sdet-2",
@@ -2678,7 +2711,8 @@
         "status": "todo",
         "prerequisite": "cur-sdet-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://mswjs.io/docs/"
       },
       {
         "id": "cur-sdet-3",
@@ -2698,7 +2732,8 @@
         "status": "todo",
         "prerequisite": "cur-sdet-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://docs.github.com/en/actions"
       },
       {
         "id": "cur-sdet-4",
@@ -2718,7 +2753,8 @@
         "status": "todo",
         "prerequisite": "cur-sdet-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://k6.io/docs/"
       },
       {
         "id": "cur-sdet-5",
@@ -2737,7 +2773,8 @@
         "status": "todo",
         "prerequisite": "cur-sdet-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://martinfowler.com/articles/nonDeterminism.html"
       }
     ],
     "estimatedEffortHours": 42,
@@ -3021,7 +3058,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://linuxjourney.com/"
       },
       {
         "id": "cur-devops-2",
@@ -3041,7 +3079,8 @@
         "status": "todo",
         "prerequisite": "cur-devops-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://docs.docker.com/build/building/multi-stage/"
       },
       {
         "id": "cur-devops-3",
@@ -3061,7 +3100,8 @@
         "status": "todo",
         "prerequisite": "cur-devops-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions"
       },
       {
         "id": "cur-devops-4",
@@ -3081,7 +3121,8 @@
         "status": "todo",
         "prerequisite": "cur-devops-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://developer.hashicorp.com/terraform/intro"
       },
       {
         "id": "cur-devops-5",
@@ -3100,7 +3141,8 @@
         "status": "todo",
         "prerequisite": "cur-devops-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://sre.google/sre-book/postmortem-culture/"
       }
     ],
     "estimatedEffortHours": 42,
@@ -3382,7 +3424,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html"
       },
       {
         "id": "cur-cloud-2",
@@ -3402,7 +3445,8 @@
         "status": "todo",
         "prerequisite": "cur-cloud-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html"
       },
       {
         "id": "cur-cloud-3",
@@ -3422,7 +3466,8 @@
         "status": "todo",
         "prerequisite": "cur-cloud-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://aws.amazon.com/serverless/"
       },
       {
         "id": "cur-cloud-4",
@@ -3442,7 +3487,8 @@
         "status": "todo",
         "prerequisite": "cur-cloud-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://docs.aws.amazon.com/cost-management/latest/userguide/ce-what-is.html"
       },
       {
         "id": "cur-cloud-5",
@@ -3461,7 +3507,8 @@
         "status": "todo",
         "prerequisite": "cur-cloud-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-workloads-on-aws.html"
       }
     ],
     "estimatedEffortHours": 40,
@@ -3726,7 +3773,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://sre.google/sre-book/service-level-objectives/"
       },
       {
         "id": "cur-sre-2",
@@ -3746,7 +3794,8 @@
         "status": "todo",
         "prerequisite": "cur-sre-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://prometheus.io/docs/introduction/overview/"
       },
       {
         "id": "cur-sre-3",
@@ -3766,7 +3815,8 @@
         "status": "todo",
         "prerequisite": "cur-sre-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://grafana.com/docs/grafana/latest/"
       },
       {
         "id": "cur-sre-4",
@@ -3786,7 +3836,8 @@
         "status": "todo",
         "prerequisite": "cur-sre-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://principlesofchaos.org/"
       },
       {
         "id": "cur-sre-5",
@@ -3805,7 +3856,8 @@
         "status": "todo",
         "prerequisite": "cur-sre-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://sre.google/sre-book/postmortem-culture/"
       }
     ],
     "estimatedEffortHours": 42,
@@ -4088,7 +4140,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.wireshark.org/docs/"
       },
       {
         "id": "cur-sec-2",
@@ -4108,7 +4161,8 @@
         "status": "todo",
         "prerequisite": "cur-sec-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://owasp.org/www-project-top-ten/"
       },
       {
         "id": "cur-sec-3",
@@ -4128,7 +4182,8 @@
         "status": "todo",
         "prerequisite": "cur-sec-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html"
       },
       {
         "id": "cur-sec-4",
@@ -4148,7 +4203,8 @@
         "status": "todo",
         "prerequisite": "cur-sec-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://owasp.org/www-community/Threat_Modeling"
       },
       {
         "id": "cur-sec-5",
@@ -4167,7 +4223,8 @@
         "status": "todo",
         "prerequisite": "cur-sec-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://csrc.nist.gov/pubs/sp/800/61/r2/final"
       }
     ],
     "estimatedEffortHours": 42,
@@ -4432,7 +4489,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.arm.com/architecture/cpu/cortex-m"
       },
       {
         "id": "cur-emb-2",
@@ -4452,7 +4510,8 @@
         "status": "todo",
         "prerequisite": "cur-emb-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://learn.sparkfun.com/tutorials/serial-communication/all"
       },
       {
         "id": "cur-emb-3",
@@ -4472,7 +4531,8 @@
         "status": "todo",
         "prerequisite": "cur-emb-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.freertos.org/Embedded-RTOS-Queues.html"
       },
       {
         "id": "cur-emb-4",
@@ -4492,7 +4552,8 @@
         "status": "todo",
         "prerequisite": "cur-emb-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.freertos.org/Documentation/RTOS_book.html"
       },
       {
         "id": "cur-emb-5",
@@ -4511,7 +4572,8 @@
         "status": "todo",
         "prerequisite": "cur-emb-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.keysight.com/us/en/assets/7018-06843/application-notes/5989-5733.pdf"
       }
     ],
     "estimatedEffortHours": 42,
@@ -4778,7 +4840,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://mqtt.org/"
       },
       {
         "id": "cur-iot-2",
@@ -4798,7 +4861,8 @@
         "status": "todo",
         "prerequisite": "cur-iot-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://nodered.org/docs/"
       },
       {
         "id": "cur-iot-3",
@@ -4818,7 +4882,8 @@
         "status": "todo",
         "prerequisite": "cur-iot-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://docs.aws.amazon.com/iot/latest/developerguide/what-is-aws-iot.html"
       },
       {
         "id": "cur-iot-4",
@@ -4838,7 +4903,8 @@
         "status": "todo",
         "prerequisite": "cur-iot-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/ota.html"
       },
       {
         "id": "cur-iot-5",
@@ -4857,7 +4923,8 @@
         "status": "todo",
         "prerequisite": "cur-iot-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://docs.nordicsemi.com/"
       }
     ],
     "estimatedEffortHours": 42,
@@ -5121,7 +5188,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://man7.org/linux/man-pages/man2/syscalls.2.html"
       },
       {
         "id": "cur-sys-2",
@@ -5141,7 +5209,8 @@
         "status": "todo",
         "prerequisite": "cur-sys-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://man7.org/linux/man-pages/man7/pipe.7.html"
       },
       {
         "id": "cur-sys-3",
@@ -5161,7 +5230,8 @@
         "status": "todo",
         "prerequisite": "cur-sys-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://sourceware.org/glibc/wiki/MallocInternals"
       },
       {
         "id": "cur-sys-4",
@@ -5181,7 +5251,8 @@
         "status": "todo",
         "prerequisite": "cur-sys-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://valgrind.org/docs/manual/quick-start.html"
       },
       {
         "id": "cur-sys-5",
@@ -5200,7 +5271,8 @@
         "status": "todo",
         "prerequisite": "cur-sys-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://man7.org/linux/man-pages/man7/pthreads.7.html"
       }
     ],
     "estimatedEffortHours": 42,
@@ -5467,7 +5539,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/"
       },
       {
         "id": "cur-de-2",
@@ -5487,7 +5560,8 @@
         "status": "todo",
         "prerequisite": "cur-de-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://airflow.apache.org/docs/apache-airflow/stable/tutorial/pipeline.html"
       },
       {
         "id": "cur-de-3",
@@ -5507,7 +5581,8 @@
         "status": "todo",
         "prerequisite": "cur-de-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://docs.greatexpectations.io/docs/"
       },
       {
         "id": "cur-de-4",
@@ -5527,7 +5602,8 @@
         "status": "todo",
         "prerequisite": "cur-de-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://parquet.apache.org/documentation/latest/"
       },
       {
         "id": "cur-de-5",
@@ -5546,7 +5622,8 @@
         "status": "todo",
         "prerequisite": "cur-de-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://sre.google/sre-book/postmortem-culture/"
       }
     ],
     "estimatedEffortHours": 42,
@@ -5812,7 +5889,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://docs.scipy.org/doc/scipy/reference/stats.html"
       },
       {
         "id": "cur-ds-2",
@@ -5832,7 +5910,8 @@
         "status": "todo",
         "prerequisite": "cur-ds-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://scikit-learn.org/stable/modules/preprocessing.html"
       },
       {
         "id": "cur-ds-3",
@@ -5852,7 +5931,8 @@
         "status": "todo",
         "prerequisite": "cur-ds-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://scikit-learn.org/stable/supervised_learning.html"
       },
       {
         "id": "cur-ds-4",
@@ -5872,7 +5952,8 @@
         "status": "todo",
         "prerequisite": "cur-ds-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://shap.readthedocs.io/en/latest/"
       },
       {
         "id": "cur-ds-5",
@@ -5891,7 +5972,8 @@
         "status": "todo",
         "prerequisite": "cur-ds-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.storytellingwithdata.com/"
       }
     ],
     "estimatedEffortHours": 42,
@@ -6158,7 +6240,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://pytorch.org/tutorials/beginner/basics/tensorqs_tutorial.html"
       },
       {
         "id": "cur-mle-2",
@@ -6178,7 +6261,8 @@
         "status": "todo",
         "prerequisite": "cur-mle-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://mlflow.org/docs/latest/index.html"
       },
       {
         "id": "cur-mle-3",
@@ -6198,7 +6282,8 @@
         "status": "todo",
         "prerequisite": "cur-mle-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://fastapi.tiangolo.com/"
       },
       {
         "id": "cur-mle-4",
@@ -6218,7 +6303,8 @@
         "status": "todo",
         "prerequisite": "cur-mle-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://docs.docker.com/guides/get-started/"
       },
       {
         "id": "cur-mle-5",
@@ -6237,7 +6323,8 @@
         "status": "todo",
         "prerequisite": "cur-mle-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://docs.evidentlyai.com/"
       }
     ],
     "estimatedEffortHours": 42,
@@ -6523,7 +6610,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://huggingface.co/blog/getting-started-with-embeddings"
       },
       {
         "id": "cur-ai-2",
@@ -6543,7 +6631,8 @@
         "status": "todo",
         "prerequisite": "cur-ai-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://platform.openai.com/docs/guides/structured-outputs"
       },
       {
         "id": "cur-ai-3",
@@ -6563,7 +6652,8 @@
         "status": "todo",
         "prerequisite": "cur-ai-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://python.langchain.com/docs/tutorials/chatbot/"
       },
       {
         "id": "cur-ai-4",
@@ -6583,7 +6673,8 @@
         "status": "todo",
         "prerequisite": "cur-ai-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://platform.openai.com/docs/guides/rate-limits"
       },
       {
         "id": "cur-ai-5",
@@ -6602,7 +6693,8 @@
         "status": "todo",
         "prerequisite": "cur-ai-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://owasp.org/www-project-top-10-for-large-language-model-applications/"
       }
     ],
     "estimatedEffortHours": 42,
@@ -6885,7 +6977,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://jalammar.github.io/illustrated-transformer/"
       },
       {
         "id": "cur-genai-2",
@@ -6905,7 +6998,8 @@
         "status": "todo",
         "prerequisite": "cur-genai-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://huggingface.co/docs/peft/index"
       },
       {
         "id": "cur-genai-3",
@@ -6925,7 +7019,8 @@
         "status": "todo",
         "prerequisite": "cur-genai-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://docs.pydantic.dev/latest/"
       },
       {
         "id": "cur-genai-4",
@@ -6945,7 +7040,8 @@
         "status": "todo",
         "prerequisite": "cur-genai-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://docs.ragas.io/en/stable/concepts/metrics/"
       },
       {
         "id": "cur-genai-5",
@@ -6964,7 +7060,8 @@
         "status": "todo",
         "prerequisite": "cur-genai-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://platform.openai.com/docs/guides/optimizing-llm-accuracy"
       }
     ],
     "estimatedEffortHours": 42,
@@ -7230,7 +7327,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.promptingguide.ai/"
       },
       {
         "id": "cur-llm-2",
@@ -7250,7 +7348,8 @@
         "status": "todo",
         "prerequisite": "cur-llm-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events"
       },
       {
         "id": "cur-llm-3",
@@ -7270,7 +7369,8 @@
         "status": "todo",
         "prerequisite": "cur-llm-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://python.langchain.com/docs/tutorials/agents/"
       },
       {
         "id": "cur-llm-4",
@@ -7290,7 +7390,8 @@
         "status": "todo",
         "prerequisite": "cur-llm-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://martinfowler.com/bliki/CircuitBreaker.html"
       },
       {
         "id": "cur-llm-5",
@@ -7309,7 +7410,8 @@
         "status": "todo",
         "prerequisite": "cur-llm-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://owasp.org/www-project-top-10-for-large-language-model-applications/"
       }
     ],
     "estimatedEffortHours": 40,
@@ -7612,7 +7714,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.pinecone.io/learn/chunking-strategies/"
       },
       {
         "id": "cur-rag-2",
@@ -7632,7 +7735,8 @@
         "status": "todo",
         "prerequisite": "cur-rag-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://weaviate.io/blog/hybrid-search-explained"
       },
       {
         "id": "cur-rag-3",
@@ -7652,7 +7756,8 @@
         "status": "todo",
         "prerequisite": "cur-rag-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.sbert.net/examples/applications/retrieve_rerank/README.html"
       },
       {
         "id": "cur-rag-4",
@@ -7672,7 +7777,8 @@
         "status": "todo",
         "prerequisite": "cur-rag-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://docs.ragas.io/en/stable/"
       },
       {
         "id": "cur-rag-5",
@@ -7691,7 +7797,8 @@
         "status": "todo",
         "prerequisite": "cur-rag-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://arxiv.org/abs/2312.10997"
       }
     ],
     "estimatedEffortHours": 42,
@@ -7974,7 +8081,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://docs.python.org/3/library/re.html"
       },
       {
         "id": "cur-nlp-2",
@@ -7994,7 +8102,8 @@
         "status": "todo",
         "prerequisite": "cur-nlp-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://spacy.io/usage/spacy-101"
       },
       {
         "id": "cur-nlp-3",
@@ -8014,7 +8123,8 @@
         "status": "todo",
         "prerequisite": "cur-nlp-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://huggingface.co/docs/transformers/training"
       },
       {
         "id": "cur-nlp-4",
@@ -8034,7 +8144,8 @@
         "status": "todo",
         "prerequisite": "cur-nlp-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html"
       },
       {
         "id": "cur-nlp-5",
@@ -8053,7 +8164,8 @@
         "status": "todo",
         "prerequisite": "cur-nlp-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://huggingface.co/docs/optimum/index"
       }
     ],
     "estimatedEffortHours": 42,
@@ -8319,7 +8431,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://mlflow.org/docs/latest/tracking.html"
       },
       {
         "id": "cur-mlops-2",
@@ -8339,7 +8452,8 @@
         "status": "todo",
         "prerequisite": "cur-mlops-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://dvc.org/doc/start"
       },
       {
         "id": "cur-mlops-3",
@@ -8359,7 +8473,8 @@
         "status": "todo",
         "prerequisite": "cur-mlops-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://cml.dev/doc"
       },
       {
         "id": "cur-mlops-4",
@@ -8379,7 +8494,8 @@
         "status": "todo",
         "prerequisite": "cur-mlops-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://martinfowler.com/bliki/CanaryRelease.html"
       },
       {
         "id": "cur-mlops-5",
@@ -8398,7 +8514,8 @@
         "status": "todo",
         "prerequisite": "cur-mlops-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://docs.evidentlyai.com/"
       }
     ],
     "estimatedEffortHours": 42,
@@ -8681,7 +8798,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://docs.opencv.org/4.x/d9/df8/tutorial_root.html"
       },
       {
         "id": "cur-cv-2",
@@ -8701,7 +8819,8 @@
         "status": "todo",
         "prerequisite": "cur-cv-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html"
       },
       {
         "id": "cur-cv-3",
@@ -8721,7 +8840,8 @@
         "status": "todo",
         "prerequisite": "cur-cv-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://docs.ultralytics.com/"
       },
       {
         "id": "cur-cv-4",
@@ -8741,7 +8861,8 @@
         "status": "todo",
         "prerequisite": "cur-cv-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://onnxruntime.ai/docs/"
       },
       {
         "id": "cur-cv-5",
@@ -8760,7 +8881,8 @@
         "status": "todo",
         "prerequisite": "cur-cv-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://scikit-learn.org/stable/modules/model_evaluation.html"
       }
     ],
     "estimatedEffortHours": 42,
@@ -9033,7 +9155,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://learn.microsoft.com/en-us/power-bi/guidance/star-schema"
       },
       {
         "id": "cur-bi-2",
@@ -9053,7 +9176,8 @@
         "status": "todo",
         "prerequisite": "cur-bi-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.postgresql.org/docs/current/sql-createview.html"
       },
       {
         "id": "cur-bi-3",
@@ -9073,7 +9197,8 @@
         "status": "todo",
         "prerequisite": "cur-bi-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://learn.microsoft.com/en-us/power-bi/create-reports/service-dashboards"
       },
       {
         "id": "cur-bi-4",
@@ -9093,7 +9218,8 @@
         "status": "todo",
         "prerequisite": "cur-bi-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-rls"
       },
       {
         "id": "cur-bi-5",
@@ -9112,7 +9238,8 @@
         "status": "todo",
         "prerequisite": "cur-bi-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.storytellingwithdata.com/"
       }
     ],
     "estimatedEffortHours": 36,
@@ -9382,7 +9509,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.nngroup.com/articles/persona-scope/"
       },
       {
         "id": "cur-uiux-2",
@@ -9402,7 +9530,8 @@
         "status": "todo",
         "prerequisite": "cur-uiux-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.nngroup.com/articles/wireframes/"
       },
       {
         "id": "cur-uiux-3",
@@ -9422,7 +9551,8 @@
         "status": "todo",
         "prerequisite": "cur-uiux-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://m3.material.io/foundations/design-tokens/overview"
       },
       {
         "id": "cur-uiux-4",
@@ -9442,7 +9572,8 @@
         "status": "todo",
         "prerequisite": "cur-uiux-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.nngroup.com/articles/usability-testing-101/"
       },
       {
         "id": "cur-uiux-5",
@@ -9461,7 +9592,8 @@
         "status": "todo",
         "prerequisite": "cur-uiux-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.figma.com/best-practices/guide-to-developer-handoff/"
       }
     ],
     "estimatedEffortHours": 40,
@@ -9709,7 +9841,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.nngroup.com/articles/design-thinking/"
       },
       {
         "id": "cur-pd-2",
@@ -9729,7 +9862,8 @@
         "status": "todo",
         "prerequisite": "cur-pd-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.nngroup.com/articles/service-blueprints-definition/"
       },
       {
         "id": "cur-pd-3",
@@ -9749,7 +9883,8 @@
         "status": "todo",
         "prerequisite": "cur-pd-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://m3.material.io/"
       },
       {
         "id": "cur-pd-4",
@@ -9769,7 +9904,8 @@
         "status": "todo",
         "prerequisite": "cur-pd-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.optimizely.com/optimization-glossary/ab-testing/"
       },
       {
         "id": "cur-pd-5",
@@ -9788,7 +9924,8 @@
         "status": "todo",
         "prerequisite": "cur-pd-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.nngroup.com/articles/design-critiques/"
       }
     ],
     "estimatedEffortHours": 42,
@@ -10052,7 +10189,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.nngroup.com/articles/user-interviews/"
       },
       {
         "id": "cur-uxr-2",
@@ -10072,7 +10210,8 @@
         "status": "todo",
         "prerequisite": "cur-uxr-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.nngroup.com/articles/affinity-diagram/"
       },
       {
         "id": "cur-uxr-3",
@@ -10092,7 +10231,8 @@
         "status": "todo",
         "prerequisite": "cur-uxr-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.nngroup.com/articles/card-sorting-definition/"
       },
       {
         "id": "cur-uxr-4",
@@ -10112,7 +10252,8 @@
         "status": "todo",
         "prerequisite": "cur-uxr-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.nngroup.com/articles/reports-that-work/"
       },
       {
         "id": "cur-uxr-5",
@@ -10131,7 +10272,8 @@
         "status": "todo",
         "prerequisite": "cur-uxr-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.nngroup.com/articles/stakeholder-interviews/"
       }
     ],
     "estimatedEffortHours": 40,
@@ -10380,7 +10522,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.svpg.com/assessing-product-opportunities/"
       },
       {
         "id": "cur-pm-2",
@@ -10400,7 +10543,8 @@
         "status": "todo",
         "prerequisite": "cur-pm-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.atlassian.com/agile/product-management/requirements"
       },
       {
         "id": "cur-pm-3",
@@ -10420,7 +10564,8 @@
         "status": "todo",
         "prerequisite": "cur-pm-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/"
       },
       {
         "id": "cur-pm-4",
@@ -10440,7 +10585,8 @@
         "status": "todo",
         "prerequisite": "cur-pm-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.atlassian.com/agile/product-management/product-roadmaps"
       },
       {
         "id": "cur-pm-5",
@@ -10459,7 +10605,8 @@
         "status": "todo",
         "prerequisite": "cur-pm-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.svpg.com/product-fail/"
       }
     ],
     "estimatedEffortHours": 40,
@@ -10708,7 +10855,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://martinfowler.com/articles/architecture-use-cases.html"
       },
       {
         "id": "cur-tpm-2",
@@ -10728,7 +10876,8 @@
         "status": "todo",
         "prerequisite": "cur-tpm-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://spec.openapis.org/oas/latest.html"
       },
       {
         "id": "cur-tpm-3",
@@ -10748,7 +10897,8 @@
         "status": "todo",
         "prerequisite": "cur-tpm-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://swagger.io/docs/specification/about/"
       },
       {
         "id": "cur-tpm-4",
@@ -10768,7 +10918,8 @@
         "status": "todo",
         "prerequisite": "cur-tpm-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://martinfowler.com/bliki/TechnicalDebtQuadrant.html"
       },
       {
         "id": "cur-tpm-5",
@@ -10787,7 +10938,8 @@
         "status": "todo",
         "prerequisite": "cur-tpm-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://12factor.net/"
       }
     ],
     "estimatedEffortHours": 42,
@@ -11058,7 +11210,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.bpmn.org/"
       },
       {
         "id": "cur-ba-2",
@@ -11078,7 +11231,8 @@
         "status": "todo",
         "prerequisite": "cur-ba-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.iiba.org/babok-guide/"
       },
       {
         "id": "cur-ba-3",
@@ -11098,7 +11252,8 @@
         "status": "todo",
         "prerequisite": "cur-ba-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.atlassian.com/agile/project-management/gap-analysis"
       },
       {
         "id": "cur-ba-4",
@@ -11118,7 +11273,8 @@
         "status": "todo",
         "prerequisite": "cur-ba-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.guru99.com/user-acceptance-testing.html"
       },
       {
         "id": "cur-ba-5",
@@ -11137,7 +11293,8 @@
         "status": "todo",
         "prerequisite": "cur-ba-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.prosci.com/methodology/adkar"
       }
     ],
     "estimatedEffortHours": 36,
@@ -11406,7 +11563,8 @@
         "status": "todo",
         "prerequisite": null,
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://developers.google.com/style"
       },
       {
         "id": "cur-tw-2",
@@ -11426,7 +11584,8 @@
         "status": "todo",
         "prerequisite": "cur-tw-1",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://spec.openapis.org/oas/latest.html"
       },
       {
         "id": "cur-tw-3",
@@ -11446,7 +11605,8 @@
         "status": "todo",
         "prerequisite": "cur-tw-2",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://developers.google.com/tech-writing"
       },
       {
         "id": "cur-tw-4",
@@ -11466,7 +11626,8 @@
         "status": "todo",
         "prerequisite": "cur-tw-3",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://docusaurus.io/docs"
       },
       {
         "id": "cur-tw-5",
@@ -11485,7 +11646,8 @@
         "status": "todo",
         "prerequisite": "cur-tw-4",
         "optionalVerifiedResource": null,
-        "completionState": "todo"
+        "completionState": "todo",
+        "resourceUrl": "https://www.writethedocs.org/guide/"
       }
     ],
     "estimatedEffortHours": 36,

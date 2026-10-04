@@ -46,22 +46,14 @@ export function validateWeeklyStudyHours(hours: number): { valid: boolean; error
   return { valid: true };
 }
 
-/**
- * Safely validates a resource URL. Returns sanitized URL or null if invalid.
- */
-export function sanitizeResourceUrl(url?: string | null): string | null {
-  if (!url || typeof url !== 'string') return null;
-  const trimmed = url.trim();
-  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
-    try {
-      new URL(trimmed);
-      return trimmed;
-    } catch {
-      return null;
-    }
-  }
-  return null;
-}
+import {
+  sanitizeResourceUrl,
+  isInvalidOrPlaceholderUrl,
+  resolveCurriculumResourceUrl,
+  resolveTaskResource,
+} from './resourceResolver';
+
+export { sanitizeResourceUrl, isInvalidOrPlaceholderUrl };
 
 /**
  * Topologically sorts roadmap templates so prerequisites strictly precede dependents.
@@ -149,7 +141,9 @@ export function generateRoadmapPlan(options: PlanGenerationOptions): PlanGenerat
           deliverable: c.deliverable,
           estimated_hours: c.estimatedHours || 8,
           prerequisite_id: prevId,
-          resource_url: c.resourceUrl || `https://careerai.local/curriculum/${path.slug}`,
+          resource_url: (c.resourceUrl && !isInvalidOrPlaceholderUrl(c.resourceUrl))
+            ? c.resourceUrl
+            : resolveCurriculumResourceUrl(c.id, path.slug, c.title),
           status: 'todo',
           phase: c.phase,
           skill_ids: c.skillIds,
@@ -285,7 +279,7 @@ export function generateRoadmapPlan(options: PlanGenerationOptions): PlanGenerat
         deliverable: template.deliverable,
         estimatedHours: totalHours,
         prerequisiteTaskId: prereqSegmentId,
-        resourceUrl: template.resource_url || '',
+        resourceUrl: resolveTaskResource({ id: template.id, title: template.title, resourceUrl: template.resource_url }, path?.slug),
         status: existing.status,
         completedAt: existing.completedAt,
         skillId,
@@ -337,7 +331,7 @@ export function generateRoadmapPlan(options: PlanGenerationOptions): PlanGenerat
           estimatedHours: totalHours,   // parent total for UI display
           scheduledHours: segHours,     // hours actually in this week
           prerequisiteTaskId: prevSegmentId,
-          resourceUrl: template.resource_url || '',
+          resourceUrl: resolveTaskResource({ id: template.id, title: template.title, resourceUrl: template.resource_url }, path?.slug),
           status: existing.status,
           completedAt: existing.completedAt,
           // Segment metadata

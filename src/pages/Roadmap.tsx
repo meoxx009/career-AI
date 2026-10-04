@@ -31,6 +31,7 @@ import {
   validateWeeklyStudyHours,
   generateRoadmapPlan,
 } from '../lib/roadmapGenerator';
+import { resolveTaskResource } from '../lib/resourceResolver';
 import {
   calculatePlanProgress,
   getCurrentActiveWeek,
@@ -421,7 +422,7 @@ export const Roadmap: React.FC = () => {
                   {weekTasks.map(task => {
                     const isDone = task.status === 'completed';
                     const { blocked: isBlocked, prerequisiteTitle } = isTaskBlocked(task, roadmapTasks);
-                    const safeUrl = sanitizeResourceUrl(task.resourceUrl);
+                    const safeUrl = sanitizeResourceUrl(resolveTaskResource(task, currentPath?.slug));
 
                     return (
                       <div

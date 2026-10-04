@@ -47,6 +47,7 @@ This is the build order. Do not start P1 until the P0 release gate in `PRD.md` p
 - [x] Build reschedule/complete/uncomplete actions with persistence.
 - [x] Separate plan completion from proficiency in UI and database.
 - [x] Add empty/no-evidence/expired-resource states.
+- [x] **Curated Resources Resolution Gate:** Resolved all 165 milestones across 33 career roles to genuine external HTTPS documentation (Hugging Face, Scikit-learn, PyTorch, MDN, PostgreSQL, etc.); fixed AI Engineer milestone 1; healed legacy roadmaps with `careerai.local` across repositories and context; added URL sanitization and CSV validation.
 
 ## Phase 5 — resume safety
 

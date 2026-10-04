@@ -11,6 +11,8 @@ import {
 } from './roadmapGenerator';
 import { SEED_ROADMAP_TEMPLATES } from '../data/seedData';
 import { STORAGE_KEY, DEFAULT_ROADMAP_TASKS } from '../context/careerConstants';
+import { healRoadmapTasks } from './resourceResolver';
+import { CAREER_CATALOGUE } from '../data/careerCatalogue';
 
 export interface PlanProgress {
   totalTasks: number;
@@ -133,7 +135,8 @@ export class LocalStorageRoadmapRepository implements IRoadmapRepository {
   async getTasks(roleId: number): Promise<RoadmapTask[]> {
     const state = this.getStoredState();
     if (state && Array.isArray(state.roadmapTasks)) {
-      return state.roadmapTasks as RoadmapTask[];
+      const path = CAREER_CATALOGUE.find(p => p.numericId === roleId);
+      return healRoadmapTasks(state.roadmapTasks as RoadmapTask[], path?.slug);
     }
 
     // Fallback: generate default plan for the role
@@ -147,7 +150,8 @@ export class LocalStorageRoadmapRepository implements IRoadmapRepository {
 
   async saveTasks(roleId: number, tasks: RoadmapTask[]): Promise<void> {
     const state = this.getStoredState() || {};
-    state.roadmapTasks = tasks;
+    const path = CAREER_CATALOGUE.find(p => p.numericId === roleId);
+    state.roadmapTasks = healRoadmapTasks(tasks, path?.slug);
     state.selectedRoleId = roleId;
     this.saveStoredState(state);
   }

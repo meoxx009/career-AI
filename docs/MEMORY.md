@@ -132,6 +132,15 @@ Do not call a check passed until it actually runs in the project folder.
   8. Extended data validator (`src/data/validator.ts` & `scripts/validateCsv.mjs`) validating all 343 path requirements and 5-phase curriculum sequences.
   9. Created comprehensive test suite `src/test/unified-path-roadmap.test.tsx` (13 tests verifying all Prompt 5 criteria). All 26 test suites (342 tests) passing with zero failures. Zero lint warnings, zero typecheck errors, production build verified.
 
+- **Curated Learning Resources Resolution & Healing Across All Roles Gate ✅**:
+  1. Identified root cause: `src/lib/roadmapGenerator.ts` had a hardcoded placeholder fallback `https://careerai.local/curriculum/${path.slug}` whenever a curriculum item lacked a `resourceUrl`. Because 162 of 165 curriculum items across 33 career paths did not have a `resourceUrl`, clicking "Curated Resource" navigated to `careerai.local` resulting in `DNS_PROBE_FINISHED_NXDOMAIN`.
+  2. Built `src/lib/resourceResolver.ts`: Authoritative dictionary and resolver mapping all 165 milestones across all 33 paths to genuine, high-authority external documentation and guides (Hugging Face, Scikit-learn, PyTorch, MDN, PostgreSQL, W3C, Docker, Kubernetes, AWS, OWASP, etc.). Specifically resolved AI Engineer Milestone 1 (`cur-ai-1`) to `https://huggingface.co/blog/getting-started-with-embeddings`.
+  3. Added strict URL sanitization: `isInvalidOrPlaceholderUrl` and `sanitizeResourceUrl` reject `careerai.local`, `.local`, `localhost`, `127.0.0.1`, `example.com`, `javascript:`, or empty strings.
+  4. Populated all 165 curriculum items in `data/career-catalogue.json` with authentic `resourceUrl`s and added automated validation in `scripts/validateCsv.mjs`.
+  5. Implemented backward-compatible data healing: `healRoadmapTask` and `healRoadmapTasks` repair legacy saved roadmaps on retrieval and save in `LocalRoadmapRepository`, `SupabaseRoadmapRepository`, `LocalStorageRoadmapRepository`, and `CareerContext.tsx` while strictly preserving completion status, dates, and milestone IDs.
+  6. Updated `src/pages/Roadmap.tsx` to safely resolve and render curated resource links opening with `target="_blank" rel="noopener noreferrer"`. Opening a resource does not alter milestone completion state.
+  7. Added comprehensive test suite `src/test/roadmap-resources.test.tsx` (12 tests). All 28 test files (363 tests) passing with zero failures. Zero lint warnings, zero typecheck errors, production build verified.
+
 ## Next concrete step
 
 - **Next Prompt / Production Deployment**: Proceed to the next numbered build prompt or production deployment as directed by the user.

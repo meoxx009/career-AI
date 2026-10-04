@@ -2,6 +2,8 @@ import type { RoadmapTask } from '../../types';
 import type { IRoadmapRepository, RepositoryResult } from './types';
 import { supabase, isSupabaseConfigured } from '../supabaseClient';
 import { STORAGE_KEY, DEFAULT_ROADMAP_TASKS } from '../../context/careerConstants';
+import { healRoadmapTasks } from '../resourceResolver';
+import { CAREER_CATALOGUE } from '../../data/careerCatalogue';
 
 export class LocalRoadmapRepository implements IRoadmapRepository {
   private storageKey: string;
@@ -20,7 +22,10 @@ export class LocalRoadmapRepository implements IRoadmapRepository {
       const raw = window.localStorage.getItem(key);
       if (!raw) return { data: DEFAULT_ROADMAP_TASKS, error: null };
       const parsed = JSON.parse(raw);
-      return { data: (isUserScoped ? parsed : parsed.roadmapTasks) || DEFAULT_ROADMAP_TASKS, error: null };
+      const rawTasks = (isUserScoped ? parsed : parsed.roadmapTasks) || DEFAULT_ROADMAP_TASKS;
+      const path = CAREER_CATALOGUE.find(p => p.numericId === _roleId);
+      const healed = healRoadmapTasks(rawTasks, path?.slug);
+      return { data: healed, error: null };
     } catch (err) {
       return { data: DEFAULT_ROADMAP_TASKS, error: String(err) };
     }
@@ -33,12 +38,14 @@ export class LocalRoadmapRepository implements IRoadmapRepository {
       }
       const isUserScoped = Boolean(userId && !userId.startsWith('guest'));
       const key = isUserScoped ? `career_ai_roadmap_${userId}` : this.storageKey;
+      const path = CAREER_CATALOGUE.find(p => p.numericId === _roleId);
+      const healedTasks = healRoadmapTasks(tasks, path?.slug);
       if (isUserScoped) {
-        window.localStorage.setItem(key, JSON.stringify(tasks));
+        window.localStorage.setItem(key, JSON.stringify(healedTasks));
       } else {
         const raw = window.localStorage.getItem(this.storageKey);
         const state = raw ? JSON.parse(raw) : {};
-        state.roadmapTasks = tasks;
+        state.roadmapTasks = healedTasks;
         window.localStorage.setItem(this.storageKey, JSON.stringify(state));
       }
       return { data: null, error: null };
@@ -118,7 +125,9 @@ export class SupabaseRoadmapRepository implements IRoadmapRepository {
         completedAt: t.completed_at ? t.completed_at.split('T')[0] : undefined,
       }));
 
-      return { data: mapped, error: null };
+      const path = CAREER_CATALOGUE.find(p => p.numericId === roleId);
+      const healed = healRoadmapTasks(mapped, path?.slug);
+      return { data: healed, error: null };
     } catch (err) {
       return { data: null, error: String(err) };
     }
@@ -130,6 +139,9 @@ export class SupabaseRoadmapRepository implements IRoadmapRepository {
     }
 
     try {
+      const path = CAREER_CATALOGUE.find(p => p.numericId === roleId);
+      const healedTasks = healRoadmapTasks(tasks, path?.slug);
+
       // Ensure roadmap record exists
       let { data: roadmap } = await supabase
         .from('roadmaps')
@@ -158,7 +170,7 @@ export class SupabaseRoadmapRepository implements IRoadmapRepository {
       }
 
       // Upsert tasks
-      const taskRows = tasks.map(t => ({
+      const taskRows = healedTasks.map(t => ({
         id: t.id.includes('-') && t.id.length >= 32 ? t.id : undefined, // only use uuid if valid
         roadmap_id: roadmap!.id,
         user_id: userId,

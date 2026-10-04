@@ -360,6 +360,16 @@ export function validateCsvDataset() {
         if (!item.title) errors.push(`career-catalogue.json (${p.slug}) step ${cIdx}: missing title`);
         if (!item.deliverable) errors.push(`career-catalogue.json (${p.slug}) step ${cIdx}: missing deliverable`);
         if (!item.whyItMatters) errors.push(`career-catalogue.json (${p.slug}) step ${cIdx}: missing whyItMatters`);
+        if (!item.resourceUrl || typeof item.resourceUrl !== 'string') {
+          errors.push(`career-catalogue.json (${p.slug}) step ${cIdx}: missing or invalid resourceUrl`);
+        } else if (
+          !item.resourceUrl.startsWith('http://') &&
+          !item.resourceUrl.startsWith('https://')
+        ) {
+          errors.push(`career-catalogue.json (${p.slug}) step ${cIdx}: resourceUrl must start with http:// or https://`);
+        } else if (item.resourceUrl.includes('.local') || item.resourceUrl.includes('careerai.local')) {
+          errors.push(`career-catalogue.json (${p.slug}) step ${cIdx}: resourceUrl must not point to .local or placeholder domain (${item.resourceUrl})`);
+        }
       });
     }
   });

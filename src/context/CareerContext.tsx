@@ -29,6 +29,8 @@ import { defaultAssessmentRepository } from '../lib/repositories/assessmentRepos
 import { defaultObservationRepository } from '../lib/repositories/observationRepository';
 import { defaultRoadmapRepository } from '../lib/repositories/roadmapRepository';
 import { defaultInterviewRepository } from '../lib/repositories/interviewRepository';
+import { healRoadmapTasks } from '../lib/resourceResolver';
+import { CAREER_CATALOGUE } from '../data/careerCatalogue';
 import { logProductEvent } from '../lib/analytics';
 import { AuthModal } from '../components/AuthModal';
 import {
@@ -155,9 +157,14 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
     savedState?.selectedRoleId || 1
   );
 
-  const [roadmapTasks, setRoadmapTasks] = useState<RoadmapTask[]>(
-    savedState?.roadmapTasks || DEFAULT_ROADMAP_TASKS
-  );
+  const [roadmapTasks, setRoadmapTasks] = useState<RoadmapTask[]>(() => {
+    if (savedState?.roadmapTasks && Array.isArray(savedState.roadmapTasks)) {
+      const activeRoleId = savedState.selectedRoleId || 1;
+      const path = CAREER_CATALOGUE.find(p => p.numericId === activeRoleId);
+      return healRoadmapTasks(savedState.roadmapTasks, path?.slug);
+    }
+    return DEFAULT_ROADMAP_TASKS;
+  });
 
   const [resumeDoc, setResumeDoc] = useState<ResumeDocument>(
     savedState?.resumeDoc || EMPTY_RESUME
@@ -324,7 +331,7 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
           skillObservations,
           diagnosticAnswers,
           selectedRoleId,
-          roadmapTasks,
+          roadmapTasks: healRoadmapTasks(roadmapTasks, CAREER_CATALOGUE.find(p => p.numericId === selectedRoleId)?.slug),
           resumeDoc,
           resumeSuggestions,
           interviewHistory,
