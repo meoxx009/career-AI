@@ -64,12 +64,13 @@ export const ResumeLab: React.FC = () => {
   } = useCareer();
 
   const activeRole = useMemo(() => {
-    return getCareerPathById(selectedRoleId) || CAREER_CATALOGUE[0];
+    return (typeof selectedRoleId === 'number' ? getCareerPathById(selectedRoleId) : undefined) || CAREER_CATALOGUE[0];
   }, [selectedRoleId]);
 
-  const getRoleJd = (roleId: number) => {
-    if (DEFAULT_JDS[roleId]) return DEFAULT_JDS[roleId];
-    const p = getCareerPathById(roleId);
+  const getRoleJd = (roleId?: number | null) => {
+    const id = (roleId !== undefined && roleId !== null) ? roleId : 1;
+    if (DEFAULT_JDS[id]) return DEFAULT_JDS[id];
+    const p = getCareerPathById(id);
     if (p) {
       const skills = (p.coreSkills || []).join(', ');
       const deliverable = p.firstProjectDeliverable ? ` Deliverables: ${p.firstProjectDeliverable}.` : '';
@@ -108,7 +109,7 @@ export const ResumeLab: React.FC = () => {
           const result = analyzeResume({
             resumeText: resumeDoc.rawText,
             jobDescription,
-            roleId: selectedRoleId,
+            roleId: selectedRoleId || 1,
             facts: resumeDoc.facts,
           });
           setAnalysisResult(result);
@@ -119,8 +120,8 @@ export const ResumeLab: React.FC = () => {
         const aiRes = await reviewResumeWithAI({
           resumeText: resumeDoc.rawText,
           jobDescription,
-          targetRoleId: String(selectedRoleId),
-          roleId: String(selectedRoleId),
+          targetRoleId: String(selectedRoleId || 1),
+          roleId: String(selectedRoleId || 1),
           roleName: activeRole.title,
           facts: resumeDoc.facts,
           factIds: (resumeDoc.facts || []).map(f => f.id),
@@ -131,7 +132,7 @@ export const ResumeLab: React.FC = () => {
         const detResult = analyzeResume({
           resumeText: resumeDoc.rawText,
           jobDescription,
-          roleId: selectedRoleId,
+          roleId: selectedRoleId || 1,
           facts: resumeDoc.facts,
         });
 
@@ -169,7 +170,7 @@ export const ResumeLab: React.FC = () => {
         const result = analyzeResume({
           resumeText: resumeDoc.rawText,
           jobDescription,
-          roleId: selectedRoleId,
+          roleId: selectedRoleId || 1,
           facts: resumeDoc.facts,
         });
 

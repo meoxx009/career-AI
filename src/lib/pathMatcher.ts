@@ -327,3 +327,90 @@ export function matchCareerPaths(
     academicContext,
   };
 }
+
+/**
+ * Pure deterministic calculation of up to three related career paths
+ * based strictly on real career catalogue data.
+ *
+ * Ranking criteria:
+ * 1. Same career category (+10 points)
+ * 2. Shared core skills (+3 points each)
+ * 3. Shared prerequisite skills (+2 points each)
+ * 4. Shared interests (+1.5 points each)
+ * 5. Shared eligible learner stages (+1 point each)
+ * 6. Shared compatible streams or degrees (+0.5 points each)
+ * 7. Stable catalogue order (numericId ascending) as tie-breaker
+ */
+export function getRelatedCareerPaths(
+  selectedPath: CareerPath,
+  catalogue: CareerPath[] = CAREER_CATALOGUE,
+  limit: number = 3
+): CareerPath[] {
+  if (!selectedPath) return [];
+
+  const selectedCore = new Set((selectedPath.coreSkills || []).map((s) => s.toLowerCase().trim()));
+  const selectedPrereqs = new Set((selectedPath.prerequisiteSkills || []).map((s) => s.toLowerCase().trim()));
+  const selectedInterests = new Set((selectedPath.interests || []).map((i) => i.toLowerCase().trim()));
+  const selectedStages = new Set(selectedPath.eligibleLearnerStages || []);
+  const selectedStreams = new Set((selectedPath.compatibleStreamsOrDegrees || []).map((s) => s.toLowerCase().trim()));
+
+  const candidates = catalogue.filter(
+    (p) => p.numericId !== selectedPath.numericId && p.slug !== selectedPath.slug
+  );
+
+  const scored = candidates.map((candidate) => {
+    let score = 0;
+
+    // 1. Same career category
+    if (candidate.category === selectedPath.category) {
+      score += 10;
+    }
+
+    // 2. Shared core skills
+    (candidate.coreSkills || []).forEach((s) => {
+      if (selectedCore.has(s.toLowerCase().trim())) {
+        score += 3;
+      }
+    });
+
+    // 3. Shared prerequisite skills
+    (candidate.prerequisiteSkills || []).forEach((s) => {
+      if (selectedPrereqs.has(s.toLowerCase().trim())) {
+        score += 2;
+      }
+    });
+
+    // 4. Shared interests
+    (candidate.interests || []).forEach((i) => {
+      if (selectedInterests.has(i.toLowerCase().trim())) {
+        score += 1.5;
+      }
+    });
+
+    // 5. Shared eligible learner stages
+    (candidate.eligibleLearnerStages || []).forEach((st) => {
+      if (selectedStages.has(st)) {
+        score += 1;
+      }
+    });
+
+    // 6. Shared compatible streams or degrees
+    (candidate.compatibleStreamsOrDegrees || []).forEach((deg) => {
+      if (selectedStreams.has(deg.toLowerCase().trim())) {
+        score += 0.5;
+      }
+    });
+
+    return { candidate, score };
+  });
+
+  // Sort descending by score; stable tie-breaker: candidate.numericId ascending
+  scored.sort((a, b) => {
+    if (b.score !== a.score) {
+      return b.score - a.score;
+    }
+    return a.candidate.numericId - b.candidate.numericId;
+  });
+
+  return scored.slice(0, limit).map((s) => s.candidate);
+}

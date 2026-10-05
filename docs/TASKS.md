@@ -115,6 +115,16 @@ This is the build order. Do not start P1 until the P0 release gate in `PRD.md` p
   7. Continuous-pointer hour budgeter and roadmap generator (`src/lib/roadmapGenerator.ts`) supports all 33 paths, converts curriculum into templates, preserves prerequisite order, splits oversized tasks, blocks dependent tasks, maintains completion state across replanning, and returns error *"Curriculum content pending review"* if curriculum is missing.
   8. Extended data validator (`src/data/validator.ts` & `scripts/validateCsv.mjs`) validating all 343 path requirements and 5-phase curriculum sequences.
   9. Created comprehensive test suite `src/test/unified-path-roadmap.test.tsx` (13 tests verifying all Prompt 5 criteria). All 26 test suites (342 tests) passing with zero failures. Zero lint warnings, zero typecheck errors, production build verified.
+- [x] **Universal Role Selection, Dynamic Preview Hero, Deterministic Related Paths, and Roadmap Alignment Gate:**
+  1. Universal applicability across all 33 production career paths in `CAREER_CATALOGUE`.
+  2. Removed default 3 starter paths in PathBuilder for fresh state; added calm role selection prompt and full 33-career selector.
+  3. Animated `RolePreviewHero.tsx` with metrics, 5-phase strip, deliverables, pulse indicator, and CTAs.
+  4. Deterministic related paths matching (`getRelatedCareerPaths`) returning up to 3 scored adjacent roles.
+  5. Staged 5-phase curriculum placed directly below preview hero.
+  6. Secondary collapsible catalogue with category tabs and search.
+  7. Role-specific roadmap with effort summary, active milestone indicator, and calm empty state when unselected.
+  8. Strict visual token preservation and accessibility compliance.
+  9. 29 test suites, 378 tests passing (100% pass rate). Production build verified.
 - [ ] Deploy static UI and function layer; configure only required redirect URLs.
 - [ ] Run production smoke test with synthetic data and AI disabled.
 

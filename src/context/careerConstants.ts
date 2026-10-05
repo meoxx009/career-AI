@@ -19,6 +19,8 @@ export const DEFAULT_ROADMAP_TASKS: RoadmapTask[] = SEED_ROADMAP_TEMPLATES
     status: 'todo',
   }));
 
+export const EMPTY_ROADMAP_TASKS: RoadmapTask[] = [];
+
 export const EMPTY_PROFILE: UserProfile = {
   id: 'guest-learner',
   displayName: '',
@@ -38,7 +40,8 @@ export const EMPTY_PROFILE: UserProfile = {
   favoriteSubjects: [],
   projectFacts: '',
   isGuestDemo: false,
-  targetRoleId: 1,
+  targetRoleId: undefined,
+  targetRoleSlug: undefined,
   fontSizePreference: 'default',
 };
 

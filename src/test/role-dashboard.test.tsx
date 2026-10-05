@@ -7,7 +7,7 @@ import { RoleDetail } from '../pages/RoleDetail';
 import { Dashboard } from '../pages/Dashboard';
 
 function StateInitializer({ setupMode }: { setupMode: 'fresh' | 'rahul' | 'partial' }) {
-  const { loadRahulDemo, setSkillObservation, setDiagnosticAnswer } = useCareer();
+  const { loadRahulDemo, setSkillObservation, setDiagnosticAnswer, setSelectedRoleId } = useCareer();
 
   if (setupMode === 'rahul') {
     return (
@@ -30,6 +30,7 @@ function StateInitializer({ setupMode }: { setupMode: 'fresh' | 'rahul' | 'parti
           setDiagnosticAnswer('q01', 'a');
           setDiagnosticAnswer('q02', 'b');
           setSkillObservation(1, 3);
+          setSelectedRoleId(1);
         }}
         data-testid="setup-partial-btn"
       >

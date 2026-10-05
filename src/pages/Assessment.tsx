@@ -139,7 +139,7 @@ export const Assessment: React.FC = () => {
     return map;
   }, [skillObservationsList]);
 
-  const targetRole = ROLES_BY_ID.get(selectedRoleId) || ROLES_BY_ID.get(1)!;
+  const targetRole = (typeof selectedRoleId === 'number' ? ROLES_BY_ID.get(selectedRoleId) : undefined) || ROLES_BY_ID.get(1)!;
   const roleReqs = targetRole.requirements || [];
   const coverageResult = calculateRoleCoverage(roleReqs, observationsMap);
   const alignmentResult = calculateAssessedAlignment(roleReqs, observationsMap);

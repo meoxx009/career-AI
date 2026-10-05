@@ -141,6 +141,17 @@ Do not call a check passed until it actually runs in the project folder.
   6. Updated `src/pages/Roadmap.tsx` to safely resolve and render curated resource links opening with `target="_blank" rel="noopener noreferrer"`. Opening a resource does not alter milestone completion state.
   7. Added comprehensive test suite `src/test/roadmap-resources.test.tsx` (12 tests). All 28 test files (363 tests) passing with zero failures. Zero lint warnings, zero typecheck errors, production build verified.
 
+- **Universal Role Selection, Dynamic Preview Hero, Deterministic Related Paths, and Roadmap Alignment Gate ✅**:
+  1. **Universal 33-Role Application**: Implemented role selection, dynamic preview hero, deterministic related roles, and aligned roadmap across all 33 production career paths in `CAREER_CATALOGUE`. No hardcoded single-role logic.
+  2. **Fresh Learner State & Removal of Default Core Paths**: Fresh learners without explicit role selection (`hasSelectedRole: false`, `selectedRoleId: null`) are presented with a calm, purposeful prompt ("Choose a career direction to see your path.") instead of 3 default starter paths or unselected curriculum.
+  3. **Data-Driven Animated Role Preview Hero**: Implemented `RolePreviewHero.tsx` rendering role category, estimated effort, 5-phase progression strip, highlighted deliverables, pulse indicator, and CTAs (Roadmap, Diagnostic, Change Target).
+  4. **Deterministic Related Career Paths**: Implemented pure deterministic function `getRelatedCareerPaths(selectedPath, catalogue, limit = 3)` scoring domain category (+10), core skills overlap (+3), prerequisite overlap (+2), interests (+1.5), and curriculum stages (+1) with stable numericId tie-breaker.
+  5. **5-Phase Staged Curriculum**: Rendered directly below the preview hero with phase names, durations, rationales, and verified deliverables.
+  6. **Secondary Collapsible Catalogue**: Full 33-career catalogue placed below as an expandable secondary explorer with category filtering and instant search, without visually competing with the active role.
+  7. **Role-Specific Roadmap & Calm Empty State**: Updated `/roadmap` to display active role roadmap with effort summary, current milestone, and safe curated resources; renders a calm guidance card when no role has been selected.
+  8. **Strict Design & Safety Preservation**: Preserved luxury editorial palette (`#080B0C`, `#222222`, `#FAF3E1`, `#F5E7C6`, `#FF6D1F`), responsive touch targets (>= 44px), `prefers-reduced-motion` compliance, and zero fake placement or salary claims.
+  9. **Comprehensive Test Suite & Verification**: Added `src/test/role-selection-path-focus.test.tsx` (15 tests). All 29 test suites (378 tests) passing with 100% success. Zero lint warnings, zero typecheck errors, production build verified.
+
 ## Next concrete step
 
 - **Next Prompt / Production Deployment**: Proceed to the next numbered build prompt or production deployment as directed by the user.

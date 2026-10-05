@@ -18,7 +18,12 @@ import {
 import { SEED_ROADMAP_TEMPLATES } from '../data/seedData';
 import { STORAGE_KEY } from '../context/careerConstants';
 
-function renderRoadmap() {
+function renderRoadmap(selectedRoleId: number = 1) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({
+    selectedRoleId,
+    hasSelectedRole: true,
+    profile: { displayName: 'Tester', targetRoleId: selectedRoleId, hoursPerWeek: 8 },
+  }));
   return render(
     <MemoryRouter initialEntries={['/roadmap']}>
       <CareerProvider>

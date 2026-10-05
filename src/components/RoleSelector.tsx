@@ -4,7 +4,7 @@ import type { PathCategory } from '../types';
 import { Search, ChevronDown, Check, X, Compass, Code2, Database, Palette } from 'lucide-react';
 
 export interface RoleSelectorProps {
-  selectedRoleId: number;
+  selectedRoleId?: number | null;
   onSelectRole: (roleId: number) => void;
   label?: string;
   helperText?: string;
@@ -12,13 +12,6 @@ export interface RoleSelectorProps {
   className?: string;
   id?: string;
 }
-
-const CATEGORY_TABS: Array<{ id: PathCategory | 'all'; label: string; count: number }> = [
-  { id: 'all', label: 'All Roles', count: 33 },
-  { id: 'software_engineering', label: 'Software & Systems', count: 15 },
-  { id: 'data_ai', label: 'Data & AI', count: 11 },
-  { id: 'design_product', label: 'Design & Product', count: 7 },
-];
 
 export const RoleSelector: React.FC<RoleSelectorProps> = ({
   selectedRoleId,
@@ -37,12 +30,19 @@ export const RoleSelector: React.FC<RoleSelectorProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
+  const categoryTabs = useMemo(() => [
+    { id: 'all' as const, label: 'All Roles', count: CAREER_CATALOGUE.length },
+    { id: 'software_engineering' as const, label: 'Software & Systems', count: CAREER_CATALOGUE.filter(p => p.category === 'software_engineering').length },
+    { id: 'data_ai' as const, label: 'Data & AI', count: CAREER_CATALOGUE.filter(p => p.category === 'data_ai').length },
+    { id: 'design_product' as const, label: 'Design & Product', count: CAREER_CATALOGUE.filter(p => p.category === 'design_product').length },
+  ], []);
+
   // Active role
   const activePath = useMemo(() => {
-    return (
-      CAREER_CATALOGUE.find((p) => p.numericId === selectedRoleId) ||
-      CAREER_CATALOGUE[0]
-    );
+    if (typeof selectedRoleId === 'number') {
+      return CAREER_CATALOGUE.find((p) => p.numericId === selectedRoleId) || null;
+    }
+    return null;
   }, [selectedRoleId]);
 
   // Filtered roles based on category and search query
@@ -64,27 +64,34 @@ export const RoleSelector: React.FC<RoleSelectorProps> = ({
     return list;
   }, [activeCategory, searchQuery]);
 
-  // Focus search input when dropdown opens
+  // Focus search input when dropdown opens (unless mobile touch)
   useEffect(() => {
     if (isOpen) {
-      setTimeout(() => {
-        searchInputRef.current?.focus();
-      }, 50);
+      const isTouch = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+      if (!isTouch) {
+        setTimeout(() => {
+          searchInputRef.current?.focus();
+        }, 50);
+      }
     }
   }, [isOpen]);
 
-  // Close on outside click
+  // Close on outside click / tap
   useEffect(() => {
-    const handleOutsideClick = (e: MouseEvent) => {
+    const handleOutsideClick = (e: MouseEvent | TouchEvent) => {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
         setIsOpen(false);
       }
     };
     if (isOpen) {
       document.addEventListener('mousedown', handleOutsideClick);
+      document.addEventListener('touchstart', handleOutsideClick);
+      document.addEventListener('pointerdown', handleOutsideClick);
     }
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('touchstart', handleOutsideClick);
+      document.removeEventListener('pointerdown', handleOutsideClick);
     };
   }, [isOpen]);
 
@@ -183,7 +190,11 @@ export const RoleSelector: React.FC<RoleSelectorProps> = ({
         onClick={() => setIsOpen(!isOpen)}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
-        aria-label={`Current role: ${activePath.title}. Click to search and select from 33 career paths.`}
+        aria-label={
+          activePath
+            ? `Current role: ${activePath.title}. Click to search and select from 33 career paths.`
+            : 'No role selected. Click to choose from 33 career paths.'
+        }
         style={{
           width: '100%',
           minHeight: '48px',
@@ -213,49 +224,62 @@ export const RoleSelector: React.FC<RoleSelectorProps> = ({
               flexShrink: 0,
             }}
           >
-            {getCategoryIcon(activePath.category)}
+            {activePath ? getCategoryIcon(activePath.category) : <Compass size={14} color="var(--color-tangerine)" aria-hidden="true" />}
           </div>
           <div style={{ minWidth: 0 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-              <span
-                style={{
-                  fontSize: '0.94rem',
-                  fontWeight: 700,
-                  color: 'var(--color-linen)',
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                }}
-              >
-                {activePath.title}
-              </span>
-              <span
-                style={{
-                  fontSize: '0.68rem',
-                  fontFamily: 'var(--font-mono)',
-                  padding: '2px 6px',
-                  borderRadius: 'var(--radius-pill)',
-                  background: 'rgba(255, 109, 31, 0.12)',
-                  color: 'var(--color-tangerine)',
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                }}
-              >
-                {getCategoryLabel(activePath.category)}
-              </span>
-            </div>
-            <p
-              style={{
-                margin: '2px 0 0',
-                fontSize: '0.76rem',
-                color: 'var(--color-muted-light)',
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-              }}
-            >
-              {activePath.description}
-            </p>
+            {activePath ? (
+              <>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                  <span
+                    style={{
+                      fontSize: '0.94rem',
+                      fontWeight: 700,
+                      color: 'var(--color-linen)',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                    }}
+                  >
+                    {activePath.title}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: '0.68rem',
+                      fontFamily: 'var(--font-mono)',
+                      padding: '2px 6px',
+                      borderRadius: 'var(--radius-pill)',
+                      background: 'rgba(255, 109, 31, 0.12)',
+                      color: 'var(--color-tangerine)',
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {getCategoryLabel(activePath.category)}
+                  </span>
+                </div>
+                <p
+                  style={{
+                    margin: '2px 0 0',
+                    fontSize: '0.76rem',
+                    color: 'var(--color-muted-light)',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                  }}
+                >
+                  {activePath.description}
+                </p>
+              </>
+            ) : (
+              <div>
+                <span style={{ fontSize: '0.92rem', fontWeight: 600, color: 'var(--color-muted-light)' }}>
+                  Choose a career direction...
+                </span>
+                <p style={{ margin: '2px 0 0', fontSize: '0.74rem', color: 'var(--color-cotton)' }}>
+                  Select from 33 validated engineering, data, and design paths
+                </p>
+              </div>
+            )}
           </div>
         </div>
 
@@ -267,7 +291,7 @@ export const RoleSelector: React.FC<RoleSelectorProps> = ({
               fontWeight: 600,
             }}
           >
-            Change
+            {activePath ? 'Change' : 'Select'}
           </span>
           <ChevronDown
             size={16}
@@ -304,7 +328,7 @@ export const RoleSelector: React.FC<RoleSelectorProps> = ({
             borderRadius: 'var(--radius-md)',
             boxShadow: '0 16px 36px rgba(0, 0, 0, 0.65)',
             padding: '16px',
-            maxHeight: '440px',
+            maxHeight: 'min(420px, 70vh)',
             display: 'flex',
             flexDirection: 'column',
             gap: '12px',
@@ -381,7 +405,7 @@ export const RoleSelector: React.FC<RoleSelectorProps> = ({
                 scrollbarWidth: 'none',
               }}
             >
-              {CATEGORY_TABS.map((tab) => {
+              {categoryTabs.map((tab) => {
                 const isActive = activeCategory === tab.id;
                 return (
                   <button
@@ -419,7 +443,7 @@ export const RoleSelector: React.FC<RoleSelectorProps> = ({
             aria-label="Career roles"
             style={{
               overflowY: 'auto',
-              maxHeight: '260px',
+              maxHeight: '240px',
               display: 'flex',
               flexDirection: 'column',
               gap: '4px',
@@ -431,8 +455,9 @@ export const RoleSelector: React.FC<RoleSelectorProps> = ({
               const isHighlighted = idx === highlightedIndex;
 
               return (
-                <div
+                <button
                   key={path.numericId}
+                  type="button"
                   role="option"
                   aria-selected={isSelected}
                   onClick={() => handleSelect(path.numericId)}
@@ -456,6 +481,8 @@ export const RoleSelector: React.FC<RoleSelectorProps> = ({
                     justifyContent: 'space-between',
                     gap: '12px',
                     minHeight: '44px',
+                    textAlign: 'left',
+                    width: '100%',
                     transition: 'background 0.15s ease',
                   }}
                 >
@@ -499,7 +526,7 @@ export const RoleSelector: React.FC<RoleSelectorProps> = ({
                       <Check size={16} color="var(--color-tangerine)" aria-hidden="true" />
                     )}
                   </div>
-                </div>
+                </button>
               );
             })}
 

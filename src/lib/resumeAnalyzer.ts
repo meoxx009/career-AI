@@ -15,7 +15,7 @@ import type { ResumeSourceFact, ResumeSuggestion } from '../types';
 export interface ResumeAnalysisInput {
   resumeText: string;
   jobDescription: string;
-  roleId: number;
+  roleId?: number | null;
   facts?: ResumeSourceFact[];
 }
 
@@ -399,7 +399,8 @@ export function analyzeResume(input: ResumeAnalysisInput): ResumeAnalysisResult 
   const resumeLower = resumeText.toLowerCase();
   const jdLower = jobDescription.toLowerCase();
 
-  const roleAliases = ROLE_KEYWORD_ALIASES[roleId];
+  const effectiveRoleId = (roleId !== undefined && roleId !== null) ? roleId : 1;
+  const roleAliases = ROLE_KEYWORD_ALIASES[effectiveRoleId];
   const hasReviewedAliases = Boolean(roleAliases);
   const matchedTerms: string[] = [];
   const missingTerms: string[] = [];

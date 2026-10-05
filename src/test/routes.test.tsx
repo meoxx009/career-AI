@@ -86,7 +86,7 @@ describe('CareerAI Full Route Shell Architecture (Prompt 03)', () => {
   it('renders Roadmap route (/roadmap)', () => {
     renderWithRouter('/roadmap');
     expect(screen.getByText(/Small steps./i)).toBeDefined();
-    expect(screen.getByText(/WEEK 01/i)).toBeDefined();
+    expect(screen.getByText(/Choose a career direction to see your path./i)).toBeDefined();
   });
 
   it('renders Resume Lab route (/resume)', () => {

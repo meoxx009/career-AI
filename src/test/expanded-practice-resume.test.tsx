@@ -333,7 +333,7 @@ describe('Prompt 7 & Gate 07 — Expanded Practice Session & Resume Builder Role
       );
 
       // Switch to Technical Writer (Role 33)
-      const selectorBtn = screen.getByRole('button', { name: /Current role: Backend Developer/i });
+      const selectorBtn = screen.getByRole('button', { name: /(Current role: Backend Developer|No role selected)/i });
       fireEvent.click(selectorBtn);
 
       const searchInput = screen.getByLabelText(/Search career roles/i);

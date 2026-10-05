@@ -287,7 +287,7 @@ describe('Prompt 05 & Gate 05 — Unified Career Catalogue & Path Builder', () =
   });
 
   describe('4. PathBuilder UI View & Interactivity', () => {
-    it('renders the Path Builder header and 33-career overview', () => {
+    it('renders the Path Builder header and calm role selection prompt in fresh state', () => {
       render(
         <MemoryRouter>
           <CareerProvider>
@@ -298,11 +298,10 @@ describe('Prompt 05 & Gate 05 — Unified Career Catalogue & Path Builder', () =
 
       expect(screen.getByRole('heading', { level: 1, name: /CAREER CATALOGUE & PATH BUILDER/i })).toBeInTheDocument();
       expect(screen.getByText(/Explore 33 production career paths/i)).toBeInTheDocument();
-      expect(screen.getByRole('heading', { name: /TOP MATCHED CAREER DIRECTIONS/i })).toBeInTheDocument();
-      expect(screen.getByRole('heading', { name: /EXPLORE FULL 33-CAREER CATALOGUE/i })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /CHOOSE A CAREER DIRECTION TO SEE YOUR PATH/i })).toBeInTheDocument();
     });
 
-    it('allows filtering by category tabs (Software, Data & AI, Design & Product)', () => {
+    it('allows opening the full catalogue and filtering by category tabs', () => {
       render(
         <MemoryRouter>
           <CareerProvider>
@@ -310,6 +309,12 @@ describe('Prompt 05 & Gate 05 — Unified Career Catalogue & Path Builder', () =
           </CareerProvider>
         </MemoryRouter>
       );
+
+      // Open catalogue
+      const toggleBtn = screen.getByRole('button', { name: /Browse All 33 Career Paths in Full Catalogue/i });
+      fireEvent.click(toggleBtn);
+
+      expect(screen.getByRole('heading', { name: /EXPLORE FULL 33-CAREER CATALOGUE/i })).toBeInTheDocument();
 
       // Category tab buttons
       const softwareTab = screen.getByRole('tab', { name: /Software & Engineering/i });
@@ -329,7 +334,7 @@ describe('Prompt 05 & Gate 05 — Unified Career Catalogue & Path Builder', () =
       expect(dataTab).toHaveAttribute('aria-selected', 'true');
     });
 
-    it('filters paths dynamically when typing in the search box', () => {
+    it('filters paths dynamically when typing in the search box after opening catalogue', () => {
       render(
         <MemoryRouter>
           <CareerProvider>
@@ -338,13 +343,17 @@ describe('Prompt 05 & Gate 05 — Unified Career Catalogue & Path Builder', () =
         </MemoryRouter>
       );
 
+      // Open catalogue
+      const toggleBtn = screen.getByRole('button', { name: /Browse All 33 Career Paths in Full Catalogue/i });
+      fireEvent.click(toggleBtn);
+
       const searchInput = screen.getByLabelText(/Search career catalogue/i);
       fireEvent.change(searchInput, { target: { value: 'Cybersecurity' } });
 
       expect(screen.getByRole('heading', { name: /Cybersecurity Engineer/i })).toBeInTheDocument();
     });
 
-    it('renders the 3 Core Starter Paths below recommendations with view roadmap buttons', () => {
+    it('does not display default starter paths in fresh state without explicit selection', () => {
       render(
         <MemoryRouter>
           <CareerProvider>
@@ -354,15 +363,13 @@ describe('Prompt 05 & Gate 05 — Unified Career Catalogue & Path Builder', () =
       );
 
       expect(
-        screen.getByRole('heading', { name: /CORE STARTER PATHS WITH INTERACTIVE ROADMAPS/i })
-      ).toBeInTheDocument();
+        screen.queryByRole('heading', { name: /CORE STARTER PATHS WITH INTERACTIVE ROADMAPS/i })
+      ).not.toBeInTheDocument();
 
-      expect(screen.getByText(/Starter Path #1/i)).toBeInTheDocument();
-      expect(screen.getByText(/Starter Path #2/i)).toBeInTheDocument();
-      expect(screen.getByText(/Starter Path #3/i)).toBeInTheDocument();
+      expect(screen.getByText(/Choose a career direction to see your path/i)).toBeInTheDocument();
     });
 
-    it('can expand and inspect the 5-phase staged curriculum for a career path', () => {
+    it('can expand and inspect the 5-phase staged curriculum for a career path in the catalogue', () => {
       render(
         <MemoryRouter>
           <CareerProvider>
@@ -370,6 +377,10 @@ describe('Prompt 05 & Gate 05 — Unified Career Catalogue & Path Builder', () =
           </CareerProvider>
         </MemoryRouter>
       );
+
+      // Open catalogue
+      const toggleBtn = screen.getByRole('button', { name: /Browse All 33 Career Paths in Full Catalogue/i });
+      fireEvent.click(toggleBtn);
 
       const viewCurriculumButtons = screen.getAllByRole('button', { name: /View 5-Phase Curriculum/i });
       expect(viewCurriculumButtons.length).toBeGreaterThan(0);

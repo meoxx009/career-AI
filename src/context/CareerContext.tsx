@@ -30,7 +30,7 @@ import { defaultObservationRepository } from '../lib/repositories/observationRep
 import { defaultRoadmapRepository } from '../lib/repositories/roadmapRepository';
 import { defaultInterviewRepository } from '../lib/repositories/interviewRepository';
 import { healRoadmapTasks } from '../lib/resourceResolver';
-import { CAREER_CATALOGUE } from '../data/careerCatalogue';
+import { CAREER_CATALOGUE, asCareerRole } from '../data/careerCatalogue';
 import { logProductEvent } from '../lib/analytics';
 import { AuthModal } from '../components/AuthModal';
 import {
@@ -57,11 +57,13 @@ interface CareerContextType {
   diagnosticAnswers: Record<string, 'a' | 'b' | 'c' | 'd'>;
   setDiagnosticAnswer: (questionId: string, answerKey: 'a' | 'b' | 'c' | 'd') => void;
   clearDiagnosticAnswer: (questionId: string) => void;
-  selectedRoleId: number;
+  hasSelectedRole: boolean;
+  selectedRoleId: number | null;
   selectedRoleSlug: string;
   selectedRole: CareerRole;
   setSelectedRoleId: (roleId: number) => void;
   setSelectedRoleSlug: (slug: string) => void;
+  clearSelectedRole: () => void;
   roadmapTasks: RoadmapTask[];
   toggleTaskCompletion: (taskId: string) => void;
   rescheduleRoadmap: (newWeeklyHours: number) => { valid: boolean; error?: string };
@@ -153,17 +155,61 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
     savedState?.diagnosticAnswers || {}
   );
 
-  const [selectedRoleId, setSelectedRoleIdState] = useState<number>(
-    savedState?.selectedRoleId || 1
+  // Determine if a role has been explicitly selected
+  const initialRoleInfo = (() => {
+    // 1. Explicit flag in savedState
+    if (savedState?.hasSelectedRole && typeof savedState.selectedRoleId === 'number') {
+      const match = CAREER_CATALOGUE.find(p => p.numericId === savedState.selectedRoleId);
+      if (match) return { hasSelected: true, roleId: match.numericId };
+    }
+    // 2. Saved user profile with explicit targetRoleId/targetRoleSlug
+    if (savedState?.profile?.targetRoleId && typeof savedState.profile.targetRoleId === 'number') {
+      const match = CAREER_CATALOGUE.find(p => p.numericId === savedState.profile.targetRoleId);
+      if (match) return { hasSelected: true, roleId: match.numericId };
+    }
+    if (savedState?.profile?.targetRoleSlug) {
+      const match = CAREER_CATALOGUE.find(p => p.slug === savedState.profile.targetRoleSlug);
+      if (match) return { hasSelected: true, roleId: match.numericId };
+    }
+    // 3. Fictional guest demo (Rahul Sharma) always has an explicit active target role (Backend Developer)
+    if (savedState?.profile?.isGuestDemo) {
+      return { hasSelected: true, roleId: savedState.selectedRoleId || 1 };
+    }
+    // 4. Backward compatibility: if savedState had explicit roadmapTasks with items and hasSelectedRole was not explicitly false
+    if (
+      savedState?.hasSelectedRole !== false &&
+      typeof savedState?.selectedRoleId === 'number' &&
+      Array.isArray(savedState?.roadmapTasks) &&
+      savedState.roadmapTasks.length > 0 &&
+      savedState?.profile?.displayName
+    ) {
+      const match = CAREER_CATALOGUE.find(p => p.numericId === savedState.selectedRoleId);
+      if (match) return { hasSelected: true, roleId: match.numericId };
+    }
+    // Fresh state — no role explicitly selected
+    return { hasSelected: false, roleId: null };
+  })();
+
+  const [hasSelectedRole, setHasSelectedRole] = useState<boolean>(initialRoleInfo.hasSelected);
+
+  const [selectedRoleId, setSelectedRoleIdState] = useState<number | null>(
+    initialRoleInfo.roleId
   );
 
   const [roadmapTasks, setRoadmapTasks] = useState<RoadmapTask[]>(() => {
+    if (!initialRoleInfo.hasSelected || initialRoleInfo.roleId === null) {
+      return [];
+    }
     if (savedState?.roadmapTasks && Array.isArray(savedState.roadmapTasks)) {
-      const activeRoleId = savedState.selectedRoleId || 1;
-      const path = CAREER_CATALOGUE.find(p => p.numericId === activeRoleId);
+      const path = CAREER_CATALOGUE.find(p => p.numericId === initialRoleInfo.roleId);
       return healRoadmapTasks(savedState.roadmapTasks, path?.slug);
     }
-    return DEFAULT_ROADMAP_TASKS;
+    const initial = generateRoadmapPlan({
+      roleId: initialRoleInfo.roleId,
+      weeklyStudyHours: savedState?.profile?.hoursPerWeek || 8,
+      templates: SEED_ROADMAP_TEMPLATES,
+    });
+    return initial.valid ? initial.tasks : [];
   });
 
   const [resumeDoc, setResumeDoc] = useState<ResumeDocument>(
@@ -257,11 +303,18 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
   const loadUserData = useCallback(async (userId: string, metadata?: Record<string, unknown>) => {
     try {
       const profRes = await defaultProfileRepository.getProfile(userId);
-      let activeRoleId = 1;
-      if (profRes.data && (profRes.data.displayName || profRes.data.targetRoleId)) {
-        setProfile({ ...profRes.data, isGuestDemo: false });
-        if (profRes.data.targetRoleId) {
-          activeRoleId = profRes.data.targetRoleId;
+      let activeRoleId: number | null = null;
+      let userHasSelected = false;
+      const profData = profRes.data;
+      if (profData && (profData.displayName || profData.targetRoleId)) {
+        setProfile({ ...profData, isGuestDemo: false });
+        if (profData.targetRoleId) {
+          const targetRoleId = profData.targetRoleId;
+          const match = CAREER_CATALOGUE.find(p => p.numericId === targetRoleId);
+          if (match) {
+            activeRoleId = match.numericId;
+            userHasSelected = true;
+          }
         }
       } else {
         const metaName =
@@ -287,6 +340,7 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
         });
       }
       setSelectedRoleIdState(activeRoleId);
+      setHasSelectedRole(userHasSelected);
 
       const answersRes = await defaultAssessmentRepository.getUserAnswers(userId);
       setDiagnosticAnswers(answersRes.data || {});
@@ -294,18 +348,22 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
       const obsRes = await defaultObservationRepository.getObservations(userId);
       setSkillObservations(obsRes.data || createEmptyObservations());
 
-      const roadmapRes = await defaultRoadmapRepository.getRoadmapTasks(userId, activeRoleId);
-      if (roadmapRes.data && roadmapRes.data.length > 0) {
-        setRoadmapTasks(roadmapRes.data);
-      } else {
-        const initial = generateRoadmapPlan({
-          roleId: activeRoleId,
-          weeklyStudyHours: profRes.data?.hoursPerWeek || 8,
-          templates: SEED_ROADMAP_TEMPLATES,
-        });
-        if (initial.valid) {
-          setRoadmapTasks(initial.tasks);
+      if (activeRoleId) {
+        const roadmapRes = await defaultRoadmapRepository.getRoadmapTasks(userId, activeRoleId);
+        if (roadmapRes.data && roadmapRes.data.length > 0) {
+          setRoadmapTasks(roadmapRes.data);
+        } else {
+          const initial = generateRoadmapPlan({
+            roleId: activeRoleId,
+            weeklyStudyHours: profRes.data?.hoursPerWeek || 8,
+            templates: SEED_ROADMAP_TEMPLATES,
+          });
+          if (initial.valid) {
+            setRoadmapTasks(initial.tasks);
+          }
         }
+      } else {
+        setRoadmapTasks([]);
       }
 
       const interviewRes = await defaultInterviewRepository.getInterviewSessions(userId);
@@ -330,8 +388,11 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
           profile,
           skillObservations,
           diagnosticAnswers,
+          hasSelectedRole,
           selectedRoleId,
-          roadmapTasks: healRoadmapTasks(roadmapTasks, CAREER_CATALOGUE.find(p => p.numericId === selectedRoleId)?.slug),
+          roadmapTasks: hasSelectedRole && selectedRoleId
+            ? healRoadmapTasks(roadmapTasks, CAREER_CATALOGUE.find(p => p.numericId === selectedRoleId)?.slug)
+            : [],
           resumeDoc,
           resumeSuggestions,
           interviewHistory,
@@ -349,6 +410,7 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
     profile,
     skillObservations,
     diagnosticAnswers,
+    hasSelectedRole,
     selectedRoleId,
     roadmapTasks,
     resumeDoc,
@@ -594,7 +656,21 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const setSelectedRoleId = (roleId: number) => {
+    const path = CAREER_CATALOGUE.find(p => p.numericId === roleId);
+    if (!path) return;
+
     setSelectedRoleIdState(roleId);
+    setHasSelectedRole(true);
+
+    const updatedProfileUpdates = {
+      targetRoleId: path.numericId,
+      targetRoleSlug: path.slug,
+    };
+    setProfile(prev => ({
+      ...prev,
+      ...updatedProfileUpdates,
+    }));
+
     const result = generateRoadmapPlan({
       roleId,
       weeklyStudyHours: profile.hoursPerWeek || 8,
@@ -604,15 +680,26 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
       setRoadmapTasks(result.tasks);
       if (user && !profile.isGuestDemo) {
         defaultRoadmapRepository.saveRoadmapTasks(user.id, roleId, result.tasks).catch(() => {});
-        const role = ROLES_BY_ID.get(roleId);
-        if (role) {
-          saveProfile({ targetRoleId: role.id, targetRoleSlug: role.slug });
-        }
+        saveProfile(updatedProfileUpdates);
       }
     }
   };
 
+  const clearSelectedRole = () => {
+    setHasSelectedRole(false);
+    setSelectedRoleIdState(null);
+    setRoadmapTasks([]);
+    setProfile(prev => ({
+      ...prev,
+      targetRoleId: undefined,
+      targetRoleSlug: undefined,
+    }));
+  };
+
   const rescheduleRoadmap = (newWeeklyHours: number): { valid: boolean; error?: string } => {
+    if (!selectedRoleId) {
+      return { valid: false, error: 'No active role selected.' };
+    }
     const result = generateRoadmapPlan({
       roleId: selectedRoleId,
       weeklyStudyHours: newWeeklyHours,
@@ -635,9 +722,9 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const setSelectedRoleSlug = (slug: string) => {
-    const matched = ROLES_BY_SLUG.get(slug);
+    const matched = CAREER_CATALOGUE.find(p => p.slug.toLowerCase() === slug.toLowerCase()) || ROLES_BY_SLUG.get(slug);
     if (matched) {
-      setSelectedRoleId(matched.id);
+      setSelectedRoleId('numericId' in matched ? matched.numericId : matched.id);
     }
   };
 
@@ -660,11 +747,12 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
       return;
     }
 
+    const roleIdToPersist = selectedRoleId ?? (profile.targetRoleId || 1);
     try {
       setIsSaving(true);
       setPersistenceStatus('saving');
-      await defaultRoadmapRepository.saveRoadmapTasks(user.id, selectedRoleId, updated);
-      const readBack = await defaultRoadmapRepository.getRoadmapTasks(user.id, selectedRoleId);
+      await defaultRoadmapRepository.saveRoadmapTasks(user.id, roleIdToPersist, updated);
+      const readBack = await defaultRoadmapRepository.getRoadmapTasks(user.id, roleIdToPersist);
       if (readBack.data) {
         setRoadmapTasks(readBack.data);
       }
@@ -762,6 +850,7 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
       q07: 'a',
     });
     setSelectedRoleIdState(1);
+    setHasSelectedRole(true);
     setRoadmapTasks(DEMO_RAHUL_ROADMAP_TASKS);
     setResumeDoc(DEMO_RAHUL_RESUME);
     setResumeSuggestions([]);
@@ -815,8 +904,9 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
     setProfile(EMPTY_PROFILE);
     setSkillObservations(createEmptyObservations());
     setDiagnosticAnswers({});
-    setSelectedRoleIdState(1);
-    setRoadmapTasks(DEFAULT_ROADMAP_TASKS);
+    setSelectedRoleIdState(null);
+    setHasSelectedRole(false);
+    setRoadmapTasks([]);
     setResumeDoc(EMPTY_RESUME);
     setResumeSuggestions([]);
     setInterviewHistory([]);
@@ -1061,8 +1151,13 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
     [aiMode]
   );
 
-  const selectedRole = ROLES_BY_ID.get(selectedRoleId) || SEED_ROLES[0];
-  const selectedRoleSlug = selectedRole.slug;
+  const activeCareerPath = hasSelectedRole && selectedRoleId
+    ? CAREER_CATALOGUE.find(p => p.numericId === selectedRoleId)
+    : null;
+  const selectedRole = activeCareerPath
+    ? asCareerRole(activeCareerPath)
+    : (selectedRoleId ? (ROLES_BY_ID.get(selectedRoleId) || SEED_ROLES[0]) : SEED_ROLES[0]);
+  const selectedRoleSlug = activeCareerPath ? activeCareerPath.slug : selectedRole.slug;
   const isDemoMode = Boolean(profile.isGuestDemo);
 
   return (
@@ -1078,11 +1173,13 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
         diagnosticAnswers,
         setDiagnosticAnswer,
         clearDiagnosticAnswer,
+        hasSelectedRole,
         selectedRoleId,
         selectedRoleSlug,
         selectedRole,
         setSelectedRoleId,
         setSelectedRoleSlug,
+        clearSelectedRole,
         roadmapTasks,
         toggleTaskCompletion,
         rescheduleRoadmap,

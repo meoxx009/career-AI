@@ -66,7 +66,7 @@ export const Practice: React.FC = () => {
 
   // Active career path from the shared 33-role catalogue
   const activePath = useMemo(() => {
-    return getCareerPathById(selectedRoleId) || CAREER_CATALOGUE[0];
+    return (typeof selectedRoleId === 'number' ? getCareerPathById(selectedRoleId) : undefined) || CAREER_CATALOGUE[0];
   }, [selectedRoleId]);
 
   // Questions for the active path (specific or safe fallback)

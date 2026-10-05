@@ -80,3 +80,5 @@ export function asCareerRole(path: CareerPath): CareerRole {
 export function getAllCareerRoles(): CareerRole[] {
   return CAREER_CATALOGUE.map(asCareerRole);
 }
+
+export { getRelatedCareerPaths } from '../lib/pathMatcher';

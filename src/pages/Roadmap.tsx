@@ -45,6 +45,7 @@ export const Roadmap: React.FC = () => {
     profile,
     selectedRole,
     selectedRoleId,
+    hasSelectedRole,
     skillObservations,
     roadmapTasks,
     toggleTaskCompletion,
@@ -89,7 +90,7 @@ export const Roadmap: React.FC = () => {
   const parsedHoursPreview = Number(hoursInput);
   const previewWeeks = (() => {
     if (!validateWeeklyStudyHours(parsedHoursPreview).valid) return null;
-    const preview = generateRoadmapPlan({ roleId: selectedRoleId, weeklyStudyHours: parsedHoursPreview });
+    const preview = generateRoadmapPlan({ roleId: selectedRoleId || 1, weeklyStudyHours: parsedHoursPreview });
     return preview.valid ? preview.estimatedWeeks : null;
   })();
 
@@ -125,6 +126,76 @@ export const Roadmap: React.FC = () => {
     }
   };
 
+  // State A: No explicit role selected
+  if (!hasSelectedRole || !selectedRoleId) {
+    return (
+      <div style={{ maxWidth: '800px', margin: '40px auto 80px', padding: '0 16px' }}>
+        <header className="roadmap-head" style={{ marginBottom: '32px' }}>
+          <div>
+            <Eyebrow text="ROADMAP EXECUTION / REAL PROOF" />
+            <DisplayHeading level={1} className="editorial-heading">
+              Small steps.<br />
+              <i style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 500, color: 'var(--color-linen)' }}>
+                Real proof.
+              </i>
+            </DisplayHeading>
+          </div>
+        </header>
+
+        <DarkCard
+          style={{
+            padding: '48px 32px',
+            textAlign: 'center',
+            border: '1px solid var(--color-line-dark)',
+            borderRadius: 'var(--radius-lg)',
+          }}
+        >
+          <div
+            style={{
+              width: '56px',
+              height: '56px',
+              borderRadius: '50%',
+              background: 'rgba(255, 109, 31, 0.12)',
+              border: '1px solid rgba(255, 109, 31, 0.3)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 20px',
+            }}
+          >
+            <Clock size={28} color="var(--color-tangerine)" aria-hidden="true" />
+          </div>
+
+          <h2 style={{ fontSize: '1.6rem', color: 'var(--color-linen)', marginBottom: '12px', fontWeight: 600 }}>
+            Choose a career direction to see your path.
+          </h2>
+
+          <p
+            className="muted-light"
+            style={{
+              fontSize: '0.95rem',
+              lineHeight: 1.5,
+              maxWidth: '520px',
+              margin: '0 auto 28px',
+              color: 'var(--color-cotton)',
+            }}
+          >
+            Select a role in the Path Builder to generate your personalized step-by-step roadmap.
+          </p>
+
+          <PrimaryButton
+            onClick={() => navigate('/paths/builder')}
+            style={{ padding: '12px 24px', fontSize: '0.9rem' }}
+          >
+            <span>Go to Path Builder →</span>
+          </PrimaryButton>
+        </DarkCard>
+      </div>
+    );
+  }
+
+  const totalEffortWeeks = weeks.length > 0 ? `${weeks.length} Weeks` : '12-16 Weeks';
+
   return (
     <div style={{ maxWidth: '960px', margin: '0 auto' }}>
       {/* Header & Editorial Heading */}
@@ -140,7 +211,7 @@ export const Roadmap: React.FC = () => {
         </div>
 
         <div className="plan-meta" style={{ textAlign: 'right' }}>
-          <span>{selectedRole.name.toUpperCase()} / {weeks.length || 0} WEEKS (ESTIMATE)</span>
+          <span>{selectedRole.name.toUpperCase()} / {totalEffortWeeks.toUpperCase()} (ESTIMATE)</span>
           <strong style={{ fontSize: '1.25rem', color: 'var(--color-tangerine)', display: 'block', margin: '4px 0' }}>
             {profile.hoursPerWeek} HRS / WEEK
           </strong>
@@ -359,6 +430,31 @@ export const Roadmap: React.FC = () => {
       ) : (
         /* Milestone Weeks Timeline */
         <div style={{ display: 'grid', gap: '28px' }}>
+          {nextPendingTask && (
+            <div
+              style={{
+                padding: '16px 20px',
+                borderRadius: 'var(--radius-md)',
+                background: 'rgba(255, 109, 31, 0.08)',
+                border: '1px solid rgba(255, 109, 31, 0.3)',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                gap: '12px',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <StatusBadge variant="tangerine" label={`ACTIVE MILESTONE / WEEK ${String(nextPendingTask.weekNumber).padStart(2, '0')}`} />
+                <span style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--color-linen)' }}>
+                  {nextPendingTask.title}
+                </span>
+              </div>
+              <span style={{ fontSize: '0.8rem', color: 'var(--color-cotton)' }}>
+                Target: {nextPendingTask.deliverable} · {nextPendingTask.estimatedHours}h
+              </span>
+            </div>
+          )}
           {weeks.map(weekNum => {
             const weekTasks = tasksByWeek[weekNum];
             const isWeekAllComplete = weekTasks.every(t => t.status === 'completed');
