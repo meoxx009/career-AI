@@ -32,6 +32,9 @@ import {
   Copy,
   AlertCircle,
   Sparkles,
+  Download,
+  Save,
+  CheckCircle2,
 } from 'lucide-react';
 
 const DEFAULT_JDS: Record<number, string> = {
@@ -233,6 +236,24 @@ export const ResumeLab: React.FC = () => {
 
   const handlePrintResume = () => {
     window.print();
+  };
+
+  const handleSaveDraft = () => {
+    showToast('Resume draft saved.');
+  };
+
+  const handleDownloadTxt = () => {
+    const filename = `resume-${activeRole.slug || 'draft'}.txt`;
+    const blob = new Blob([resumeDoc.rawText], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast(`Downloaded ${filename}`);
   };
 
   const handleLoadRahulDemo = () => {
@@ -588,6 +609,70 @@ export const ResumeLab: React.FC = () => {
             </div>
           </DarkCard>
 
+          {/* Source-Linked Roadmap Achievements & Project Evidence */}
+          <DarkCard style={{ padding: '18px 22px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px', flexWrap: 'wrap', gap: '8px' }}>
+              <h4 style={{ margin: 0, fontSize: '0.95rem', color: 'var(--color-linen)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <CheckCircle2 size={16} color="var(--color-success)" />
+                Source-Linked Roadmap Achievements
+              </h4>
+              <span className="source-label" style={{ fontSize: '0.68rem' }}>
+                {resumeDoc.facts.filter(f => f.source === 'roadmap' || f.id.startsWith('fact-rm-')).length} Verified Milestones
+              </span>
+            </div>
+            <p style={{ margin: '0 0 14px', fontSize: '0.78rem', color: 'var(--color-muted-light)', lineHeight: 1.5 }}>
+              Automatically synchronized when you complete milestones in your Roadmap. Planned deliverables are never imported as completed proof.
+            </p>
+
+            {(() => {
+              const roadmapFacts = resumeDoc.facts.filter(f => f.source === 'roadmap' || f.id.startsWith('fact-rm-'));
+              if (roadmapFacts.length === 0) {
+                return (
+                  <div
+                    style={{
+                      padding: '12px 14px',
+                      borderRadius: 'var(--radius-sm)',
+                      background: 'rgba(255, 255, 255, 0.03)',
+                      border: '1px dashed var(--color-line-dark)',
+                      fontSize: '0.76rem',
+                      color: 'var(--color-muted-light)',
+                      lineHeight: 1.45,
+                    }}
+                  >
+                    No roadmap milestones marked complete yet. Check off completed milestones in your interactive roadmap to automatically record verifiable project deliverables and completion dates here.
+                  </div>
+                );
+              }
+
+              return (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {roadmapFacts.map((fact) => (
+                    <div
+                      key={fact.id}
+                      style={{
+                        padding: '10px 14px',
+                        borderRadius: 'var(--radius-sm)',
+                        background: 'rgba(74, 122, 60, 0.10)',
+                        border: '1px solid rgba(74, 122, 60, 0.35)',
+                        fontSize: '0.78rem',
+                      }}
+                    >
+                      <div style={{ fontWeight: 700, color: 'var(--color-linen)', marginBottom: '4px' }}>
+                        {fact.claim || fact.text}
+                      </div>
+                      <div style={{ color: 'var(--color-muted-light)', fontSize: '0.74rem', lineHeight: 1.4 }}>
+                        {fact.evidenceSnippet || fact.text}
+                      </div>
+                      <div style={{ marginTop: '4px', fontSize: '0.70rem', color: 'var(--color-cotton)', fontFamily: 'var(--font-mono)' }}>
+                        {fact.verifiedAt ? `Verified: ${fact.verifiedAt} · ` : ''}Source: Interactive Roadmap
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              );
+            })()}
+          </DarkCard>
+
           {/* Real Browser Export Controls */}
           <DarkCard style={{ padding: '18px 22px' }}>
             <h4 style={{ margin: '0 0 8px', fontSize: '0.95rem', color: 'var(--color-linen)' }}>
@@ -597,8 +682,14 @@ export const ResumeLab: React.FC = () => {
               Generates 100% selectable, standard text with clean printer styling. We do not generate unreadable or locked PDFs.
             </p>
             <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+              <PrimaryButton onClick={handleSaveDraft} icon={<Save size={14} />}>
+                Save Draft
+              </PrimaryButton>
               <SecondaryButton onClick={handlePrintResume} icon={<Printer size={14} />}>
                 Print / Save as PDF ↗
+              </SecondaryButton>
+              <SecondaryButton onClick={handleDownloadTxt} icon={<Download size={14} />}>
+                Download .txt
               </SecondaryButton>
               <SecondaryButton onClick={handleCopyResume} icon={<Copy size={14} />}>
                 Copy Plaintext

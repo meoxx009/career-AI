@@ -1,15 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCareer } from '../context/CareerContext';
-import {
-  SEED_ROLES,
-  SEED_ROLE_SKILL_REQUIREMENTS,
-  SKILLS_BY_ID,
-} from '../data/seedData';
-import {
-  buildRoleExplanation,
-  sortRoleAssessments,
-} from '../lib/scoring';
 import {
   DisplayHeading,
   Eyebrow,
@@ -17,22 +8,24 @@ import {
   SecondaryButton,
   DarkCard,
   CottonCard,
-  ScoreMeter,
   StatusBadge,
+  ScoreMeter,
   ProgressPill,
 } from '../components/DesignSystem';
 import {
-  ArrowRight,
   Info,
+  SlidersHorizontal,
+  BookOpen,
   CheckCircle2,
   AlertTriangle,
   HelpCircle,
-  SlidersHorizontal,
-  Sparkles,
-  BookOpen,
+  ArrowRight,
 } from 'lucide-react';
 import { LearnerContextIntake } from '../components/LearnerContextIntake';
 import { generatePathRecommendations } from '../lib/pathRecommendations';
+import { BranchingPathTree } from '../components/BranchingPathTree';
+import { SEED_ROLES, SEED_ROLE_SKILL_REQUIREMENTS, SKILLS_BY_ID } from '../data/seedData';
+import { buildRoleExplanation } from '../lib/scoring';
 import type { UserProfile } from '../types';
 
 export const Paths: React.FC = () => {
@@ -48,40 +41,46 @@ export const Paths: React.FC = () => {
   } = useCareer();
 
   const [isEditorOpen, setIsEditorOpen] = useState(false);
+  const [draftProfile, setDraftProfile] = useState<UserProfile>(profile);
 
-  // Create lookup map of skill observations
-  const obsMap = new Map<number | string, number | null>();
-  Object.entries(skillObservations).forEach(([sId, val]) => {
-    obsMap.set(Number(sId), val);
-  });
-
-  // Build rich deterministic assessment for each seed role
-  const roleAssessments = SEED_ROLES.map(role =>
-    buildRoleExplanation(role, SEED_ROLE_SKILL_REQUIREMENTS, obsMap)
-  );
-
-  // Sort: selected first, then confident by alignment, then coverage
-  const sortedAssessments = sortRoleAssessments(roleAssessments).sort((a, b) => {
-    const aSelected = Number(a.roleId) === selectedRoleId;
-    const bSelected = Number(b.roleId) === selectedRoleId;
-    if (aSelected && !bSelected) return -1;
-    if (!aSelected && bSelected) return 1;
-    return 0;
-  });
-
-  const handleSelectRole = (roleId: number, roleName: string) => {
-    setSelectedRoleId(roleId);
-    showToast(`Active path set to ${roleName}.`);
+  const handleToggleEditor = () => {
+    if (!isEditorOpen) {
+      setDraftProfile({ ...profile });
+    }
+    setIsEditorOpen(!isEditorOpen);
   };
 
-  const handleProfileChange = (updates: Partial<UserProfile>) => {
-    updateProfile(updates);
-    saveProfile(updates);
+  const handleDraftChange = (updates: Partial<UserProfile>) => {
+    setDraftProfile(prev => ({ ...prev, ...updates }));
   };
 
-  // Generate deterministic personalized path recommendations
+  const handleApplyDraft = () => {
+    let hours = Number(draftProfile.hoursPerWeek) || 8;
+    if (hours < 1) hours = 1;
+    if (hours > 40) hours = 40;
+
+    const validated: UserProfile = {
+      ...draftProfile,
+      hoursPerWeek: hours,
+    };
+
+    updateProfile(validated);
+    saveProfile(validated);
+    setIsEditorOpen(false);
+    showToast('Applied updated profile & interests. Directions recalculated.');
+  };
+
+  // Generate deterministic personalized path recommendations from applied profile
   const recResult = generatePathRecommendations(profile);
   const isSchool = recResult.isSchoolLearner;
+
+  const obsMap = useMemo(() => {
+    const map = new Map<number | string, number | null>();
+    Object.entries(skillObservations).forEach(([sId, val]) => {
+      map.set(Number(sId), val);
+    });
+    return map;
+  }, [skillObservations]);
 
   return (
     <div style={{ maxWidth: '1120px', margin: '0 auto' }}>
@@ -132,7 +131,7 @@ export const Paths: React.FC = () => {
 
           <button
             type="button"
-            onClick={() => setIsEditorOpen(!isEditorOpen)}
+            onClick={handleToggleEditor}
             className="button button-secondary"
             style={{ fontSize: '0.8rem', padding: '8px 16px', minHeight: '36px' }}
           >
@@ -141,7 +140,7 @@ export const Paths: React.FC = () => {
           </button>
         </div>
 
-        {/* Expandable Reusable Intake Component */}
+        {/* Expandable Reusable Intake Component with Local Draft State */}
         {isEditorOpen && (
           <div
             style={{
@@ -151,12 +150,21 @@ export const Paths: React.FC = () => {
             }}
           >
             <LearnerContextIntake
-              profile={profile}
-              onChange={handleProfileChange}
+              profile={draftProfile}
+              onChange={handleDraftChange}
               mode="all"
             />
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
-              <PrimaryButton onClick={() => setIsEditorOpen(false)} style={{ fontSize: '0.8rem', padding: '8px 18px' }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '20px' }}>
+              <SecondaryButton
+                onClick={() => {
+                  setDraftProfile(profile);
+                  setIsEditorOpen(false);
+                }}
+                style={{ fontSize: '0.8rem', padding: '8px 16px' }}
+              >
+                Cancel
+              </SecondaryButton>
+              <PrimaryButton onClick={handleApplyDraft} style={{ fontSize: '0.8rem', padding: '8px 18px' }}>
                 Apply &amp; View Updated Directions ↗
               </PrimaryButton>
             </div>
@@ -181,7 +189,7 @@ export const Paths: React.FC = () => {
           </p>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '16px' }}>
-            {recResult.streamOpportunity.opportunityDirections.map((dir, idx) => (
+            {recResult.streamOpportunity.opportunityDirections?.map((dir, idx) => (
               <span
                 key={idx}
                 style={{
@@ -215,211 +223,44 @@ export const Paths: React.FC = () => {
         </CottonCard>
       )}
 
-      {/* Personalized Path Recommendations Section */}
-      <section style={{ marginBottom: '48px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-          <Sparkles size={18} color="var(--color-tangerine)" aria-hidden="true" />
-          <Eyebrow text="PERSONALIZED PATH SUGGESTIONS" />
-        </div>
-        <h2 style={{ fontSize: '1.6rem', color: 'var(--color-linen)', margin: '0 0 8px' }}>
-          Suggested Directions for You
-        </h2>
-        <p className="muted-light" style={{ maxWidth: '720px', margin: '0 0 24px', fontSize: '0.9rem', lineHeight: 1.5 }}>
-          Generated deterministically from your stage, stream, interests, and stated hours.
-          Eligibility varies by institution and programme.
-        </p>
-
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))',
-            gap: '20px',
-          }}
-        >
-          {recResult.recommendations.map(rec => (
-            <DarkCard
-              key={rec.id}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                padding: '28px',
-                border: '1px solid var(--color-line-dark)',
-              }}
-            >
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                  <StatusBadge variant="tangerine" label={rec.badge} />
-                  {rec.alignedRoleId && (
-                    <span style={{ fontSize: '0.74rem', fontFamily: 'var(--font-mono)', color: 'var(--color-cotton)' }}>
-                      SEED #{rec.alignedRoleId}
-                    </span>
-                  )}
-                </div>
-
-                <h3 style={{ fontSize: '1.25rem', color: 'var(--color-linen)', margin: '0 0 10px', lineHeight: 1.3 }}>
-                  {rec.title}
-                </h3>
-
-                <p style={{ margin: '0 0 16px', fontSize: '0.84rem', color: 'var(--color-muted-light)', lineHeight: 1.5 }}>
-                  <strong>Why suggested:</strong> {rec.whySuggested}
-                </p>
-
-                <div
-                  style={{
-                    background: 'var(--color-black-soft)',
-                    border: '1px solid var(--color-line-dark)',
-                    borderRadius: 'var(--radius-sm)',
-                    padding: '12px 14px',
-                    fontSize: '0.78rem',
-                    color: 'var(--color-cotton)',
-                    display: 'grid',
-                    gap: '6px',
-                    marginBottom: '16px',
-                  }}
-                >
-                  <div><strong>Inputs evaluated:</strong> {(rec.inputsEvaluated || rec.contributingInputs || []).join(' · ')}</div>
-                  {rec.requirementsEvaluated && rec.requirementsEvaluated.length > 0 && (
-                    <div><strong>Requirements evaluated:</strong> {rec.requirementsEvaluated.join(' · ')}</div>
-                  )}
-                  <div>
-                    <strong>Evidence found:</strong>{' '}
-                    {rec.evidenceFound && rec.evidenceFound.length > 0 && !rec.evidenceFound.every(e => e.includes('No prior coursework') || e.includes('No verified skill'))
-                      ? rec.evidenceFound.join(' · ')
-                      : 'No verified skill evidence supplied yet.'}
-                  </div>
-                  <div>
-                    <strong>Still unknown:</strong>{' '}
-                    {(rec.stillUnknown || rec.unknowns || []).length > 0
-                      ? (rec.stillUnknown || rec.unknowns || []).map(u => u.replace(/Confirmed gap/gi, 'Not assessed yet')).join(' · ')
-                      : 'Not assessed yet'}
-                  </div>
-                  <div>
-                    <strong>Prerequisites:</strong>{' '}
-                    {(rec.prerequisiteSkills || rec.prerequisites || []).length > 0
-                      ? (rec.prerequisiteSkills || rec.prerequisites || []).join(', ')
-                      : 'None'}
-                  </div>
-                </div>
-
-                {/* Estimated Curriculum Preview */}
-                <div style={{ marginBottom: '16px' }}>
-                  <span style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--color-tangerine)', textTransform: 'uppercase' }}>
-                    Estimated Curriculum Path
-                  </span>
-                  <ul style={{ margin: '6px 0 0', paddingLeft: '18px', fontSize: '0.78rem', color: 'var(--color-muted-light)', lineHeight: 1.45 }}>
-                    {(rec.estimatedCurriculum || []).map((item, idx) => (
-                      <li key={idx}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Next Action */}
-                <div style={{ marginBottom: '14px', fontSize: '0.8rem', color: 'var(--color-linen)' }}>
-                  <strong style={{ color: 'var(--color-tangerine)' }}>Next Action: </strong>
-                  {rec.nextAction}
-                </div>
-              </div>
-
-              <div>
-                <p style={{ fontSize: '0.72rem', color: 'var(--color-muted-dark)', margin: '0 0 14px', lineHeight: 1.4, fontStyle: 'italic' }}>
-                  {rec.disclaimer}
-                </p>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  {rec.canExplore && (rec.exploreHref || rec.cataloguePathSlug || rec.catalogueSlug) ? (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const slug = rec.cataloguePathSlug || rec.catalogueSlug;
-                        const pathId = rec.cataloguePathId || rec.alignedRoleId;
-                        if (pathId) {
-                          setSelectedRoleId(pathId);
-                        }
-                        navigate(rec.exploreHref || `/paths/${slug}`);
-                      }}
-                      className="button button-primary"
-                      style={{ width: '100%', padding: '10px 14px', fontSize: '0.82rem' }}
-                    >
-                      <span>Explore this curriculum roadmap</span>
-                      <ArrowRight size={14} aria-hidden="true" />
-                    </button>
-                  ) : (
-                    <div style={{ textAlign: 'center', padding: '6px 0' }}>
-                      <p style={{ margin: '0 0 6px', fontSize: '0.78rem', color: 'var(--color-cotton)' }}>
-                        Curriculum content pending review
-                      </p>
-                      <button
-                        type="button"
-                        onClick={() => navigate('/paths/builder')}
-                        className="button button-secondary"
-                        style={{ width: '100%', padding: '8px 12px', fontSize: '0.78rem' }}
-                      >
-                        <span>Explore in Path Builder ↗</span>
-                      </button>
-                    </div>
-                  )}
-
-                  {/* Secondary Action: Diagnostic Assessment — Never replaces Explore */}
-                  <button
-                    type="button"
-                    onClick={() => navigate('/assessment')}
-                    className="button button-secondary"
-                    style={{ width: '100%', padding: '8px 14px', fontSize: '0.78rem' }}
-                  >
-                    <span>Take diagnostic assessment</span>
-                    <ArrowRight size={14} aria-hidden="true" />
-                  </button>
-                </div>
-              </div>
-            </DarkCard>
-          ))}
-        </div>
-      </section>
+      {/* Concise Top-to-Bottom Animated Branching Path Visualization */}
+      <BranchingPathTree
+        profile={profile}
+        recommendations={recResult.recommendations}
+        selectedRoleId={selectedRoleId}
+        skillObservations={skillObservations}
+        onActivateRole={(roleId, roleTitle) => {
+          setSelectedRoleId(roleId);
+          updateProfile({ targetRoleId: roleId });
+          saveProfile({ targetRoleId: roleId });
+          showToast(`Active roadmap direction set to ${roleTitle}.`);
+        }}
+      />
 
       {/* Preloaded Starter Paths (Always Present Below Recommendations) */}
-      <section style={{ marginBottom: '40px' }}>
+      <section style={{ marginBottom: '40px' }} aria-labelledby="starter-paths-heading">
         <header style={{ marginBottom: '20px' }}>
           <Eyebrow text="FOUNDATIONAL BENCHMARKS / ENTRY ROLES" />
-          <h2 style={{ fontSize: '1.6rem', color: 'var(--color-linen)', margin: '0 0 8px' }}>
-            Starter paths — available to explore before assessment.
+          <h2 id="starter-paths-heading" style={{ fontSize: '1.6rem', color: 'var(--color-linen)', margin: '0 0 8px' }}>
+            Starter paths — available to explore before assessment
           </h2>
-          {isSchool ? (
-            <div
-              style={{
-                padding: '10px 14px',
-                borderRadius: 'var(--radius-sm)',
-                background: 'rgba(255, 109, 31, 0.08)',
-                border: '1px solid rgba(255, 109, 31, 0.25)',
-                fontSize: '0.82rem',
-                color: 'var(--color-cotton)',
-                marginBottom: '16px',
-              }}
-            >
-              <strong>School Learner Notice: </strong>
-              You can begin foundation preparation now. Role readiness is not being claimed.
-            </div>
-          ) : (
-            <p className="muted-light" style={{ maxWidth: '720px', margin: 0, fontSize: '0.9rem', lineHeight: 1.5 }}>
-              Compare entry-level directions against your verified diagnostic observations.
-              Assessed alignment is only calculated when your evidence covers at least 60% of role requirements.
-            </p>
-          )}
+          <p className="muted-light" style={{ margin: 0, fontSize: '0.9rem' }}>
+            {isSchool
+              ? 'Foundational reference careers mapped for early exploration. Full readiness requires completing core curriculum.'
+              : 'Deterministic readiness based on your answers so far. Click Explore Plan to view milestone sequence.'}
+          </p>
         </header>
 
-        {/* Three Directions Cards Grid */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
             gap: '24px',
-            marginBottom: '40px',
           }}
         >
-          {sortedAssessments.map((assessment, index) => {
-            const roleId = Number(assessment.roleId);
-            const role = SEED_ROLES.find(r => r.id === roleId)!;
-            const isSelected = selectedRoleId === roleId;
+          {SEED_ROLES.map((role) => {
+            const isSelected = selectedRoleId === role.id;
+            const assessment = buildRoleExplanation(role, SEED_ROLE_SKILL_REQUIREMENTS, obsMap);
             const isConfident = assessment.state === 'confident';
 
             return (
@@ -429,28 +270,32 @@ export const Paths: React.FC = () => {
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
-                  padding: '32px',
-                  border: isSelected
-                    ? '1px solid var(--color-tangerine)'
-                    : '1px solid var(--color-line-dark)',
-                  background: isSelected
-                    ? 'linear-gradient(180deg, rgba(255, 109, 31, 0.08) 0%, var(--color-black-hole) 100%)'
-                    : 'var(--color-black-hole)',
-                  position: 'relative',
+                  border: isSelected ? '1px solid var(--color-tangerine)' : '1px solid var(--color-line-dark)',
+                  background: isSelected ? 'rgba(255, 109, 31, 0.04)' : undefined,
                 }}
               >
                 <div>
-                  {/* Card Topline */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
-                    <span style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono)', color: 'var(--color-cotton)' }}>
-                      0{index + 1} / {role.level.toUpperCase()}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                    <span style={{ fontSize: '0.74rem', fontFamily: 'var(--font-mono)', color: 'var(--color-cotton)' }}>
+                      SEED #{role.id} · {role.level.toUpperCase()}
                     </span>
                     {isSelected && (
-                      <StatusBadge variant="tangerine" label="Active Target" />
+                      <span
+                        style={{
+                          fontSize: '0.70rem',
+                          background: 'rgba(255, 109, 31, 0.15)',
+                          color: 'var(--color-tangerine)',
+                          padding: '2px 8px',
+                          borderRadius: 'var(--radius-pill)',
+                          border: '1px solid var(--color-tangerine)',
+                          fontWeight: 700,
+                        }}
+                      >
+                        Target
+                      </span>
                     )}
                   </div>
 
-                  {/* Role Title */}
                   <h3 style={{ fontSize: '1.6rem', lineHeight: 1.25, color: 'var(--color-linen)', margin: '0 0 10px' }}>
                     {role.name}
                   </h3>
@@ -458,7 +303,6 @@ export const Paths: React.FC = () => {
                     {role.description}
                   </p>
 
-                  {/* Score & Coverage Block */}
                   <div
                     style={{
                       padding: '16px 20px',
@@ -511,7 +355,6 @@ export const Paths: React.FC = () => {
                     <ScoreMeter score={assessment.coverage.coveragePercent} />
                   </div>
 
-                  {/* Evidence & Gaps Summary */}
                   <div style={{ display: 'grid', gap: '10px', marginBottom: '24px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.78rem' }}>
                       <CheckCircle2 size={13} style={{ color: 'var(--color-success)', flexShrink: 0 }} />
@@ -535,7 +378,6 @@ export const Paths: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Priority Gap Callout if available */}
                   {assessment.prioritizedGaps.length > 0 && (
                     <div
                       style={{
@@ -557,7 +399,6 @@ export const Paths: React.FC = () => {
                   )}
                 </div>
 
-                {/* Card Footer Actions & Source Label */}
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '8px' }}>
                     <span className="source-label">{assessment.source} · {assessment.version}</span>
@@ -577,7 +418,10 @@ export const Paths: React.FC = () => {
 
                     {!isSelected && (
                       <SecondaryButton
-                        onClick={() => handleSelectRole(role.id, role.name)}
+                        onClick={() => {
+                          setSelectedRoleId(role.id);
+                          showToast(`Selected ${role.name} as benchmark target.`);
+                        }}
                         style={{ padding: '10px 14px', fontSize: '0.8rem' }}
                       >
                         Set Active

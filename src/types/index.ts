@@ -376,6 +376,11 @@ export interface ResumeSourceFact {
   category: 'project' | 'education' | 'experience' | 'skill';
   text: string;
   verified: boolean;
+  source?: string;
+  claim?: string;
+  evidenceSnippet?: string;
+  deliverable?: string;
+  verifiedAt?: string;
 }
 
 export type ResumeFact = ResumeSourceFact;

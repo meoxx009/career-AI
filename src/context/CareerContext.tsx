@@ -5,6 +5,7 @@ import type {
   RoadmapTask,
   ResumeDocument,
   ResumeSuggestion,
+  ResumeSourceFact,
   CareerRole,
   InterviewSessionRecord,
   FontSizePreference,
@@ -422,14 +423,43 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
     consentGiven,
   ]);
 
-  // Supabase Auth listener
+  // Supabase Auth listener & Entry session resolution
   useEffect(() => {
-    if (!supabase || !isSupabaseAvailable) return;
+    let dismissed = false;
+    try {
+      dismissed = sessionStorage.getItem('career_ai_auth_prompt_dismissed') === 'true';
+    } catch {
+      // storage unavailable
+    }
+
+    if (!supabase || !isSupabaseAvailable) {
+      // In guest / demo mode: promptly show dismissible modal on entry if not dismissed and not in test runner
+      const isTestEnv = typeof process !== 'undefined' && process.env?.NODE_ENV === 'test' && !(window as unknown as { __TEST_ENABLE_AUTH_PROMPT__?: boolean }).__TEST_ENABLE_AUTH_PROMPT__;
+      if (!dismissed && !isTestEnv) {
+        setTimeout(() => {
+          setIsAuthModalOpen(true);
+        }, 0);
+      }
+      return;
+    }
 
     supabase.auth.getSession().then(({ data: { session } }) => {
+      setAuthLoading(false);
       if (session?.user) {
+        // Valid session exists: restore it and do NOT show login prompt
         setUser({ id: session.user.id, email: session.user.email });
         loadUserData(session.user.id, session.user.user_metadata as Record<string, unknown> | undefined);
+      } else {
+        // Visitor is signed out: promptly show dismissible modal unless previously dismissed
+        setUser(null);
+        if (!dismissed) {
+          setIsAuthModalOpen(true);
+        }
+      }
+    }).catch(() => {
+      setAuthLoading(false);
+      if (!dismissed) {
+        setIsAuthModalOpen(true);
       }
     });
 
@@ -438,6 +468,7 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
     } = supabase.auth.onAuthStateChange(async (_event, session) => {
       if (session?.user) {
         setUser({ id: session.user.id, email: session.user.email });
+        setIsAuthModalOpen(false);
         await loadUserData(session.user.id, session.user.user_metadata as Record<string, unknown> | undefined);
       } else {
         setUser(null);
@@ -729,19 +760,75 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const toggleTaskCompletion = async (taskId: string) => {
+    let toggledTask: RoadmapTask | undefined;
+    let nextStatus: RoadmapTask['status'] = 'todo';
+
     const updated = roadmapTasks.map(task => {
       if (task.id === taskId) {
-        const nextStatus: RoadmapTask['status'] = task.status === 'completed' ? 'todo' : 'completed';
-        return {
+        nextStatus = task.status === 'completed' ? 'todo' : 'completed';
+        toggledTask = {
           ...task,
           status: nextStatus,
           completedAt: nextStatus === 'completed' ? new Date().toISOString().split('T')[0] : undefined,
         };
+        return toggledTask;
       }
       return task;
     });
 
     setRoadmapTasks(updated);
+
+    // Sync source-linked resume draft content using actual completed learner work (never planned deliverables)
+    if (toggledTask) {
+      const completionDate = toggledTask.completedAt || new Date().toISOString().split('T')[0];
+      const roleName = selectedRole?.name || 'Career Milestone';
+      const factId = `fact-rm-${toggledTask.id}`;
+      const deliverableText = toggledTask.deliverable || toggledTask.title;
+      const milestoneBullet = `• ${toggledTask.title} (${roleName}) — Delivered: ${deliverableText} [Completed: ${completionDate}]`;
+
+      if (toggledTask.status === 'completed') {
+        const newFact: ResumeSourceFact = {
+          id: factId,
+          category: 'project',
+          text: `Self-reported milestone completed for ${roleName}: ${toggledTask.title}. Delivered: ${deliverableText} on ${completionDate}.`,
+          claim: `Completed milestone "${toggledTask.title}" (${roleName})`,
+          evidenceSnippet: `Verified deliverable produced: ${deliverableText}`,
+          deliverable: deliverableText,
+          verifiedAt: completionDate,
+          verified: true,
+          source: 'roadmap',
+        };
+        const updatedFacts = [...resumeDoc.facts.filter(f => f.id !== factId), newFact];
+
+        let updatedText = resumeDoc.rawText;
+        if (!updatedText.includes(milestoneBullet)) {
+          const sectionHeader = 'VERIFIED ROADMAP MILESTONES (SELF-REPORTED)';
+          if (updatedText.includes(sectionHeader)) {
+            updatedText = updatedText.replace(sectionHeader, `${sectionHeader}\n${milestoneBullet}`);
+          } else {
+            updatedText = `${updatedText.trim()}\n\n${sectionHeader}\n${milestoneBullet}`;
+          }
+        }
+        setResumeDoc(prev => ({
+          ...prev,
+          facts: updatedFacts,
+          rawText: updatedText,
+        }));
+      } else {
+        const updatedFacts = resumeDoc.facts.filter(f => f.id !== factId);
+        let lines = resumeDoc.rawText.split('\n');
+        lines = lines.filter(line => !line.includes(toggledTask!.title) || !line.startsWith('•'));
+        let updatedText = lines.join('\n');
+        if (!updatedFacts.some(f => f.id.startsWith('fact-rm-'))) {
+          updatedText = updatedText.replace(/VERIFIED ROADMAP MILESTONES \(SELF-REPORTED\)\s*/g, '').trim();
+        }
+        setResumeDoc(prev => ({
+          ...prev,
+          facts: updatedFacts,
+          rawText: updatedText,
+        }));
+      }
+    }
 
     if (profile.isGuestDemo || !user) {
       return;
@@ -926,6 +1013,12 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
       const newUser = { id: localId, email };
       setUser(newUser);
       await loadUserData(localId);
+      try {
+        sessionStorage.setItem('career_ai_auth_prompt_dismissed', 'true');
+      } catch (e) {
+        void e;
+      }
+      setIsAuthModalOpen(false);
       return { success: true };
     }
 
@@ -939,6 +1032,12 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
         const newUser = { id: data.user.id, email: data.user.email };
         setUser(newUser);
         await loadUserData(data.user.id);
+        try {
+          sessionStorage.setItem('career_ai_auth_prompt_dismissed', 'true');
+        } catch (e) {
+        void e;
+      }
+        setIsAuthModalOpen(false);
         return { success: true };
       }
       return { success: false, error: 'User session not created.' };
@@ -956,6 +1055,12 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
       const newUser = { id: localId, email };
       setUser(newUser);
       await loadUserData(localId);
+      try {
+        sessionStorage.setItem('career_ai_auth_prompt_dismissed', 'true');
+      } catch (e) {
+        void e;
+      }
+      setIsAuthModalOpen(false);
       return { success: true };
     }
 
@@ -969,6 +1074,12 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
         const newUser = { id: data.user.id, email: data.user.email };
         setUser(newUser);
         await loadUserData(data.user.id);
+        try {
+          sessionStorage.setItem('career_ai_auth_prompt_dismissed', 'true');
+        } catch (e) {
+        void e;
+      }
+        setIsAuthModalOpen(false);
       }
       return { success: true };
     } catch (err) {
@@ -1029,10 +1140,21 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
       contactEmail: 'local.learner@careerai.local',
       isGuestDemo: false,
     }));
+    try {
+      sessionStorage.setItem('career_ai_auth_prompt_dismissed', 'true');
+    } catch (e) {
+      void e;
+    }
+    setIsAuthModalOpen(false);
     showToast(`Signed in as ${displayName} (local session).`);
   };
 
   const signOut = async (): Promise<void> => {
+    try {
+      sessionStorage.removeItem('career_ai_auth_prompt_dismissed');
+    } catch (e) {
+      void e;
+    }
     if (supabase && isSupabaseAvailable) {
       await supabase.auth.signOut();
     }
@@ -1048,6 +1170,7 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
     setLastPersistenceError(null);
     setLastFailedAction(null);
     showToast('Signed out. In-memory private session cleared.');
+    setIsAuthModalOpen(true);
   };
 
   const exportUserData = () => {
@@ -1117,6 +1240,11 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const closeAuthModal = () => {
+    try {
+      sessionStorage.setItem('career_ai_auth_prompt_dismissed', 'true');
+    } catch {
+      // storage unavailable
+    }
     setIsAuthModalOpen(false);
   };
 

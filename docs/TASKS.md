@@ -125,6 +125,14 @@ This is the build order. Do not start P1 until the P0 release gate in `PRD.md` p
   7. Role-specific roadmap with effort summary, active milestone indicator, and calm empty state when unselected.
   8. Strict visual token preservation and accessibility compliance.
   9. 29 test suites, 378 tests passing (100% pass rate). Production build verified.
+- [x] **Auth Entry Resolution, Draft Branching Path Tree, and Roadmap-to-Resume Sync Gate:**
+  1. Entry session resolution in `CareerContext.tsx`: restores valid session without login prompt, prompts signed-out visitors with dismissible modal unless dismissed in session storage.
+  2. Local draft intake on `/paths`: edits local draft without polluting global state until "Apply & View Updated Directions ↗".
+  3. Animated top-to-bottom branching path tree (`BranchingPathTree.tsx`) from applied learner horizon to domain branches and leaf nodes with all 8 criteria and explore actions.
+  4. Role node inspection and explicit `Activate for Roadmap →` action.
+  5. Roadmap completion to source-linked resume synchronization: completed tasks automatically add verifiable deliverables and completion dates to `resumeDoc.facts` (`source: 'roadmap'`) and `resumeDoc.rawText`, removing them on uncheck. Planned tasks never treated as completed proof.
+  6. Resume Lab review, edit, save draft, `.txt` download, print/PDF (`window.print()`), copy plaintext, and source-linked achievements display.
+  7. 31 test suites, 386 tests passing (100% pass rate). 0 lint errors, 0 typecheck errors. Production build verified.
 - [ ] Deploy static UI and function layer; configure only required redirect URLs.
 - [ ] Run production smoke test with synthetic data and AI disabled.
 

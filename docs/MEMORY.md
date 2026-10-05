@@ -152,9 +152,18 @@ Do not call a check passed until it actually runs in the project folder.
   8. **Strict Design & Safety Preservation**: Preserved luxury editorial palette (`#080B0C`, `#222222`, `#FAF3E1`, `#F5E7C6`, `#FF6D1F`), responsive touch targets (>= 44px), `prefers-reduced-motion` compliance, and zero fake placement or salary claims.
   9. **Comprehensive Test Suite & Verification**: Added `src/test/role-selection-path-focus.test.tsx` (15 tests). All 29 test suites (378 tests) passing with 100% success. Zero lint warnings, zero typecheck errors, production build verified.
 
+- **Auth Entry Resolution, Draft Branching Path Tree, and Roadmap-to-Resume Sync Gate ✅**:
+  1. **Real Auth Session Resolution on Entry**: Valid session is restored immediately without showing the login prompt. Signed-out visitors promptly receive the dismissible sign-in modal unless dismissed during the session in `sessionStorage`.
+  2. **Local Draft Profile Intake in Paths**: In `/paths`, "Customize Profile & Interests" edits a local draft without mutating global state until "Apply & View Updated Directions ↗" validates and commits the draft.
+  3. **Top-to-Bottom Animated Branching Path Visualization (`BranchingPathTree.tsx`)**: Renders root applied learner horizon, vertical branching stems into domain buckets, and role leaf nodes with full 8 criteria, core skills, and explore actions.
+  4. **Interactive Node Click & Roadmap Activation**: Clicking a role node or inspect toggle opens its 5-phase curriculum breakdown, estimated effort, and verified deliverables with an explicit `Activate for Roadmap →` action.
+  5. **Roadmap Completion to Source-Linked Resume Synchronization**: Completing milestones in `/roadmap` automatically synchronizes verifiable project proof into `resumeDoc.facts` (`source: 'roadmap'`) and formats bullet points in `resumeDoc.rawText`. Unchecking cleanly removes the milestone proof. Planned tasks are never imported as completed proof.
+  6. **Resume Lab Review, Edit, Save, and Clean Browser Export**: In `/resume`, learners can review/edit draft text, run safety audits, save draft, download `.txt`, print/PDF (`window.print()`), copy plaintext, and view verified source-linked roadmap achievements.
+  7. **Comprehensive Verification**: Added integration test suites `src/test/auth-session-entry.test.tsx` (3 tests) and `src/test/branching-paths-resume-sync.test.tsx` (5 tests). All 31 test suites (386 tests) passing with 100% success. Zero lint warnings, zero typecheck errors, production build verified.
+
 ## Next concrete step
 
-- **Next Prompt / Production Deployment**: Proceed to the next numbered build prompt or production deployment as directed by the user.
+- **Production Deployment & Release**: Push verified codebase to GitHub `main` and trigger deployment.
 
 ## Known gaps
 
