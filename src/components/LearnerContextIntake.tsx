@@ -439,6 +439,52 @@ export const LearnerContextIntake: React.FC<LearnerContextIntakeProps> = ({
                   }}
                 />
               </div>
+
+              {/* College / Institution (optional) */}
+              <div>
+                <label htmlFor="intake-institution" style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-linen)', marginBottom: '4px' }}>
+                  College / University / Institution <span style={{ color: 'var(--color-muted-light)', fontWeight: 400 }}>(optional)</span>
+                </label>
+                <input
+                  id="intake-institution"
+                  type="text"
+                  placeholder="e.g. IIT Bombay, Delhi University, Anna University"
+                  value={profile.institution || ''}
+                  onChange={e => onChange({ institution: e.target.value })}
+                  style={{
+                    width: '100%',
+                    padding: '10px 12px',
+                    borderRadius: 'var(--radius-sm)',
+                    background: 'var(--color-void)',
+                    border: '1px solid var(--color-line-dark)',
+                    color: 'var(--color-linen)',
+                    fontSize: '0.88rem',
+                  }}
+                />
+              </div>
+
+              {/* Expected Graduation Year (optional) */}
+              <div>
+                <label htmlFor="intake-grad-year" style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-linen)', marginBottom: '4px' }}>
+                  Expected Graduation Date / Year <span style={{ color: 'var(--color-muted-light)', fontWeight: 400 }}>(optional)</span>
+                </label>
+                <input
+                  id="intake-grad-year"
+                  type="text"
+                  placeholder="e.g. 2026, 2027"
+                  value={profile.expectedGraduationYear || ''}
+                  onChange={e => onChange({ expectedGraduationYear: e.target.value })}
+                  style={{
+                    width: '100%',
+                    padding: '10px 12px',
+                    borderRadius: 'var(--radius-sm)',
+                    background: 'var(--color-void)',
+                    border: '1px solid var(--color-line-dark)',
+                    color: 'var(--color-linen)',
+                    fontSize: '0.88rem',
+                  }}
+                />
+              </div>
             </div>
           )}
 

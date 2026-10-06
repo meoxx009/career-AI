@@ -68,6 +68,8 @@ export const ProfileEdit: React.FC = () => {
     stream: profile.stream,
     degree: profile.degree || profile.branch || 'BTech / BE Computer Science',
     branch: profile.branch || 'Computer Science',
+    institution: profile.institution || '',
+    expectedGraduationYear: profile.expectedGraduationYear || '',
     studyYear: profile.studyYear || '3rd Year',
     cgpa: profile.cgpa || '',
     hoursPerWeek: initialHours,
@@ -77,6 +79,9 @@ export const ProfileEdit: React.FC = () => {
     favoriteSubjects: profile.favoriteSubjects || [],
     preferredWorkDirection: profile.preferredWorkDirection || '',
     projectFacts: profile.projectFacts || '',
+    portfolioUrl: profile.portfolioUrl || '',
+    githubUrl: profile.githubUrl || '',
+    linkedinUrl: profile.linkedinUrl || '',
     targetRoleId: initialRoleId,
     preferredRoleIds: profile.preferredRoleIds && profile.preferredRoleIds.length > 0
       ? profile.preferredRoleIds
@@ -185,6 +190,8 @@ export const ProfileEdit: React.FC = () => {
       stream: profile.stream,
       degree: profile.degree || profile.branch || 'BTech / BE Computer Science',
       branch: profile.branch || 'Computer Science',
+      institution: profile.institution || '',
+      expectedGraduationYear: profile.expectedGraduationYear || '',
       studyYear: profile.studyYear || '3rd Year',
       cgpa: profile.cgpa || '',
       hoursPerWeek: profile.hoursPerWeek || 8,
@@ -194,7 +201,10 @@ export const ProfileEdit: React.FC = () => {
       favoriteSubjects: profile.favoriteSubjects || [],
       preferredWorkDirection: profile.preferredWorkDirection || '',
       projectFacts: profile.projectFacts || '',
-      targetRoleId: profile.targetRoleId || 1,
+      portfolioUrl: profile.portfolioUrl || '',
+      githubUrl: profile.githubUrl || '',
+      linkedinUrl: profile.linkedinUrl || '',
+      targetRoleId: profile.targetRoleId,
       preferredRoleIds: profile.preferredRoleIds && profile.preferredRoleIds.length > 0
         ? profile.preferredRoleIds
         : [profile.targetRoleId || 1],
@@ -1157,6 +1167,111 @@ export const ProfileEdit: React.FC = () => {
                   resize: 'vertical',
                 }}
               />
+            </div>
+
+            {/* Optional Links: Portfolio / GitHub / LinkedIn */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px' }}>
+              <div>
+                <label
+                  htmlFor="edit-portfolio"
+                  style={{
+                    display: 'block',
+                    fontSize: '0.8rem',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.06em',
+                    color: 'var(--color-cotton)',
+                    marginBottom: '6px',
+                  }}
+                >
+                  Portfolio / Website URL
+                </label>
+                <input
+                  id="edit-portfolio"
+                  type="url"
+                  value={formState.portfolioUrl || ''}
+                  onChange={(e) => updateForm({ portfolioUrl: e.target.value })}
+                  placeholder="https://yourportfolio.dev"
+                  style={{
+                    width: '100%',
+                    padding: '10px 14px',
+                    borderRadius: 'var(--radius-sm)',
+                    border: '1px solid var(--color-line-dark)',
+                    background: 'var(--color-black-soft)',
+                    color: 'var(--color-linen)',
+                    fontSize: '0.86rem',
+                    outline: 'none',
+                  }}
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="edit-github"
+                  style={{
+                    display: 'block',
+                    fontSize: '0.8rem',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.06em',
+                    color: 'var(--color-cotton)',
+                    marginBottom: '6px',
+                  }}
+                >
+                  GitHub Profile URL
+                </label>
+                <input
+                  id="edit-github"
+                  type="url"
+                  value={formState.githubUrl || ''}
+                  onChange={(e) => updateForm({ githubUrl: e.target.value })}
+                  placeholder="https://github.com/username"
+                  style={{
+                    width: '100%',
+                    padding: '10px 14px',
+                    borderRadius: 'var(--radius-sm)',
+                    border: '1px solid var(--color-line-dark)',
+                    background: 'var(--color-black-soft)',
+                    color: 'var(--color-linen)',
+                    fontSize: '0.86rem',
+                    outline: 'none',
+                  }}
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="edit-linkedin"
+                  style={{
+                    display: 'block',
+                    fontSize: '0.8rem',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.06em',
+                    color: 'var(--color-cotton)',
+                    marginBottom: '6px',
+                  }}
+                >
+                  LinkedIn Profile URL
+                </label>
+                <input
+                  id="edit-linkedin"
+                  type="url"
+                  value={formState.linkedinUrl || ''}
+                  onChange={(e) => updateForm({ linkedinUrl: e.target.value })}
+                  placeholder="https://linkedin.com/in/username"
+                  style={{
+                    width: '100%',
+                    padding: '10px 14px',
+                    borderRadius: 'var(--radius-sm)',
+                    border: '1px solid var(--color-line-dark)',
+                    background: 'var(--color-black-soft)',
+                    color: 'var(--color-linen)',
+                    fontSize: '0.86rem',
+                    outline: 'none',
+                  }}
+                />
+              </div>
             </div>
           </div>
         </DarkCard>

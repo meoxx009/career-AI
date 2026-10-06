@@ -90,21 +90,13 @@ describe('Prompt 07 & Gate 07: Role Comparison and Dashboard', () => {
       expect(screen.getByText(/does not certify skill mastery/i)).toBeDefined();
     });
 
-    it('renders all 3 roles on /paths with correct alignment states for Rahul', () => {
+    it('renders clean branching path explorer on /paths for Rahul with personalized directions', () => {
       const { getByTestId } = render(<TestWrapper initialRoute="/paths" setupMode="rahul" />);
       fireEvent.click(getByTestId('setup-rahul-btn'));
 
-      // Role 1: Backend Developer (confident 67%)
+      // Rahul's target is Backend Developer, so branching directions are active
       expect(screen.getByText('Backend Developer')).toBeDefined();
-      expect(screen.getByText('67')).toBeDefined();
-      expect(screen.getByText(/COVERAGE 65%/i)).toBeDefined();
-
-      // Role 2: Data Analyst (coverage < 60%)
-      expect(screen.getByText('Data Analyst')).toBeDefined();
-
-      // Role 3: Frontend Developer (coverage < 60%)
-      expect(screen.getByText('Frontend Developer')).toBeDefined();
-      expect(screen.getAllByText(/More evidence needed/i).length).toBeGreaterThan(0);
+      expect(screen.queryByText(/Starter paths — available to explore before assessment/i)).toBeNull();
     });
   });
 
@@ -121,19 +113,11 @@ describe('Prompt 07 & Gate 07: Role Comparison and Dashboard', () => {
       expect(screen.queryByText(/RAHUL'S SNAPSHOT/i)).toBeNull();
     });
 
-    it('shows more evidence needed across all 3 roles on /paths for fresh user', () => {
+    it('shows clean empty guidance state without starter card clutter on /paths for fresh user', () => {
       render(<TestWrapper initialRoute="/paths" setupMode="fresh" />);
 
-      expect(screen.getByText('Backend Developer')).toBeDefined();
-      expect(screen.getByText('Data Analyst')).toBeDefined();
-      expect(screen.getByText('Frontend Developer')).toBeDefined();
-
-      // All 3 show "More evidence needed" and coverage 0%
-      const neededBadges = screen.getAllByText(/More evidence needed/i);
-      expect(neededBadges.length).toBe(3);
-
-      const coverageZeros = screen.getAllByText(/COVERAGE 0%/i);
-      expect(coverageZeros.length).toBe(3);
+      expect(screen.getByText(/Choose a Target Role or Add Interests/i)).toBeDefined();
+      expect(screen.queryByText(/Starter paths — available to explore before assessment/i)).toBeNull();
     });
 
     it('shows unassessed for all requirements on /paths/backend-developer for fresh user', () => {
@@ -152,16 +136,16 @@ describe('Prompt 07 & Gate 07: Role Comparison and Dashboard', () => {
   });
 
   describe('Case 3: Partial User with Low Coverage (< 60%)', () => {
-    it('explains uncertainty and remains unranked when coverage is below 60%', () => {
-      const { getByTestId } = render(<TestWrapper initialRoute="/paths" setupMode="partial" />);
+    it('explains uncertainty and remains unranked when coverage is below 60% on role detail', () => {
+      const { getByTestId } = render(<TestWrapper initialRoute="/paths/backend-developer" setupMode="partial" />);
       fireEvent.click(getByTestId('setup-partial-btn'));
 
       // Backend Developer has some evidence, but coverage is < 60%
       expect(screen.getByText('Backend Developer')).toBeDefined();
       expect(screen.getAllByText(/More evidence needed/i).length).toBeGreaterThan(0);
 
-      // Card explains coverage threshold
-      expect(screen.getAllByText(/is below 60% threshold/i).length).toBeGreaterThan(0);
+      // Explains coverage threshold
+      expect(screen.getAllByText(/below (the )?60% threshold/i).length).toBeGreaterThan(0);
     });
   });
 

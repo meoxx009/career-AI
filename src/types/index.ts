@@ -23,6 +23,8 @@ export type SchoolStream =
 
 export type FontSizePreference = 'default' | 'comfortable' | 'large' | 'extra-large';
 
+export type AuthStatus = 'initializing' | 'authenticated' | 'unauthenticated' | 'error';
+
 export interface UserProfile {
   id: string;
   displayName: string;
@@ -35,6 +37,9 @@ export interface UserProfile {
   stream?: SchoolStream;
   degree?: string;
   specialization?: string;
+  academicContext?: string;
+  institution?: string;
+  expectedGraduationYear?: string;
   branch: string;
   studyYear: string;
   hoursPerWeek: number;
@@ -47,6 +52,9 @@ export interface UserProfile {
   favoriteSubjects?: string[];
   preferredWorkDirection?: string;
   projectFacts?: string;
+  portfolioUrl?: string;
+  githubUrl?: string;
+  linkedinUrl?: string;
   isGuestDemo: boolean;
   targetRoleId?: number;
   targetRoleSlug?: string;
@@ -297,6 +305,15 @@ export interface RoadmapTemplate {
   skill_ids?: string[];
 }
 
+export interface ActualWorkDetails {
+  whatLearnerDid?: string;
+  ownContribution?: string;
+  technologiesUsed?: string;
+  outcomeOrLimitation?: string;
+  projectUrl?: string;
+  recordedAt?: string;
+}
+
 // User-tracked roadmap task
 export interface RoadmapTask {
   id: string;
@@ -313,6 +330,7 @@ export interface RoadmapTask {
   // --- Task-splitting segment fields (optional) ---
   // When a task's estimatedHours > weeklyStudyHours it is split into sequential segments.
   // Each segment carries these fields; the unsplit original carries none of them.
+  templateId?: string;        // canonical template id (e.g. "task-fe-01" or "ai-week-01")
   parentTaskId?: string;      // template id of the parent task (same as id when not split)
   segmentIndex?: number;      // 0-based index of this segment
   segmentCount?: number;      // total number of segments for this parent task
@@ -327,6 +345,9 @@ export interface RoadmapTask {
   evidenceSource?: string;
   phase?: string;
   nextAction?: string;
+
+  // --- Learner-captured actual work accomplishments (Prompt 5) ---
+  actualWork?: ActualWorkDetails;
 }
 
 export interface InterviewQuestion {
@@ -381,6 +402,21 @@ export interface ResumeSourceFact {
   evidenceSnippet?: string;
   deliverable?: string;
   verifiedAt?: string;
+
+  // Prompt 5 source-linked accomplishment fields
+  userId?: string;
+  roleId?: number;
+  roleName?: string;
+  milestoneId?: string;
+  parentMilestoneId?: string;
+  sourceRef?: string;
+  completedAt?: string;
+  actualWork?: ActualWorkDetails;
+  sourceStatus?: 'self_reported' | 'confirmed' | 'reviewed';
+  inclusionStatus?: 'included' | 'dismissed' | 'pending_review' | 'outdated';
+  manualEdit?: string;
+  isOutdated?: boolean;
+  isSegmentPartial?: boolean;
 }
 
 export type ResumeFact = ResumeSourceFact;

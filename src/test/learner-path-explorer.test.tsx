@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { CareerProvider } from '../context/CareerContext';
 import { AppShell } from '../components/AppShell';
@@ -330,7 +330,7 @@ describe('Prompt 04 & Gate 04 — School, College, and Self-Taught Learner Intak
   });
 
   describe('4. Path Explorer & Settings Integration', () => {
-    it('renders Path Explorer with personalized recommendations and original 3 starter paths', () => {
+    it('renders Path Explorer with clean personalized recommendations without unconditional starter paths', () => {
       renderApp('/paths');
 
       // Top header
@@ -344,15 +344,12 @@ describe('Prompt 04 & Gate 04 — School, College, and Self-Taught Learner Intak
       expect(screen.getByText(/PERSONALIZED PATH SUGGESTIONS/i)).toBeDefined();
       expect(screen.getByText(/Suggested Directions for You/i)).toBeDefined();
 
-      // Original 3 starter paths always present below
-      expect(screen.getByText(/FOUNDATIONAL BENCHMARKS \/ ENTRY ROLES/i)).toBeDefined();
-      expect(screen.getByText(/Starter paths — available to explore before assessment/i)).toBeDefined();
-      expect(screen.getByText(/Backend Developer/i)).toBeDefined();
-      expect(screen.getByText(/Frontend Developer/i)).toBeDefined();
-      expect(screen.getByText(/Data Analyst/i)).toBeDefined();
+      // Starter paths section is cleanly absent from Paths page
+      expect(screen.queryByText(/FOUNDATIONAL BENCHMARKS \/ ENTRY ROLES/i)).toBeNull();
+      expect(screen.queryByText(/Starter paths — available to explore before assessment/i)).toBeNull();
     });
 
-    it('toggles profile editor in Paths and updates recommendations on stream change', () => {
+    it('toggles profile editor in Paths and updates recommendations on stream change', async () => {
       renderApp('/paths');
 
       const customizeBtn = screen.getByRole('button', { name: /Customize Profile & Interests/i });
@@ -374,8 +371,10 @@ describe('Prompt 04 & Gate 04 — School, College, and Self-Taught Learner Intak
       fireEvent.click(applyBtn);
 
       // Stream opportunity card for Commerce is now displayed
-      expect(screen.getByText(/Opportunities for Commerce/i)).toBeDefined();
-      expect(screen.getByText(/Business Analytics & Financial Data Systems/i)).toBeDefined();
+      await waitFor(() => {
+        expect(screen.getByText(/Opportunities for Commerce/i)).toBeDefined();
+        expect(screen.getByText(/Business Analytics & Financial Data Systems/i)).toBeDefined();
+      });
     });
 
     it('ensures learner profile editor is absent from Settings and directs to /profile/edit', () => {

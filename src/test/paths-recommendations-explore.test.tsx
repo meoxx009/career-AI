@@ -325,19 +325,15 @@ describe('Prompt 2 — Paths Recommendations, Explore Buttons & Deterministic Mu
       expect(result.recommendations.some(r => r.cataloguePathId !== 18)).toBe(true);
     });
 
-    // 13. Starter paths remain visible below recommendations
-    it('13. Starter paths remain visible below recommendations', () => {
+    // 13. Starter paths are removed from Paths page, keeping branching directions clean
+    it('13. Starter paths are cleanly removed from Paths page (superseding legacy starter cards)', () => {
       renderPathsApp({
         interests: ['ai-ml'],
       });
 
-      // Starter paths section header
-      expect(screen.getByRole('heading', { name: /Starter paths — available to explore before assessment/i })).toBeInTheDocument();
-
-      // All 3 starter roles present in starter paths section
-      expect(screen.getByRole('heading', { name: 'Backend Developer' })).toBeInTheDocument();
-      expect(screen.getByRole('heading', { name: 'Frontend Developer' })).toBeInTheDocument();
-      expect(screen.getByRole('heading', { name: 'Data Analyst' })).toBeInTheDocument();
+      // Starter paths section header is absent
+      expect(screen.queryByRole('heading', { name: /Starter paths — available to explore before assessment/i })).not.toBeInTheDocument();
+      expect(screen.queryByText(/FOUNDATIONAL BENCHMARKS \/ ENTRY ROLES/i)).not.toBeInTheDocument();
     });
 
     // 14. No duplicate path cards

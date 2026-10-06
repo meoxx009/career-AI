@@ -20,7 +20,8 @@ export class LocalProfileRepository implements IProfileRepository {
       const raw = window.localStorage.getItem(key);
       if (!raw) return { data: EMPTY_PROFILE, error: null };
       const parsed = JSON.parse(raw);
-      return { data: (isUserScoped ? parsed : parsed.profile) || EMPTY_PROFILE, error: null };
+      const loaded = isUserScoped ? parsed : parsed.profile;
+      return { data: loaded ? { ...EMPTY_PROFILE, ...loaded } : EMPTY_PROFILE, error: null };
     } catch (err) {
       return { data: EMPTY_PROFILE, error: String(err) };
     }
@@ -82,17 +83,36 @@ export class SupabaseProfileRepository implements IProfileRepository {
       const profile: UserProfile = {
         id: data.id,
         displayName: data.display_name || '',
+        username: data.username || undefined,
+        contactEmail: data.contact_email || undefined,
+        profileImageUrl: data.profile_image_url || undefined,
+        profileImageStorageKey: data.profile_image_storage_key || undefined,
+        learnerStage: (data.learner_stage as UserProfile['learnerStage']) || undefined,
+        schoolClass: data.school_class || undefined,
+        stream: (data.stream as UserProfile['stream']) || undefined,
+        degree: data.degree || undefined,
+        specialization: data.specialization || undefined,
+        institution: data.institution || undefined,
+        expectedGraduationYear: data.expected_graduation_year || undefined,
         branch: data.branch || '',
         studyYear: data.study_year ? String(data.study_year) : '',
         hoursPerWeek: data.hours_per_week ? Number(data.hours_per_week) : 8,
         preferredRoles: data.preferred_roles || [],
-        preferredRoleIds: [],
-        cgpa: '',
+        preferredRoleIds: data.target_role_id ? [data.target_role_id] : [],
+        cgpa: data.cgpa || '',
         locationPreference: data.location_preference || '',
-        currentSkills: [],
-        projectFacts: '',
+        currentSkills: data.current_skills || [],
+        interests: data.interests || [],
+        favoriteSubjects: data.favorite_subjects || [],
+        preferredWorkDirection: data.preferred_work_direction || undefined,
+        projectFacts: data.project_facts || '',
+        portfolioUrl: data.portfolio_url || undefined,
+        githubUrl: data.github_url || undefined,
+        linkedinUrl: data.linkedin_url || undefined,
         isGuestDemo: false,
-        targetRoleId: 1,
+        targetRoleId: data.target_role_id !== null && data.target_role_id !== undefined ? Number(data.target_role_id) : undefined,
+        targetRoleSlug: data.target_role_slug || undefined,
+        fontSizePreference: (data.font_size_preference as UserProfile['fontSizePreference']) || undefined,
       };
 
       return { data: profile, error: null };
@@ -115,11 +135,34 @@ export class SupabaseProfileRepository implements IProfileRepository {
         .upsert({
           id: profile.id,
           display_name: profile.displayName || null,
+          username: profile.username || null,
+          contact_email: profile.contactEmail || null,
+          profile_image_url: profile.profileImageUrl || null,
+          profile_image_storage_key: profile.profileImageStorageKey || null,
+          learner_stage: profile.learnerStage || null,
+          school_class: profile.schoolClass || null,
+          stream: profile.stream || null,
+          degree: profile.degree || null,
+          specialization: profile.specialization || null,
+          institution: profile.institution || null,
+          expected_graduation_year: profile.expectedGraduationYear || null,
           branch: profile.branch || null,
           study_year: studyYearNum && !isNaN(studyYearNum) ? studyYearNum : null,
           hours_per_week: hoursNum && !isNaN(hoursNum) ? hoursNum : 8,
           preferred_roles: profile.preferredRoles || [],
           location_preference: profile.locationPreference || null,
+          cgpa: profile.cgpa || null,
+          current_skills: profile.currentSkills || [],
+          interests: profile.interests || [],
+          favorite_subjects: profile.favoriteSubjects || [],
+          preferred_work_direction: profile.preferredWorkDirection || null,
+          project_facts: profile.projectFacts || null,
+          target_role_id: profile.targetRoleId !== undefined ? profile.targetRoleId : null,
+          target_role_slug: profile.targetRoleSlug || null,
+          portfolio_url: profile.portfolioUrl || null,
+          github_url: profile.githubUrl || null,
+          linkedin_url: profile.linkedinUrl || null,
+          font_size_preference: profile.fontSizePreference || null,
           updated_at: new Date().toISOString(),
         })
         .select('*')

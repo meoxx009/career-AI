@@ -228,6 +228,22 @@ describe('3. Unified Career Catalogue & 8 Criteria Path Recommendations', () => 
   });
 
   it('renders recommendation card with all 8 criteria in Paths page and keeps starter paths', async () => {
+    localStorage.setItem(
+      'career_ai_state_v3',
+      JSON.stringify({
+        hasSelectedRole: true,
+        selectedRoleId: 1,
+        profile: {
+          id: 'guest-learner',
+          displayName: 'Test Learner',
+          learnerStage: 'undergraduate',
+          degree: 'BTech',
+          targetRoleId: 1,
+          interests: ['backend'],
+          hoursPerWeek: 8,
+        },
+      })
+    );
     render(
       <MemoryRouter initialEntries={['/paths']}>
         <CareerProvider>
@@ -239,20 +255,11 @@ describe('3. Unified Career Catalogue & 8 Criteria Path Recommendations', () => 
     // Recommended pathways section
     expect(screen.getByText(/Suggested Directions for You/i)).toBeInTheDocument();
 
-    // 8 criteria labels
-    expect(screen.getAllByText(/Why suggested:/i).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/Inputs evaluated:/i).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/Requirements evaluated:/i).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/Evidence found:/i).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/Still unknown:/i).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/Prerequisites:/i).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/Estimated Curriculum Path/i).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/Next Action:/i).length).toBeGreaterThan(0);
+    // Compact reasoning toggle available
+    expect(screen.getAllByText(/Why this direction\?/i).length).toBeGreaterThan(0);
 
-    // Starter paths remain rendered below
-    expect(screen.getByText(/Starter paths — available to explore before assessment/i)).toBeInTheDocument();
-    expect(screen.getByText(/Data Analyst/i)).toBeInTheDocument();
-    expect(screen.getByText(/Frontend Developer/i)).toBeInTheDocument();
+    // Starter paths are cleanly removed from Paths page
+    expect(screen.queryByText(/Starter paths — available to explore before assessment/i)).not.toBeInTheDocument();
   });
 });
 

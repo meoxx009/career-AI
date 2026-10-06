@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { UserProfile, CareerPath } from '../types';
 import type { PathRecommendation } from '../lib/pathRecommendations';
@@ -15,6 +15,10 @@ import {
   Database,
   Palette,
   Sparkles,
+  ChevronDown,
+  ChevronUp,
+  Compass,
+  ArrowRight,
 } from 'lucide-react';
 
 export interface BranchingPathTreeProps {
@@ -23,6 +27,8 @@ export interface BranchingPathTreeProps {
   selectedRoleId: number | null;
   skillObservations?: Record<number, number | null>;
   onActivateRole: (roleId: number, roleTitle: string) => void;
+  onOpenCustomizer?: () => void;
+  applyKey?: number;
 }
 
 export const BranchingPathTree: React.FC<BranchingPathTreeProps> = ({
@@ -30,6 +36,8 @@ export const BranchingPathTree: React.FC<BranchingPathTreeProps> = ({
   recommendations,
   selectedRoleId,
   onActivateRole,
+  onOpenCustomizer,
+  applyKey,
 }) => {
   const navigate = useNavigate();
 
@@ -61,27 +69,6 @@ export const BranchingPathTree: React.FC<BranchingPathTreeProps> = ({
       }
     });
 
-    // Ensure at least top entry roles if recommendations are sparse
-    if (list.length === 0) {
-      CAREER_CATALOGUE.slice(0, 3).forEach((path) => {
-        list.push({
-          rec: {
-            id: `rec-${path.slug}`,
-            cataloguePathId: path.numericId,
-            cataloguePathSlug: path.slug,
-            pathType: 'career_role',
-            title: path.title,
-            category: path.category,
-            whySuggested: path.description,
-            contributingInputs: ['General career catalogue exploration'],
-            canExplore: true,
-            exploreHref: `/paths/${path.slug}`,
-          },
-          path,
-        });
-      });
-    }
-
     return list;
   }, [recommendations]);
 
@@ -94,7 +81,6 @@ export const BranchingPathTree: React.FC<BranchingPathTreeProps> = ({
       items: Array<{ rec: Partial<PathRecommendation> & { id: string; title: string; whySuggested: string }; path: CareerPath }>;
     }>();
 
-    // Defined domain buckets
     map.set('software_engineering', {
       id: 'software_engineering',
       title: 'Software & Engineering',
@@ -119,7 +105,6 @@ export const BranchingPathTree: React.FC<BranchingPathTreeProps> = ({
       if (map.has(cat)) {
         map.get(cat)!.items.push(item);
       } else {
-        // Fallback to software
         map.get('software_engineering')!.items.push(item);
       }
     });
@@ -128,8 +113,55 @@ export const BranchingPathTree: React.FC<BranchingPathTreeProps> = ({
     return Array.from(map.values()).filter((b) => b.items.length > 0);
   }, [resolvedPaths]);
 
-  // Initially null so detail breakdown only renders when clicked
-  const [activeRoleSlug, setActiveRoleSlug] = useState<string | null>(null);
+  // State for user manually previewing a node
+  const [userSelectedSlug, setUserSelectedSlug] = useState<string | null>(null);
+  const [prevApplyKey, setPrevApplyKey] = useState(applyKey);
+  // Reset manual preview selection upon a new Apply commit
+  if (applyKey !== prevApplyKey) {
+    setPrevApplyKey(applyKey);
+    setUserSelectedSlug(null);
+  }
+
+  // Accordion state for compact "Why this direction?"
+  const [expandedWhySlug, setExpandedWhySlug] = useState<string | null>(null);
+
+  // Top-to-bottom animation trigger on genuine new Apply
+  const [isAnimating, setIsAnimating] = useState(false);
+  const prevAnimRef = useRef(applyKey ?? 0);
+
+  useEffect(() => {
+    if (applyKey !== undefined && applyKey > 0 && applyKey !== prevAnimRef.current) {
+      prevAnimRef.current = applyKey;
+      const frame = requestAnimationFrame(() => {
+        setIsAnimating(true);
+      });
+      const timer = setTimeout(() => {
+        setIsAnimating(false);
+      }, 750);
+      return () => {
+        cancelAnimationFrame(frame);
+        clearTimeout(timer);
+      };
+    }
+  }, [applyKey]);
+
+  // Default open behavior:
+  // - If an explicit target role exists, open its path by default after Apply.
+  // - If only suggestions exist, invite the learner to choose a direction node.
+  const targetRoleSlug = useMemo(() => {
+    if (profile.targetRoleId) {
+      const matched = resolvedPaths.find((p) => p.path.numericId === profile.targetRoleId);
+      return matched?.path.slug || null;
+    }
+    return null;
+  }, [profile.targetRoleId, resolvedPaths]);
+
+  const activeRoleSlug = useMemo(() => {
+    if (userSelectedSlug && resolvedPaths.some((p) => p.path.slug === userSelectedSlug)) {
+      return userSelectedSlug;
+    }
+    return targetRoleSlug;
+  }, [userSelectedSlug, resolvedPaths, targetRoleSlug]);
 
   const activeItem = useMemo(() => {
     if (!activeRoleSlug) return null;
@@ -158,6 +190,10 @@ export const BranchingPathTree: React.FC<BranchingPathTreeProps> = ({
         return 'Applied Learner Horizon';
     }
   }, [profile.learnerStage, profile.stream, profile.degree]);
+
+  const toggleWhy = (slug: string) => {
+    setExpandedWhySlug((prev) => (prev === slug ? null : slug));
+  };
 
   return (
     <section
@@ -202,8 +238,11 @@ export const BranchingPathTree: React.FC<BranchingPathTreeProps> = ({
           marginBottom: '32px',
         }}
       >
-        {/* LEVEL 1: ROOT NODE (APPLIED LEARNER HORIZON) */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative', zIndex: 2 }}>
+        {/* LEVEL 1: ROOT NODE (YOUR APPLIED DIRECTION) */}
+        <div
+          className={isAnimating ? 'branch-animate-root' : undefined}
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative', zIndex: 2 }}
+        >
           <div
             style={{
               padding: '14px 24px',
@@ -230,7 +269,7 @@ export const BranchingPathTree: React.FC<BranchingPathTreeProps> = ({
             />
             <div>
               <div style={{ fontSize: '0.74rem', fontFamily: 'var(--font-mono)', color: 'var(--color-tangerine)', fontWeight: 700, textTransform: 'uppercase' }}>
-                ROOT HORIZON • {stageDisplay}
+                YOUR APPLIED DIRECTION • ROOT HORIZON • {stageDisplay}
               </div>
               <div style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--color-linen)', marginTop: '2px' }}>
                 {profile.stream ? `Stream: ${profile.stream.toUpperCase()}` : profile.degree || 'General Intake'}{' '}
@@ -243,221 +282,304 @@ export const BranchingPathTree: React.FC<BranchingPathTreeProps> = ({
 
           {/* ROOT-TO-BRANCH VERTICAL STEM */}
           <div
+            className={isAnimating ? 'branch-animate-stem' : undefined}
             style={{
               width: '2px',
               height: '32px',
               background: 'linear-gradient(180deg, var(--color-tangerine) 0%, var(--color-line-dark) 100%)',
               margin: '0 auto',
+              pointerEvents: 'none',
             }}
             aria-hidden="true"
           />
         </div>
 
-        {/* LEVEL 2 & 3: DOMAIN BRANCHES & ROLE NODES */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: `repeat(${branches.length}, minmax(0, 1fr))`,
-            gap: '24px',
-            position: 'relative',
-            zIndex: 2,
-          }}
-          className="tree-branches-grid"
-        >
-          {branches.map((branch) => (
+        {resolvedPaths.length === 0 ? (
+          <div
+            style={{
+              padding: '36px 24px',
+              textAlign: 'center',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '14px',
+              background: 'rgba(255, 255, 255, 0.02)',
+              borderRadius: 'var(--radius-md)',
+              border: '1px dashed var(--color-line-dark)',
+            }}
+          >
             <div
-              key={branch.id}
               style={{
+                width: '44px',
+                height: '44px',
+                borderRadius: '50%',
+                background: 'rgba(255, 109, 31, 0.1)',
+                border: '1px solid rgba(255, 109, 31, 0.25)',
                 display: 'flex',
-                flexDirection: 'column',
                 alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--color-tangerine)',
+                marginBottom: '4px',
               }}
             >
-              {/* Branch Header Node */}
-              <div
-                style={{
-                  padding: '8px 16px',
-                  borderRadius: 'var(--radius-pill)',
-                  background: 'var(--color-black-hole)',
-                  border: '1px solid var(--color-line-dark)',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  marginBottom: '16px',
-                }}
+              <Sparkles size={20} aria-hidden="true" />
+            </div>
+            <h3 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--color-linen)', fontFamily: 'var(--font-display)', letterSpacing: '0.04em' }}>
+              Choose a Target Role or Add Interests
+            </h3>
+            <p className="muted-light" style={{ maxWidth: '540px', margin: 0, fontSize: '0.9rem', lineHeight: 1.55 }}>
+              No applied direction signals yet. Customize your profile &amp; interests or select a target career role to generate evidence-aligned paths without manufactured suggestions.
+            </p>
+            {onOpenCustomizer && (
+              <button
+                type="button"
+                onClick={onOpenCustomizer}
+                className="button button-primary"
+                aria-label="Configure Profile Signals"
+                style={{ marginTop: '8px', fontSize: '0.84rem', padding: '10px 20px' }}
               >
-                {branch.icon}
-                <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--color-linen)' }}>
-                  {branch.title} ({branch.items.length})
-                </span>
-              </div>
+                <span>Configure Profile Signals</span>
+              </button>
+            )}
+          </div>
+        ) : (
+          <>
+            {/* LEVEL 2 & 3: DOMAIN BRANCHES & COMPACT ROLE NODES */}
+            <div
+              className="tree-branches-grid"
+              style={{
+                position: 'relative',
+                zIndex: 2,
+              }}
+            >
+              {branches.map((branch, bIdx) => (
+                <div
+                  key={branch.id}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                  }}
+                >
+                  {/* Branch Header Node */}
+                  <div
+                    className={isAnimating ? 'branch-animate-branch-header' : undefined}
+                    style={{
+                      padding: '8px 16px',
+                      borderRadius: 'var(--radius-pill)',
+                      background: 'var(--color-black-hole)',
+                      border: '1px solid var(--color-line-dark)',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      marginBottom: '16px',
+                      pointerEvents: 'none',
+                    }}
+                  >
+                    {branch.icon}
+                    <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--color-linen)' }}>
+                      {branch.title} ({branch.items.length})
+                    </span>
+                  </div>
 
-              {/* Connecting line down to role nodes */}
-              <div
-                style={{
-                  width: '2px',
-                  height: '16px',
-                  background: 'var(--color-line-dark)',
-                  marginBottom: '16px',
-                }}
-                aria-hidden="true"
-              />
+                  {/* Branch connector line down to nodes */}
+                  <div
+                    className={isAnimating ? 'branch-animate-stem' : undefined}
+                    style={{
+                      width: '2px',
+                      height: '16px',
+                      background: 'var(--color-line-dark)',
+                      marginBottom: '16px',
+                      pointerEvents: 'none',
+                    }}
+                    aria-hidden="true"
+                  />
 
-              {/* Role Leaf Nodes */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '18px', width: '100%' }}>
-                {branch.items.map(({ rec, path }) => {
-                  const isNodeActive = activeRoleSlug === path.slug;
-                  const isRoleTarget = selectedRoleId === path.numericId;
+                  {/* Role Leaf Nodes */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%' }}>
+                    {branch.items.map(({ rec, path }, nIdx) => {
+                      const isNodeActive = activeRoleSlug === path.slug;
+                      const isRoleTarget = selectedRoleId === path.numericId;
+                      const isWhyOpen = expandedWhySlug === path.slug;
+                      const staggerDelay = `${0.35 + (bIdx * 2 + nIdx) * 0.08}s`;
 
-                  return (
-                    <DarkCard
-                      key={path.id}
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-between',
-                        padding: '24px',
-                        border: isNodeActive
-                          ? '1px solid var(--color-tangerine)'
-                          : isRoleTarget
-                          ? '1px solid var(--color-cotton)'
-                          : '1px solid var(--color-line-dark)',
-                        background: isNodeActive
-                          ? 'rgba(255, 109, 31, 0.08)'
-                          : undefined,
-                        boxShadow: isNodeActive ? '0 0 20px rgba(255, 109, 31, 0.15)' : 'none',
-                        transition: 'all 0.2s ease',
-                      }}
-                    >
-                      <div>
-                        {/* Header badge row */}
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                          <StatusBadge variant="tangerine" label={rec.badge || `${path.level.toUpperCase()} LEVEL`} />
-                          {rec.alignedRoleId && (
-                            <span style={{ fontSize: '0.74rem', fontFamily: 'var(--font-mono)', color: 'var(--color-cotton)' }}>
-                              SEED #{rec.alignedRoleId}
-                            </span>
-                          )}
-                          {isRoleTarget && !rec.alignedRoleId && (
-                            <StatusBadge variant="tangerine" label="Active Target" />
-                          )}
-                        </div>
-
-                        {/* Title heading */}
-                        <h3 style={{ fontSize: '1.25rem', color: 'var(--color-linen)', margin: '0 0 10px', lineHeight: 1.3 }}>
-                          {rec.title}
-                        </h3>
-
-                        {/* Why suggested */}
-                        <p style={{ margin: '0 0 16px', fontSize: '0.84rem', color: 'var(--color-muted-light)', lineHeight: 1.5 }}>
-                          <strong>Why suggested:</strong> {rec.whySuggested || path.description}
-                        </p>
-
-                        {/* 8 Criteria details container */}
-                        <div
+                      return (
+                        <DarkCard
+                          key={path.id}
+                          className={isAnimating ? 'branch-animate-node' : undefined}
                           style={{
-                            display: 'grid',
-                            gap: '8px',
-                            fontSize: '0.78rem',
-                            color: 'var(--color-muted-light)',
-                            marginBottom: '18px',
-                            padding: '12px 14px',
-                            borderRadius: 'var(--radius-sm)',
-                            background: 'var(--color-black-soft)',
-                            border: '1px solid var(--color-line-dark)',
-                          }}
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'space-between',
+                            padding: '20px',
+                            border: isNodeActive
+                              ? '1px solid var(--color-tangerine)'
+                              : isRoleTarget
+                              ? '1px solid var(--color-cotton)'
+                              : '1px solid var(--color-line-dark)',
+                            background: isNodeActive
+                              ? 'rgba(255, 109, 31, 0.08)'
+                              : undefined,
+                            boxShadow: isNodeActive ? '0 0 20px rgba(255, 109, 31, 0.15)' : 'none',
+                            transition: 'border 0.2s ease, background 0.2s ease, box-shadow 0.2s ease',
+                            pointerEvents: 'auto',
+                            '--stagger-delay': staggerDelay,
+                          } as React.CSSProperties}
                         >
-                          <div><strong>Inputs evaluated:</strong> {(rec.inputsEvaluated || rec.contributingInputs || []).join(' · ')}</div>
-                          {rec.requirementsEvaluated && rec.requirementsEvaluated.length > 0 && (
-                            <div><strong>Requirements evaluated:</strong> {rec.requirementsEvaluated.join(' · ')}</div>
-                          )}
                           <div>
-                            <strong>Evidence found:</strong>{' '}
-                            {rec.evidenceFound && rec.evidenceFound.length > 0 && !rec.evidenceFound.every((e: string) => e.includes('No prior coursework') || e.includes('No verified skill'))
-                              ? rec.evidenceFound.join(' · ')
-                              : 'No verified skill evidence supplied yet.'}
-                          </div>
-                          <div>
-                            <strong>Still unknown:</strong>{' '}
-                            {(rec.stillUnknown || rec.unknowns || []).length > 0
-                              ? (rec.stillUnknown || rec.unknowns || []).map((u: string) => u.replace(/Confirmed gap/gi, 'Not assessed yet')).join(' · ')
-                              : 'Not assessed yet'}
-                          </div>
-                          {rec.prerequisites && rec.prerequisites.length > 0 && (
-                            <div><strong>Prerequisites:</strong> {rec.prerequisites.join(' · ')}</div>
-                          )}
-                          <div>
-                            <strong>Estimated Curriculum Path:</strong>{' '}
-                            {(rec.estimatedCurriculum && rec.estimatedCurriculum.length > 0)
-                              ? rec.estimatedCurriculum.join(' · ')
-                              : `${path.estimatedEffortHours || 80} hours · 5 phases`}
-                          </div>
-                          <div>
-                            <strong>Next Action:</strong>{' '}
-                            {rec.nextAction || 'Explore curriculum and begin milestone 1'}
-                          </div>
-                        </div>
+                            {/* Header badge row */}
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                              <StatusBadge variant="tangerine" label={rec.badge || `${path.level.toUpperCase()} LEVEL`} />
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                {isRoleTarget && (
+                                  <span
+                                    style={{
+                                      fontSize: '0.68rem',
+                                      padding: '2px 8px',
+                                      borderRadius: 'var(--radius-pill)',
+                                      background: 'rgba(255, 109, 31, 0.2)',
+                                      color: 'var(--color-tangerine)',
+                                      fontWeight: 700,
+                                      border: '1px solid var(--color-tangerine)',
+                                    }}
+                                  >
+                                    Active Target
+                                  </span>
+                                )}
+                                {isNodeActive && !isRoleTarget && (
+                                  <span
+                                    style={{
+                                      fontSize: '0.68rem',
+                                      padding: '2px 8px',
+                                      borderRadius: 'var(--radius-pill)',
+                                      background: 'rgba(250, 243, 225, 0.12)',
+                                      color: 'var(--color-cotton)',
+                                      fontWeight: 600,
+                                    }}
+                                  >
+                                    Previewing
+                                  </span>
+                                )}
+                              </div>
+                            </div>
 
-                        {/* Core Technical Keywords */}
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '16px' }}>
-                          {path.coreSkills.map((skill, sIdx) => (
-                            <span
-                              key={sIdx}
+                            {/* Canonical role title */}
+                            <h3 style={{ fontSize: '1.2rem', color: 'var(--color-linen)', margin: '0 0 6px', lineHeight: 1.3 }}>
+                              {rec.title || path.title}
+                            </h3>
+                            {rec.title && rec.title !== path.title && (
+                              <div style={{ fontSize: '0.74rem', color: 'var(--color-cotton)', marginBottom: '4px' }}>
+                                <span>Canonical Role: </span>
+                                <span style={{ fontWeight: 600 }}>{path.title}</span>
+                              </div>
+                            )}
+
+                            {/* One-line description */}
+                            <p
                               style={{
-                                fontSize: '0.70rem',
-                                padding: '2px 8px',
-                                borderRadius: 'var(--radius-pill)',
-                                background: 'rgba(250, 243, 225, 0.06)',
-                                color: 'var(--color-cotton)',
-                                border: '1px solid var(--color-line-dark)',
+                                margin: '0 0 12px',
+                                fontSize: '0.84rem',
+                                color: 'var(--color-muted-light)',
+                                lineHeight: 1.45,
+                                display: '-webkit-box',
+                                WebkitLineClamp: 2,
+                                WebkitBoxOrient: 'vertical',
+                                overflow: 'hidden',
                               }}
                             >
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
+                              {path.description}
+                            </p>
 
-                      {/* Card Actions */}
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: 'auto' }}>
-                        <PrimaryButton
-                          onClick={() => {
-                            setActiveRoleSlug(path.slug);
-                            onActivateRole(path.numericId, path.title);
-                          }}
-                          style={{ width: '100%', fontSize: '0.84rem', padding: '10px 16px' }}
-                        >
-                          Explore this curriculum roadmap →
-                        </PrimaryButton>
+                            {/* Up to 3 relevant skills */}
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '14px' }}>
+                              {path.coreSkills.slice(0, 3).map((skill, sIdx) => (
+                                <span
+                                  key={sIdx}
+                                  style={{
+                                    fontSize: '0.70rem',
+                                    padding: '2px 8px',
+                                    borderRadius: 'var(--radius-pill)',
+                                    background: 'rgba(250, 243, 225, 0.06)',
+                                    color: 'var(--color-cotton)',
+                                    border: '1px solid var(--color-line-dark)',
+                                  }}
+                                >
+                                  {skill}
+                                </span>
+                              ))}
+                            </div>
 
-                        <SecondaryButton
-                          onClick={() => navigate('/assessment')}
-                          style={{ width: '100%', fontSize: '0.78rem', padding: '8px 14px' }}
-                        >
-                          Take diagnostic assessment
-                        </SecondaryButton>
+                            {/* Compact "Why this direction?" Accordion Toggle */}
+                            <div style={{ marginBottom: '14px' }}>
+                              <button
+                                type="button"
+                                onClick={() => toggleWhy(path.slug)}
+                                className="button-text"
+                                style={{
+                                  fontSize: '0.76rem',
+                                  color: 'var(--color-tangerine)',
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  gap: '4px',
+                                  padding: 0,
+                                }}
+                                aria-expanded={isWhyOpen}
+                              >
+                                <span>Why this direction?</span>
+                                {isWhyOpen ? <ChevronUp size={12} aria-hidden="true" /> : <ChevronDown size={12} aria-hidden="true" />}
+                              </button>
+                              {isWhyOpen && (
+                                <div
+                                  style={{
+                                    marginTop: '8px',
+                                    padding: '10px 12px',
+                                    borderRadius: 'var(--radius-sm)',
+                                    background: 'var(--color-black-soft)',
+                                    border: '1px solid var(--color-line-dark)',
+                                    fontSize: '0.78rem',
+                                    color: 'var(--color-linen)',
+                                    lineHeight: 1.45,
+                                  }}
+                                >
+                                  {rec.whySuggested || path.description}
+                                </div>
+                              )}
+                            </div>
+                          </div>
 
-                        <button
-                          type="button"
-                          onClick={() => setActiveRoleSlug(activeRoleSlug === path.slug ? null : path.slug)}
-                          className="button-text"
-                          style={{ fontSize: '0.76rem', color: 'var(--color-tangerine)', marginTop: '4px', textAlign: 'center', width: '100%' }}
-                        >
-                          {activeRoleSlug === path.slug ? 'Hide Curriculum Breakdown ▲' : 'Inspect 5-Phase Curriculum Breakdown ▼'}
-                        </button>
-                      </div>
-                    </DarkCard>
-                  );
-                })}
-              </div>
+                          {/* Accessible open/preview action button & diagnostic link */}
+                          <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                            <PrimaryButton
+                              onClick={() => setUserSelectedSlug(path.slug)}
+                              aria-label={`Inspect 5-Phase Curriculum Breakdown ▼ ${path.title}`}
+                              style={{ width: '100%', fontSize: '0.82rem', padding: '9px 14px' }}
+                            >
+                              Explore this curriculum roadmap {isNodeActive ? '· Viewing Below ↓' : '· Inspect Breakdown ▼'}
+                            </PrimaryButton>
+
+                            <SecondaryButton
+                              onClick={() => navigate('/assessment')}
+                              style={{ width: '100%', fontSize: '0.76rem', padding: '6px 12px' }}
+                            >
+                              Take diagnostic assessment
+                            </SecondaryButton>
+                          </div>
+                        </DarkCard>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        )}
       </div>
 
       {/* DETAIL OVERVIEW CONTAINER (OPENS DIRECTLY BELOW THE TREE UPON NODE SELECTION) */}
-      {activePath && (
+      {activePath ? (
         <DarkCard
+          className={isAnimating ? 'branch-animate-overview' : undefined}
           style={{
             padding: '32px',
             border: '1px solid var(--color-tangerine)',
@@ -617,9 +739,10 @@ export const BranchingPathTree: React.FC<BranchingPathTreeProps> = ({
                 type="button"
                 onClick={() => navigate(`/paths/${activePath.slug}`)}
                 className="button-text"
-                style={{ fontSize: '0.78rem', color: 'var(--color-tangerine)' }}
+                style={{ fontSize: '0.78rem', color: 'var(--color-tangerine)', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
               >
-                Full Syllabus &amp; Specs ↗
+                <span>Full Syllabus &amp; Specs</span>
+                <ArrowRight size={13} aria-hidden="true" />
               </button>
             </div>
 
@@ -655,6 +778,25 @@ export const BranchingPathTree: React.FC<BranchingPathTreeProps> = ({
             </ol>
           </div>
         </DarkCard>
+      ) : (
+        resolvedPaths.length > 0 && (
+          <DarkCard
+            style={{
+              padding: '24px',
+              textAlign: 'center',
+              border: '1px dashed var(--color-line-dark)',
+              background: 'var(--color-black-hole)',
+            }}
+          >
+            <Compass size={28} color="var(--color-tangerine)" style={{ margin: '0 auto 10px' }} aria-hidden="true" />
+            <h3 style={{ margin: '0 0 6px', fontSize: '1.1rem', color: 'var(--color-linen)' }}>
+              Select a Career Direction Above
+            </h3>
+            <p className="muted-light" style={{ margin: 0, fontSize: '0.88rem', maxWidth: '540px', marginInline: 'auto', lineHeight: 1.5 }}>
+              Click or activate any direction node above to inspect its 5-phase structured curriculum, verified milestone deliverables, and activate it for your roadmap.
+            </p>
+          </DarkCard>
+        )
       )}
     </section>
   );

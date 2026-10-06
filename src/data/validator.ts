@@ -43,6 +43,9 @@ export const UserProfileSchema = z.object({
   schoolClass: z.string().optional(),
   stream: SchoolStreamSchema.optional(),
   degree: z.string().optional(),
+  specialization: z.string().optional(),
+  institution: z.string().optional(),
+  expectedGraduationYear: z.string().optional(),
   branch: z.string(),
   studyYear: z.string(),
   hoursPerWeek: z.number().min(1).max(168),
@@ -55,9 +58,33 @@ export const UserProfileSchema = z.object({
   favoriteSubjects: z.array(z.string()).optional(),
   preferredWorkDirection: z.string().optional(),
   projectFacts: z.string().optional(),
+  portfolioUrl: z.string().optional(),
+  githubUrl: z.string().optional(),
+  linkedinUrl: z.string().optional(),
   isGuestDemo: z.boolean(),
   targetRoleId: z.number().optional(),
   targetRoleSlug: z.string().optional(),
+  fontSizePreference: z.enum(['default', 'comfortable', 'large', 'extra-large']).optional(),
+});
+
+export const ResumeSourceFactSchema = z.object({
+  id: z.string().min(1),
+  category: z.enum(['project', 'education', 'experience', 'skill']),
+  text: z.string(),
+  verified: z.boolean(),
+  source: z.string().optional(),
+  claim: z.string().optional(),
+  evidenceSnippet: z.string().optional(),
+  deliverable: z.string().optional(),
+  verifiedAt: z.string().optional(),
+});
+
+export const ResumeDocumentSchema = z.object({
+  id: z.string().min(1),
+  userId: z.string().min(1),
+  label: z.string(),
+  rawText: z.string().max(50000),
+  facts: z.array(ResumeSourceFactSchema),
 });
 
 export const SkillSchema = z.object({

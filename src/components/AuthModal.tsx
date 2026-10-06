@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useCareer } from '../context/CareerContext';
 import {
   Eyebrow,
@@ -39,16 +39,74 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
   const [showSupabaseNotice, setShowSupabaseNotice] = useState(false);
 
-  // Close modal on Escape key press for accessible keyboard navigation
+  const previousActiveElementRef = useRef<HTMLElement | null>(null);
+  const modalContainerRef = useRef<HTMLDivElement>(null);
+  const emailInputRef = useRef<HTMLInputElement>(null);
+
+  const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
+  const [prevInitialMode, setPrevInitialMode] = useState(initialMode);
+
+  // Sync mode and clear transient notices when modal opens or initialMode changes
+  if (isOpen !== prevIsOpen || initialMode !== prevInitialMode) {
+    setPrevIsOpen(isOpen);
+    setPrevInitialMode(initialMode);
+    if (isOpen) {
+      setMode(initialMode);
+      setErrorMsg(null);
+      setSuccessMsg(null);
+      setShowSupabaseNotice(false);
+    }
+  }
+
+  // Focus capture, containment, and restoration on open/close
   useEffect(() => {
     if (!isOpen) return;
+
+    previousActiveElementRef.current = document.activeElement as HTMLElement | null;
+
+    // Focus initial input field smoothly
+    const timer = setTimeout(() => {
+      emailInputRef.current?.focus();
+    }, 60);
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
+        return;
+      }
+
+      // Trap focus within modal dialog
+      if (e.key === 'Tab' && modalContainerRef.current) {
+        const focusableElements = modalContainerRef.current.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusableElements.length === 0) return;
+
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
       }
     };
+
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('keydown', handleKeyDown);
+      // Restore focus to previous trigger element
+      previousActiveElementRef.current?.focus();
+    };
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
@@ -139,6 +197,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       role="dialog"
       aria-modal="true"
       aria-labelledby="auth-modal-title"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          onClose();
+        }
+      }}
       style={{
         position: 'fixed',
         inset: 0,
@@ -152,12 +215,15 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       }}
     >
       <div
+        ref={modalContainerRef}
         style={{
           background: 'var(--color-black-soft)',
           border: '1px solid var(--color-line-dark)',
           borderRadius: 'var(--radius-lg)',
           maxWidth: '460px',
           width: '100%',
+          maxHeight: 'min(90vh, 760px)',
+          overflowY: 'auto',
           padding: '32px',
           boxShadow: '0 24px 48px rgba(0, 0, 0, 0.7)',
           position: 'relative',
@@ -406,6 +472,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             </label>
             <div style={{ position: 'relative' }}>
               <input
+                ref={emailInputRef}
                 id="auth-email-input"
                 type="email"
                 required

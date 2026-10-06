@@ -1,4 +1,4 @@
-import type { ResumeDocument } from '../../types';
+import type { ResumeDocument, ResumeSourceFact, ResumeSuggestion } from '../../types';
 import type { IResumeRepository, RepositoryResult } from './types';
 import { supabase, isSupabaseConfigured } from '../supabaseClient';
 import { STORAGE_KEY, EMPTY_RESUME } from '../../context/careerConstants';
@@ -10,29 +10,43 @@ export class LocalResumeRepository implements IResumeRepository {
     this.storageKey = storageKey;
   }
 
-  async getResumeDocument(_userId: string): Promise<RepositoryResult<ResumeDocument>> {
+  private getScopedKey(userId: string): string {
+    const isUserScoped = Boolean(userId && !userId.startsWith('guest'));
+    return isUserScoped ? `career_ai_resume_${userId}` : this.storageKey;
+  }
+
+  async getResumeDocument(userId: string): Promise<RepositoryResult<ResumeDocument>> {
     try {
       if (typeof window === 'undefined' || !window.localStorage) {
         return { data: EMPTY_RESUME, error: null };
       }
-      const raw = window.localStorage.getItem(this.storageKey);
+      const isUserScoped = Boolean(userId && !userId.startsWith('guest'));
+      const key = this.getScopedKey(userId);
+      const raw = window.localStorage.getItem(key);
       if (!raw) return { data: EMPTY_RESUME, error: null };
       const parsed = JSON.parse(raw);
-      return { data: parsed.resumeDoc || EMPTY_RESUME, error: null };
+      const doc = (isUserScoped ? parsed : parsed.resumeDoc) || EMPTY_RESUME;
+      return { data: doc, error: null };
     } catch (err) {
       return { data: EMPTY_RESUME, error: String(err) };
     }
   }
 
-  async saveResumeDocument(_userId: string, resume: ResumeDocument): Promise<RepositoryResult<void>> {
+  async saveResumeDocument(userId: string, resume: ResumeDocument): Promise<RepositoryResult<void>> {
     try {
       if (typeof window === 'undefined' || !window.localStorage) {
         return { data: null, error: null };
       }
-      const raw = window.localStorage.getItem(this.storageKey);
-      const state = raw ? JSON.parse(raw) : {};
-      state.resumeDoc = resume;
-      window.localStorage.setItem(this.storageKey, JSON.stringify(state));
+      const isUserScoped = Boolean(userId && !userId.startsWith('guest'));
+      const key = this.getScopedKey(userId);
+      if (isUserScoped) {
+        window.localStorage.setItem(key, JSON.stringify(resume));
+      } else {
+        const raw = window.localStorage.getItem(this.storageKey);
+        const state = raw ? JSON.parse(raw) : {};
+        state.resumeDoc = resume;
+        window.localStorage.setItem(this.storageKey, JSON.stringify(state));
+      }
       return { data: null, error: null };
     } catch (err) {
       return { data: null, error: String(err) };
@@ -79,9 +93,9 @@ export class SupabaseResumeRepository implements IResumeRepository {
       const doc: ResumeDocument = {
         id: data.id,
         userId: data.user_id,
-        label: data.label,
-        rawText: data.raw_text,
-        facts: [],
+        label: data.label || 'Draft Resume',
+        rawText: data.raw_text || '',
+        facts: Array.isArray(data.facts) ? (data.facts as unknown as ResumeSourceFact[]) : [],
       };
 
       return { data: doc, error: null };
@@ -96,11 +110,15 @@ export class SupabaseResumeRepository implements IResumeRepository {
     }
 
     try {
+      const isUuid = Boolean(resume.id && resume.id.includes('-') && resume.id.length >= 32);
       const { error } = await supabase.from('resume_documents').upsert({
-        id: resume.id && resume.id.includes('-') && resume.id.length >= 32 ? resume.id : undefined,
+        id: isUuid ? resume.id : undefined,
         user_id: userId,
         label: resume.label || 'Draft Resume',
-        raw_text: resume.rawText,
+        raw_text: resume.rawText || '',
+        facts: (resume.facts || []) as unknown as Record<string, unknown>[],
+        suggestions: ((resume as { suggestions?: ResumeSuggestion[] }).suggestions || []) as unknown as Record<string, unknown>[],
+        role_id: (resume as { roleId?: number }).roleId || null,
         updated_at: new Date().toISOString(),
       });
 

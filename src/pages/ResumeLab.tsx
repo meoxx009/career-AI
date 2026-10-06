@@ -9,6 +9,11 @@ import {
 } from '../lib/resumeAnalyzer';
 import { RoleSelector } from '../components/RoleSelector';
 import { ResumeUploader } from '../components/ResumeUploader';
+import { formatResumeMilestoneBullet } from '../lib/roadmapResumeSync';
+import {
+  composeStructuredResume,
+  regenerateResumePreservingManualEdits,
+} from '../lib/resumeComposer';
 import {
   DisplayHeading,
   Eyebrow,
@@ -52,8 +57,11 @@ const DEFAULT_JDS: Record<number, string> = {
 
 export const ResumeLab: React.FC = () => {
   const {
+    profile,
+    roadmapTasks,
     resumeDoc,
     updateResumeText,
+    updateResumeFactInclusion,
     resumeSuggestions,
     setResumeSuggestions,
     updateSuggestionStatus,
@@ -66,9 +74,51 @@ export const ResumeLab: React.FC = () => {
     consentGiven,
   } = useCareer();
 
+  const [activeView, setActiveView] = useState<'editor' | 'preview'>('editor');
+  const [showComposeConfirm, setShowComposeConfirm] = useState(false);
+  const [editingFactId, setEditingFactId] = useState<string | null>(null);
+  const [editFactWording, setEditFactWording] = useState('');
+  const [factRoleFilter, setFactRoleFilter] = useState<'all' | 'target'>('all');
+
   const activeRole = useMemo(() => {
     return (typeof selectedRoleId === 'number' ? getCareerPathById(selectedRoleId) : undefined) || CAREER_CATALOGUE[0];
   }, [selectedRoleId]);
+
+  const handleComposeResume = (mode: 'overwrite' | 'merge_accomplishments' = 'overwrite') => {
+    setShowComposeConfirm(false);
+    const composed = composeStructuredResume({
+      profile,
+      roadmapTasks,
+      targetRole: activeRole,
+      existingFacts: resumeDoc.facts,
+    });
+
+    if (mode === 'overwrite' || !resumeDoc.rawText.trim()) {
+      updateResumeText(composed.rawText);
+      showToast('Composed fresh structured resume from profile & roadmap work.');
+    } else {
+      const merged = regenerateResumePreservingManualEdits({
+        existingRawText: resumeDoc.rawText,
+        inputs: {
+          profile,
+          roadmapTasks,
+          targetRole: activeRole,
+          existingFacts: resumeDoc.facts,
+        },
+        mode: 'merge_accomplishments',
+      });
+      updateResumeText(merged);
+      showToast('Merged new roadmap accomplishments while preserving custom text.');
+    }
+  };
+
+  const handleComposeClick = () => {
+    if (resumeDoc.rawText.trim().length > 0) {
+      setShowComposeConfirm(true);
+    } else {
+      handleComposeResume('overwrite');
+    }
+  };
 
   const getRoleJd = (roleId?: number | null) => {
     const id = (roleId !== undefined && roleId !== null) ? roleId : 1;
@@ -391,7 +441,7 @@ export const ResumeLab: React.FC = () => {
             ocrWarning={ocrWarning}
           />
 
-          {/* Resume Text Area */}
+          {/* Resume Text Area & Recruiter View */}
           <DarkCard>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', flexWrap: 'wrap', gap: '8px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -400,7 +450,14 @@ export const ResumeLab: React.FC = () => {
                   Resume Text Draft
                 </h3>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                <PrimaryButton
+                  onClick={handleComposeClick}
+                  style={{ minHeight: '30px', padding: '4px 12px', fontSize: '0.72rem' }}
+                >
+                  <Sparkles size={12} aria-hidden="true" />
+                  Compose from Profile &amp; Work
+                </PrimaryButton>
                 <span style={{ fontSize: '0.72rem', color: resumeLength > 10000 ? '#ef4444' : 'var(--color-muted-light)' }}>
                   {resumeLength} / 10,000 chars
                 </span>
@@ -410,26 +467,122 @@ export const ResumeLab: React.FC = () => {
               </div>
             </div>
 
-            <textarea
-              rows={13}
-              value={resumeDoc.rawText}
-              onChange={e => updateResumeText(e.target.value)}
-              placeholder="Paste your plain-text resume here... (minimum 10 characters)"
-              style={{
-                width: '100%',
-                background: 'var(--color-black-soft)',
-                border: '1px solid var(--color-line-dark)',
-                borderRadius: 'var(--radius-md)',
-                color: 'var(--color-linen)',
-                padding: '14px',
-                fontSize: '0.86rem',
-                fontFamily: 'var(--font-mono), monospace',
-                lineHeight: 1.6,
-                resize: 'vertical',
-                boxSizing: 'border-box',
-              }}
-              aria-label="Resume Text Draft"
-            />
+            {/* View switcher: Plaintext Editor vs ATS Recruiter Preview */}
+            <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
+              <button
+                type="button"
+                onClick={() => setActiveView('editor')}
+                style={{
+                  padding: '5px 12px',
+                  borderRadius: 'var(--radius-pill)',
+                  fontSize: '0.72rem',
+                  fontWeight: 700,
+                  background: activeView === 'editor' ? 'rgba(250, 243, 225, 0.15)' : 'transparent',
+                  color: activeView === 'editor' ? 'var(--color-cotton)' : 'var(--color-muted-light)',
+                  border: activeView === 'editor' ? '1px solid var(--color-cotton)' : '1px solid var(--color-line-dark)',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                Plaintext Editor
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveView('preview')}
+                style={{
+                  padding: '5px 12px',
+                  borderRadius: 'var(--radius-pill)',
+                  fontSize: '0.72rem',
+                  fontWeight: 700,
+                  background: activeView === 'preview' ? 'rgba(255, 109, 31, 0.2)' : 'transparent',
+                  color: activeView === 'preview' ? 'var(--color-tangerine)' : 'var(--color-cotton)',
+                  border: activeView === 'preview' ? '1px solid var(--color-tangerine)' : '1px solid var(--color-line-dark)',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                ATS Recruiter Preview
+              </button>
+            </div>
+
+            {/* Empty Draft Prompt */}
+            {resumeLength === 0 && activeView === 'editor' && (
+              <div
+                style={{
+                  padding: '14px 18px',
+                  borderRadius: 'var(--radius-sm)',
+                  background: 'rgba(255, 109, 31, 0.08)',
+                  border: '1px dashed var(--color-tangerine)',
+                  marginBottom: '12px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '8px',
+                }}
+              >
+                <div style={{ fontSize: '0.84rem', color: 'var(--color-linen)', fontWeight: 600 }}>
+                  Your draft is currently empty.
+                </div>
+                <p style={{ margin: 0, fontSize: '0.78rem', color: 'var(--color-muted-light)', lineHeight: 1.5 }}>
+                  Compose an ATS-formatted resume automatically using your saved profile facts, education, verified skills, and completed roadmap accomplishments.
+                </p>
+                <PrimaryButton
+                  onClick={() => handleComposeResume('overwrite')}
+                  style={{ alignSelf: 'flex-start', minHeight: '32px', padding: '4px 12px', fontSize: '0.74rem' }}
+                >
+                  <Sparkles size={12} aria-hidden="true" />
+                  Compose from Profile &amp; Roadmap Work
+                </PrimaryButton>
+              </div>
+            )}
+
+            {activeView === 'editor' ? (
+              <textarea
+                rows={13}
+                value={resumeDoc.rawText}
+                onChange={e => updateResumeText(e.target.value)}
+                placeholder="Paste your plain-text resume here... (minimum 10 characters)"
+                style={{
+                  width: '100%',
+                  background: 'var(--color-black-soft)',
+                  border: '1px solid var(--color-line-dark)',
+                  borderRadius: 'var(--radius-md)',
+                  color: 'var(--color-linen)',
+                  padding: '14px',
+                  fontSize: '0.86rem',
+                  fontFamily: 'var(--font-mono), monospace',
+                  lineHeight: 1.6,
+                  resize: 'vertical',
+                  boxSizing: 'border-box',
+                }}
+                aria-label="Resume Text Draft"
+              />
+            ) : (
+              <div
+                style={{
+                  padding: '20px 22px',
+                  background: '#131516',
+                  border: '1px solid var(--color-line-dark)',
+                  borderRadius: 'var(--radius-md)',
+                  color: 'var(--color-linen)',
+                  fontFamily: 'var(--font-mono), monospace',
+                  fontSize: '0.84rem',
+                  lineHeight: 1.65,
+                  whiteSpace: 'pre-wrap',
+                  minHeight: '260px',
+                  userSelect: 'text',
+                  overflowX: 'auto',
+                }}
+                data-testid="ats-recruiter-preview"
+              >
+                {resumeDoc.rawText ? (
+                  resumeDoc.rawText
+                ) : (
+                  <span style={{ color: 'var(--color-muted-light)', fontStyle: 'italic' }}>
+                    No resume content yet. Click &ldquo;Compose from Profile &amp; Work&rdquo; to generate a structured draft.
+                  </span>
+                )}
+              </div>
+            )}
 
             {/* Quick helper buttons & character count guidance */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '12px', flexWrap: 'wrap', gap: '8px' }}>
@@ -617,16 +770,16 @@ export const ResumeLab: React.FC = () => {
                 Source-Linked Roadmap Achievements
               </h4>
               <span className="source-label" style={{ fontSize: '0.68rem' }}>
-                {resumeDoc.facts.filter(f => f.source === 'roadmap' || f.id.startsWith('fact-rm-')).length} Verified Milestones
+                {resumeDoc.facts.filter(f => (f.source === 'roadmap' || f.id.startsWith('fact-rm-')) && !f.isOutdated).length} Verified Milestones
               </span>
             </div>
             <p style={{ margin: '0 0 14px', fontSize: '0.78rem', color: 'var(--color-muted-light)', lineHeight: 1.5 }}>
-              Automatically synchronized when you complete milestones in your Roadmap. Planned deliverables are never imported as completed proof.
+              Automatically synchronized when you complete milestones in your Roadmap. Planned goals alone never generate invented accomplishments.
             </p>
 
             {(() => {
-              const roadmapFacts = resumeDoc.facts.filter(f => f.source === 'roadmap' || f.id.startsWith('fact-rm-'));
-              if (roadmapFacts.length === 0) {
+              const allRoadmapFacts = resumeDoc.facts.filter(f => f.source === 'roadmap' || f.id.startsWith('fact-rm-'));
+              if (allRoadmapFacts.length === 0) {
                 return (
                   <div
                     style={{
@@ -644,30 +797,233 @@ export const ResumeLab: React.FC = () => {
                 );
               }
 
+              // Target role filtering: prioritizes relevant entries without deleting history
+              const roleMatchedFacts = allRoadmapFacts.filter(f => !f.roleId || f.roleId === selectedRoleId);
+              const displayedFacts = factRoleFilter === 'target' && roleMatchedFacts.length > 0
+                ? roleMatchedFacts
+                : allRoadmapFacts;
+
               return (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  {roadmapFacts.map((fact) => (
-                    <div
-                      key={fact.id}
-                      style={{
-                        padding: '10px 14px',
-                        borderRadius: 'var(--radius-sm)',
-                        background: 'rgba(74, 122, 60, 0.10)',
-                        border: '1px solid rgba(74, 122, 60, 0.35)',
-                        fontSize: '0.78rem',
-                      }}
-                    >
-                      <div style={{ fontWeight: 700, color: 'var(--color-linen)', marginBottom: '4px' }}>
-                        {fact.claim || fact.text}
-                      </div>
-                      <div style={{ color: 'var(--color-muted-light)', fontSize: '0.74rem', lineHeight: 1.4 }}>
-                        {fact.evidenceSnippet || fact.text}
-                      </div>
-                      <div style={{ marginTop: '4px', fontSize: '0.70rem', color: 'var(--color-cotton)', fontFamily: 'var(--font-mono)' }}>
-                        {fact.verifiedAt ? `Verified: ${fact.verifiedAt} · ` : ''}Source: Interactive Roadmap
-                      </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  {allRoadmapFacts.length > 1 && (
+                    <div style={{ display: 'flex', gap: '6px', marginBottom: '4px', flexWrap: 'wrap' }}>
+                      <button
+                        type="button"
+                        onClick={() => setFactRoleFilter('all')}
+                        style={{
+                          padding: '3px 10px',
+                          borderRadius: 'var(--radius-pill)',
+                          fontSize: '0.70rem',
+                          fontWeight: 600,
+                          background: factRoleFilter === 'all' ? 'rgba(255, 109, 31, 0.2)' : 'rgba(255, 255, 255, 0.05)',
+                          color: factRoleFilter === 'all' ? 'var(--color-tangerine)' : 'var(--color-cotton)',
+                          border: '1px solid var(--color-line-dark)',
+                          cursor: 'pointer',
+                        }}
+                      >
+                        All Milestones ({allRoadmapFacts.length})
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setFactRoleFilter('target')}
+                        style={{
+                          padding: '3px 10px',
+                          borderRadius: 'var(--radius-pill)',
+                          fontSize: '0.70rem',
+                          fontWeight: 600,
+                          background: factRoleFilter === 'target' ? 'rgba(255, 109, 31, 0.2)' : 'rgba(255, 255, 255, 0.05)',
+                          color: factRoleFilter === 'target' ? 'var(--color-tangerine)' : 'var(--color-cotton)',
+                          border: '1px solid var(--color-line-dark)',
+                          cursor: 'pointer',
+                        }}
+                      >
+                        Active Role: {activeRole.title} ({roleMatchedFacts.length})
+                      </button>
                     </div>
-                  ))}
+                  )}
+
+                  {displayedFacts.map((fact) => {
+                    const isIncluded = fact.inclusionStatus !== 'dismissed';
+                    const bulletPreview = formatResumeMilestoneBullet(fact);
+
+                    return (
+                      <div
+                        key={fact.id}
+                        style={{
+                          padding: '12px 14px',
+                          borderRadius: 'var(--radius-sm)',
+                          background: fact.isOutdated
+                            ? 'rgba(239, 68, 68, 0.08)'
+                            : isIncluded
+                            ? 'rgba(74, 122, 60, 0.12)'
+                            : 'rgba(255, 255, 255, 0.03)',
+                          border: fact.isOutdated
+                            ? '1px solid rgba(239, 68, 68, 0.4)'
+                            : isIncluded
+                            ? '1px solid rgba(74, 122, 60, 0.35)'
+                            : '1px dashed var(--color-line-dark)',
+                          fontSize: '0.78rem',
+                          opacity: isIncluded ? 1 : 0.75,
+                        }}
+                      >
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px', flexWrap: 'wrap', gap: '6px' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+                            <span style={{ fontWeight: 700, color: 'var(--color-linen)' }}>
+                              {fact.deliverable || fact.claim || fact.text}
+                            </span>
+                            {fact.roleName && (
+                              <span
+                                style={{
+                                  fontSize: '0.68rem',
+                                  padding: '1px 6px',
+                                  borderRadius: 'var(--radius-pill)',
+                                  background: 'rgba(255, 255, 255, 0.08)',
+                                  color: 'var(--color-cotton)',
+                                }}
+                              >
+                                {fact.roleName}
+                              </span>
+                            )}
+                          </div>
+
+                          <div>
+                            {fact.isOutdated ? (
+                              <StatusBadge variant="danger" label="Reverted in Roadmap" />
+                            ) : fact.actualWork?.whatLearnerDid ? (
+                              <StatusBadge variant="success" label="Accomplishment Draft" />
+                            ) : (
+                              <StatusBadge variant="cotton" label="Self-Reported Learning" />
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Outdated warning if milestone was unchecked in roadmap */}
+                        {fact.isOutdated && (
+                          <div
+                            style={{
+                              color: '#ef4444',
+                              fontSize: '0.72rem',
+                              marginBottom: '6px',
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '4px',
+                            }}
+                          >
+                            <AlertCircle size={12} />
+                            <span>Milestone was marked incomplete in Roadmap. Review before keeping in your resume.</span>
+                          </div>
+                        )}
+
+                        {/* Bullet Draft or Editing Box */}
+                        {editingFactId === fact.id ? (
+                          <div style={{ marginTop: '8px' }}>
+                            <label style={{ fontSize: '0.70rem', color: 'var(--color-cotton)', display: 'block', marginBottom: '2px' }}>
+                              Custom bullet wording for resume document:
+                            </label>
+                            <textarea
+                              rows={2}
+                              value={editFactWording}
+                              onChange={e => setEditFactWording(e.target.value)}
+                              style={{
+                                width: '100%',
+                                background: 'var(--color-black-soft)',
+                                border: '1px solid var(--color-tangerine)',
+                                color: 'var(--color-linen)',
+                                padding: '8px',
+                                borderRadius: 'var(--radius-sm)',
+                                fontSize: '0.78rem',
+                                boxSizing: 'border-box',
+                              }}
+                            />
+                            <div style={{ display: 'flex', gap: '6px', marginTop: '6px' }}>
+                              <PrimaryButton
+                                onClick={() => {
+                                  updateResumeFactInclusion(fact.id, 'included', editFactWording.trim());
+                                  setEditingFactId(null);
+                                  showToast('Custom accomplishment wording saved to resume draft.');
+                                }}
+                                style={{ minHeight: '28px', padding: '4px 10px', fontSize: '0.72rem' }}
+                              >
+                                Save Wording
+                              </PrimaryButton>
+                              <SecondaryButton
+                                onClick={() => setEditingFactId(null)}
+                                style={{ minHeight: '28px', padding: '4px 10px', fontSize: '0.72rem' }}
+                              >
+                                Cancel
+                              </SecondaryButton>
+                            </div>
+                          </div>
+                        ) : (
+                          <div style={{ color: 'var(--color-muted-light)', fontSize: '0.74rem', lineHeight: 1.45, marginBottom: '6px' }}>
+                            <div style={{ color: 'var(--color-linen)', fontStyle: fact.manualEdit ? 'italic' : 'normal' }}>
+                              {bulletPreview}
+                            </div>
+                            {fact.actualWork?.technologiesUsed && (
+                              <div style={{ color: 'var(--color-cotton)', fontSize: '0.70rem', marginTop: '3px' }}>
+                                <strong>Technologies:</strong> {fact.actualWork.technologiesUsed}
+                              </div>
+                            )}
+                          </div>
+                        )}
+
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px', flexWrap: 'wrap', gap: '8px' }}>
+                          <span style={{ fontSize: '0.70rem', color: 'var(--color-cotton)', fontFamily: 'var(--font-mono)' }}>
+                            {fact.verifiedAt ? `Completed: ${fact.verifiedAt} · ` : ''}Source: Interactive Roadmap
+                          </span>
+
+                          <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const nextStatus = isIncluded ? 'dismissed' : 'included';
+                                updateResumeFactInclusion(fact.id, nextStatus);
+                                showToast(
+                                  nextStatus === 'included'
+                                    ? 'Milestone included in resume draft.'
+                                    : 'Milestone dismissed from resume draft.'
+                                );
+                              }}
+                              className="button-text"
+                              style={{
+                                fontSize: '0.72rem',
+                                color: isIncluded ? 'var(--color-success)' : 'var(--color-tangerine)',
+                                fontWeight: 700,
+                              }}
+                            >
+                              {isIncluded ? 'Included in Draft ✓' : '+ Include in Draft'}
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setEditingFactId(fact.id);
+                                setEditFactWording(fact.manualEdit || bulletPreview);
+                              }}
+                              className="button-text"
+                              style={{ fontSize: '0.72rem', color: 'var(--color-cotton)' }}
+                            >
+                              Edit ✎
+                            </button>
+
+                            {isIncluded && (
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  updateResumeFactInclusion(fact.id, 'dismissed');
+                                  showToast('Milestone excluded from resume draft.');
+                                }}
+                                className="button-text"
+                                style={{ fontSize: '0.72rem', color: 'var(--color-muted-light)' }}
+                              >
+                                Dismiss ✕
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               );
             })()}
@@ -1066,6 +1422,67 @@ export const ResumeLab: React.FC = () => {
           {resumeDoc.rawText}
         </div>
       </div>
+
+      {/* Compose Confirmation Modal */}
+      {showComposeConfirm && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="compose-modal-title"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: 'rgba(8, 11, 12, 0.85)',
+            backdropFilter: 'blur(4px)',
+            zIndex: 1000,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '16px',
+          }}
+        >
+          <div
+            style={{
+              maxWidth: '480px',
+              width: '100%',
+              backgroundColor: 'var(--color-black-hole)',
+              border: '1px solid var(--color-line-dark)',
+              borderRadius: 'var(--radius-md)',
+              padding: '24px',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.6)',
+            }}
+          >
+            <h3 id="compose-modal-title" style={{ margin: '0 0 10px', fontSize: '1.15rem', color: 'var(--color-linen)' }}>
+              Update Resume from Profile &amp; Work
+            </h3>
+            <p style={{ margin: '0 0 18px', fontSize: '0.82rem', color: 'var(--color-muted-light)', lineHeight: 1.55 }}>
+              Your editor already contains text. Would you like to merge newly completed roadmap accomplishments into your draft, or overwrite it with a fresh structured document?
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <PrimaryButton
+                onClick={() => handleComposeResume('merge_accomplishments')}
+                style={{ width: '100%', justifyContent: 'center' }}
+              >
+                Merge New Accomplishments (Keep Custom Edits)
+              </PrimaryButton>
+              <SecondaryButton
+                onClick={() => handleComposeResume('overwrite')}
+                style={{ width: '100%', justifyContent: 'center', borderColor: 'var(--color-line-dark)' }}
+              >
+                Replace with Fresh Composition
+              </SecondaryButton>
+              <button
+                type="button"
+                onClick={() => setShowComposeConfirm(false)}
+                className="button-text"
+                style={{ alignSelf: 'center', marginTop: '6px', fontSize: '0.78rem', color: 'var(--color-muted-light)' }}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

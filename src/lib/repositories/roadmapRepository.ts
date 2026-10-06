@@ -12,39 +12,74 @@ export class LocalRoadmapRepository implements IRoadmapRepository {
     this.storageKey = storageKey;
   }
 
-  async getRoadmapTasks(userId: string, _roleId: number): Promise<RepositoryResult<RoadmapTask[]>> {
+  private getScopedKey(userId: string, roleId: number): string {
+    const isUserScoped = Boolean(userId && !userId.startsWith('guest'));
+    return isUserScoped
+      ? `career_ai_roadmap_${userId}_${roleId}`
+      : `career_ai_roadmap_guest_${roleId}`;
+  }
+
+  async getRoadmapTasks(userId: string, roleId: number): Promise<RepositoryResult<RoadmapTask[]>> {
     try {
       if (typeof window === 'undefined' || !window.localStorage) {
         return { data: DEFAULT_ROADMAP_TASKS, error: null };
       }
-      const isUserScoped = Boolean(userId && !userId.startsWith('guest'));
-      const key = isUserScoped ? `career_ai_roadmap_${userId}` : this.storageKey;
+      const key = this.getScopedKey(userId, roleId);
       const raw = window.localStorage.getItem(key);
-      if (!raw) return { data: DEFAULT_ROADMAP_TASKS, error: null };
-      const parsed = JSON.parse(raw);
-      const rawTasks = (isUserScoped ? parsed : parsed.roadmapTasks) || DEFAULT_ROADMAP_TASKS;
-      const path = CAREER_CATALOGUE.find(p => p.numericId === _roleId);
-      const healed = healRoadmapTasks(rawTasks, path?.slug);
-      return { data: healed, error: null };
+      const path = CAREER_CATALOGUE.find(p => p.numericId === roleId);
+
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          const healed = healRoadmapTasks(parsed, path?.slug);
+          return { data: healed, error: null };
+        }
+      }
+
+      // User backwards compatibility fallback: check legacy unscoped key
+      const isUserScoped = Boolean(userId && !userId.startsWith('guest'));
+      if (isUserScoped) {
+        const legacyUserRaw = window.localStorage.getItem(`career_ai_roadmap_${userId}`);
+        if (legacyUserRaw) {
+          const parsed = JSON.parse(legacyUserRaw);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            const healed = healRoadmapTasks(parsed, path?.slug);
+            return { data: healed, error: null };
+          }
+        }
+      } else {
+        // Guest backwards compatibility fallback: check legacy storageKey
+        const legacyRaw = window.localStorage.getItem(this.storageKey);
+        if (legacyRaw) {
+          const legacyParsed = JSON.parse(legacyRaw);
+          if (Array.isArray(legacyParsed?.roadmapTasks) && legacyParsed.roadmapTasks.length > 0) {
+            const healed = healRoadmapTasks(legacyParsed.roadmapTasks, path?.slug);
+            return { data: healed, error: null };
+          }
+        }
+      }
+
+      return { data: DEFAULT_ROADMAP_TASKS, error: null };
     } catch (err) {
       return { data: DEFAULT_ROADMAP_TASKS, error: String(err) };
     }
   }
 
-  async saveRoadmapTasks(userId: string, _roleId: number, tasks: RoadmapTask[]): Promise<RepositoryResult<void>> {
+  async saveRoadmapTasks(userId: string, roleId: number, tasks: RoadmapTask[]): Promise<RepositoryResult<void>> {
     try {
       if (typeof window === 'undefined' || !window.localStorage) {
         return { data: null, error: null };
       }
-      const isUserScoped = Boolean(userId && !userId.startsWith('guest'));
-      const key = isUserScoped ? `career_ai_roadmap_${userId}` : this.storageKey;
-      const path = CAREER_CATALOGUE.find(p => p.numericId === _roleId);
+      const key = this.getScopedKey(userId, roleId);
+      const path = CAREER_CATALOGUE.find(p => p.numericId === roleId);
       const healedTasks = healRoadmapTasks(tasks, path?.slug);
-      if (isUserScoped) {
-        window.localStorage.setItem(key, JSON.stringify(healedTasks));
-      } else {
-        const raw = window.localStorage.getItem(this.storageKey);
-        const state = raw ? JSON.parse(raw) : {};
+      window.localStorage.setItem(key, JSON.stringify(healedTasks));
+
+      // Guest backwards compatibility: also update legacy state
+      const isUserScoped = Boolean(userId && !userId.startsWith('guest'));
+      if (!isUserScoped) {
+        const legacyRaw = window.localStorage.getItem(this.storageKey);
+        const state = legacyRaw ? JSON.parse(legacyRaw) : {};
         state.roadmapTasks = healedTasks;
         window.localStorage.setItem(this.storageKey, JSON.stringify(state));
       }
@@ -94,7 +129,7 @@ export class SupabaseRoadmapRepository implements IRoadmapRepository {
       }
 
       if (!roadmap) {
-        return new LocalRoadmapRepository().getRoadmapTasks(userId, roleId);
+        return { data: [], error: null };
       }
 
       const { data: tasks, error: tasksError } = await supabase
@@ -109,21 +144,32 @@ export class SupabaseRoadmapRepository implements IRoadmapRepository {
       }
 
       if (!tasks || tasks.length === 0) {
-        return new LocalRoadmapRepository().getRoadmapTasks(userId, roleId);
+        return { data: [], error: null };
       }
 
-      const mapped: RoadmapTask[] = tasks.map(t => ({
-        id: t.id,
-        weekNumber: t.week_number,
-        title: t.title,
-        description: t.description,
-        deliverable: t.deliverable,
-        estimatedHours: Number(t.estimated_hours),
-        prerequisiteTaskId: t.prerequisite_task_id || undefined,
-        resourceUrl: t.resource_url || '',
-        status: (t.status === 'done' ? 'completed' : t.status === 'in_progress' ? 'in_progress' : 'todo') as RoadmapTask['status'],
-        completedAt: t.completed_at ? t.completed_at.split('T')[0] : undefined,
-      }));
+      const mapped: RoadmapTask[] = tasks.map(t => {
+        const stableId = t.template_id || t.id;
+        return {
+          id: stableId,
+          weekNumber: t.week_number,
+          title: t.title,
+          description: t.description,
+          deliverable: t.deliverable,
+          estimatedHours: Number(t.estimated_hours),
+          prerequisiteTaskId: t.prerequisite_template_id || t.prerequisite_task_id || undefined,
+          resourceUrl: t.resource_url || '',
+          status: (t.status === 'done' ? 'completed' : t.status === 'in_progress' ? 'in_progress' : 'todo') as RoadmapTask['status'],
+          completedAt: t.completed_at ? t.completed_at.split('T')[0] : undefined,
+          templateId: t.template_id || undefined,
+          parentTaskId: t.parent_task_id || undefined,
+          segmentIndex: t.segment_index !== null && t.segment_index !== undefined ? Number(t.segment_index) : undefined,
+          segmentCount: t.segment_count !== null && t.segment_count !== undefined ? Number(t.segment_count) : undefined,
+          scheduledHours: t.scheduled_hours !== null && t.scheduled_hours !== undefined ? Number(t.scheduled_hours) : undefined,
+          skillId: t.skill_id || undefined,
+          skillName: t.skill_name || undefined,
+          actualWork: t.actual_work || undefined,
+        };
+      });
 
       const path = CAREER_CATALOGUE.find(p => p.numericId === roleId);
       const healed = healRoadmapTasks(mapped, path?.slug);
@@ -169,22 +215,35 @@ export class SupabaseRoadmapRepository implements IRoadmapRepository {
         roadmap = created;
       }
 
-      // Upsert tasks
-      const taskRows = healedTasks.map(t => ({
-        id: t.id.includes('-') && t.id.length >= 32 ? t.id : undefined, // only use uuid if valid
-        roadmap_id: roadmap!.id,
-        user_id: userId,
-        week_number: t.weekNumber,
-        title: t.title,
-        description: t.description,
-        deliverable: t.deliverable,
-        estimated_hours: t.estimatedHours,
-        resource_url: t.resourceUrl || null,
-        status: t.status === 'completed' ? 'done' : t.status,
-        completed_at: t.completedAt ? new Date(t.completedAt).toISOString() : null,
-      }));
+      // Upsert tasks with durable identity
+      const taskRows = healedTasks.map(t => {
+        const canonicalTemplateId = t.templateId || t.parentTaskId || t.id.split('__s')[0];
+        const isUuid = Boolean(t.id && t.id.includes('-') && t.id.length >= 32);
+        return {
+          id: isUuid ? t.id : undefined, // database id
+          roadmap_id: roadmap!.id,
+          user_id: userId,
+          week_number: t.weekNumber,
+          title: t.title,
+          description: t.description,
+          deliverable: t.deliverable,
+          estimated_hours: t.estimatedHours,
+          resource_url: t.resourceUrl || null,
+          status: t.status === 'completed' ? 'done' : t.status,
+          completed_at: t.completedAt ? new Date(t.completedAt).toISOString() : null,
+          template_id: t.id, // Store exact durable client ID in template_id!
+          parent_task_id: t.parentTaskId || canonicalTemplateId,
+          segment_index: t.segmentIndex !== undefined ? t.segmentIndex : 0,
+          segment_count: t.segmentCount !== undefined ? t.segmentCount : 1,
+          scheduled_hours: t.scheduledHours !== undefined ? t.scheduledHours : t.estimatedHours,
+          skill_id: t.skillId || null,
+          skill_name: t.skillName || null,
+          prerequisite_template_id: t.prerequisiteTaskId || null,
+          actual_work: t.actualWork || null,
+        };
+      });
 
-      // Delete existing tasks and recreate (clean sync)
+      // Delete existing tasks and recreate (clean sync with preserved template_id)
       await supabase.from('roadmap_tasks').delete().eq('roadmap_id', roadmap!.id).eq('user_id', userId);
       const { error: insertError } = await supabase.from('roadmap_tasks').insert(taskRows);
 

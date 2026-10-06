@@ -125,14 +125,60 @@ This is the build order. Do not start P1 until the P0 release gate in `PRD.md` p
   7. Role-specific roadmap with effort summary, active milestone indicator, and calm empty state when unselected.
   8. Strict visual token preservation and accessibility compliance.
   9. 29 test suites, 378 tests passing (100% pass rate). Production build verified.
-- [x] **Auth Entry Resolution, Draft Branching Path Tree, and Roadmap-to-Resume Sync Gate:**
-  1. Entry session resolution in `CareerContext.tsx`: restores valid session without login prompt, prompts signed-out visitors with dismissible modal unless dismissed in session storage.
-  2. Local draft intake on `/paths`: edits local draft without polluting global state until "Apply & View Updated Directions ↗".
-  3. Animated top-to-bottom branching path tree (`BranchingPathTree.tsx`) from applied learner horizon to domain branches and leaf nodes with all 8 criteria and explore actions.
-  4. Role node inspection and explicit `Activate for Roadmap →` action.
-  5. Roadmap completion to source-linked resume synchronization: completed tasks automatically add verifiable deliverables and completion dates to `resumeDoc.facts` (`source: 'roadmap'`) and `resumeDoc.rawText`, removing them on uncheck. Planned tasks never treated as completed proof.
-  6. Resume Lab review, edit, save draft, `.txt` download, print/PDF (`window.print()`), copy plaintext, and source-linked achievements display.
-  7. 31 test suites, 386 tests passing (100% pass rate). 0 lint errors, 0 typecheck errors. Production build verified.
+- [x] **Prompt 1 — Session-Aware Login Priority & Authentication Contract Gate:**
+  1. Added `AuthStatus` lifecycle (`initializing`, `authenticated`, `unauthenticated`, `error`) to resolve sessions before auto-opening modal.
+  2. Decoupled session authentication from profile/roadmap hydration with stale request protection (`activeUserIdRef`) and duplicate hydration avoidance (`lastHydratedUserIdRef`).
+  3. Non-blocking auth event listeners in `CareerContext.tsx` avoiding provider lock contention.
+  4. Promptly auto-opens dismissible sign-in modal on entry for confirmed signed-out visitors; remembers dismissal in `sessionStorage` (`career_ai_auth_prompt_dismissed`).
+  5. Suppresses modal opening during OAuth redirect, recovery, and email confirmation flows.
+  6. Restores valid sessions without modal or flicker, rendering `<NavbarProfile />`.
+  7. Non-looping `signOut()` clears in-memory state and restores Sign In without an immediate repetitive popup.
+  8. Enforces production authenticity: guest sessions and synthetic demo are not treated as authenticated cloud accounts; unconfigured Supabase rejects fake password sign-ins with clear guidance.
+  9. Enhanced `AuthModal.tsx` accessibility: email input auto-focus, focus trapping (Tab wrap), Escape dismissal, focus restoration, backdrop click dismissal, and responsive scroll container for short screens.
+  10. 31 test suites, 390 tests passing (100% green), 0 lint errors, 0 typecheck errors, production Vite build verified.
+- [x] **Prompt 2 — Profile, Roadmap & Resume Persistence Round-Trip Gate:**
+  1. Authored forward-only additive SQL migration `supabase/migrations/0002_profile_and_resume_expansion.sql` preserving `0001_initial.sql` and existing RLS policies intact.
+  2. Full round-trip profile persistence: mapped all 25+ fields (`institution`, `branch`, `specialization`, `expected_graduation_year`, `portfolio_url`, `github_url`, `linkedin_url`, `target_role_slug`, `interests`, `current_skills`, `verified_projects`, `weekly_hours`) across `UserProfileSchema`, `UserProfile`, `SupabaseProfileRepository`, and `LocalProfileRepository`. No dropped fields, no hardcoded `targetRoleId: 1`. Formal college remains completely optional for self-taught learners.
+  3. Scoped roadmap persistence by both `userId` and `roleId` (`career_ai_roadmap_${userId}_${roleId}`). Switching target roles preserves completed tasks across multiple active tracks without state collision.
+  4. Durable task identity: preserved client template identifiers (`template_id`, `parent_task_id`, `segment_index`, `scheduled_hours`, `prerequisite_template_id`) ensuring task IDs (`rm-task-...`, `task__s0`) remain durable across saves and continuous-pointer rescheduling, preventing broken milestone fact links (`fact-rm-${taskId}`).
+  5. Resume document persistence & grounded fact sync: wired `defaultResumeRepository` into signed-in user load/save in `CareerContext.tsx`. Implemented `syncProfileFactsToResume` (`src/lib/profileResumeSync.ts`) linking verified profile facts into grounded resume facts without hallucinations, keeping guest storage keys unpolluted.
+  6. Added profile edit fields for institution, expected graduation year, portfolio URL, GitHub URL, and LinkedIn URL in `ProfileEdit.tsx` and `LearnerContextIntake.tsx`.
+  7. Created integration test suite `src/test/persistence-roundtrip-identity.test.tsx` (8 tests). All 32 test suites (398 tests) passing with 100% success. Zero lint warnings, zero typecheck errors, production Vite build verified.
+- [x] **Prompt 3 — Apply as a Real Commit Action, Draft Isolation & Relevance Calibration Gate:**
+  1. State model separation: decoupled `draftProfile`, `appliedProfile`, `recResult` (deterministic recommendations derived solely from the applied snapshot), previewed direction, and active roadmap target.
+  2. Isolated editing: field edits in `LearnerContextIntake` mutate local draft only without triggering continuous repository writes, global state mutations, or live direction recalculations while typing. Cancel restores previous values. External profile changes sync only when editor is closed.
+  3. Atomic Apply commit: validates the full draft, captures an immutable snapshot, and persists once via `saveProfile(snapshot)`. On success, commits `appliedProfile`, recalculates directions from that snapshot, closes the customizer, and focuses the branching results container.
+  4. Failure handling: on repository failure, retains draft, keeps editor open, displays clear error alert, and never shows "Applied successfully".
+  5. Universal role anchoring & relevance calibration: explicit target roles (roles 1-33) are mandatory anchors; interest-only profiles produce a focused set of meaningfully matched directions without unrelated padding; token boundary, stemming, and canonical mapping eliminate false substring matches ('ai' in 'email', 'react' in 'reaction'); hours modulate pacing only; self-reported skills are labelled 'Self-reported' and never claimed as verified.
+  6. Calm empty state: empty profile produces no default role result (no automatic Backend result, no 3 starter roles in branching directions); renders Level 1 Root Node and an invitation to configure signals.
+  7. Created comprehensive integration test suite `src/test/apply-commit-action.test.tsx` (7 tests). All 33 test suites (405 tests) passing with 100% success. Zero lint warnings, zero typecheck errors, production Vite build verified.
+- [x] **Prompt 4 — Top-to-Bottom Branching Animation & Clean Paths Page Gate:**
+  1. Removed unconditional starter cards section (Backend Developer, Frontend Developer, Data Analyst) from `/paths` (`src/pages/Paths.tsx`) and obsolete imports/variables. Kept all 33 careers in `CAREER_CATALOGUE`.
+  2. Clean default content: leaf nodes do not simultaneously expand all 8 criteria. Compact "Why this direction?" accordion toggle retains transparent reasoning on demand.
+  3. Top-to-bottom visual branching tree (`BranchingPathTree.tsx`): Root node ("YOUR APPLIED DIRECTION • ROOT HORIZON"), vertical stems/connectors with `pointer-events: none`, and clean direction cards with canonical role name, 1-line description, top 3 skill badges, and accessible preview action.
+  4. Direction overview below tree: clicking a node previews its 5-phase curriculum breakdown, estimated effort, and verified deliverables with direct syllabus link and explicit `Activate for Roadmap →` CTA.
+  5. Default open logic: opens explicit target role path below tree by default; presents calm invitation when directions are recommendations only.
+  6. Decoupled preview & activation: inspecting a direction node never mutates `selectedRoleId`; roadmap changes only upon explicit button click.
+  7. Top-to-bottom CSS animation (`branchFadeDown`, `branchGrowLine`) triggers top-to-bottom for 400–800 ms only on genuine new Apply commits (`applyKey` change). Respects `prefers-reduced-motion: reduce`.
+  8. Responsive multi-column layout on desktop/tablet, single-column on mobile (< 768px) with no horizontal overflow.
+  9. Created comprehensive test suite `src/test/branching-animation-clean-paths.test.tsx` (6 tests). All 34 test suites (411 tests) passing (100% green). Zero lint warnings, zero typecheck errors, production Vite build verified.
+- [x] **Prompt 5 — Automatic Sync of Actual Accomplishments from Roadmap to Resume Lab Gate:**
+  1. Completion meaning & truthful grounding: distinguished planned milestones, learner-marked completion, actual work descriptions, and reviewed evidence. Checkboxes never imply mastery or guaranteed employment. Planned goals alone never generate "Built X" claims.
+  2. Low-friction work capture: preserved instant "Mark Complete" action. Completed milestones offer a compact inline accomplishment evidence form capturing what learner did, contribution, technologies, outcome/limitation, and project/demo URL. Form is optional and skippable without blocking progress.
+  3. Pure and idempotent roadmap-resume sync engine (`src/lib/roadmapResumeSync.ts`): derives concise accomplishment drafts from actual work, or truthful educational completion bullets when actual work is skipped. Groups split milestone segments by parent template; partial segments do not claim whole completion. Prevents duplicate bullets on repeated saves/refreshes.
+  4. Review/edit/include/dismiss pattern in Resume Lab: learners can include, dismiss, or custom edit synchronized accomplishment bullets. Manual edits survive work description updates without being overwritten.
+  5. Undo & reverting completion: unchecking a milestone excludes unreviewed generated entries from final output and marks source facts outdated without deleting manual edits.
+  6. Role switching & cross-role retention: completed milestones across all career paths remain saved in the resume document's source pool, with target-role filtering in Resume Lab prioritizing the active career path.
+  7. Additive migration & persistence: authored `supabase/migrations/0003_actual_work_sync.sql` adding `actual_work jsonb` to `roadmap_tasks`. Synthetic demo data (Rahul) is strictly guest-isolated and never written to real user tables.
+  8. Created comprehensive test suite `src/test/roadmap-accomplishments-sync.test.tsx` (8 tests). All 35 test suites (419 tests) passing (100% green). Zero lint warnings, zero typecheck errors, production Vite build verified.
+- [x] **Prompt 6 — Profile + Roadmap Work Structured Resume Composer Gate:**
+  1. Structured ATS-friendly resume composer engine (`src/lib/resumeComposer.ts`): pure deterministic generator formatting standard 6 sections ((1) Name & contact links, (2) Role summary, (3) Education, (4) Skills, (5) Projects from roadmap accomplishments and profile, (6) Experience/certifications).
+  2. Truthful action-led bullets: normalized action verbs (`Action -> actual work -> tech -> outcome`); strictly sanitizes and rejects fabricated metrics (`40% reduction`, `10,000 users`, `99.9% uptime`).
+  3. Clean value filtering: `isCleanValue` filters out placeholders ('N/A', 'None', 'Unknown') and internal identifiers (`usr-`, `fact-rm-`, UUIDs).
+  4. Self-taught & incomplete profile integrity: cleanly omits education for self-taught candidates without placeholder colleges; handles partial profiles gracefully without crashes.
+  5. Resume Lab UI integration (`src/pages/ResumeLab.tsx`): added "Compose from Profile & Work" button, empty draft 1-click prompt, and confirmation dialog for existing text offering overwrite vs merging accomplishments (`regenerateResumePreservingManualEdits`).
+  6. Dual-view & clean export: view switcher between Plaintext Editor and ATS Recruiter Preview. Print export container renders clean candidate document matching preview without application chrome or banners.
+  7. Created comprehensive test suite `src/test/resume-composer-structured.test.tsx` (10 tests). All 36 test suites (429 tests) passing (100% green). Zero lint warnings, zero typecheck errors, production Vite build verified.
 - [ ] Deploy static UI and function layer; configure only required redirect URLs.
 - [ ] Run production smoke test with synthetic data and AI disabled.
 

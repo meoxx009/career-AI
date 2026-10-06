@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { CareerProvider } from '../context/CareerContext';
 import { Paths } from '../pages/Paths';
@@ -47,7 +47,7 @@ describe('End-to-End Flow: Local Draft Intake, Branching Path Tree, & Roadmap-to
   });
 
   describe('1. Paths Draft Intake & Branching Visualization', () => {
-    it('allows drafting profile changes and applying them to recalculate branching directions', () => {
+    it('allows drafting profile changes and applying them to recalculate branching directions', async () => {
       render(<TestSyncApp initialRoute="/paths" />);
 
       // Branching path visualization is visible
@@ -75,11 +75,28 @@ describe('End-to-End Flow: Local Draft Intake, Branching Path Tree, & Roadmap-to
       fireEvent.click(applyBtn);
 
       // Directions update
-      expect(screen.getByText(/STREAM-ALIGNED OPPORTUNITY GROUPS \/ COMMERCE/i)).toBeInTheDocument();
-      expect(screen.getByText(/Future Opportunities for Commerce/i)).toBeInTheDocument();
+      await waitFor(() => {
+        expect(screen.getByText(/STREAM-ALIGNED OPPORTUNITY GROUPS \/ COMMERCE/i)).toBeInTheDocument();
+        expect(screen.getByText(/Future Opportunities for Commerce/i)).toBeInTheDocument();
+      });
     });
 
     it('opens 5-phase curriculum breakdown when inspected and activates direction for roadmap', () => {
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          hasSelectedRole: false,
+          selectedRoleId: null,
+          profile: {
+            id: 'test-sync-user',
+            displayName: 'Sync Learner',
+            learnerStage: 'undergraduate',
+            degree: 'BTech',
+            interests: ['backend'],
+            hoursPerWeek: 8,
+          },
+        })
+      );
       render(<TestSyncApp initialRoute="/paths" />);
 
       // Initially no direction overview is open

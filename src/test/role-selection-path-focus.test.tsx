@@ -50,7 +50,7 @@ describe('Universal Role Selection, Dynamic Preview, & Deterministic Related Pat
       expect(screen.queryByText(/Starter Path #1/i)).not.toBeInTheDocument();
     });
 
-    it('Paths page renders launcher to PathBuilder and starter paths for comparison', () => {
+    it('Paths page renders launcher to PathBuilder and clean state without unconditional starter paths', () => {
       render(
         <MemoryRouter initialEntries={['/paths']}>
           <CareerProvider>
@@ -60,7 +60,8 @@ describe('Universal Role Selection, Dynamic Preview, & Deterministic Related Pat
       );
 
       expect(screen.getAllByRole('button', { name: /Launch Unified Path Builder/i }).length).toBeGreaterThanOrEqual(1);
-      expect(screen.getByText(/Starter paths — available to explore before assessment/i)).toBeInTheDocument();
+      expect(screen.queryByText(/Starter paths — available to explore before assessment/i)).not.toBeInTheDocument();
+      expect(screen.getByText(/Choose a Target Role or Add Interests/i)).toBeInTheDocument();
     });
 
     it('Roadmap page renders calm empty state with CTA to PathBuilder when no role is selected', () => {

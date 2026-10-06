@@ -231,6 +231,154 @@ export interface RecommendationResult {
   recommendations: PathRecommendation[];
   streamOpportunity?: StreamOpportunityGroup;
   disclaimer: string;
+  hasDirectionSignals?: boolean;
+}
+
+/**
+ * Determines whether a user profile contains any explicit direction signals
+ * (target role, interests, skills, or specific academic stream/degree/branch).
+ */
+export function hasProfileDirectionSignals(profile?: Partial<UserProfile> | null): boolean {
+  if (!profile) return false;
+  if (profile.targetRoleId && profile.targetRoleId > 0) return true;
+  if (profile.targetRoleSlug && profile.targetRoleSlug.trim().length > 0) return true;
+  if (profile.preferredRoles && profile.preferredRoles.length > 0) return true;
+  if (profile.preferredRoleIds && profile.preferredRoleIds.length > 0) return true;
+  if (profile.interests && profile.interests.length > 0) return true;
+  if (profile.currentSkills && profile.currentSkills.length > 0) return true;
+  if (profile.stream && profile.stream.trim().length > 0) return true;
+  if (profile.degree && profile.degree.trim().length > 0 && profile.degree !== 'Not specified' && profile.degree !== 'Other') return true;
+  if (profile.branch && profile.branch.trim().length > 0 && profile.branch !== 'Other') return true;
+  if (profile.academicContext && profile.academicContext.trim().length > 0) return true;
+  return false;
+}
+
+function stemToken(token: string): string {
+  const t = token.toLowerCase();
+  if (t.length <= 3) return t; // short tokens like 'ai', 'ml', 'qa', 'ux', 'ui' must remain exact
+  return t.replace(/(ing|ers?|ed|ments?|tion|tions|s)$/, '');
+}
+
+/**
+ * Checks whether an interest term meaningfully matches a career path,
+ * using exact token boundaries, word stems, and canonical phrases to prevent false substring matches
+ * (e.g. "ai" inside "email", "react" inside "reaction", "art" inside "smart").
+ */
+export function isMeaningfulInterestMatch(interest: string, path: CareerPath): boolean {
+  const normInterest = interest.trim().toLowerCase().replace(/[-_/]/g, ' ');
+  if (!normInterest) return false;
+
+  const interestTokens = normInterest.split(/\s+/).filter(Boolean);
+  if (interestTokens.length === 0) return false;
+
+  const normTitle = path.title.toLowerCase().replace(/[-_/]/g, ' ');
+  const normSlug = path.slug.toLowerCase().replace(/[-_/]/g, ' ');
+  const titleTokens = normTitle.split(/\s+/);
+  const slugTokens = normSlug.split(/\s+/);
+
+  // 1. Exact phrase equality with title or slug
+  if (normTitle === normInterest || normSlug === normInterest) {
+    return true;
+  }
+
+  // 2. Acronym or short token (<= 3 chars, e.g. "ai", "ml", "qa", "ui", "ux", "rag", "llm", "sre")
+  // Must match as an exact whole word in title or slug
+  if (interestTokens.length === 1 && interestTokens[0].length <= 3) {
+    const singleToken = interestTokens[0];
+    if (titleTokens.includes(singleToken) || slugTokens.includes(singleToken)) {
+      return true;
+    }
+  } else {
+    // Multi-token or word token: each token matches either exact or stemmed
+    const stemmedInterestTokens = interestTokens.map(stemToken);
+    const stemmedTitleTokens = titleTokens.map(stemToken);
+    const stemmedSlugTokens = slugTokens.map(stemToken);
+
+    const matchesTitle = stemmedInterestTokens.every(it => stemmedTitleTokens.includes(it));
+    const matchesSlug = stemmedInterestTokens.every(it => stemmedSlugTokens.includes(it));
+    if (matchesTitle || matchesSlug) {
+      return true;
+    }
+  }
+
+  // 3. Match against path.interests
+  if (path.interests && path.interests.length > 0) {
+    for (const pi of path.interests) {
+      const normPi = pi.trim().toLowerCase().replace(/[-_/]/g, ' ');
+      if (normPi === normInterest) return true;
+
+      const piTokens = normPi.split(/\s+/);
+      if (interestTokens.length === 1 && interestTokens[0].length <= 3) {
+        if (piTokens.includes(interestTokens[0])) return true;
+      } else {
+        const stemmedPi = piTokens.map(stemToken);
+        const stemmedInterest = interestTokens.map(stemToken);
+        if (stemmedInterest.every(tok => stemmedPi.includes(tok)) || stemmedPi.every(tok => stemmedInterest.includes(tok))) {
+          return true;
+        }
+      }
+    }
+  }
+
+  // 4. Match against path core skills, prerequisite skills, or curriculum skill IDs
+  if (path.coreSkills?.some(cs => cs.toLowerCase().replace(/[-_/]/g, ' ') === normInterest || cs.toLowerCase() === normInterest)) {
+    return true;
+  }
+  if (path.prerequisiteSkills?.some(ps => ps.toLowerCase().replace(/[-_/]/g, ' ') === normInterest || ps.toLowerCase() === normInterest)) {
+    return true;
+  }
+  if (path.curriculum?.some(c => c.skillIds?.some(sk => sk.toLowerCase().replace(/[-_/]/g, ' ') === normInterest || sk.toLowerCase() === normInterest))) {
+    return true;
+  }
+
+  // 5. Canonical interest tags and domain mappings:
+  if (normInterest === 'ai ml' || normInterest === 'aiml' || normInterest === 'machine learning' || normInterest === 'artificial intelligence') {
+    if (path.category === 'data_ai' && (normSlug.includes('ai') || normSlug.includes('learning') || normSlug.includes('data-scientist') || normSlug.includes('llm') || normSlug.includes('rag') || normSlug.includes('nlp') || normSlug.includes('vision'))) {
+      return true;
+    }
+  }
+  if (normInterest.includes('ui ux') || normInterest.includes('ux') || normInterest.includes('design')) {
+    if (path.category === 'design_product' || normSlug.includes('design') || normSlug.includes('ux')) {
+      return true;
+    }
+  }
+  if (normInterest === 'backend' || normInterest === 'backend systems') {
+    if (normSlug.includes('backend') || normSlug.includes('systems') || normSlug.includes('cloud') || normSlug.includes('devops')) {
+      return true;
+    }
+  }
+  if (normInterest === 'frontend' || normInterest === 'front end') {
+    if (normSlug.includes('frontend') || normSlug.includes('full-stack') || normSlug.includes('mobile')) {
+      return true;
+    }
+  }
+  if (normInterest.includes('data engineering') || normInterest.includes('data pipeline') || normInterest.includes('etl') || normInterest.includes('big data')) {
+    if (path.slug === 'data-engineer' || path.slug === 'data-analyst' || path.slug === 'data-scientist') {
+      return true;
+    }
+  }
+  if (normInterest === 'sql' || normInterest === 'database' || normInterest === 'databases') {
+    if (path.slug === 'data-engineer' || path.slug === 'data-analyst' || path.slug === 'backend-developer') {
+      return true;
+    }
+  }
+  if (normInterest.includes('cloud') || normInterest.includes('devops') || normInterest.includes('sre') || normInterest.includes('infrastructure')) {
+    if (path.slug === 'devops-engineer' || path.slug === 'cloud-engineer' || path.slug === 'sre-engineer' || path.slug === 'backend-developer') {
+      return true;
+    }
+  }
+  if (normInterest.includes('cyber') || normInterest.includes('security') || normInterest.includes('infosec')) {
+    if (path.slug === 'cybersecurity-engineer') {
+      return true;
+    }
+  }
+  if (normInterest.includes('mobile') || normInterest.includes('android') || normInterest.includes('ios') || normInterest.includes('flutter') || normInterest.includes('react native')) {
+    if (path.slug === 'mobile-developer') {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 /**
@@ -340,6 +488,18 @@ export function generatePathRecommendations(profile: Partial<UserProfile>): Reco
   const commonDisclaimer =
     'This is a preparation suggestion, not an admission, placement, or hiring guarantee. Eligibility and subject prerequisites vary by institution and programme.';
 
+  // If the learner has no explicit direction signals, do not manufacture personalization
+  if (!hasProfileDirectionSignals(profile)) {
+    return {
+      learnerStage: stage,
+      stageLabel: stageMeta.badge,
+      isSchoolLearner: false,
+      recommendations: [],
+      disclaimer: commonDisclaimer,
+      hasDirectionSignals: false,
+    };
+  }
+
   // Map academic stream / degree context
   const academicContext = resolveAcademicContext(profile);
 
@@ -400,34 +560,8 @@ export function generatePathRecommendations(profile: Partial<UserProfile>): Reco
       score += 15;
     }
 
-    // 4. Selected Interests Match
-    const matchedInterests = interests.filter(i => {
-      const iRaw = i.trim().toLowerCase();
-      const iNorm = iRaw.replace(/[-_]/g, ' ');
-      const iTokens = iNorm.split(/\s+/).filter(t => t.length > 2);
-
-      const titleNorm = path.title.toLowerCase().replace(/[-_]/g, ' ');
-      const slugNorm = path.slug.toLowerCase().replace(/[-_]/g, ' ');
-      const catNorm = path.category.toLowerCase().replace(/[-_]/g, ' ');
-
-      if (
-        slugNorm.includes(iNorm) || iNorm.includes(slugNorm) ||
-        titleNorm.includes(iNorm) || iNorm.includes(titleNorm) ||
-        catNorm.includes(iNorm) || iNorm.includes(catNorm)
-      ) {
-        return true;
-      }
-
-      return path.interests.some(pi => {
-        const piRaw = pi.trim().toLowerCase();
-        const piNorm = piRaw.replace(/[-_]/g, ' ');
-        return (
-          piRaw.includes(iRaw) || iRaw.includes(piRaw) ||
-          piNorm.includes(iNorm) || iNorm.includes(piNorm) ||
-          iTokens.some(t => t.length >= 3 && piNorm.includes(t))
-        );
-      });
-    });
+    // 4. Selected Interests Match (whole-token exact/alias matching to eliminate false substring matches)
+    const matchedInterests = interests.filter(i => isMeaningfulInterestMatch(i, path));
 
     if (matchedInterests.length > 0) {
       score += matchedInterests.length * 20;
@@ -436,13 +570,19 @@ export function generatePathRecommendations(profile: Partial<UserProfile>): Reco
 
     // Direct title or slug match bonus (e.g. Machine Learning, Data Engineer, Product Designer)
     const directTitleOrSlugMatch = interests.some(i => {
-      const iNorm = i.trim().toLowerCase().replace(/[-_]/g, ' ');
-      const titleNorm = path.title.toLowerCase().replace(/[-_]/g, ' ');
-      const slugNorm = path.slug.toLowerCase().replace(/[-_]/g, ' ');
-      return titleNorm.includes(iNorm) || iNorm.includes(titleNorm) || slugNorm.includes(iNorm) || iNorm.includes(slugNorm);
+      const iNorm = i.trim().toLowerCase().replace(/[-_/]/g, ' ');
+      const titleNorm = path.title.toLowerCase().replace(/[-_/]/g, ' ');
+      const slugNorm = path.slug.toLowerCase().replace(/[-_/]/g, ' ');
+      return (
+        titleNorm === iNorm ||
+        slugNorm === iNorm ||
+        titleNorm.startsWith(iNorm) ||
+        slugNorm.startsWith(iNorm) ||
+        (iNorm.length > 3 && (titleNorm.includes(iNorm) || slugNorm.includes(iNorm)))
+      );
     });
     if (directTitleOrSlugMatch) {
-      score += 25;
+      score += 40;
     }
 
     // 5. Current Validated Skills Match
@@ -465,32 +605,23 @@ export function generatePathRecommendations(profile: Partial<UserProfile>): Reco
       matchReasons.push(`Builds upon your prior background in ${matchedSkills.join(', ')}.`);
     }
 
-    // 6. Starter path baseline (subtle when user has no explicit profile signals)
-    if ([1, 2, 3].includes(path.numericId)) {
-      if (interests.length === 0 && skills.length === 0 && !targetRoleId) {
-        score += 10;
-      } else {
-        score += 2;
-      }
-    }
-
     // Prerequisite gaps
     const missingPrereqs = path.prerequisiteSkills.filter(
       ps => !skills.some(s => ps.toLowerCase().includes(s.toLowerCase()))
     );
 
-    // 6. Prerequisite coverage bonus (evidence signal)
+    // Prerequisite coverage bonus (evidence signal)
     const satisfiedPrereqsCount = path.prerequisiteSkills.length - missingPrereqs.length;
     if (satisfiedPrereqsCount > 0) {
       score += satisfiedPrereqsCount * 15;
     }
 
-    // Evidence found
+    // Evidence found (Self-reported skills must never be labelled "verified")
     const evidenceFound = matchedSkills.length > 0
-      ? matchedSkills.map(s => `Demonstrated skill: ${s}`)
+      ? matchedSkills.map(s => `Self-reported: ${s}`)
       : ['No verified skill evidence supplied yet.'];
 
-    // Inputs evaluated — avoid writing raw "Backend Developer" to prevent heading collision in tests
+    // Inputs evaluated
     const inputsEvaluated = [
       `Stage: ${stageMeta.label}`,
       stream ? `Stream: ${streamMeta?.label}` : (degree ? `Discipline: ${degree}` : 'Independent learning'),
@@ -534,6 +665,8 @@ export function generatePathRecommendations(profile: Partial<UserProfile>): Reco
       score,
       isTargetRole,
       isStreamAligned,
+      matchedInterests,
+      matchedSkills,
       whySuggested,
       inputsEvaluated,
       requirementsEvaluated,
@@ -834,6 +967,41 @@ export function generatePathRecommendations(profile: Partial<UserProfile>): Reco
         });
       }
     });
+    // Ensure explicit target role is anchored for school learners if chosen
+    const schoolTarget = scoredPaths.find(sp => sp.isTargetRole);
+    if (schoolTarget && !recommendations.some(r => r.cataloguePathId === schoolTarget.path.numericId)) {
+      recommendations.unshift({
+        id: `rec-${schoolTarget.path.slug}`,
+        title: schoolTarget.displayTitle,
+        badge: 'Target Career Role',
+        cataloguePathId: schoolTarget.path.numericId,
+        cataloguePathSlug: schoolTarget.path.slug,
+        pathType: 'career_role',
+        category: mapCategoryToRecCategory(schoolTarget.path.category),
+        curriculumAvailable: Boolean(schoolTarget.path.curriculum && schoolTarget.path.curriculum.length > 0),
+        requirementsAvailable: Boolean(
+          (schoolTarget.path.coreSkills && schoolTarget.path.coreSkills.length > 0) ||
+          (schoolTarget.path.prerequisiteSkills && schoolTarget.path.prerequisiteSkills.length > 0)
+        ),
+        canExplore: Boolean(schoolTarget.path.curriculum && schoolTarget.path.curriculum.length > 0 && schoolTarget.path.slug),
+        exploreHref: `/paths/${schoolTarget.path.slug}`,
+        alignedRoleId: schoolTarget.path.numericId,
+        isStreamAligned: schoolTarget.isStreamAligned,
+        whySuggested: schoolTarget.whySuggested,
+        contributingInputs: schoolTarget.inputsEvaluated,
+        inputsEvaluated: schoolTarget.inputsEvaluated,
+        requirementsEvaluated: schoolTarget.requirementsEvaluated,
+        evidenceFound: schoolTarget.evidenceFound,
+        stillUnknown: schoolTarget.stillUnknown,
+        unknowns: schoolTarget.stillUnknown,
+        nextAction: schoolTarget.nextAction,
+        prerequisiteSkills: schoolTarget.prerequisites,
+        prerequisites: schoolTarget.prerequisites,
+        estimatedCurriculum: schoolTarget.estimatedCurriculum,
+        disclaimer: commonDisclaimer,
+        catalogueSlug: schoolTarget.path.slug,
+      });
+    }
   } else {
     // For higher education, graduates, and self-taught learners:
     // Deduplicate scored paths deterministically by stable numeric ID
@@ -844,8 +1012,30 @@ export function generatePathRecommendations(profile: Partial<UserProfile>): Reco
       return true;
     });
 
-    // Take top scored paths directly from the career catalogue (up to 6, at least 3)
-    const topScored = uniqueScoredPaths.slice(0, 6);
+    // 1. Mandatory anchor: If user has an explicit target role, find it first
+    const targetPath = uniqueScoredPaths.find(sp => sp.isTargetRole);
+
+    // 2. Meaningfully matched candidates
+    const meaningfullyMatched = uniqueScoredPaths.filter(sp => {
+      if (sp.isTargetRole) return true;
+      if (sp.matchedInterests && sp.matchedInterests.length > 0) return true;
+      if (sp.matchedSkills && sp.matchedSkills.length > 0) return true;
+      if (sp.isStreamAligned) return true;
+      return false;
+    });
+
+    const candidatesToInclude: typeof uniqueScoredPaths = [];
+    if (targetPath) {
+      candidatesToInclude.push(targetPath);
+    }
+    meaningfullyMatched.forEach(sp => {
+      if (!candidatesToInclude.some(p => p.path.numericId === sp.path.numericId)) {
+        candidatesToInclude.push(sp);
+      }
+    });
+
+    // Take top scored paths (up to 6). Do NOT fill with unrelated defaults.
+    const topScored = candidatesToInclude.slice(0, 6);
 
     topScored.forEach((sp, idx) => {
       let id = `rec-${sp.path.slug}`;

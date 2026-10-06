@@ -67,7 +67,8 @@ describe('CareerAI Full Route Shell Architecture (Prompt 03)', () => {
   it('renders Paths role comparison route (/paths)', () => {
     renderWithRouter('/paths');
     expect(screen.getByText(/CAREER PATH COMPARISON/i)).toBeDefined();
-    expect(screen.getByText(/Backend Developer/i)).toBeDefined();
+    expect(screen.getByRole('button', { name: /Launch Unified Path Builder/i })).toBeDefined();
+    expect(screen.getByText(/Choose a Target Role or Add Interests/i)).toBeDefined();
   });
 
   it('renders RoleDetail route (/paths/:roleSlug)', () => {

@@ -49,9 +49,49 @@ export const Roadmap: React.FC = () => {
     skillObservations,
     roadmapTasks,
     toggleTaskCompletion,
+    updateTaskActualWork,
     rescheduleRoadmap,
     showToast,
   } = useCareer();
+
+  const [editingWorkTaskId, setEditingWorkTaskId] = useState<string | null>(null);
+  const [workForm, setWorkForm] = useState({
+    whatLearnerDid: '',
+    ownContribution: '',
+    technologiesUsed: '',
+    outcomeOrLimitation: '',
+    projectUrl: '',
+  });
+
+  const handleOpenWorkForm = (task: typeof roadmapTasks[0]) => {
+    setEditingWorkTaskId(task.id);
+    setWorkForm({
+      whatLearnerDid: task.actualWork?.whatLearnerDid || '',
+      ownContribution: task.actualWork?.ownContribution || '',
+      technologiesUsed: task.actualWork?.technologiesUsed || '',
+      outcomeOrLimitation: task.actualWork?.outcomeOrLimitation || '',
+      projectUrl: task.actualWork?.projectUrl || '',
+    });
+  };
+
+  const handleSaveWork = async (taskId: string) => {
+    if (!workForm.whatLearnerDid.trim()) {
+      showToast('Please describe what you actually did, or skip to keep learning record only.');
+      return;
+    }
+    const success = await updateTaskActualWork(taskId, {
+      whatLearnerDid: workForm.whatLearnerDid.trim(),
+      ownContribution: workForm.ownContribution.trim() || undefined,
+      technologiesUsed: workForm.technologiesUsed.trim() || undefined,
+      outcomeOrLimitation: workForm.outcomeOrLimitation.trim() || undefined,
+      projectUrl: workForm.projectUrl.trim() || undefined,
+      recordedAt: new Date().toISOString().split('T')[0],
+    });
+    if (success) {
+      setEditingWorkTaskId(null);
+      showToast('Actual work accomplishment synced to Resume Lab!');
+    }
+  };
 
   const currentPath = React.useMemo(() => {
     return CAREER_CATALOGUE.find(p => p.numericId === selectedRoleId);
@@ -675,6 +715,196 @@ export const Roadmap: React.FC = () => {
                               Verifiable deliverable · Official offline/course notes
                             </div>
                           )}
+
+                          {/* Low-Friction Accomplishment Capture (Prompt 5) */}
+                          {isDone && (
+                            <div
+                              style={{
+                                marginTop: '14px',
+                                padding: '12px 14px',
+                                borderRadius: 'var(--radius-sm)',
+                                background: 'rgba(255, 109, 31, 0.05)',
+                                border: '1px solid rgba(255, 109, 31, 0.25)',
+                              }}
+                            >
+                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
+                                <div style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-tangerine)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                  <span>Accomplishment Evidence (Resume Lab Draft)</span>
+                                  {task.actualWork?.whatLearnerDid && (
+                                    <StatusBadge variant="success" label="Evidence Recorded" />
+                                  )}
+                                </div>
+                                {editingWorkTaskId !== task.id && (
+                                  <button
+                                    type="button"
+                                    onClick={() => handleOpenWorkForm(task)}
+                                    className="button-text"
+                                    style={{ fontSize: '0.74rem', color: 'var(--color-linen)', fontWeight: 600 }}
+                                  >
+                                    {task.actualWork?.whatLearnerDid ? 'Edit Accomplishment Details ✎' : '+ Describe What You Actually Built / Did'}
+                                  </button>
+                                )}
+                              </div>
+
+                              {task.actualWork?.whatLearnerDid && editingWorkTaskId !== task.id && (
+                                <div style={{ marginTop: '8px', fontSize: '0.78rem', color: 'var(--color-cotton)', lineHeight: 1.45 }}>
+                                  <div><strong>What you did:</strong> {task.actualWork.whatLearnerDid}</div>
+                                  {task.actualWork.technologiesUsed && (
+                                    <div style={{ color: 'var(--color-muted-light)', fontSize: '0.72rem', marginTop: '2px' }}>
+                                      <strong>Technologies:</strong> {task.actualWork.technologiesUsed}
+                                    </div>
+                                  )}
+                                  {task.actualWork.outcomeOrLimitation && (
+                                    <div style={{ color: 'var(--color-muted-light)', fontSize: '0.72rem', marginTop: '2px' }}>
+                                      <strong>Outcome:</strong> {task.actualWork.outcomeOrLimitation}
+                                    </div>
+                                  )}
+                                  {task.actualWork.projectUrl && (
+                                    <div style={{ color: 'var(--color-tangerine)', fontSize: '0.72rem', marginTop: '2px' }}>
+                                      <strong>Link:</strong> {task.actualWork.projectUrl}
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+
+                              {editingWorkTaskId === task.id && (
+                                <div style={{ marginTop: '10px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                  <p style={{ margin: 0, fontSize: '0.74rem', color: 'var(--color-muted-light)' }}>
+                                    Optional: Ground your resume draft in what you actually executed. Skipping retains a truthful educational record.
+                                  </p>
+
+                                  <div>
+                                    <label style={{ fontSize: '0.72rem', color: 'var(--color-linen)', display: 'block', marginBottom: '2px' }}>
+                                      What you actually did / built:
+                                    </label>
+                                    <input
+                                      type="text"
+                                      value={workForm.whatLearnerDid}
+                                      onChange={e => setWorkForm(prev => ({ ...prev, whatLearnerDid: e.target.value }))}
+                                      placeholder="e.g. Implemented REST user endpoints with bcrypt password hashing"
+                                      style={{
+                                        width: '100%',
+                                        background: 'var(--color-black-hole)',
+                                        border: '1px solid var(--color-line-dark)',
+                                        borderRadius: 'var(--radius-sm)',
+                                        color: 'var(--color-linen)',
+                                        padding: '6px 10px',
+                                        fontSize: '0.78rem',
+                                        boxSizing: 'border-box',
+                                      }}
+                                    />
+                                  </div>
+
+                                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '8px' }}>
+                                    <div>
+                                      <label style={{ fontSize: '0.72rem', color: 'var(--color-linen)', display: 'block', marginBottom: '2px' }}>
+                                        Technologies actually used:
+                                      </label>
+                                      <input
+                                        type="text"
+                                        value={workForm.technologiesUsed}
+                                        onChange={e => setWorkForm(prev => ({ ...prev, technologiesUsed: e.target.value }))}
+                                        placeholder="e.g. Python, FastAPI, SQLite, pytest"
+                                        style={{
+                                          width: '100%',
+                                          background: 'var(--color-black-hole)',
+                                          border: '1px solid var(--color-line-dark)',
+                                          borderRadius: 'var(--radius-sm)',
+                                          color: 'var(--color-linen)',
+                                          padding: '6px 10px',
+                                          fontSize: '0.78rem',
+                                          boxSizing: 'border-box',
+                                        }}
+                                      />
+                                    </div>
+
+                                    <div>
+                                      <label style={{ fontSize: '0.72rem', color: 'var(--color-linen)', display: 'block', marginBottom: '2px' }}>
+                                        Your individual contribution:
+                                      </label>
+                                      <input
+                                        type="text"
+                                        value={workForm.ownContribution}
+                                        onChange={e => setWorkForm(prev => ({ ...prev, ownContribution: e.target.value }))}
+                                        placeholder="e.g. Sole author; wrote schemas and tests"
+                                        style={{
+                                          width: '100%',
+                                          background: 'var(--color-black-hole)',
+                                          border: '1px solid var(--color-line-dark)',
+                                          borderRadius: 'var(--radius-sm)',
+                                          color: 'var(--color-linen)',
+                                          padding: '6px 10px',
+                                          fontSize: '0.78rem',
+                                          boxSizing: 'border-box',
+                                        }}
+                                      />
+                                    </div>
+                                  </div>
+
+                                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '8px' }}>
+                                    <div>
+                                      <label style={{ fontSize: '0.72rem', color: 'var(--color-linen)', display: 'block', marginBottom: '2px' }}>
+                                        Outcome or limitation:
+                                      </label>
+                                      <input
+                                        type="text"
+                                        value={workForm.outcomeOrLimitation}
+                                        onChange={e => setWorkForm(prev => ({ ...prev, outcomeOrLimitation: e.target.value }))}
+                                        placeholder="e.g. Passed 12 unit tests; caching not implemented"
+                                        style={{
+                                          width: '100%',
+                                          background: 'var(--color-black-hole)',
+                                          border: '1px solid var(--color-line-dark)',
+                                          borderRadius: 'var(--radius-sm)',
+                                          color: 'var(--color-linen)',
+                                          padding: '6px 10px',
+                                          fontSize: '0.78rem',
+                                          boxSizing: 'border-box',
+                                        }}
+                                      />
+                                    </div>
+
+                                    <div>
+                                      <label style={{ fontSize: '0.72rem', color: 'var(--color-linen)', display: 'block', marginBottom: '2px' }}>
+                                        Project / Repo / Demo link (optional):
+                                      </label>
+                                      <input
+                                        type="text"
+                                        value={workForm.projectUrl}
+                                        onChange={e => setWorkForm(prev => ({ ...prev, projectUrl: e.target.value }))}
+                                        placeholder="e.g. https://github.com/myuser/auth-api"
+                                        style={{
+                                          width: '100%',
+                                          background: 'var(--color-black-hole)',
+                                          border: '1px solid var(--color-line-dark)',
+                                          borderRadius: 'var(--radius-sm)',
+                                          color: 'var(--color-linen)',
+                                          padding: '6px 10px',
+                                          fontSize: '0.78rem',
+                                          boxSizing: 'border-box',
+                                        }}
+                                      />
+                                    </div>
+                                  </div>
+
+                                  <div style={{ display: 'flex', gap: '8px', marginTop: '6px', alignItems: 'center' }}>
+                                    <PrimaryButton
+                                      onClick={() => handleSaveWork(task.id)}
+                                      style={{ padding: '6px 12px', fontSize: '0.74rem', minHeight: '30px' }}
+                                    >
+                                      <span>Save & Sync to Resume Lab ↗</span>
+                                    </PrimaryButton>
+                                    <SecondaryButton
+                                      onClick={() => setEditingWorkTaskId(null)}
+                                      style={{ padding: '6px 12px', fontSize: '0.74rem', minHeight: '30px' }}
+                                    >
+                                      <span>Skip / Close</span>
+                                    </SecondaryButton>
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          )}
                         </div>
 
                         {/* Complete / Uncomplete Control */}
@@ -688,6 +918,11 @@ export const Roadmap: React.FC = () => {
                                 return;
                               }
                               toggleTaskCompletion(task.id);
+                              if (!isDone) {
+                                handleOpenWorkForm(task);
+                              } else if (editingWorkTaskId === task.id) {
+                                setEditingWorkTaskId(null);
+                              }
                               showToast(
                                 isDone
                                   ? `Marked "${task.title}" as pending.`

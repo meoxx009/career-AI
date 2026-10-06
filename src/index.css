@@ -887,10 +887,77 @@ h2 {
   }
 }
 
+/* Top-to-Bottom Branching Animation (Prompt 4) */
+@keyframes branchFadeDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes branchGrowLine {
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: top center;
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: top center;
+  }
+}
+
+.branch-animate-root {
+  animation: branchFadeDown 0.35s ease-out both;
+}
+
+.branch-animate-stem {
+  animation: branchGrowLine 0.3s ease-out 0.15s both;
+}
+
+.branch-animate-branch-header {
+  animation: branchFadeDown 0.35s ease-out 0.25s both;
+}
+
+.branch-animate-node {
+  animation: branchFadeDown 0.4s ease-out var(--stagger-delay, 0.35s) both;
+}
+
+.branch-animate-overview {
+  animation: branchFadeDown 0.45s ease-out 0.5s both;
+}
+
+.tree-branches-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .tree-branches-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
+  .branch-animate-root,
+  .branch-animate-stem,
+  .branch-animate-branch-header,
+  .branch-animate-node,
+  .branch-animate-overview {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
+
