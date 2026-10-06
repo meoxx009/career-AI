@@ -2,6 +2,7 @@ import type { UserProfile } from '../../types';
 import type { IProfileRepository, RepositoryResult } from './types';
 import { supabase, isSupabaseConfigured } from '../supabaseClient';
 import { STORAGE_KEY, EMPTY_PROFILE } from '../../context/careerConstants';
+import { getCareerPathBySlug, getCareerPathById } from '../../data/careerCatalogue';
 
 export class LocalProfileRepository implements IProfileRepository {
   private storageKey: string;
@@ -98,7 +99,12 @@ export class SupabaseProfileRepository implements IProfileRepository {
         studyYear: data.study_year ? String(data.study_year) : '',
         hoursPerWeek: data.hours_per_week ? Number(data.hours_per_week) : 8,
         preferredRoles: data.preferred_roles || [],
-        preferredRoleIds: data.target_role_id ? [data.target_role_id] : [],
+        preferredRoleIds: (() => {
+          const resolved = data.target_role_id !== null && data.target_role_id !== undefined
+            ? Number(data.target_role_id)
+            : (data.target_role_slug ? getCareerPathBySlug(data.target_role_slug)?.numericId : undefined);
+          return resolved ? [resolved] : (data.target_role_id ? [data.target_role_id] : []);
+        })(),
         cgpa: data.cgpa || '',
         locationPreference: data.location_preference || '',
         currentSkills: data.current_skills || [],
@@ -110,8 +116,15 @@ export class SupabaseProfileRepository implements IProfileRepository {
         githubUrl: data.github_url || undefined,
         linkedinUrl: data.linkedin_url || undefined,
         isGuestDemo: false,
-        targetRoleId: data.target_role_id !== null && data.target_role_id !== undefined ? Number(data.target_role_id) : undefined,
-        targetRoleSlug: data.target_role_slug || undefined,
+        targetRoleId: data.target_role_id !== null && data.target_role_id !== undefined
+          ? Number(data.target_role_id)
+          : (data.target_role_slug ? getCareerPathBySlug(data.target_role_slug)?.numericId : undefined),
+        targetRoleSlug: data.target_role_slug || (() => {
+          const resolved = data.target_role_id !== null && data.target_role_id !== undefined
+            ? Number(data.target_role_id)
+            : undefined;
+          return resolved ? getCareerPathById(resolved)?.slug : undefined;
+        })(),
         fontSizePreference: (data.font_size_preference as UserProfile['fontSizePreference']) || undefined,
       };
 
@@ -129,44 +142,67 @@ export class SupabaseProfileRepository implements IProfileRepository {
     try {
       const studyYearNum = profile.studyYear ? parseInt(profile.studyYear, 10) : null;
       const hoursNum = profile.hoursPerWeek ? Number(profile.hoursPerWeek) : null;
+      const resolvedTargetRoleSlug = profile.targetRoleSlug || (profile.targetRoleId ? getCareerPathById(profile.targetRoleId)?.slug : null) || null;
 
-      const { error } = await supabase
+      const payload = {
+        id: profile.id,
+        display_name: profile.displayName || null,
+        username: profile.username || null,
+        contact_email: profile.contactEmail || null,
+        profile_image_url: profile.profileImageUrl || null,
+        profile_image_storage_key: profile.profileImageStorageKey || null,
+        learner_stage: profile.learnerStage || null,
+        school_class: profile.schoolClass || null,
+        stream: profile.stream || null,
+        degree: profile.degree || null,
+        specialization: profile.specialization || null,
+        institution: profile.institution || null,
+        expected_graduation_year: profile.expectedGraduationYear || null,
+        branch: profile.branch || null,
+        study_year: studyYearNum && !isNaN(studyYearNum) ? studyYearNum : null,
+        hours_per_week: hoursNum && !isNaN(hoursNum) ? hoursNum : 8,
+        preferred_roles: profile.preferredRoles || [],
+        location_preference: profile.locationPreference || null,
+        cgpa: profile.cgpa || null,
+        current_skills: profile.currentSkills || [],
+        interests: profile.interests || [],
+        favorite_subjects: profile.favoriteSubjects || [],
+        preferred_work_direction: profile.preferredWorkDirection || null,
+        project_facts: profile.projectFacts || null,
+        target_role_id: profile.targetRoleId !== undefined ? profile.targetRoleId : null,
+        target_role_slug: resolvedTargetRoleSlug,
+        portfolio_url: profile.portfolioUrl || null,
+        github_url: profile.githubUrl || null,
+        linkedin_url: profile.linkedinUrl || null,
+        font_size_preference: profile.fontSizePreference || null,
+        updated_at: new Date().toISOString(),
+      };
+
+      let { error } = await supabase
         .from('profiles')
-        .upsert({
-          id: profile.id,
-          display_name: profile.displayName || null,
-          username: profile.username || null,
-          contact_email: profile.contactEmail || null,
-          profile_image_url: profile.profileImageUrl || null,
-          profile_image_storage_key: profile.profileImageStorageKey || null,
-          learner_stage: profile.learnerStage || null,
-          school_class: profile.schoolClass || null,
-          stream: profile.stream || null,
-          degree: profile.degree || null,
-          specialization: profile.specialization || null,
-          institution: profile.institution || null,
-          expected_graduation_year: profile.expectedGraduationYear || null,
-          branch: profile.branch || null,
-          study_year: studyYearNum && !isNaN(studyYearNum) ? studyYearNum : null,
-          hours_per_week: hoursNum && !isNaN(hoursNum) ? hoursNum : 8,
-          preferred_roles: profile.preferredRoles || [],
-          location_preference: profile.locationPreference || null,
-          cgpa: profile.cgpa || null,
-          current_skills: profile.currentSkills || [],
-          interests: profile.interests || [],
-          favorite_subjects: profile.favoriteSubjects || [],
-          preferred_work_direction: profile.preferredWorkDirection || null,
-          project_facts: profile.projectFacts || null,
-          target_role_id: profile.targetRoleId !== undefined ? profile.targetRoleId : null,
-          target_role_slug: profile.targetRoleSlug || null,
-          portfolio_url: profile.portfolioUrl || null,
-          github_url: profile.githubUrl || null,
-          linkedin_url: profile.linkedinUrl || null,
-          font_size_preference: profile.fontSizePreference || null,
-          updated_at: new Date().toISOString(),
-        })
+        .upsert(payload)
         .select('*')
         .single();
+
+      // Gracefully handle foreign key constraint violation on target_role_id:
+      // If the remote Supabase career_roles table only has starter roles seeded (e.g. 1, 2, 3)
+      // and does not yet have expanded roles (e.g. 19 AI Engineer), retry saving with target_role_id: null
+      // while preserving target_role_slug so the user's profile is saved with 100% success.
+      if (error && (error.message.includes('profiles_target_role_id_fkey') || error.message.includes('target_role_id') || error.message.includes('foreign key constraint'))) {
+        console.warn('Remote career_roles FK violation on target_role_id. Retrying with target_role_slug anchor:', error.message);
+        const fallbackPayload = {
+          ...payload,
+          target_role_id: null,
+          target_role_slug: resolvedTargetRoleSlug,
+        };
+        const retryRes = await supabase
+          .from('profiles')
+          .upsert(fallbackPayload)
+          .select('*')
+          .single();
+
+        error = retryRes.error;
+      }
 
       if (error) {
         return { data: null, error: error.message };

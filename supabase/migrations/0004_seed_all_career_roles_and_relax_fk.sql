@@ -1,0 +1,66 @@
+-- Migration: 0004_seed_all_career_roles_and_relax_fk.sql
+-- Seeds all 33 unified catalogue career roles and permanently relaxes/protects foreign key constraints.
+
+-- 1. Temporarily drop foreign key constraint on profiles and resume_documents to ensure zero user disruption
+alter table public.profiles drop constraint if exists profiles_target_role_id_fkey;
+alter table public.resume_documents drop constraint if exists resume_documents_role_id_fkey;
+alter table public.roadmaps drop constraint if exists roadmaps_role_id_fkey;
+
+-- 2. Seed all 33 career roles with conflict handling
+insert into public.career_roles (id, slug, name, level, description, source_label, source_url, source_checked_at, version, active)
+values
+  (1, 'backend-developer', 'Backend Developer', 'entry', 'Build and maintain server-side features, APIs, background jobs, and data flows with robust error handling.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (2, 'frontend-developer', 'Frontend Developer', 'entry', 'Build usable, accessible, responsive interfaces and connect them cleanly to reliable backend data streams.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (3, 'data-analyst', 'Data Analyst', 'entry', 'Clean, explore, validate, and communicate patterns in structured datasets to support evidence-led decisions.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (4, 'software-engineer', 'Software Engineer', 'entry', 'Design, implement, and maintain modular software systems across desktop, server, or cloud environments with sound algorithmic trade-offs.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (5, 'full-stack-developer', 'Full Stack Developer', 'entry', 'Bridge interface implementation and server-side data models to deliver complete, secure end-to-end web applications.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (6, 'mobile-developer', 'Mobile Developer', 'entry', 'Develop performant, battery-aware native or cross-platform applications for iOS and Android mobile devices.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (7, 'qa-engineer', 'QA Engineer', 'entry', 'Design test plans, verify software quality, catch regressions, and ensure software specifications are rigorously satisfied.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (8, 'sdet-engineer', 'SDET / Test Automation Engineer', 'entry_to_mid', 'Write automated test harnesses, CI regression suites, and infrastructure mocks to keep deployment pipelines green and reliable.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (9, 'devops-engineer', 'DevOps Engineer', 'entry_to_mid', 'Automate code integration, packaging, deployment, and infrastructure provisioning across cloud environments.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (10, 'cloud-engineer', 'Cloud Engineer', 'entry_to_mid', 'Architect, provision, and maintain resilient cloud computing, storage, and networking services.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (11, 'sre-engineer', 'Site Reliability Engineer', 'entry_to_mid', 'Apply software engineering practices to system operations, ensuring high availability, latency budgets, and rapid incident response.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (12, 'cybersecurity-engineer', 'Cybersecurity Engineer', 'entry_to_mid', 'Protect systems, networks, and data by identifying vulnerabilities, implementing defense controls, and responding to security threats.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (13, 'embedded-systems-engineer', 'Embedded Systems Engineer', 'entry', 'Program low-level microcontrollers and firmware to control physical hardware with strict memory and real-time execution constraints.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (14, 'iot-engineer', 'IoT Engineer', 'entry', 'Connect physical sensors and edge devices to cloud telemetry pipelines using lightweight networking protocols like MQTT.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (15, 'systems-engineer', 'Systems Engineer', 'entry_to_mid', 'Build high-performance runtime tools, operating system interfaces, and compiled utilities using low-level languages like C, C++, or Rust.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (16, 'data-engineer', 'Data Engineer', 'entry_to_mid', 'Construct reliable data pipelines, automated ETL workflows, and scalable analytical warehouses for business and AI consumption.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (17, 'data-scientist', 'Data Scientist', 'entry_to_mid', 'Formulate hypotheses, train statistical predictive models, and design experiments to discover actionable insights from complex data.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (18, 'machine-learning-engineer', 'Machine Learning Engineer', 'entry_to_mid', 'Bridge data science models into production by building scalable training pipelines, inference microservices, and monitoring systems.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (19, 'ai-engineer', 'AI Engineer', 'entry', 'Integrate foundation AI models, embeddings, and cognitive APIs into practical, secure production software applications.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (20, 'generative-ai-engineer', 'Generative AI Engineer', 'entry_to_mid', 'Design, fine-tune, evaluate, and orchestrate multimodal generative models for text, code, image, and structured asset generation.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (21, 'llm-application-engineer', 'LLM Application Engineer', 'entry', 'Architect robust production applications powered by Large Language Models with structured tools, state, and reliability engineering.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (22, 'rag-engineer', 'RAG Engineer', 'entry_to_mid', 'Build high-accuracy Retrieval-Augmented Generation systems connecting LLMs to private enterprise knowledge bases without hallucinations.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (23, 'nlp-engineer', 'NLP Engineer', 'entry_to_mid', 'Process, classify, and extract structured knowledge from unstructured human language using computational linguistics and deep learning.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (24, 'mlops-engineer', 'MLOps Engineer', 'entry_to_mid', 'Operationalize machine learning by automating continuous training, model registries, reproducible environments, and monitoring in production.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (25, 'computer-vision-engineer', 'Computer Vision Engineer', 'entry_to_mid', 'Extract structured patterns, objects, and classifications from digital images, video streams, and spatial camera feeds.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (26, 'bi-analyst', 'Business Intelligence Analyst', 'entry', 'Transform operational and financial data into interactive dashboards, KPI reporting, and strategic business intelligence.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (27, 'ui-ux-designer', 'UI/UX Designer', 'entry', 'Craft intuitive, accessible user experiences and polished digital interfaces backed by user research and design systems.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (28, 'product-designer', 'Product Designer', 'entry_to_mid', 'Own the end-to-end product experience, aligning user needs, business conversion metrics, and engineering feasibility.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (29, 'ux-researcher', 'UX Researcher', 'entry', 'Conduct qualitative interviews, usability studies, and surveys to uncover core user mental models and inform product roadmap decisions.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (30, 'product-manager', 'Product Manager', 'entry_to_mid', 'Define product strategy, write clear requirements, prioritize backlogs, and coordinate engineering, design, and business teams to launch features.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (31, 'technical-product-manager', 'Technical Product Manager', 'entry_to_mid', 'Lead complex developer platforms, APIs, data infrastructure, and system services requiring deep technical literacy.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (32, 'business-analyst', 'Business Analyst', 'entry', 'Analyze business processes, gather stakeholder requirements, model workflows, and translate operational needs into technical specifications.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true),
+  (33, 'technical-writer', 'Technical Writer', 'entry', 'Translate complex software architectures, APIs, and systems into crystal-clear documentation, developer guides, and tutorials.', 'CareerAI catalogue', '', '2026-10-02', 'v1', true)
+on conflict (id) do update set
+  slug = excluded.slug,
+  name = excluded.name,
+  level = excluded.level,
+  description = excluded.description,
+  active = excluded.active;
+
+-- 3. Safely re-add foreign key constraints with on delete set null / cascade
+alter table public.profiles
+  add constraint profiles_target_role_id_fkey
+  foreign key (target_role_id) references public.career_roles(id)
+  on delete set null;
+
+alter table public.resume_documents
+  add constraint resume_documents_role_id_fkey
+  foreign key (role_id) references public.career_roles(id)
+  on delete set null;
+
+alter table public.roadmaps
+  add constraint roadmaps_role_id_fkey
+  foreign key (role_id) references public.career_roles(id)
+  on delete cascade;

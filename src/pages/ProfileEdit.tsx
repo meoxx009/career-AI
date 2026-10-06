@@ -31,7 +31,7 @@ import {
   Upload,
 } from 'lucide-react';
 import type { UserProfile } from '../types';
-import { CAREER_CATALOGUE } from '../data/careerCatalogue';
+import { CAREER_CATALOGUE, getCareerPathById } from '../data/careerCatalogue';
 
 export const ProfileEdit: React.FC = () => {
   const navigate = useNavigate();
@@ -281,6 +281,9 @@ export const ProfileEdit: React.FC = () => {
       ? formState.username.trim().toLowerCase()
       : '';
 
+    const roleIdToSave = formState.targetRoleId || 1;
+    const roleSlugToSave = formState.targetRoleSlug || getCareerPathById(roleIdToSave)?.slug;
+
     const updatedProfile: Partial<UserProfile> = {
       ...formState,
       displayName: (formState.displayName || '').trim(),
@@ -288,10 +291,11 @@ export const ProfileEdit: React.FC = () => {
       contactEmail: formState.contactEmail ? formState.contactEmail.trim() : '',
       profileImageUrl: imagePreview || '',
       profileImageStorageKey: formState.profileImageStorageKey || '',
-      targetRoleId: formState.targetRoleId || 1,
+      targetRoleId: roleIdToSave,
+      targetRoleSlug: roleSlugToSave,
       preferredRoleIds: formState.preferredRoleIds?.length
         ? formState.preferredRoleIds
-        : [formState.targetRoleId || 1],
+        : [roleIdToSave],
       isGuestDemo: isDemoMode, // Preserve synthetic demo status without overwriting
     };
 
@@ -971,8 +975,10 @@ export const ProfileEdit: React.FC = () => {
               <RoleSelector
                 selectedRoleId={formState.targetRoleId || 1}
                 onSelectRole={(roleId) => {
+                  const roleSlug = getCareerPathById(roleId)?.slug;
                   updateForm({
                     targetRoleId: roleId,
+                    targetRoleSlug: roleSlug,
                     preferredRoleIds: [roleId],
                   });
                 }}

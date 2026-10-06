@@ -111,7 +111,7 @@ export class SupabaseResumeRepository implements IResumeRepository {
 
     try {
       const isUuid = Boolean(resume.id && resume.id.includes('-') && resume.id.length >= 32);
-      const { error } = await supabase.from('resume_documents').upsert({
+      let { error } = await supabase.from('resume_documents').upsert({
         id: isUuid ? resume.id : undefined,
         user_id: userId,
         label: resume.label || 'Draft Resume',
@@ -121,6 +121,21 @@ export class SupabaseResumeRepository implements IResumeRepository {
         role_id: (resume as { roleId?: number }).roleId || null,
         updated_at: new Date().toISOString(),
       });
+
+      if (error && (error.message.includes('role_id') || error.message.includes('foreign key constraint') || error.message.includes('resume_documents_role_id_fkey'))) {
+        console.warn('Foreign key violation on resume_documents role_id. Retrying with role_id: null');
+        const retryRes = await supabase.from('resume_documents').upsert({
+          id: isUuid ? resume.id : undefined,
+          user_id: userId,
+          label: resume.label || 'Draft Resume',
+          raw_text: resume.rawText || '',
+          facts: (resume.facts || []) as unknown as Record<string, unknown>[],
+          suggestions: ((resume as { suggestions?: ResumeSuggestion[] }).suggestions || []) as unknown as Record<string, unknown>[],
+          role_id: null,
+          updated_at: new Date().toISOString(),
+        });
+        error = retryRes.error;
+      }
 
       if (error) {
         return { data: null, error: error.message };

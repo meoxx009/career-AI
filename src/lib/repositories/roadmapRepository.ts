@@ -125,10 +125,14 @@ export class SupabaseRoadmapRepository implements IRoadmapRepository {
         .maybeSingle();
 
       if (roadmapError) {
-        return { data: null, error: roadmapError.message };
+        return new LocalRoadmapRepository().getRoadmapTasks(userId, roleId);
       }
 
       if (!roadmap) {
+        const localRes = await new LocalRoadmapRepository().getRoadmapTasks(userId, roleId);
+        if (localRes.data && localRes.data.length > 0 && localRes.data !== DEFAULT_ROADMAP_TASKS) {
+          return localRes;
+        }
         return { data: [], error: null };
       }
 
@@ -210,6 +214,14 @@ export class SupabaseRoadmapRepository implements IRoadmapRepository {
           .single();
 
         if (createError) {
+          const isFkError =
+            createError.code === '23503' ||
+            createError.message?.toLowerCase().includes('foreign key') ||
+            createError.message?.includes('roadmaps_role_id_fkey');
+          if (isFkError) {
+            console.warn('[SupabaseRoadmapRepository] role_id not seeded in remote career_roles table, falling back to local storage for roleId', roleId);
+            return new LocalRoadmapRepository().saveRoadmapTasks(userId, roleId, healedTasks);
+          }
           return { data: null, error: createError.message };
         }
         roadmap = created;

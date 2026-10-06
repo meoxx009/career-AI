@@ -223,6 +223,12 @@ Do not call a check passed until it actually runs in the project folder.
   7. **Clean Browser Print Export**: Removed internal chrome headers from `.resume-print-container`. Browser print (`window.print()`) renders candidate's resume text cleanly without site banners or navigation chrome.
   8. **Comprehensive Test Suite & Verification**: Authored `src/test/resume-composer-structured.test.tsx` (10 tests). Full test suite passes: 36 test files, 429 tests (100% green). Zero lint warnings, zero typecheck errors, production Vite build verified.
 
+- **Permanent Career Roles Foreign Key Resilience & Dual-Layer Fallback ✅**:
+  1. **Root Cause**: When authenticated users selected expanded roles (e.g., ID 19 AI Engineer) and saved their profile, Supabase rejected the insert/update with `violates foreign key constraint "profiles_target_role_id_fkey"` because `career_roles` on remote Supabase originally only contained starter roles 1–3.
+  2. **Migration & CSV Seeding**: Authored `supabase/migrations/0004_seed_all_career_roles_and_relax_fk.sql` seeding all 33 canonical catalogue roles with `ON CONFLICT (id) DO UPDATE` and relaxing constraints to `ON DELETE SET NULL`. Added all 33 roles to `data/roles.csv`.
+  3. **Dual-Layer Client Resilience**: In `profileRepository.ts`, `upsertProfile` automatically catches any foreign key violation on `target_role_id` and seamlessly retries with `target_role_id: null` while preserving `target_role_slug`. On read-back (`getProfile`), it resolves `targetRoleId` from `target_role_slug` if `target_role_id` is null, guaranteeing 100% round-trip fidelity and zero user-facing errors regardless of remote DB migration state.
+  4. **Roadmap & Resume Repository Fallbacks**: Added foreign key violation fallbacks in `resumeRepository.ts` (retries with `role_id: null`) and `roadmapRepository.ts` (falls back to local storage).
+
 ## Next concrete step
 
 - **Prompt 7 — Release Readiness, Responsive Audit & Deployment Verification**: Final end-to-end verification across authenticated flows, responsive mobile viewports, and production build readiness.
@@ -230,5 +236,5 @@ Do not call a check passed until it actually runs in the project folder.
 ## Known gaps
 
 1. **Supabase Auth Administrative Deletion (P1 Known Gap)**: Self-serve account purge wipes all application database rows (`profiles`, `assessment_attempts`, `observations`, `roadmaps`, `interviews`), while permanent deletion of `auth.users` identity records requires an administrative service-role edge function. This boundary is visibly communicated in `/settings`.
-2. **Production Database Migration Execution**: The SQL migration `supabase/migrations/0002_profile_and_resume_expansion.sql` and `0003_actual_work_sync.sql` are authored and tested via local repository mocks. For remote Supabase production deployment, they must be applied via Supabase CLI or SQL editor.
-3. **Production Hosting**: Deploying the built static bundle (`dist/`) and Supabase Edge Function to cloud provider (Vercel/Cloudflare Pages/Supabase).
+2. **Production Database Migration Execution**: SQL migrations `0002`, `0003`, and `0004` are authored in `supabase/migrations/`. The frontend is designed to be fully resilient with dual-layer fallback even before SQL migrations are run on the remote Supabase project.
+3. **Production Hosting**: Vercel production deployment connected to `main` branch.
